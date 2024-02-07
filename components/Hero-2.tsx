@@ -8,7 +8,7 @@ export function ThreeDCardDemo() {
 	return (
 		<div className=" items-start py-0 lg:flex lg:justify-around ">
 			<CardContainer className="inter-var p-16 md:p-0">
-				<CardBody className="bg-gray-500 bg-opacity-10 relative group/card  hover:shadow-2xl hover:shadow-emerald-500/[0.1]  dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+				<CardBody className="bg-[#890c1c] bg-opacity-30 relative group/card  hover:shadow-2xl hover:shadow-emerald-500/[0.1]  dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
 					<CardItem translateZ="50" className=" text-xl font-bold text-black ">
 						Внос от USA
 					</CardItem>

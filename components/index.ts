@@ -8,12 +8,12 @@ import SearchBar from "./Searchbar";
 import Hero from "./Hero";
 
 export {
-  Hero,
-  CarCard,
-  CustomButton,
-  CustomFilter,
-  Footer,
-  NavBar,
-  ShowMore,
-  SearchBar,
+	Hero,
+	CarCard,
+	CustomButton,
+	CustomFilter,
+	Footer,
+	NavBar,
+	ShowMore,
+	SearchBar,
 };
