@@ -25,7 +25,7 @@ const Hero = () => {
 				</p>
 
 				<CustomButton
-					title="Към аукционите"
+					title="Към новите аукциони"
 					containerStyles="bg-red-500 hover:bg-red-700 text-white rounded-full mt-10"
 					handleClick={handleScroll}
 				/>
