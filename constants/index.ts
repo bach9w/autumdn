@@ -95,7 +95,6 @@ export const footerLinks = [
 			{ title: "Instagram", url: "/" },
 			{ title: "Facebook", url: "/" },
 			{ title: "Twitter", url: "/" },
-			{ title: "Betano", url: "/" },
 		],
 	},
 ];

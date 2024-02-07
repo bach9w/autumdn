@@ -56,17 +56,21 @@ const CarCard = ({ car }: CarCardProps) => {
 							height={20}
 							alt="steering wheel"
 						/>
-						<p className="text-[14px] leading-[17px]">
+						<p className="text-[14px] leading-[17px] text-white">
 							{transmission === "a" ? "Автоматик" : "Ръчно"}
 						</p>
 					</div>
 					<div className="car-card__icon">
 						<Image src="/tire.svg" width={20} height={20} alt="seat" />
-						<p className="car-card__icon-text">{drive.toUpperCase()}</p>
+						<p className="car-card__icon-text text-white">
+							{drive.toUpperCase()}
+						</p>
 					</div>
 					<div className="car-card__icon">
 						<Image src="/gas.svg" width={20} height={20} alt="seat" />
-						<p className="car-card__icon-text">{city_mpg} Л/100 КМ</p>
+						<p className="car-card__icon-text text-white">
+							{city_mpg} Л/100 КМ
+						</p>
 					</div>
 				</div>
 
