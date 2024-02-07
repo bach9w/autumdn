@@ -13,7 +13,7 @@ const NavBar = () => {
 					<CustomButton
 						title="За нас"
 						btnType="button"
-						containerStyles="absolute top-20 left-3 text-white rounded-bl bg-orange-700 hover:bg-orange-800 hover:bg-opacity:20 min-w-[100px]"
+						containerStyles="absolute top-20 left-3 text-white rounded-bl bg-black hover:bg-gray-800 hover:bg-opacity:20 min-w-[100px]"
 					/>
 					<div className="flex justify-center items-center   ">
 						<Image src={Logo} width={250} height={250} alt="logo" />
@@ -22,7 +22,7 @@ const NavBar = () => {
 					<CustomButton
 						title="Контакти"
 						btnType="button"
-						containerStyles="absolute top-20 right-3 text-white rounded-bl bg-orange-700 hover:bg-orange-800 hover:bg-opacity:20 min-w-[100px]"
+						containerStyles="absolute top-20 right-3 text-white rounded-bl bg-black hover:bg-gray-800 hover:bg-opacity:20 min-w-[100px]"
 					/>
 				</nav>
 			</header>
