@@ -42,29 +42,18 @@ const Hero = () => {
 					<motion.div
 						whileInView={{
 							opacity: 100,
-							y: 120,
+							y: 10,
 							scale: 1,
 							transition: {
 								type: "spring",
-								stiffness: 260,
-								damping: 10,
+								stiffness: 10,
+								damping: 2,
 								duration: 2,
 							},
 						}}
-						exit={{ opacity: 0, y: 20, scale: 0.6 }}
+						exit={{ opacity: 0, y: 0, scale: 0.6 }}
 					>
-						<Image
-							src="/hero.png"
-							height="2000"
-							width="2000"
-							className="absolute top-[-50px] font-bold text-2xl"
-							style={{
-								transform: IsInView ? "none" : "translateX(200px)",
-								opacity: IsInView ? 1 : 1,
-								transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
-							}}
-							alt="thumbnail"
-						/>
+						<Image src="/hero.png" height="3000" width="3000" alt="thumbnail" />
 						<section ref={ref}></section>
 					</motion.div>
 				</div>
