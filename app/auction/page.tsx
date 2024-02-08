@@ -2,7 +2,7 @@ import DrawerDialogDemo from "@components/DrawerC";
 import { ThreeDCardDemo } from "@components/Hero-2";
 import React from "react";
 
-export const page = () => {
+export default async function Home() {
 	return (
 		<>
 			<div className="text-center bg-black text-white uppercase">За нас</div>
@@ -15,5 +15,4 @@ export const page = () => {
 			</div>
 		</>
 	);
-};
-export default page;
+}
