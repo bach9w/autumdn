@@ -37,7 +37,7 @@ const Hero = () => {
 					handleClick={handleScroll}
 				/>
 			</div>
-			<div className="hero__image-container">
+			<div className="hero__image-container bottom-[200px] relative">
 				<div className="hero__image">
 					<motion.div
 						whileInView={{

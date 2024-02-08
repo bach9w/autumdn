@@ -123,11 +123,11 @@
 }
 
 .hero__image {
-	@apply relative xl:w-full w-[90%] xl:h-full h-[590px] z-0;
+	@apply relative xl:top-0  xl:w-full md:top-[100px] left-[80px] top-[200px]  w-[100%] xl:h-full h-[590px] z-0;
 }
 
 .hero__image-overlay {
-	@apply absolute xl:-top-24 xl:-right-1/2 -right-1/4 bg-hero-bg bg-repeat-round -z-10 w-full xl:h-screen h-[590px] overflow-hidden;
+	@apply absolute xl:top-4 bottom-[50px] xl:-right-1/2 -right-1/4 bg-hero-bg bg-repeat-round -z-10 w-full xl:h-screen h-[300px] overflow-hidden;
 }
 /* END: Hero styles */
 
