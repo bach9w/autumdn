@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 
-import { CustomButton } from "@components";
+import CustomButton from "@components/CustomButton";
 import { useEffect, useRef } from "react";
 
 const Hero = () => {

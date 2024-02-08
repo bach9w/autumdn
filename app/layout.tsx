@@ -1,6 +1,7 @@
 import "./globals.css";
 
-import { Footer, NavBar } from "@components";
+import Footer from "@components/Footer";
+import NavBar from "@components/Navbar";
 
 export const metadata = {
 	title: "AUTOMDN",

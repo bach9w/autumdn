@@ -1,7 +1,12 @@
 import { fetchCars } from "@utils";
 import { HomeProps } from "@types";
 import { fuels, yearsOfProduction } from "@constants";
-import { CarCard, ShowMore, SearchBar, CustomFilter, Hero } from "@components";
+import Hero from "@components/Hero";
+import CarCard from "@components/CarCard";
+import SearchBar from "@components/Searchbar";
+import CustomFilter from "@components/CustomFilter";
+
+import ShowMore from "@components/ShowMore";
 import { HeroParallaxDemo } from "@components/Parallax";
 import { ThreeDCardDemo } from "@components/Hero-2";
 
