@@ -37,7 +37,7 @@ const Hero = () => {
 					handleClick={handleScroll}
 				/>
 			</div>
-			<div className="hero__image-container relative mb-[-350px] bottom-[300px] md:bottom-0 md:mb-[0px]  xl:bottom-[-200px]">
+			<div className="hero__image-container relative mb-[-350px] bottom-[300px] md:bottom-0 md:mb-[0px]  xl:bottom-[100px]">
 				<div className="hero__image">
 					<motion.div
 						className="bottom-[200px] absolute"
