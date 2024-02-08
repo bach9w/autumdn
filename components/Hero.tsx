@@ -23,7 +23,7 @@ const Hero = () => {
 	}, [IsInView]);
 
 	return (
-		<div className="hero" ref={ref}>
+		<div className="hero relative" ref={ref}>
 			<div className="flex-1 pt-36 padding-x">
 				<h1 className="hero__title">Нови аукциони</h1>
 
@@ -37,9 +37,10 @@ const Hero = () => {
 					handleClick={handleScroll}
 				/>
 			</div>
-			<div className="hero__image-container bottom-[200px] relative">
+			<div className="hero__image-container relative mb-[-350px] bottom-[300px] md:bottom-0 md:mb-[0px]  xl:bottom-[-100px]">
 				<div className="hero__image">
 					<motion.div
+						className="bottom-[200px] absolute"
 						whileInView={{
 							opacity: 100,
 							y: 10,
@@ -53,12 +54,12 @@ const Hero = () => {
 						}}
 						exit={{ opacity: 0, y: 0, scale: 0.6 }}
 					>
-						<Image src="/hero.png" height="3000" width="3000" alt="thumbnail" />
+						<Image src="/hero.png" height="4000" width="4000" alt="thumbnail" />
 						<section ref={ref}></section>
 					</motion.div>
 				</div>
 
-				<div className="hero__image-overlay" />
+				<div className=" hero__image-overlay" />
 			</div>
 		</div>
 	);

@@ -32,25 +32,46 @@ export function DrawerDialogDemo() {
 
 	if (isDesktop) {
 		return (
-			<Dialog open={open} onOpenChange={setOpen}>
-				<DialogTrigger asChild>
-					<Button
-						className="h-[100px] w-full bg-red-700 uppercase text-white"
-						variant="outline"
-					>
-						Намерете желания автомобил, бързо и лесно.
-					</Button>
-				</DialogTrigger>
-				<DialogContent className="sm:max-w-[425px]">
-					<DialogHeader>
-						<DialogTitle>Налични: - аукциони API</DialogTitle>
-						<DialogDescription>
-							Make changes to your profile here. Click save when you're done.
-						</DialogDescription>
-					</DialogHeader>
-					<ProfileForm />
-				</DialogContent>
-			</Dialog>
+			<>
+				<Dialog open={open} onOpenChange={setOpen}>
+					<DialogTrigger asChild>
+						<Button
+							className="h-[100px] z-30 xl:top-[900px] top-[1100px] relative w-full bg-red-700 uppercase text-white"
+							variant="outline"
+						>
+							Намерете желания автомобил, бързо и лесно.
+						</Button>
+					</DialogTrigger>
+					<DialogContent className="sm:max-w-[425px]">
+						<DialogHeader>
+							<DialogTitle>Налични: - аукциони API</DialogTitle>
+							<DialogDescription>
+								Make changes to your profile here. Click save when you're done.
+							</DialogDescription>
+						</DialogHeader>
+						<ProfileForm />
+					</DialogContent>
+				</Dialog>
+				<Dialog open={open} onOpenChange={setOpen}>
+					<DialogTrigger asChild>
+						<Button
+							className="h-[100px] w-full bg-red-700 uppercase text-white"
+							variant="outline"
+						>
+							Намерете желания автомобил, бързо и лесно.
+						</Button>
+					</DialogTrigger>
+					<DialogContent className="sm:max-w-[425px]">
+						<DialogHeader>
+							<DialogTitle>Налични: - аукциони API</DialogTitle>
+							<DialogDescription>
+								Make changes to your profile here. Click save when you're done.
+							</DialogDescription>
+						</DialogHeader>
+						<ProfileForm />
+					</DialogContent>
+				</Dialog>
+			</>
 		);
 	}
 

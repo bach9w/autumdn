@@ -16,7 +16,7 @@ export function ThreeDCardDemo() {
 			<div className="bg-black absolute opacity-35 text-white text-center items-center flex text-3xl lg:text-4xl justify-between h-32">
 				ИЗБЕРЕТЕ ПРАВИЛНИЯ АВТОМОБИЛ ЗА ВАС ОТ ИЗБРАНАТА ЛОКАЦИЯ
 			</div>
-			<div className="items-start  py-0 lg:flex lg:justify-around ">
+			<div className="lg:flex">
 				<CardContainer className="inter-var p-16 md:p-0 mt-20">
 					<Button
 						className="h-2/3 w-2/3 rounded-xl"
@@ -42,7 +42,7 @@ export function ThreeDCardDemo() {
 						</CardBody>
 					</Button>
 				</CardContainer>
-				<CardContainer className="inter-var p-16 md:p-0 xl:mt-52">
+				<CardContainer className="inter-var p-16 mt-20 md:p-0 xl:mt-12">
 					<Button
 						className="h-2/3 w-2/3 rounded-xl"
 						onClick={() => setIsPresed(true)}
