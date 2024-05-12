@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { SwipeCarousel } from "./carousel";
 
 export const HeroParallax = ({
 	products,
@@ -25,7 +26,7 @@ export const HeroParallax = ({
 	const ref = React.useRef(null);
 	const { scrollYProgress } = useScroll({
 		target: ref,
-		offset: ["start start", "end start"],
+		offset: ["end start", "start start"],
 	});
 
 	const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
@@ -58,7 +59,7 @@ export const HeroParallax = ({
 		<>
 			<div
 				ref={ref}
-				className="h-[140vh] md:h-[160vh] py-80 md:py-40 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:200px] [transform-style:preserve-3d]"
+				className=" md:h-full py-80 md:py-40 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:200px] [transform-style:preserve-3d]"
 			>
 				<Header />
 				<motion.div
@@ -73,18 +74,6 @@ export const HeroParallax = ({
 					<motion.div className="flex bg-red-700 font-bold text-white justify-center mb-4">
 						<h1>AUTO MDN</h1>
 					</motion.div>
-					<motion.div className="flex flex-row-reverse space-x-reverse space-x-10 mb-10">
-						{firstRow.map((product) => (
-							<ProductCard
-								product={product}
-								translate={translateX}
-								key={product.title}
-							/>
-						))}
-					</motion.div>
-					<motion.div className="flex bg-red-700 font-bold text-white justify-center mb-4">
-						<h1>AUTO MDN</h1>
-					</motion.div>
 					<motion.div className="flex flex-row  mb-20 space-x-20 ">
 						{secondRow.map((product) => (
 							<ProductCard
@@ -94,17 +83,11 @@ export const HeroParallax = ({
 							/>
 						))}
 					</motion.div>
-					<motion.div className="flex bg-red-700 justify-center mb-4"></motion.div>
-					<motion.div className="flex flex-row-reverse space-x-reverse space-x-20">
-						{thirdRow.map((product) => (
-							<ProductCard
-								product={product}
-								translate={translateX}
-								key={product.title}
-							/>
-						))}
-					</motion.div>
+					<motion.div className="flex bg-red-700 font-bold text-white justify-center mb-4"></motion.div>
 				</motion.div>
+				<div className="">
+					<SwipeCarousel />
+				</div>
 			</div>
 		</>
 	);
@@ -112,7 +95,7 @@ export const HeroParallax = ({
 
 export const Header = () => {
 	return (
-		<div className="max-w-7xl relative mx-auto py-0 md:py-40 px-10 w-full ">
+		<div className="max-w-7xl relative bottom-[250px] mx-auto py-0 md:py-40 px-10 w-full ">
 			<h1 className="text-5xl md:text-7xl font-bold text-black ">
 				Нови <br /> аукциони
 			</h1>

@@ -13,10 +13,10 @@ export function ThreeDCardDemo() {
 	}
 	return (
 		<>
-			<div className="bg-black absolute opacity-35 text-white text-center items-center flex text-3xl lg:text-4xl justify-between h-32">
+			<div className="bg-black text-white h-[200px] relative bottom-[280px] md:bottom-[130px]">
 				ИЗБЕРЕТЕ ПРАВИЛНИЯ АВТОМОБИЛ ЗА ВАС ОТ ИЗБРАНАТА ЛОКАЦИЯ
 			</div>
-			<div className="lg:flex">
+			<div className="">
 				<CardContainer className="inter-var p-16 md:p-0 mt-20">
 					<Button
 						className="h-2/3 w-2/3 rounded-xl"
