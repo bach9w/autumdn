@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { SwipeCarousel } from "./carousel";
+import { SwipeCarousel } from "./carousel_first";
 
 export const HeroParallax = ({
 	products,
