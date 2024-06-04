@@ -3,48 +3,76 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "/public/myride_logo.jpg";
 
-import ButtonWrapper from "./SpotlightButton";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import { Menu, Package2 } from "lucide-react";
 
 const NavBar = () => {
 	const router = useRouter();
 	return (
 		<>
-			<header className="bg-[#8c6066] bg-opacity-95 w-full sticky top-0 opacity-100  z-40">
-				<nav className=" max-w-[1440px] mx-auto flex justify-between items-start  px-0 py-0 bg-transparent">
-					<div className="flex  justify-between  bg-black opacity-100 w-full h-40   items-end    ">
-						<div className="relative  bottom-10 left-10">
-							<ButtonWrapper text="Контакти" />
-						</div>
-						<div className="relative bottom-10 hidden md:flex">
-							<ButtonWrapper text="За нас" />
-						</div>
-						<div className="hidden md:flex md:flex-col md:relative w-[300px] ">
-							<Label className="text-white mb-2 uppercase font-bold">
-								Намери желания автомобил
-							</Label>
+			<nav className="sticky top-0 bg-black w-full h-[10%] z-50">
+				<div className="flex w-full items-center justify-between">
+					<Image
+						style={{ filter: "brightness(0.3)" }}
+						src={Logo}
+						width={100}
+						height={250}
+						alt="logo"
+						onClick={() => router.push("/")}
+					/>
+					<div className="p-2 hidden md:flex md:relative w-[300px] ">
+						<Input
+							placeholder="Tърсене на автомобил"
+							className="rounded-r-none"
+						/>
 
-							<Input />
-							<div className="relative bottom-2 left-[200px]">
-								<Button className="w-[100px]">Търси</Button>
-							</div>
-						</div>
-						<div className="relative  bottom-5 right-5">
-							<Image
-								style={{ filter: "brightness(0.3)" }}
-								src={Logo}
-								width={150}
-								height={250}
-								alt="logo"
-								onClick={() => router.push("/")}
-							/>
-						</div>
+						<Button className="bg-red-500 rounded-l-none">Търси</Button>
 					</div>
-				</nav>
-			</header>
+					<div className="text-black">
+						<Sheet>
+							<SheetTrigger asChild>
+								<Button variant="outline" size="icon" className="shrink-0">
+									<Menu className="h-5 w-5" />
+									<span className="sr-only">Toggle navigation menu</span>
+								</Button>
+							</SheetTrigger>
+							<SheetContent side="left">
+								<nav className="grid gap-6 text-lg font-medium">
+									<Link
+										href="#"
+										className="flex items-center gap-2 text-lg font-semibold"
+									>
+										<Image src={Logo} width={70} height={30} alt="logo" />
+										<span className="sr-only">Acme Inc</span>
+									</Link>
+									<Link
+										href="#"
+										className="text-muted-foreground hover:text-foreground"
+									>
+										Начало
+									</Link>
+									<Link
+										href="#"
+										className="text-muted-foreground hover:text-foreground"
+									>
+										Аукциони
+									</Link>
+									<Link
+										href="#"
+										className="text-muted-foreground hover:text-foreground"
+									>
+										За нас
+									</Link>
+								</nav>
+							</SheetContent>
+						</Sheet>
+					</div>
+				</div>
+			</nav>
 		</>
 	);
 };
