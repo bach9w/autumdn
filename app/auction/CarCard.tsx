@@ -45,7 +45,7 @@ interface CarCardProps {
 	};
 }
 
-const CarCard = ({ car }: { car: CarCardProps }) => {
+const CarCard = ({ car }: { car: any }) => {
 	return (
 		<Card className="overflow-hidden">
 			<CardHeader>
@@ -57,11 +57,11 @@ const CarCard = ({ car }: { car: CarCardProps }) => {
 			<CardContent>
 				<div className="grid gap-2">
 					{car.lots &&
-						car.lots.map((lot) => (
+						car.lots.map((lot: any) => (
 							<Carousel key={lot.id}>
 								<CarouselContent>
 									{lot.images?.normal &&
-										lot.images.normal.map((img, index) => (
+										lot.images.normal.map((img: any, index: any) => (
 											<CarouselItem key={index}>
 												<img
 													src={img}
