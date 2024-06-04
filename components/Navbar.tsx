@@ -16,7 +16,7 @@ const NavBar = () => {
 						<div className="relative  bottom-10 left-10">
 							<ButtonWrapper text="Контакти" />
 						</div>
-						<div className="relative bottom-10">
+						<div className="relative bottom-10 hidden md:flex">
 							<ButtonWrapper text="За нас" />
 						</div>
 						<div className="hidden md:flex md:flex-col md:relative w-[300px] ">
