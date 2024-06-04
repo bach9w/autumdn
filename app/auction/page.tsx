@@ -1,5 +1,5 @@
 import DrawerDialogDemo from "@components/DrawerC";
-import { ThreeDCardDemo } from "@components/Hero-2";
+import { ThreeDCard } from "@components/Hero-2";
 import React from "react";
 
 export default async function Home() {
@@ -10,7 +10,7 @@ export default async function Home() {
 				<div className="text-center text-black h-10">Тук ще има</div>
 				<div className="aucInfo bg-black text-white">Аукциони от деня</div>
 				<div className="last5auc h-full bg-white">
-					<ThreeDCardDemo />
+					<ThreeDCard />
 				</div>
 			</div>
 		</>
