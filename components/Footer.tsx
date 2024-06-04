@@ -8,14 +8,14 @@ const Footer = () => (
 		<div className="flex max-md:flex-col flex-wrap justify-between gap-5 sm:px-16 px-6 py-10">
 			<div className="flex justify-start items-center gap-6">
 				<Image
-					src="/logo1.png"
+					src="/myride_logo.jpg"
 					alt="logo"
 					width={158}
 					height={18}
 					className="object-contain"
 				/>
 				<p className="text-base text-gray-700">
-					AUTOMDN 2024 <br />
+					MYRIDE 2024 <br />
 					Всички права запазени &copy;
 				</p>
 			</div>
@@ -41,7 +41,7 @@ const Footer = () => (
 		</div>
 
 		<div className="flex flex-col justify-between items-center flex-wrap mt-10 border-t border-gray-100 sm:px-16 px-6 py-10">
-			<p>@2024 AUTOMDN. Всички права запазени</p>
+			<p>@2024 MYRIDE. Всички права запазени</p>
 
 			<div className="footer__copyrights-link">
 				<Link href="/" className="text-gray-500">

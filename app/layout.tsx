@@ -4,8 +4,8 @@ import Footer from "@components/Footer";
 import NavBar from "@components/Navbar";
 
 export const metadata = {
-	title: "AUTOMDN",
-	description: "AUTOMDN IMPORT",
+	title: "MYRIDE",
+	description: "MYRIDE IMPORT",
 };
 
 export default function RootLayout({
