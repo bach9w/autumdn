@@ -67,9 +67,9 @@ export const SwipeCarousel = () => {
 	};
 
 	return (
-		<div className="relative bg-red-900 overflow-hidden  py-8">
-			<Label className="w-full items-center justify-center flex hover:bg-red-900">
-				<Badge className="relative bottom-2 bg-white h-[60px] w-[80%] hover:bg-red-900  text-black font-bold  justify-center uppercase text-xl lg:text-3xl hover:text-white">
+		<div className="relative bg-orange-500 overflow-hidden  py-8">
+			<Label className="w-full items-center justify-center flex hover:bg-orange-500">
+				<Badge className="relative bottom-2 bg-white h-[60px] w-[80%] hover:bg-orange-500  text-black font-bold  justify-center uppercase text-xl lg:text-3xl hover:text-white">
 					Последно добавени автомобили
 				</Badge>
 			</Label>
@@ -114,18 +114,18 @@ const Images = ({ imgIndex }: { imgIndex: number }) => {
 							scale: imgIndex === idx ? 0.95 : 0.85,
 						}}
 						transition={SPRING_OPTIONS}
-						className="aspect-video w-screen shrink-0 rounded-xl bg-neutral-800 object-cover"
+						className="aspect-video w-full max-h-[600px] shrink-0 rounded-xl bg-neutral-800 "
 					>
 						<Button
 							variant="destructive"
-							className="bg-red-800 relative top-2 left-2"
+							className="bg-orange-800 relative top-2 left-2"
 						>
 							Позвъни сега
 						</Button>
-						<div className="absolute w-full h-[80px] bg-red-900 bottom-0">
-							<div className="group">
+						<div className="absolute w-full h-[80px] bg-orange-500 bottom-0">
+							<div className="group flex justify-between">
 								<Badge className="bg-white hover:bg-none h-[80px] w-full rounded-t text-black flex items-center relative top-2 justify-between">
-									<div className="space-x-4 relative top-5 md:top-0 left-10">
+									<div className="hidden sm:flex space-x-4 relative top-5 md:top-0 left-10">
 										<Button className="gap-3 hover:bg-red-900">
 											<CarIcon />
 											200 000 км

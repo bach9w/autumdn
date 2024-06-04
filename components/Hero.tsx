@@ -33,7 +33,7 @@ const Hero = () => {
 
 				<CustomButton
 					title="Към новите аукциони"
-					containerStyles="bg-red-500 hover:bg-red-700 text-white rounded-full mt-10"
+					containerStyles="bg-orange-500 hover:bg-red-700 text-white rounded-full mt-10"
 					handleClick={handleScroll}
 				/>
 			</div>

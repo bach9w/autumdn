@@ -36,7 +36,7 @@ export function DrawerDialogDemo() {
 				<Dialog open={open} onOpenChange={setOpen}>
 					<DialogTrigger asChild>
 						<Button
-							className="h-[100px] z-30 xl:top-[900px] top-[1100px] relative w-full bg-red-700 uppercase text-white"
+							className="h-[100px] z-30 xl:top-[900px] top-[1100px] relative w-full bg-orange-700 uppercase text-white"
 							variant="outline"
 						>
 							Намерете желания автомобил, бързо и лесно.
@@ -55,7 +55,7 @@ export function DrawerDialogDemo() {
 				<Dialog open={open} onOpenChange={setOpen}>
 					<DialogTrigger asChild>
 						<Button
-							className="h-[100px] w-full xl:hidden bg-red-700 uppercase text-white"
+							className="h-[100px] w-full xl:hidden bg-orange-700 uppercase text-white"
 							variant="outline"
 						>
 							Намерете желания автомобил, бързо и лесно.
@@ -79,7 +79,7 @@ export function DrawerDialogDemo() {
 		<Drawer open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>
 				<Button
-					className="h-[100px] w-full bg-red-700 uppercase text-white"
+					className="h-[100px] w-full bg-orange-700 uppercase text-white"
 					variant="outline"
 				>
 					Не открихте това, което търсехте <br /> опитайте пак или проверете

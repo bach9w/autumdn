@@ -77,7 +77,7 @@ export const footerLinks = [
 			{ title: "Кои сме ние", url: "/" },
 			{ title: "Нашата мисия", url: "/" },
 			{ title: "Нашият екип", url: "/" },
-			{ title: "Защо да изберете AUTODMN", url: "/" },
+			{ title: "Защо да изберете MYRIDE", url: "/" },
 		],
 	},
 	{

@@ -71,8 +71,8 @@ export const HeroParallax = ({
 					}}
 					className=""
 				>
-					<motion.div className="flex bg-red-700 font-bold text-white justify-center mb-4">
-						<h1>AUTO MDN</h1>
+					<motion.div className="flex bg-orange-400 font-bold text-white justify-center mb-4">
+						<h1>MYRIDE</h1>
 					</motion.div>
 					<motion.div className="flex flex-row  mb-20 space-x-20 ">
 						{secondRow.map((product) => (
@@ -83,7 +83,6 @@ export const HeroParallax = ({
 							/>
 						))}
 					</motion.div>
-					<motion.div className="flex bg-red-700 font-bold text-white justify-center mb-4"></motion.div>
 				</motion.div>
 				<div className="">
 					<SwipeCarousel />

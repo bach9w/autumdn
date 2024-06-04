@@ -8,7 +8,7 @@ import CustomFilter from "@components/CustomFilter";
 
 import ShowMore from "@components/ShowMore";
 import { HeroParallaxDemo } from "@components/Parallax";
-import { ThreeDCardDemo } from "@components/Hero-2";
+import { ThreeDCard } from "@components/Hero-2";
 
 export default async function Home({ searchParams }: HomeProps) {
 	const allCars = await fetchCars({
@@ -24,7 +24,7 @@ export default async function Home({ searchParams }: HomeProps) {
 	return (
 		<main className="overflow-hidden">
 			<HeroParallaxDemo />
-			<ThreeDCardDemo />
+			<ThreeDCard />
 			<Hero />
 
 			<div className="mt-12 padding-x padding-y max-width" id="discover">

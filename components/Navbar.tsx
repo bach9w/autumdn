@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "/public/myride_logo.jpg";
@@ -6,8 +7,10 @@ import ButtonWrapper from "./SpotlightButton";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 const NavBar = () => {
+	const router = useRouter();
 	return (
 		<>
 			<header className="bg-[#8c6066] bg-opacity-95 w-full sticky top-0 opacity-100  z-40">
@@ -36,6 +39,7 @@ const NavBar = () => {
 								width={150}
 								height={250}
 								alt="logo"
+								onClick={() => router.push("/")}
 							/>
 						</div>
 					</div>

@@ -6,23 +6,20 @@ import { Button } from "./ui/button";
 import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
 import DrawerDialogDemo from "./DrawerC";
 
-export function ThreeDCardDemo() {
+export function ThreeDCard() {
 	const [isPresed, setIsPresed] = React.useState(false);
 	if (isPresed) {
 		return <DrawerDialogDemo />;
 	}
 	return (
 		<>
-			<div className="bg-black text-white h-[200px] relative bottom-[280px] md:bottom-[130px]">
-				ИЗБЕРЕТЕ ПРАВИЛНИЯ АВТОМОБИЛ ЗА ВАС ОТ ИЗБРАНАТА ЛОКАЦИЯ
-			</div>
-			<div className="">
-				<CardContainer className="inter-var p-16 md:p-0 mt-20">
+			<div className="grid grid-cols-1 md:grid-cols-2">
+				<CardContainer className="inter-var">
 					<Button
 						className="h-2/3 w-2/3 rounded-xl"
 						onClick={() => setIsPresed(true)}
 					>
-						<CardBody className="bg-[#890c1c]  bg-opacity-100 hover:bg-[#890c1c] relative group/card  hover:shadow-2xl hover:shadow-emerald-500/[0.1]  dark:border-white/[0.2] border-black/[0.1] w-screen sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+						<CardBody className="bg-[#890c1c]  bg-opacity-100 hover:bg-[#890c1c] relative group/card  hover:shadow-2xl hover:shadow-emerald-500/[0.1]  dark:border-white/[0.2] border-black/[0.1] w-screen sm:w-[30rem] h-full rounded-xl p-6 border  ">
 							<CardItem
 								translateZ="50"
 								className=" text-xl font-bold text-white uppercase "
