@@ -5,8 +5,8 @@ import { AuctionProps } from "@types";
 import CarCard from "./CarCard";
 
 function Cars() {
-	const [allAuctions, setAllAuctions] = useState<AuctionProps>();
-	const [data, setData] = useState(null);
+	const [allAuctions, setAllAuctions] = useState<AuctionProps | null>();
+	const [data, setData] = useState<any[]>([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
