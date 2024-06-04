@@ -14,7 +14,7 @@ const NavBar = () => {
 	const router = useRouter();
 	return (
 		<>
-			<nav className="sticky top-0 bg-black w-full h-[10%] z-50">
+			<nav className="sticky top-0 bg-black w-full h-[10%] z-50 p-2">
 				<div className="flex w-full items-center justify-between">
 					<Image
 						style={{ filter: "brightness(0.3)" }}
@@ -40,7 +40,7 @@ const NavBar = () => {
 									<span className="sr-only">Toggle navigation menu</span>
 								</Button>
 							</SheetTrigger>
-							<SheetContent side="left">
+							<SheetContent side="right">
 								<nav className="grid gap-6 text-lg font-medium">
 									<Link
 										href="#"
@@ -60,6 +60,18 @@ const NavBar = () => {
 										className="text-muted-foreground hover:text-foreground"
 									>
 										Аукциони
+									</Link>
+									<Link
+										href="#"
+										className="text-muted-foreground hover:text-foreground"
+									>
+										Наскоро добавени - Канада
+									</Link>
+									<Link
+										href="#"
+										className="text-muted-foreground hover:text-foreground"
+									>
+										Наскоро добавени - Америка
 									</Link>
 									<Link
 										href="#"
