@@ -25,6 +25,7 @@ export default async function Home({ searchParams }: HomeProps) {
 	return (
 		<main className="overflow-hidden">
 			<HeroParallaxDemo />
+
 			<ThreeDCard />
 
 			<div className="mt-12 padding-x padding-y max-width" id="discover">
@@ -33,14 +34,14 @@ export default async function Home({ searchParams }: HomeProps) {
 					<p>Наскоро добавени аукциони</p>
 				</div>
 
-				<div className="home__filters">
+				<section id="auctions" className="home__filters">
 					<SearchBar />
 
 					<div className="home__filter-container">
 						<CustomFilter title="fuel" options={fuels} />
 						<CustomFilter title="year" options={yearsOfProduction} />
 					</div>
-				</div>
+				</section>
 			</div>
 			<Cars />
 		</main>
