@@ -79,8 +79,13 @@ const CarCard = ({ car }: { car: any }) => {
 						<div className="col-span-2 w-full flex-col items-center justify-center rounded-md border border-dashed">
 							<div className="w-full flex flex-col justify-center items-center h-full">
 								<h2>Детайли</h2>
-								<h2>Година - {car.year}</h2>
-								<h2>Гориво - {car.fuel && car.fuel.name}</h2>
+								<h2>Пробег - {car.lots[0].odometer.km} км</h2>
+								<h2>Двигател - {car.engine.name}</h2>
+								<h2>Повреда - {car.lots[0].damage.main.name}</h2>
+								<h2>
+									Търг -{" "}
+									{car.lots[0].sale_date ? car.lots[0].sale_date : "Няма данни"}
+								</h2>
 							</div>
 						</div>
 

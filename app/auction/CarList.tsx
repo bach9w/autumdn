@@ -3,16 +3,16 @@ import React, { useEffect, useState } from "react";
 import { fetchAuction } from "@app/api/cars";
 import { AuctionProps } from "@types";
 import CarCard from "./CarCard";
+import cars from "./cars.json";
 
 function Cars() {
-	const [allAuctions, setAllAuctions] = useState<AuctionProps | null>();
+	const [allAuctions, setAllAuctions] = useState<typeof cars | null>();
 	const [data, setData] = useState<any[]>([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const result = await fetchAuction();
-			setAllAuctions(result);
-			setData(result.data);
+			setAllAuctions(cars);
+			setData(cars.data);
 		};
 
 		fetchData();
