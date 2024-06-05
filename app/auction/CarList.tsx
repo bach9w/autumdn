@@ -22,7 +22,7 @@ function Cars() {
 
 	return (
 		<div>
-			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-2">
+			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-1">
 				{data &&
 					Array.isArray(data) &&
 					data.map((car: any) => (

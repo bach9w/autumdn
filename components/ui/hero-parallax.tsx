@@ -10,6 +10,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { SwipeCarousel } from "./carousel_first";
+import Hero from "@components/Hero";
 
 export const HeroParallax = ({
 	products,
@@ -57,11 +58,11 @@ export const HeroParallax = ({
 	);
 	return (
 		<>
+			<Header />
 			<div
 				ref={ref}
-				className=" md:h-full py-80 md:py-40 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:200px] [transform-style:preserve-3d]"
+				className=" md:h-full py-10 md:py-40 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:200px] [transform-style:preserve-3d]"
 			>
-				<Header />
 				<motion.div
 					style={{
 						rotateX,
@@ -94,15 +95,8 @@ export const HeroParallax = ({
 
 export const Header = () => {
 	return (
-		<div className="max-w-7xl relative bottom-[250px] mx-auto py-0 md:py-40 px-10 w-full ">
-			<h1 className="text-5xl md:text-7xl font-bold text-black ">
-				Нови <br /> аукциони
-			</h1>
-			<p className="max-w-2xl text-base md:text-xl mt-8 text-black">
-				Доставяме всяка седмица нови аукциони на най-добри цени. Автомобилите са
-				с гарантиран произход и се предлагат на аукцион. Всеки автомобил е с
-				документи и се продава на аукцион.
-			</p>
+		<div className="relative bottom-24">
+			<Hero />
 		</div>
 	);
 };

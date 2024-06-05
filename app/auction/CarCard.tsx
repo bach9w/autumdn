@@ -18,6 +18,7 @@ import {
 import Image from "next/image";
 import { PhoneCall, Upload } from "lucide-react";
 import { Separator } from "@components/ui/separator";
+import { Badge } from "@components/ui/badge";
 
 interface CarCardProps {
 	title: string;
@@ -50,9 +51,18 @@ const CarCard = ({ car }: { car: any }) => {
 	return (
 		<Card className="overflow-hidden">
 			<CardHeader>
+				<div className="w-full flex justify-end">
+					{car.lots[0].condition &&
+					car.lots[0].condition.name === "run_and_drives" ? (
+						<Badge>В движение</Badge>
+					) : (
+						<Badge>Неподвижен</Badge>
+					)}
+				</div>
 				<CardTitle>
-					{car.manufacturer.name} {car.model.name}{" "}
+					{car.manufacturer.name} {car.model.name}
 				</CardTitle>
+
 				<CardDescription>{car.year}</CardDescription>
 			</CardHeader>
 			<CardContent>
