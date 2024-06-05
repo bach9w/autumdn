@@ -6,16 +6,14 @@ import CarCard from "./CarCard";
 import cars from "./cars.json";
 
 function Cars() {
-	const [allAuctions, setAllAuctions] = useState<typeof cars | null>();
+	const [allAuctions, setAllAuctions] = useState<AuctionProps>();
 	const [data, setData] = useState<any[]>([]);
 
 	useEffect(() => {
-		const fetchData = async () => {
-			setAllAuctions(cars);
-			setData(cars.data);
-		};
-
-		fetchData();
+		fetchAuction().then((res) => {
+			setAllAuctions(res);
+			setData(res.data);
+		});
 	}, []); // Empty array ensures this runs once on mount
 
 	console.log(allAuctions);

@@ -58,7 +58,8 @@ const CarCard = ({ car }: { car: any }) => {
 		<Card className="overflow-hidden h-full ">
 			<CardHeader>
 				<div className="w-full flex justify-end">
-					{car.lots[0].condition &&
+					{car.lots[0] &&
+					car.lots[0].condition &&
 					car.lots[0].condition.name === "run_and_drives" ? (
 						<Badge>В движение</Badge>
 					) : (
@@ -66,7 +67,8 @@ const CarCard = ({ car }: { car: any }) => {
 					)}
 				</div>
 				<CardTitle>
-					{car.manufacturer.name} {car.model.name}
+					{car.manufacturer && car.manufacturer.name}{" "}
+					{car.model && car.model.name}
 				</CardTitle>
 
 				<CardDescription>{car.year}</CardDescription>
@@ -77,7 +79,7 @@ const CarCard = ({ car }: { car: any }) => {
 						car.lots.map((lot: any) => (
 							<Carousel key={lot.id}>
 								<CarouselContent>
-									{lot.images?.normal &&
+									{lot.images?.normal !== "" ? (
 										lot.images.normal.map((img: any, index: any) => (
 											<CarouselItem key={index}>
 												<img
@@ -88,7 +90,14 @@ const CarCard = ({ car }: { car: any }) => {
 													width="300"
 												/>
 											</CarouselItem>
-										))}
+										))
+									) : (
+										<CarouselItem>
+											<div className="aspect-square w-[300px] h-[300px] rounded-md object-cover ">
+												No Image
+											</div>
+										</CarouselItem>
+									)}
 								</CarouselContent>
 							</Carousel>
 						))}
@@ -97,18 +106,24 @@ const CarCard = ({ car }: { car: any }) => {
 							<div className="w-full flex flex-col justify-center items-center h-full">
 								<h2>Детайли</h2>
 								<Separator orientation="horizontal" />
-								<h2>Пробег - {car.lots[0].odometer.km} км</h2>
+								<h2>
+									Пробег -{" "}
+									{car.lots[0] &&
+										car.lots[0].odometer &&
+										car.lots[0].odometer.km}{" "}
+									км
+								</h2>
 								<Separator orientation="horizontal" />
 
-								<h2>Двигател - {car.engine.name}</h2>
+								<h2>Двигател - {car.engine && car.engine.name}</h2>
 								<Separator orientation="horizontal" />
 
-								<h2>Повреда - {car.lots[0].damage.main.name}</h2>
+								<h2>Повреда - {car.lots[0] && car.lots[0].damage.main.name}</h2>
 								<Separator orientation="horizontal" />
 
 								<h2 className="w-full flex items-center justify-center">
 									Търг -{" "}
-									{car.lots[0].sale_date
+									{car.lots[0] && car.lots[0].sale_date
 										? splitDateAndTime(car.lots[0].sale_date)
 										: "Очаква се дата"}
 								</h2>

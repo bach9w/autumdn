@@ -35,7 +35,7 @@ export default async function Home({ searchParams }: HomeProps) {
 				</div>
 
 				<section id="auctions" className="home__filters">
-					<SearchBar />
+					{/*<SearchBar />*/}
 
 					<div className="home__filter-container">
 						<CustomFilter title="fuel" options={fuels} />
