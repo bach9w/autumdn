@@ -14,22 +14,25 @@ function Cars() {
 			setAllAuctions(res);
 			setData(res.data);
 		});
-	}, []); // Empty array ensures this runs once on mount
-
-	console.log(allAuctions);
+	}, []);
 
 	return (
-		<div>
-			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-1">
-				{data &&
-					Array.isArray(data) &&
-					data.map((car: any) => (
-						<div key={car.id}>
-							<CarCard car={car} />
-						</div>
-					))}
-			</div>
-		</div>
+		<>
+			{data &&
+				Array.isArray(data) &&
+				data.map(
+					(car: any) =>
+						car.lots &&
+						car.lots[0] &&
+						car.lots[0].images &&
+						car.lots[0].sale_date !== null &&
+						car.lots[0].images?.normal && (
+							<div key={car.id}>
+								<CarCard car={car} />
+							</div>
+						),
+				)}
+		</>
 	);
 }
 

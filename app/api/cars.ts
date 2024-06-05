@@ -3,7 +3,7 @@ export async function fetchAuction() {
 		"x-api-key": "a48f8f672e29bd479c652f76f100bcf4",
 	};
 	const response = await fetch(
-		"https://import-motor.com/api/cars?minutes=10&status=3&condition=0&per_page=100",
+		"https://import-motor.com/api/cars?minutes=10&per_page=100&status=3&condition=0",
 		{
 			headers: headers,
 		},
