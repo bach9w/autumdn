@@ -47,9 +47,15 @@ interface CarCardProps {
 	};
 }
 
+function splitDateAndTime(date: string) {
+	const [datePart, timePart] = date.split("T");
+	const [year, month, day] = datePart.split("-");
+	return `${day}.${month}.${year}`;
+}
+
 const CarCard = ({ car }: { car: any }) => {
 	return (
-		<Card className="overflow-hidden">
+		<Card className="overflow-hidden h-full ">
 			<CardHeader>
 				<div className="w-full flex justify-end">
 					{car.lots[0].condition &&
@@ -86,7 +92,7 @@ const CarCard = ({ car }: { car: any }) => {
 								</CarouselContent>
 							</Carousel>
 						))}
-					<div className="grid grid-cols-3 gap-2">
+					<div className="grid grid-cols-3 gap-2 uppercase">
 						<div className="col-span-2 w-full flex-col items-center justify-center rounded-md border border-dashed">
 							<div className="w-full flex flex-col justify-center items-center h-full">
 								<h2>Детайли</h2>
@@ -100,14 +106,16 @@ const CarCard = ({ car }: { car: any }) => {
 								<h2>Повреда - {car.lots[0].damage.main.name}</h2>
 								<Separator orientation="horizontal" />
 
-								<h2>
+								<h2 className="w-full flex items-center justify-center">
 									Търг -{" "}
-									{car.lots[0].sale_date ? car.lots[0].sale_date : "Няма данни"}
+									{car.lots[0].sale_date
+										? splitDateAndTime(car.lots[0].sale_date)
+										: "Очаква се дата"}
 								</h2>
 							</div>
 						</div>
 
-						<button className="flex aspect-square w-full flex-col items-center justify-center rounded-md border border-dashed text-white bg-red-500">
+						<button className="flex aspect-square w-full min-h-full flex-col items-center justify-center rounded-md border border-dashed text-white bg-red-500 hover:bg-red-800">
 							Направи запитване
 							<PhoneCall color="white" />
 						</button>
