@@ -5,26 +5,39 @@ import { AuctionProps } from "@types";
 import CarCard from "./CarCard";
 import cars from "./cars.json";
 
+import Logo from "@/public/myride_logo.jpg";
+import Image from "next/image";
+
+const Loading = () => (
+	<div className="w-full min-h-screen flex justify-center items-center text-black animate-pulse ">
+		<Image src={Logo} width={300} height={300} alt="Logo" />
+	</div>
+);
+
 function Cars({ filters }: { filters: any }) {
 	const [allAuctions, setAllAuctions] = useState<AuctionProps>();
 	const [data, setData] = useState<any[]>([]);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		if (!filters) {
 			fetchAuction().then((res) => {
 				setAllAuctions(res);
 				setData(res.data);
+				setLoading(false);
 			});
 		} else {
 			fetchAuctionFilter(filters).then((res) => {
 				setAllAuctions(res);
 				setData(res.data);
+				setLoading(false);
 			});
 		}
 	}, [filters]);
 
 	return (
 		<>
+			{loading && <Loading />}
 			{data &&
 				Array.isArray(data) &&
 				data.map(

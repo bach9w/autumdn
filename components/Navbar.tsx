@@ -3,7 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "/public/myride_logo.jpg";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+	Sheet,
+	SheetClose,
+	SheetContent,
+	SheetTrigger,
+} from "@/components/ui/sheet";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
@@ -43,30 +48,36 @@ const NavBar = () => {
 							<SheetContent side="right">
 								<nav className="grid gap-6 text-lg font-medium">
 									<Link
-										href="#"
+										href="/"
 										className="flex items-center gap-2 text-lg font-semibold"
 									>
 										<Image src={Logo} width={70} height={30} alt="logo" />
-										<span className="sr-only">Acme Inc</span>
+										<span className="sr-only">MYRIDE</span>
 									</Link>
-									<Link
-										href="#"
-										className="text-muted-foreground hover:text-foreground"
-									>
-										Начало
-									</Link>
-									<Link
-										href="#"
-										className="text-muted-foreground hover:text-foreground"
-									>
-										Аукциони
-									</Link>
-									<Link
-										href="#"
-										className="text-muted-foreground hover:text-foreground"
-									>
-										Наскоро добавени - Канада
-									</Link>
+									<SheetClose asChild>
+										<Link
+											href="/"
+											className="text-muted-foreground hover:text-foreground"
+										>
+											Начало
+										</Link>
+									</SheetClose>
+									<SheetClose asChild>
+										<Link
+											href="/auction"
+											className="text-muted-foreground hover:text-foreground"
+										>
+											Аукциони
+										</Link>
+									</SheetClose>
+									<SheetClose asChild>
+										<Link
+											href="/manufacturers"
+											className="text-muted-foreground hover:text-foreground"
+										>
+											Марки
+										</Link>
+									</SheetClose>
 									<Link
 										href="#"
 										className="text-muted-foreground hover:text-foreground"

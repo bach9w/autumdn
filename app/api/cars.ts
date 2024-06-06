@@ -37,3 +37,15 @@ export async function fetchAuctionFilter(filters: Filters) {
 
 	return result;
 }
+
+export async function fetchManufacturers() {
+	const headers = {
+		"x-api-key": "a48f8f672e29bd479c652f76f100bcf4",
+	};
+	const response = await fetch("https://import-motor.com/api/manufacturers", {
+		headers: headers,
+	});
+
+	const result = await response.json();
+	return result;
+}
