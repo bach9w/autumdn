@@ -14,40 +14,38 @@ import { Button } from "@components/ui/button";
 import Link from "next/link";
 
 export default async function Home({ searchParams }: HomeProps) {
-	const filters = {
-		year: searchParams.year || "",
-		fuel: searchParams.fuel || "",
-	};
+  const filters = {
+    year: searchParams.year || "",
+    fuel: searchParams.fuel || "",
+  };
 
-	return (
-		<main className="overflow-hidden">
-			<HeroParallaxDemo />
+  return (
+    <main className="overflow-hidden">
+      <HeroParallaxDemo />
 
-			<ThreeDCard />
+      <div className="padding-x padding-y max-width mt-12" id="discover">
+        <div className="home__text-container">
+          <h1 className="text-4xl font-extrabold">Каталог аукциони</h1>
+          <p>Наскоро добавени аукциони</p>
+        </div>
 
-			<div className="mt-12 padding-x padding-y max-width" id="discover">
-				<div className="home__text-container">
-					<h1 className="text-4xl font-extrabold">Каталог аукциони</h1>
-					<p>Наскоро добавени аукциони</p>
-				</div>
+        <section id="auctions" className="home__filters">
+          {/*<SearchBar />*/}
 
-				<section id="auctions" className="home__filters">
-					{/*<SearchBar />*/}
-
-					<div className="home__filter-container">
-						<CustomFilter title="fuel" options={fuels} />
-						<CustomFilter title="year" options={yearsOfProduction} />
-					</div>
-				</section>
-			</div>
-			<div className="h-full grid grid-cols-1 md:grid-cols-2 ">
-				<Cars filters={filters} />
-			</div>
-			<div className="w-full flex items-start justify-center mt-6">
-				<Link href="/auction">
-					<Button>Разгледай всички аукциони</Button>
-				</Link>
-			</div>
-		</main>
-	);
+          <div className="home__filter-container">
+            <CustomFilter title="fuel" options={fuels} />
+            <CustomFilter title="year" options={yearsOfProduction} />
+          </div>
+        </section>
+      </div>
+      <div className="grid h-full grid-cols-1 md:grid-cols-2">
+        <Cars filters={filters} />
+      </div>
+      <div className="mt-6 flex w-full items-start justify-center">
+        <Link href="/auction">
+          <Button>Разгледай всички аукциони</Button>
+        </Link>
+      </div>
+    </main>
+  );
 }

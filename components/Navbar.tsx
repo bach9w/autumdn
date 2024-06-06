@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "/public/myride_logo.jpg";
+import Logo from "/public/myride_logo.png";
 
 import {
   Sheet,
@@ -28,7 +28,7 @@ const NavBar = () => {
               height={250}
               alt="logo"
               onClick={() => router.push("/")}
-              className="cursor-pointer rounded-xl opacity-70 backdrop-brightness-50"
+              className="cursor-pointer rounded-xl"
             />
           </div>
           <div className="hidden w-[300px] p-2 md:relative md:flex">
