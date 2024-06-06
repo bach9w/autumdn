@@ -3,6 +3,8 @@
 import { fetchCarByManufacturer } from "@app/api/cars";
 import CarCard from "@app/auction/CarCard";
 import Loading from "@components/loading";
+import { Button } from "@components/ui/button";
+import { ChevronLeft } from "lucide-react";
 import { Suspense, useEffect, useState } from "react";
 
 const Manufacture = ({ params }: { params: { slug: number } }) => {
@@ -19,6 +21,15 @@ const Manufacture = ({ params }: { params: { slug: number } }) => {
   return (
     <Suspense fallback={<Loading />}>
       <div className="grid grid-cols-1 p-4 py-10 md:grid-cols-2">
+        <Button variant="outline" size="icon" className="mb-2 h-7 w-7">
+          <ChevronLeft
+            className="h-4 w-4"
+            onClick={() => {
+              window.history.back();
+            }}
+          />
+          <span className="sr-only">Назад</span>
+        </Button>
         {loading && <Loading />}
         {data &&
           Array.isArray(data) &&

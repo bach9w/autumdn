@@ -1,9 +1,10 @@
 "use client";
 
 import { fetchCarDetails } from "@app/api/cars";
-import CarDetails from "./CarDetails";
+
 import Loading from "@components/loading";
 import { Suspense, useEffect, useState } from "react";
+import { CarInfo } from "./CarInfo";
 
 const Manufacture = ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
@@ -24,7 +25,7 @@ const Manufacture = ({ params }: { params: { slug: string } }) => {
     <Suspense fallback={<Loading />}>
       <div className="p-4 py-10">
         {loading && <Loading />}
-        {data && <CarDetails car={data} />}
+        {data && <CarInfo data={data} />}
       </div>
     </Suspense>
   );
