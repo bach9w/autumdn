@@ -10,10 +10,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-import { Menu, Package2 } from "lucide-react";
+import { Menu } from "lucide-react";
 
 const NavBar = () => {
   const router = useRouter();

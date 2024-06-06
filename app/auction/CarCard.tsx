@@ -84,9 +84,11 @@ const CarCard = ({ car }: { car: any }) => {
               </Carousel>
             ))}
           <div className="grid grid-cols-3 gap-2 uppercase">
-            <div className="col-span-2 w-full flex-col items-center justify-center rounded-md border border-dashed">
+            <div className="col-span-2 w-full flex-col items-center justify-center rounded-md">
               <div className="flex h-full w-full flex-col items-center justify-center">
-                <h2>Детайли</h2>
+                <Badge className="flex w-full justify-center rounded-b-none">
+                  Детайли
+                </Badge>
                 <Separator orientation="horizontal" />
                 <h2>
                   Пробег -{" "}
@@ -103,16 +105,16 @@ const CarCard = ({ car }: { car: any }) => {
                 <h2>Повреда - {car.lots[0] && car.lots[0].damage.main.name}</h2>
                 <Separator orientation="horizontal" />
 
-                <h2 className="flex w-full items-center justify-center">
+                <Badge className="flex w-full items-center justify-center rounded-t-none">
                   Търг -{" "}
                   {car.lots[0] && car.lots[0].sale_date
                     ? splitDateAndTime(car.lots[0].sale_date)
                     : "Очаква се дата"}
-                </h2>
+                </Badge>
               </div>
             </div>
 
-            <button className="flex aspect-square min-h-full w-full flex-col items-center justify-center rounded-md border border-dashed bg-red-500 text-white hover:bg-red-800">
+            <button className="flex aspect-square min-h-full w-full flex-col items-center justify-center rounded-md border bg-red-500 text-white hover:bg-red-800">
               Направи запитване
               <PhoneCall color="white" />
             </button>
