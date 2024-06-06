@@ -68,7 +68,7 @@ export function CarInfo({ data }: { data: any }) {
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-[1fr_250px] lg:grid-cols-3 lg:gap-8">
+        <div className="grid gap-4 md:grid-cols-[1fr_250px] lg:gap-8">
           <div className="grid auto-rows-max items-start gap-4 lg:gap-8">
             <Card x-chunk="dashboard-07-chunk-3">
               <CardHeader>
@@ -79,11 +79,22 @@ export function CarInfo({ data }: { data: any }) {
                   <div className="grid gap-3">
                     <div className="flex flex-col">
                       <Badge className="mb-2 flex h-[40px] w-full justify-center rounded-none uppercase">
-                        {data.lots && splitDateAndTime(data.lots[2].sale_date)}
+                        {data.lots && splitDateAndTime(data.lots[0].sale_date)}
                       </Badge>
-                      {data.lots[2].buy_now && (
+
+                      {data.lots[data.lots.length - 1].buy_now ? (
                         <Badge className="flex w-full justify-center uppercase">
-                          Купи сега за - {data.lots[2].buy_now} $
+                          Купи сега за -{" "}
+                          {data.lots[data.lots.length - 1].buy_now} $
+                        </Badge>
+                      ) : (
+                        <Badge className="flex w-full justify-center uppercase">
+                          Очаквана цена -{" "}
+                          {
+                            data.lots[data.lots.length - 1]
+                              .clean_wholesale_price
+                          }{" "}
+                          $
                         </Badge>
                       )}
                     </div>
@@ -100,7 +111,7 @@ export function CarInfo({ data }: { data: any }) {
                 <Carousel>
                   <CarouselContent>
                     {data.lots &&
-                      data.lots[0].images.normal.map(
+                      data.lots[data.lots.length - 1].images.normal.map(
                         (imageUrl: string, index: number) => (
                           <CarouselItem key={index}>
                             <img
@@ -125,16 +136,24 @@ export function CarInfo({ data }: { data: any }) {
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col">
-                <Button className="rounded-none" size="sm" variant="secondary">
+                <Button
+                  className="rounded-none hover:bg-red-500 hover:text-white"
+                  size="sm"
+                  variant="secondary"
+                >
                   VIN - {data.vin}
                 </Button>
-                <Button size="sm" className="rounded-none" variant="secondary">
+                <Button
+                  size="sm"
+                  className="rounded-none hover:bg-red-500 hover:text-white"
+                  variant="secondary"
+                >
                   ID - {data.id}
                 </Button>
               </CardContent>
             </Card>
           </div>
-          <div className="grid auto-rows-max items-start gap-4 lg:col-span-2 lg:gap-8">
+          <div className="grid auto-rows-max items-start gap-4 lg:gap-8">
             <Card x-chunk="dashboard-07-chunk-0">
               <CardHeader>
                 <CardTitle>Информация за автомобила</CardTitle>
@@ -159,19 +178,19 @@ export function CarInfo({ data }: { data: any }) {
                   <div className="grid gap-3">
                     <Label htmlFor="name">Година</Label>
                     <Badge className="flex w-full justify-center uppercase">
-                      {data.year}
+                      {data ? data.year : "Няма информация"}
                     </Badge>
                   </div>
                   <div className="grid gap-3">
                     <Label htmlFor="name">Цвят</Label>
                     <Badge className="flex w-full justify-center uppercase">
-                      {data.color.name}
+                      {data.color ? data.color.name : "Няма цвят"}
                     </Badge>
                   </div>
                   <div className="grid gap-3">
                     <Label htmlFor="name">Airbags</Label>
                     <Badge className="flex w-full justify-center uppercase">
-                      {data.lots[0].airbags !== null
+                      {data.lots[data.lots.length - 1].airbags !== null
                         ? "Нарушени"
                         : "Ненарушени"}
                     </Badge>
@@ -179,13 +198,18 @@ export function CarInfo({ data }: { data: any }) {
                   <div className="grid gap-3">
                     <Label htmlFor="name">Ключове</Label>
                     <Badge className="flex w-full justify-center uppercase">
-                      {data.lots[0].keys_available ? "Налични" : "Неналични"}
+                      {data.lots[data.lots.length - 1].keys_available
+                        ? "Налични"
+                        : "Неналични"}
                     </Badge>
                   </div>
                   <div className="grid gap-3">
                     <Label htmlFor="name">Километраж</Label>
                     <Badge className="flex w-full justify-center uppercase">
-                      {data.lots[0].odometer.km} км
+                      {data.lots[data.lots.length - 1].odometer
+                        ? data.lots[data.lots.length - 1].odometer.km
+                        : "Няма информация"}{" "}
+                      км
                     </Badge>
                   </div>
                   <div className="grid gap-3">
@@ -193,14 +217,14 @@ export function CarInfo({ data }: { data: any }) {
                     <Badge className="flex w-full flex-col justify-between uppercase">
                       <p>
                         Основна -{" "}
-                        {data.lots[0].damage.main !== null
-                          ? data.lots[0].damage.main.name
+                        {data.lots[data.lots.length - 1].damage.main !== null
+                          ? data.lots[data.lots.length - 1].damage.main.name
                           : "Няма"}
                       </p>
                       <p>
                         Вторична -{" "}
-                        {data.lots[0].damage.second !== null
-                          ? data.lots[0].damage.second.name
+                        {data.lots[data.lots.length - 1].damage.second !== null
+                          ? data.lots[data.lots.length - 1].damage.second.name
                           : "Няма"}
                       </p>
                     </Badge>
@@ -220,31 +244,33 @@ export function CarInfo({ data }: { data: any }) {
                   <div className="grid gap-3">
                     <Label htmlFor="name">Мощност</Label>
                     <Badge className="flex w-full justify-center uppercase">
-                      {data.engine.name}
+                      {data.engine ? data.engine.name : "Няма информация"}
                     </Badge>
                   </div>
                   <div className="grid gap-3">
                     <Label htmlFor="name">Година</Label>
                     <Badge className="flex w-full justify-center uppercase">
-                      {data.year}
+                      {data ? data.year : "Няма информация"}
                     </Badge>
                   </div>
                   <div className="grid gap-3">
                     <Label htmlFor="name">Цилиндри</Label>
                     <Badge className="flex w-full justify-center uppercase">
-                      {data.cylinders}
+                      {data ? data.cylinders : "Няма информация"}
                     </Badge>
                   </div>
                   <div className="grid gap-3">
                     <Label htmlFor="name">Гориво</Label>
                     <Badge className="flex w-full justify-center uppercase">
-                      {data.fuel.name}
+                      {data.fuel ? data.fuel.name : "Няма информация"}
                     </Badge>
                   </div>
                   <div className="grid gap-3">
                     <Label htmlFor="name">Трансмисия</Label>
                     <Badge className="flex w-full justify-center uppercase">
-                      {data.transmission.name}
+                      {data.transmission
+                        ? data.transmission.name
+                        : "Няма информация"}
                     </Badge>
                   </div>
                 </div>
