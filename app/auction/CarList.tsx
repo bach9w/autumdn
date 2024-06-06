@@ -5,55 +5,48 @@ import { AuctionProps } from "@types";
 import CarCard from "./CarCard";
 import cars from "./cars.json";
 
-import Logo from "@/public/myride_logo.jpg";
-import Image from "next/image";
-
-const Loading = () => (
-	<div className="w-full min-h-screen flex justify-center items-center text-black animate-pulse ">
-		<Image src={Logo} width={300} height={300} alt="Logo" />
-	</div>
-);
+import Loading from "@components/loading";
 
 function Cars({ filters }: { filters: any }) {
-	const [allAuctions, setAllAuctions] = useState<AuctionProps>();
-	const [data, setData] = useState<any[]>([]);
-	const [loading, setLoading] = useState(true);
+  const [allAuctions, setAllAuctions] = useState<AuctionProps>();
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-	useEffect(() => {
-		if (!filters) {
-			fetchAuction().then((res) => {
-				setAllAuctions(res);
-				setData(res.data);
-				setLoading(false);
-			});
-		} else {
-			fetchAuctionFilter(filters).then((res) => {
-				setAllAuctions(res);
-				setData(res.data);
-				setLoading(false);
-			});
-		}
-	}, [filters]);
+  useEffect(() => {
+    if (!filters) {
+      fetchAuction().then((res) => {
+        setAllAuctions(res);
+        setData(res.data);
+        setLoading(false);
+      });
+    } else {
+      fetchAuctionFilter(filters).then((res) => {
+        setAllAuctions(res);
+        setData(res.data);
+        setLoading(false);
+      });
+    }
+  }, [filters]);
 
-	return (
-		<>
-			{loading && <Loading />}
-			{data &&
-				Array.isArray(data) &&
-				data.map(
-					(car: any) =>
-						car.lots &&
-						car.lots[0] &&
-						car.lots[0].images &&
-						car.lots[0].sale_date !== null &&
-						car.lots[0].images?.normal && (
-							<div key={car.id}>
-								<CarCard car={car} />
-							</div>
-						),
-				)}
-		</>
-	);
+  return (
+    <>
+      {loading && <Loading />}
+      {data &&
+        Array.isArray(data) &&
+        data.map(
+          (car: any) =>
+            car.lots &&
+            car.lots[0] &&
+            car.lots[0].images &&
+            car.lots[0].sale_date !== null &&
+            car.lots[0].images?.normal && (
+              <div key={car.id}>
+                <CarCard car={car} />
+              </div>
+            ),
+        )}
+    </>
+  );
 }
 
 export default Cars;

@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/carousel";
 
 import Image from "next/image";
-import { PhoneCall, Upload } from "lucide-react";
+import { Car, PhoneCall, Upload } from "lucide-react";
 import { Separator } from "@components/ui/separator";
 import { Badge } from "@components/ui/badge";
 
@@ -26,10 +26,11 @@ function splitDateAndTime(date: string) {
   return `${day}.${month}.${year}`;
 }
 
-const CarCard = ({ car }: { car: any }) => {
+const CarDetails = ({ car }: { car: any }) => {
+  console.log(car);
   return (
     <Card
-      className="h-full overflow-hidden"
+      className="h-full max-h-full overflow-hidden"
       onClick={() => {
         window.location.href = `/auction/${car.vin}`;
       }}
@@ -56,33 +57,25 @@ const CarCard = ({ car }: { car: any }) => {
         <CardDescription>{car.year}</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-2">
-          {car.lots &&
-            car.lots.map((lot: any) => (
-              <Carousel key={lot.id}>
-                <CarouselContent>
-                  {lot.images?.normal !== "" ? (
-                    lot.images.normal.map((img: any, index: any) => (
-                      <CarouselItem key={index}>
-                        <img
-                          src={img}
-                          alt={`Car image ${index + 1}`}
-                          height={300}
-                          className="aspect-square w-full rounded-md object-cover"
-                          width="300"
-                        />
-                      </CarouselItem>
-                    ))
-                  ) : (
-                    <CarouselItem>
-                      <div className="aspect-square h-[300px] w-[300px] rounded-md object-cover">
-                        No Image
-                      </div>
+        <div className="">
+          <Carousel>
+            <CarouselContent>
+              {car.lots &&
+                car.lots[0].images.normal.map(
+                  (imageUrl: string, index: number) => (
+                    <CarouselItem key={index}>
+                      <img
+                        src={imageUrl}
+                        alt={`Car image ${index + 1}`}
+                        height={300}
+                        className="aspect-square w-full rounded-md object-fill"
+                        width="300"
+                      />
                     </CarouselItem>
-                  )}
-                </CarouselContent>
-              </Carousel>
-            ))}
+                  ),
+                )}
+            </CarouselContent>
+          </Carousel>
           <div className="grid grid-cols-3 gap-2 uppercase">
             <div className="col-span-2 w-full flex-col items-center justify-center rounded-md border border-dashed">
               <div className="flex h-full w-full flex-col items-center justify-center">
@@ -123,4 +116,4 @@ const CarCard = ({ car }: { car: any }) => {
   );
 };
 
-export default CarCard;
+export default CarDetails;
