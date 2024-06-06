@@ -23,7 +23,7 @@ const Manufacture = ({ params }: { params: { slug: string } }) => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className="p-4 py-10">
+      <div className="p-1 py-10">
         {loading && <Loading />}
         {data && <CarInfo data={data} />}
       </div>
