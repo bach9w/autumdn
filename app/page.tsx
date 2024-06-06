@@ -1,4 +1,4 @@
-import { fetchCars } from "@utils";
+import { fetchAuctionFilter } from "@/app/api/cars";
 import { HomeProps } from "@types";
 import { fuels, yearsOfProduction } from "@constants";
 import Hero from "@components/Hero";
@@ -10,17 +10,14 @@ import ShowMore from "@components/ShowMore";
 import { HeroParallaxDemo } from "@components/Parallax";
 import { ThreeDCard } from "@components/Hero-2";
 import Cars from "./auction/CarList";
+import { Button } from "@components/ui/button";
+import Link from "next/link";
 
 export default async function Home({ searchParams }: HomeProps) {
-	const allCars = await fetchCars({
-		manufacturer: searchParams.manufacturer || "",
-		year: searchParams.year || 2022,
+	const filters = {
+		year: searchParams.year || "",
 		fuel: searchParams.fuel || "",
-		limit: searchParams.limit || 10,
-		model: searchParams.model || "",
-	});
-
-	const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
+	};
 
 	return (
 		<main className="overflow-hidden">
@@ -44,7 +41,12 @@ export default async function Home({ searchParams }: HomeProps) {
 				</section>
 			</div>
 			<div className="h-full grid grid-cols-1 md:grid-cols-2 ">
-				<Cars />
+				<Cars filters={filters} />
+			</div>
+			<div className="w-full flex items-start justify-center mt-6">
+				<Link href="/auction">
+					<Button>Разгледай всички аукциони</Button>
+				</Link>
 			</div>
 		</main>
 	);

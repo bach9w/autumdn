@@ -55,7 +55,7 @@ function splitDateAndTime(date: string) {
 
 const CarCard = ({ car }: { car: any }) => {
 	return (
-		<Card className="overflow-hidden h-full ">
+		<Card className="overflow-hidden h-full">
 			<CardHeader>
 				<div className="w-full flex justify-end">
 					{car.lots[0] &&

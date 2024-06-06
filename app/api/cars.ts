@@ -13,3 +13,27 @@ export async function fetchAuction() {
 
 	return result;
 }
+
+interface Filters {
+	year: string;
+	fuel: string;
+}
+
+export async function fetchAuctionFilter(filters: Filters) {
+	const fuel = parseInt(filters.fuel);
+	const year = parseInt(filters.year) || undefined;
+	const headers = {
+		"x-api-key": "a48f8f672e29bd479c652f76f100bcf4",
+	};
+	const response = await fetch(
+		`https://import-motor.com/api/cars?minutes=10&per_page=30&status=3&condition=0&fuel_type=${fuel}&year=${year}`,
+		{
+			headers: headers,
+		},
+	);
+
+	// Parse the response as JSON
+	const result = await response.json();
+
+	return result;
+}

@@ -1,20 +1,27 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { fetchAuction } from "@app/api/cars";
+import { fetchAuction, fetchAuctionFilter } from "@app/api/cars";
 import { AuctionProps } from "@types";
 import CarCard from "./CarCard";
 import cars from "./cars.json";
 
-function Cars() {
+function Cars({ filters }: { filters: any }) {
 	const [allAuctions, setAllAuctions] = useState<AuctionProps>();
 	const [data, setData] = useState<any[]>([]);
 
 	useEffect(() => {
-		fetchAuction().then((res) => {
-			setAllAuctions(res);
-			setData(res.data);
-		});
-	}, []);
+		if (!filters) {
+			fetchAuction().then((res) => {
+				setAllAuctions(res);
+				setData(res.data);
+			});
+		} else {
+			fetchAuctionFilter(filters).then((res) => {
+				setAllAuctions(res);
+				setData(res.data);
+			});
+		}
+	}, [filters]);
 
 	return (
 		<>

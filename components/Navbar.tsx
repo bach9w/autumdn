@@ -14,7 +14,7 @@ const NavBar = () => {
 	const router = useRouter();
 	return (
 		<>
-			<nav className="sticky top-0 bg-black w-full h-[10%] z-50 p-2">
+			<nav className="sticky top-0 bg-[#000000] w-full h-[10%] z-50 p-2">
 				<div className="flex w-full items-center justify-between">
 					<Image
 						style={{ filter: "brightness(0.3)" }}
