@@ -66,7 +66,7 @@ const CarCard = ({ car }: { car: any }) => {
             car.lots.map((lot: any) => (
               <Carousel key={lot.id}>
                 <CarouselContent>
-                  {lot.images?.normal !== "" ? (
+                  {lot.images && lot.images?.normal !== null ? (
                     lot.images.normal.map((img: any, index: any) => (
                       <CarouselItem key={index}>
                         <img
