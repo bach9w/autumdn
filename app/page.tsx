@@ -21,24 +21,28 @@ export default async function Home({ searchParams }: HomeProps) {
 
   return (
     <main className="overflow-hidden">
-      <HeroParallaxDemo />
-
-      <div className="padding-x padding-y max-width mt-12" id="discover">
-        <div className="home__text-container">
-          <h1 className="text-4xl font-extrabold">Каталог аукциони</h1>
-          <p>Наскоро добавени аукциони</p>
-        </div>
-
-        <section id="auctions" className="home__filters">
-          {/*<SearchBar />*/}
-
-          <div className="home__filter-container">
-            <CustomFilter title="fuel" options={fuels} />
-            <CustomFilter title="year" options={yearsOfProduction} />
+      <div className="h-full">
+        <HeroParallaxDemo />
+        <div className="padding-x padding-y max-width mt-12" id="discover">
+          <div className="home__text-container">
+            <h1 className="text-4xl font-extrabold text-white">
+              Каталог аукциони
+            </h1>
+            <p className="text-white">Наскоро добавени аукциони</p>
           </div>
-        </section>
+
+          <section id="auctions" className="home__filters">
+            <SearchBar />
+
+            <div className="home__filter-container">
+              <CustomFilter title="fuel" options={fuels} />
+              <CustomFilter title="year" options={yearsOfProduction} />
+            </div>
+          </section>
+        </div>
       </div>
-      <div className="grid h-full grid-cols-1 md:grid-cols-2">
+
+      <div className="grid h-full grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
         <Cars filters={filters} />
       </div>
       <div className="mt-6 flex w-full items-start justify-center">

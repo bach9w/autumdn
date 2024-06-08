@@ -17,6 +17,7 @@ import { Menu } from "lucide-react";
 
 const NavBar = () => {
   const router = useRouter();
+
   return (
     <>
       <nav className="sticky top-0 z-50 h-[10%] w-full bg-gradient-to-b from-[#151515] to-[#191919] p-2">

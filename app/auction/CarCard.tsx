@@ -18,20 +18,25 @@ import {
 import Image from "next/image";
 import { PhoneCall, Upload } from "lucide-react";
 import { Separator } from "@components/ui/separator";
+import { useRouter } from "next/navigation";
+
 import { Badge } from "@components/ui/badge";
+import { cn } from "@lib/utils";
 
 function splitDateAndTime(date: string) {
   const [datePart, timePart] = date.split("T");
   const [year, month, day] = datePart.split("-");
+
   return `${day}.${month}.${year}`;
 }
 
 const CarCard = ({ car }: { car: any }) => {
+  const router = useRouter();
   return (
     <Card
-      className="h-full overflow-hidden"
+      className="m-2 h-full overflow-hidden border-none p-2 shadow-md shadow-black"
       onClick={() => {
-        window.location.href = `/auction/${car.vin}`;
+        router.push(`/auction/${car.vin}`);
       }}
     >
       <CardHeader>
@@ -84,8 +89,8 @@ const CarCard = ({ car }: { car: any }) => {
               </Carousel>
             ))}
           <div className="grid grid-cols-3 gap-2 uppercase">
-            <div className="col-span-2 w-full flex-col items-center justify-center rounded-md">
-              <div className="flex h-full w-full flex-col items-center justify-center">
+            <div className="col-span-3 w-full flex-col items-center justify-center rounded-md">
+              <div className="flex h-full w-full flex-col items-center justify-center text-center">
                 <Badge className="flex w-full justify-center rounded-b-none">
                   Детайли
                 </Badge>
@@ -99,10 +104,20 @@ const CarCard = ({ car }: { car: any }) => {
                 </h2>
                 <Separator orientation="horizontal" />
 
-                <h2>Двигател - {car.engine && car.engine.name}</h2>
+                <h2 className={cn("text-[20px]")}>
+                  Двигател - {car.engine && car.engine.name}
+                </h2>
+
                 <Separator orientation="horizontal" />
 
-                <h2>Повреда - {car.lots[0] && car.lots[0].damage.main.name}</h2>
+                <h2>
+                  Повреда -{" "}
+                  {car.lots[0] &&
+                  car.lots[0].damage &&
+                  car.lots[0].damage.main.name !== null
+                    ? car.lots[0].damage.main.name
+                    : "Няма"}
+                </h2>
                 <Separator orientation="horizontal" />
 
                 <Badge className="flex w-full items-center justify-center rounded-t-none">
@@ -113,8 +128,13 @@ const CarCard = ({ car }: { car: any }) => {
                 </Badge>
               </div>
             </div>
+            <div className="col-span-2 w-full flex-col items-center justify-center rounded-md">
+              <div className="flex h-full w-full flex-col items-center justify-center rounded-xl bg-red-500 font-bold text-white shadow-md shadow-black">
+                КУПИ СЕГА
+              </div>
+            </div>
 
-            <button className="flex aspect-square min-h-full w-full flex-col items-center justify-center rounded-md border bg-red-500 text-white hover:bg-red-800">
+            <button className="flex aspect-square min-h-full w-full flex-col items-center justify-center rounded-md border bg-orange-600 text-white hover:bg-red-800">
               Направи запитване
               <PhoneCall color="white" />
             </button>

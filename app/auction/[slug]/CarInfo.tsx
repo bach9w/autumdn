@@ -44,10 +44,13 @@ export function CarInfo({ data }: { data: any }) {
             />
             <span className="sr-only">Назад</span>
           </Button>
-          <h1 className="text-wrap h-full flex-1 shrink-0 text-xl font-semibold tracking-tight sm:grow-0 sm:whitespace-nowrap">
+          <h1 className="text-wrap h-full flex-1 shrink-0 text-xl font-semibold tracking-tight text-white sm:grow-0 sm:whitespace-nowrap">
             {data.title}
           </h1>
-          <Badge variant="outline" className="ml-auto rounded-none sm:ml-0">
+          <Badge
+            variant="outline"
+            className="ml-auto rounded-none bg-white sm:ml-0"
+          >
             В движение
           </Badge>
           <div className="hidden items-center gap-2 md:ml-auto md:flex">

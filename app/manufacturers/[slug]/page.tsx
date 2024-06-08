@@ -39,8 +39,10 @@ const Manufacture = ({ params }: { params: { slug: number } }) => {
               car.lots[0] &&
               car.lots[0].images &&
               car.lots[0].sale_date !== null &&
+              car.lots[0].damage &&
+              car.lots[0].damage.main &&
               car.lots[0].images?.normal && (
-                <div key={car.id}>
+                <div key={car.id} className="mb-[25px]">
                   <CarCard car={car} />
                 </div>
               ),

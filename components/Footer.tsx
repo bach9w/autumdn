@@ -4,55 +4,55 @@ import Link from "next/link";
 import { footerLinks } from "@constants";
 
 const Footer = () => (
-	<footer className="flex flex-col text-black-100  mt-5 border-t border-gray-100">
-		<div className="flex max-md:flex-col flex-wrap justify-between gap-5 sm:px-16 px-6 py-10">
-			<div className="flex justify-start items-center gap-6">
-				<Image
-					src="/myride_logo.jpg"
-					alt="logo"
-					width={158}
-					height={18}
-					className="object-contain"
-				/>
-				<p className="text-base text-gray-700">
-					MYRIDE 2024 <br />
-					Всички права запазени &copy;
-				</p>
-			</div>
+  <footer className="mt-5 flex flex-col text-gray-100">
+    <div className="flex flex-wrap justify-between gap-5 px-6 py-10 max-md:flex-col sm:px-16">
+      <div className="flex items-center justify-start gap-6">
+        <Image
+          src="/myride_logo.jpg"
+          alt="logo"
+          width={158}
+          height={18}
+          className="object-contain hover:shadow-2xl hover:shadow-orange-500"
+        />
+        <p className="text-base text-gray-400">
+          MYRIDE 2024 <br />
+          Всички права запазени &copy;
+        </p>
+      </div>
 
-			<div className="footer__links">
-				{footerLinks.map((item) => (
-					<div key={item.title} className="footer__link">
-						<h3 className="font-bold">{item.title}</h3>
-						<div className="flex flex-col gap-5">
-							{item.links.map((link) => (
-								<Link
-									key={link.title}
-									href={link.url}
-									className="text-gray-500"
-								>
-									{link.title}
-								</Link>
-							))}
-						</div>
-					</div>
-				))}
-			</div>
-		</div>
+      <div className="footer__links">
+        {footerLinks.map((item) => (
+          <div key={item.title} className="footer__link">
+            <h3 className="font-bold">{item.title}</h3>
+            <div className="flex flex-col gap-5">
+              {item.links.map((link) => (
+                <Link
+                  key={link.title}
+                  href={link.url}
+                  className="text-gray-200 transition-colors duration-300 hover:bg-orange-500 hover:text-center"
+                >
+                  {link.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
 
-		<div className="flex flex-col justify-between items-center flex-wrap mt-10 border-t border-gray-100 sm:px-16 px-6 py-10">
-			<p>@2024 MYRIDE. Всички права запазени</p>
+    <div className="mt-10 flex flex-col flex-wrap items-center justify-between border-t border-gray-100 px-6 py-10 sm:px-16">
+      <p>@2024 MYRIDE. Всички права запазени</p>
 
-			<div className="footer__copyrights-link">
-				<Link href="/" className="text-gray-500">
-					Правила за поверителност
-				</Link>
-				<Link href="/" className="text-gray-500">
-					Условия и положения
-				</Link>
-			</div>
-		</div>
-	</footer>
+      <div className="footer__copyrights-link">
+        <Link href="/" className="text-gray-500">
+          Правила за поверителност
+        </Link>
+        <Link href="/" className="text-gray-500">
+          Условия и положения
+        </Link>
+      </div>
+    </div>
+  </footer>
 );
 
 export default Footer;

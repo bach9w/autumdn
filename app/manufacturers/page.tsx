@@ -5,10 +5,12 @@ import { fetchManufacturers } from "@app/api/cars";
 import { Card, CardDescription, CardHeader } from "@components/ui/card";
 import { cn } from "@lib/utils";
 import Loading from "@components/loading";
+import { useRouter } from "next/navigation";
 
 const Manufacturers = () => {
   const [manufacturers, setManufacturers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     fetchManufacturers().then((res) => {
@@ -25,13 +27,13 @@ const Manufacturers = () => {
           Марки автомобили
         </div>
         <Suspense fallback={<Loading />}>
-          <div className="grid grid-cols-2 p-4 py-10 md:grid-cols-3">
+          <div className="mt-2 grid grid-cols-2 gap-4 p-4 py-10 md:grid-cols-3">
             {manufacturers.map((manufacturer: any) => (
               <div
                 key={manufacturer.id}
                 className={cn(manufacturer.image ? "flex p-1" : "hidden")}
                 onClick={() => {
-                  window.location.href = `/manufacturers/${manufacturer.id}`;
+                  router.push(`/manufacturers/${manufacturer.id}`);
                 }}
               >
                 <Card className="flex h-[200px] w-full flex-col items-center justify-center">
