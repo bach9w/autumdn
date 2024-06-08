@@ -24,6 +24,8 @@ import {
   CarouselItem,
 } from "@components/ui/carousel";
 
+import ReactWhatsapp from "react-whatsapp";
+
 function splitDateAndTime(date: string) {
   const [datePart, timePart] = date.split("T");
   const [year, month, day] = datePart.split("-");
@@ -59,14 +61,26 @@ export function CarInfo({ data }: { data: any }) {
               variant="outline"
               size="sm"
             >
-              Получи информация <PhoneCall className="h-4 w-4" />
+              <a
+                className="flex animate-pulse items-center justify-center gap-1"
+                href="tel:+359897962266"
+              >
+                Получи информация <PhoneCall className="h-4 w-4" />
+              </a>
             </Button>
             <Button
               className="flex items-center justify-center gap-1 hover:bg-red-500 hover:text-white"
               size="sm"
             >
-              Изпрати запитване{" "}
-              <MessageCircleQuestionIcon className="h-4 w-4" />
+              <ReactWhatsapp
+                className="flex animate-pulse items-center justify-center gap-1"
+                element="webview"
+                number="+359897962266"
+                message={`Здравейте, интересувам се от автомил с VIN: ${data.vin}`}
+              >
+                Изпрати запитване{" "}
+                <MessageCircleQuestionIcon className="h-4 w-4" />
+              </ReactWhatsapp>
             </Button>
           </div>
         </div>
@@ -287,13 +301,26 @@ export function CarInfo({ data }: { data: any }) {
             variant="outline"
             size="sm"
           >
-            Получи информация <PhoneCall className="h-4 w-4" />
+            <a
+              className="flex animate-pulse items-center justify-center gap-1"
+              href="tel:+359897962266"
+            >
+              Получи информация <PhoneCall className="h-4 w-4" />
+            </a>
           </Button>
           <Button
             className="flex items-center justify-center gap-1 hover:bg-red-500 hover:text-white"
             size="sm"
           >
-            Изпрати запитване <MessageCircleQuestionIcon className="h-4 w-4" />
+            <ReactWhatsapp
+              className="flex animate-pulse items-center justify-center gap-1"
+              element="webview"
+              number="+359897962266"
+              message={`Здравейте, интересувам се от автомил с VIN: ${data.vin}`}
+            >
+              Изпрати запитване{" "}
+              <MessageCircleQuestionIcon className="h-4 w-4" />
+            </ReactWhatsapp>
           </Button>
         </div>
       </div>

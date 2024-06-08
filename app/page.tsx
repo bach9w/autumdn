@@ -1,4 +1,3 @@
-"use client";
 import { fetchAuctionFilter } from "@/app/api/cars";
 import { HomeProps } from "@types";
 import { fuels, yearsOfProduction } from "@constants";
@@ -14,16 +13,13 @@ import Cars from "./auction/CarList";
 import { Button } from "@components/ui/button";
 import Link from "next/link";
 import Loading from "@components/loading";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
     year: searchParams.year || "",
     fuel: searchParams.fuel || "",
   };
-  useEffect(() => {
-    window.scrollTo(10, 0);
-  }, []);
 
   return (
     <main className="overflow-hidden">
