@@ -68,7 +68,7 @@ const Hero = () => {
         transition={{ duration: 0.5 }}
         className="hero__subtitle padding-x xl:mt-22 mt-12 w-full items-center justify-center text-center text-white xl:absolute xl:bottom-[-50px] xl:left-0 xl:z-50 xl:mx-auto xl:w-1/2"
       >
-        Доставяме всяка седмица нови аукциони на най-добри <b>цени</b>
+        Качваме всеки ден нови обяви на най-добри <b>цени</b>
       </motion.div>
     </div>
   );

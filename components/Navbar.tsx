@@ -85,7 +85,7 @@ const NavBar = () => {
                     href="#"
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    Наскоро добавени - Америка
+                    Части за автомобили
                   </Link>
                   <Link
                     href="#"
