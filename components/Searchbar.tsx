@@ -18,20 +18,20 @@ const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
   </button>
 );
 
-const SearchBar = ({ manufact, mode }: { manufact: number; mode: number }) => {
-  const [manufacturer, setManuFacturer] = useState(manufact);
-  const [model, setModel] = useState(mode);
+const SearchBar = () => {
+  const [manufacturer, setManuFacturer] = useState("");
+  const [model, setModel] = useState("");
 
   const router = useRouter();
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!manufacturer) {
+    if (manufacturer.trim() === "" && model.trim() === "") {
       return alert("Please provide some input");
     }
 
-    updateSearchParams(parseInt, manufacturer);
+    updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
   };
 
   const updateSearchParams = (model: string, manufacturer: string) => {
