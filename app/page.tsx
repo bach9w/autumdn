@@ -1,3 +1,4 @@
+"use client";
 import { fetchAuctionFilter } from "@/app/api/cars";
 import { HomeProps } from "@types";
 import { fuels, yearsOfProduction } from "@constants";
@@ -12,12 +13,17 @@ import { ThreeDCard } from "@components/Hero-2";
 import Cars from "./auction/CarList";
 import { Button } from "@components/ui/button";
 import Link from "next/link";
+import Loading from "@components/loading";
+import { Suspense, useEffect } from "react";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
     year: searchParams.year || "",
     fuel: searchParams.fuel || "",
   };
+  useEffect(() => {
+    window.scrollTo(10, 0);
+  }, []);
 
   return (
     <main className="overflow-hidden">
@@ -34,7 +40,7 @@ export default async function Home({ searchParams }: HomeProps) {
           <section id="auctions" className="home__filters">
             <SearchBar />
 
-            <div className="home__filter-container">
+            <div className="home__filter-container mt-2">
               <CustomFilter title="fuel" options={fuels} />
               <CustomFilter title="year" options={yearsOfProduction} />
             </div>
@@ -42,9 +48,11 @@ export default async function Home({ searchParams }: HomeProps) {
         </div>
       </div>
 
-      <div className="grid h-full grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
-        <Cars filters={filters} />
-      </div>
+      <Suspense fallback={<Loading />}>
+        <div className="grid h-full grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+          <Cars filters={filters} />
+        </div>
+      </Suspense>
       <div className="mt-6 flex w-full items-start justify-center">
         <Link href="/auction">
           <Button>Разгледай всички аукциони</Button>
