@@ -81,12 +81,14 @@ const NavBar = () => {
                       Марки
                     </Link>
                   </SheetClose>
-                  <Link
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    Части за автомобили
-                  </Link>
+                  <SheetClose asChild>
+                    <Link
+                      href="/parts"
+                      className="text-muted-foreground hover:text-foreground"
+                    >
+                      Части за автомобили
+                    </Link>
+                  </SheetClose>
                   <Link
                     href="#"
                     className="text-muted-foreground hover:text-foreground"
