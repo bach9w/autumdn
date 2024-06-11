@@ -15,7 +15,7 @@ const Manufacturers = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`/api/manufacturer`, { cache: "no-store" });
+        const response = await fetch(`/api/manufacturer`, { next: { revalidate: 3600} });
         const result = await response.json();
         if (!response.ok) {
           throw new Error(result.error);

@@ -11,6 +11,7 @@ export default async function Home({ searchParams }: HomeProps) {
     condition: "0",
     fuel_type: "1",
     year: "2020",
+    sale_date_in_days: "7",
   };
   return (
     <div className="grid h-full grid-cols-1 gap-4 md:grid-cols-2">

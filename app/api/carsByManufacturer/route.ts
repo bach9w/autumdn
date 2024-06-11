@@ -7,6 +7,7 @@ export async function GET(request: Request) {
   const per_page = searchParams.get("per_page") || "100";
   const status = searchParams.get("status") || "3";
   const condition = searchParams.get("condition") || "0";
+  const sale_date = searchParams.get("sale_date_in_days") || "7";
 
   const manufacturer = searchParams.get("manufacturer");
 
@@ -18,7 +19,7 @@ export async function GET(request: Request) {
   const url = new URL("https://import-motor.com/api/cars");
   url.searchParams.append("minutes", minutes);
   url.searchParams.append("per_page", per_page);
-  url.searchParams.append("status", status);
+  url.searchParams.append("sale_date_in_days", sale_date);
   url.searchParams.append("condition", condition);
 
   if (manufacturer) url.searchParams.append("manufacturer_id", manufacturer);
