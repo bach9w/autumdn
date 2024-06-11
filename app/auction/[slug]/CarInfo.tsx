@@ -59,32 +59,32 @@ export function CarInfo({ data }: { data: any }) {
             В движение
           </Badge>
           <div className="hidden items-center gap-2 md:ml-auto md:flex">
-            <Button
-              className="flex items-center justify-center gap-1 hover:bg-red-500 hover:text-white"
-              variant="outline"
-              size="sm"
+          <Button
+            className="flex items-center justify-center gap-1 hover:bg-red-500 hover:text-white"
+            variant="outline"
+            size="sm"
+          >
+            <a
+              className="flex animate-pulse items-center justify-center gap-1"
+              href="tel:+359876995555"
             >
-              <a
-                className="flex animate-pulse items-center justify-center gap-1"
-                href="tel:+359897962266"
-              >
-                Получи информация <PhoneCall className="h-4 w-4" />
-              </a>
-            </Button>
-            <Button
-              className="flex items-center justify-center gap-1 hover:bg-red-500 hover:text-white"
-              size="sm"
+              Получи информация <PhoneCall className="h-4 w-4" />
+            </a>
+          </Button>
+          <Button
+            className="flex items-center justify-center gap-1 hover:bg-red-500 hover:text-white"
+            size="sm"
+          >
+            <ReactWhatsapp
+              className="flex animate-pulse items-center justify-center gap-1"
+              element="webview"
+              number="+359876995555"
+              message={`Здравейте, интересувам се от автомил с VIN: ${data.vin}, https://myride.bg/auction/${data.vin}`}
             >
-              <ReactWhatsapp
-                className="flex animate-pulse items-center justify-center gap-1"
-                element="webview"
-                number="+359897962266"
-                message={`Здравейте, интересувам се от автомил с VIN: ${data.vin}`}
-              >
-                Изпрати запитване{" "}
-                <MessageCircleQuestionIcon className="h-4 w-4" />
-              </ReactWhatsapp>
-            </Button>
+              Изпрати запитване{" "}
+              <MessageCircleQuestionIcon className="h-4 w-4" />
+            </ReactWhatsapp>
+          </Button>
           </div>
         </div>
 
