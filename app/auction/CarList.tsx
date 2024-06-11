@@ -16,7 +16,7 @@ function Cars({ filters }: { filters: any }) {
     async function fetchData() {
       const query = new URLSearchParams(filters).toString();
       try {
-        const response = await fetch(`/api/cars?${query}`);
+        const response = await fetch(`/api/cars?${query}`, {cache: "no-store"});
         const result = await response.json();
         if (!response.ok) {
           throw new Error(result.error);

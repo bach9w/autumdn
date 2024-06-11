@@ -16,7 +16,7 @@ const Manufacture = ({ params }: { params: { slug: number } }) => {
     async function fetchData() {
       
       try {
-        const response = await fetch(`/api/cars?manufacturer=${slug}`);
+        const response = await fetch(`/api/cars?manufacturer=${slug}`, {cache: "no-store"});
         const result = await response.json();
         if (!response.ok) {
           throw new Error(result.error);

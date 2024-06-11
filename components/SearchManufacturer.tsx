@@ -16,7 +16,7 @@ const SearchManufacturer = ({
 	useEffect(() => {
 		const fetchManufacturers = async () => {
 			const response = await fetch(
-				"/api/manufacturer",
+				"/api/manufacturer", { cache: "no-store"}
 			);
 			const result = await response.json();
 			setManuFacturers(result.data);
