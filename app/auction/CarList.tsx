@@ -13,19 +13,22 @@ function Cars({ filters }: { filters: any }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!filters) {
-      fetchAuction().then((res) => {
-        setAllAuctions(res);
-        setData(res.data);
+    async function fetchData() {
+      const query = new URLSearchParams(filters).toString();
+      try {
+        const response = await fetch(`/api/cars?${query}`);
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error);
+        }
+        setData(result.data);
         setLoading(false);
-      });
-    } else {
-      fetchAuctionFilter(filters).then((res) => {
-        setAllAuctions(res);
-        setData(res.data);
-        setLoading(false);
-      });
+      } catch (error) {
+        console.error(error);
+      }
     }
+
+    fetchData();
   }, [filters]);
 
   return (

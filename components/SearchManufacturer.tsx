@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 
 import { manufacturers } from "@constants";
@@ -10,20 +10,41 @@ const SearchManufacturer = ({
 	setManuFacturer,
 }: SearchManuFacturerProps) => {
 	const [query, setQuery] = useState("");
+	const [length, setLength] = useState(0);
+	const [manufacturers1, setManuFacturers] = useState<any[]>([]);
 
-	const filteredManufacturers =
-		query === ""
-			? manufacturers
-			: manufacturers.filter((item) =>
-					item
-						.toLowerCase()
-						.replace(/\s+/g, "")
-						.includes(query.toLowerCase().replace(/\s+/g, "")),
-			  );
+	useEffect(() => {
+		const fetchManufacturers = async () => {
+			const response = await fetch(
+				"/api/manufacturer",
+			);
+			const result = await response.json();
+			setManuFacturers(result.data);
+			setLength(result.data.length);
+		};
+
+		fetchManufacturers();
+
+		
+	}, []);
+
+	
+
+
 
 	return (
+		<>
+
+		
 		<div className="search-manufacturer">
-			<Combobox value={manufacturer} onChange={setManuFacturer}>
+			
+			<Combobox value={manufacturer} onChange={(value) => {
+				const selectedMan = manufacturers1.find(manufacturer => manufacturer.name === value)
+				if( selectedMan){
+					setManuFacturer(selectedMan.id);
+					setQuery(selectedMan.id);
+				}
+			}}>
 				<div className="relative w-full">
 					{/* Button for the combobox. Click on the icon to see the complete dropdown */}
 					<Combobox.Button className="absolute top-[14px]">
@@ -56,7 +77,7 @@ const SearchManufacturer = ({
 							className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
 							static
 						>
-							{filteredManufacturers.length === 0 && query !== "" ? (
+							{length === 0 && query !== "" ? (
 								<Combobox.Option
 									value={query}
 									className="search-manufacturer__option"
@@ -64,15 +85,15 @@ const SearchManufacturer = ({
 									Create "{query}"
 								</Combobox.Option>
 							) : (
-								filteredManufacturers.map((item) => (
+								manufacturers1.map((item) => (
 									<Combobox.Option
-										key={item}
+										key={item.id}
 										className={({ active }) =>
 											`relative search-manufacturer__option ${
 												active ? "bg-primary-blue text-white" : "text-gray-900"
 											}`
 										}
-										value={item}
+										value={item.name}
 									>
 										{({ selected, active }) => (
 											<>
@@ -81,7 +102,7 @@ const SearchManufacturer = ({
 														selected ? "font-medium" : "font-normal"
 													}`}
 												>
-													{item}
+													{item.name}
 												</span>
 
 												{/* Show an active blue background color if the option is selected */}
@@ -92,7 +113,9 @@ const SearchManufacturer = ({
 																? "text-white"
 																: "text-pribg-primary-purple"
 														}`}
-													></span>
+													>
+														
+													</span>
 												) : null}
 											</>
 										)}
@@ -104,6 +127,8 @@ const SearchManufacturer = ({
 				</div>
 			</Combobox>
 		</div>
+		
+		</>
 	);
 };
 

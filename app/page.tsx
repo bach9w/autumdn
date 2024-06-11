@@ -19,6 +19,8 @@ export default async function Home({ searchParams }: HomeProps) {
   const filters = {
     year: searchParams.year || "",
     fuel: searchParams.fuel || "",
+    manufacturer: searchParams.manufacturer || "",
+    model: searchParams.model || "",
   };
 
   return (

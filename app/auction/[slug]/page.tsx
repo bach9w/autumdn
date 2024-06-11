@@ -12,11 +12,22 @@ const Manufacture = ({ params }: { params: { slug: string } }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    fetchCarDetails(slug).then((res) => {
-      setData(res.data);
-      setLoading(false);
-    });
+    async function fetchData() {
+      
+      try {
+        const response = await fetch(`/api/carByVin/${slug}`);
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error);
+        }
+        setData(result.data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
   }, []);
 
   console.log(data);

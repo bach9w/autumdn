@@ -27,6 +27,9 @@ import {
 import ReactWhatsapp from "react-whatsapp";
 
 function splitDateAndTime(date: string) {
+  if (!date) {
+    return "Няма информация";
+  }
   const [datePart, timePart] = date.split("T");
   const [year, month, day] = datePart.split("-");
   return `${day}.${month}.${year}`;

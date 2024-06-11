@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import SearchManufacturer from "./SearchManufacturer";
@@ -18,6 +18,8 @@ const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
   </button>
 );
 
+
+
 const SearchBar = () => {
   const [manufacturer, setManuFacturer] = useState("");
   const [model, setModel] = useState("");
@@ -27,11 +29,11 @@ const SearchBar = () => {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (manufacturer.trim() === "" && model.trim() === "") {
+    if (manufacturer === "" && model.trim() === "") {
       return alert("Please provide some input");
     }
 
-    updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
+    updateSearchParams(model.toLowerCase(), manufacturer);
   };
 
   const updateSearchParams = (model: string, manufacturer: string) => {
@@ -57,35 +59,21 @@ const SearchBar = () => {
       window.location.pathname
     }?${searchParams.toString()}`;
 
-    router.push(newPathname);
+    router.push(newPathname, {scroll: false});
   };
+
+ 
 
   return (
     <form className="searchbar" onSubmit={handleSearch}>
-      <div className="searchbar__item bg-white">
+      <div className="searchbar__item bg-white rounded-xl">
         <SearchManufacturer
           manufacturer={manufacturer}
           setManuFacturer={setManuFacturer}
         />
         <SearchButton otherClasses="sm:hidden" />
       </div>
-      <div className="searchbar__item">
-        <Image
-          src="/model-icon.png"
-          width={25}
-          height={25}
-          className="absolute ml-4 h-[20px] w-[20px]"
-          alt="car model"
-        />
-        <input
-          type="text"
-          name="model"
-          value={model}
-          onChange={(e) => setModel(e.target.value)}
-          placeholder="GT 63..."
-          className="searchbar__input"
-        />
-      </div>
+     
       <SearchButton otherClasses="max-sm:hidden" />
     </form>
   );

@@ -13,10 +13,22 @@ const Manufacture = ({ params }: { params: { slug: number } }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchCarByManufacturer(slug).then((res) => {
-      setData(res.data);
-      setLoading(false);
-    });
+    async function fetchData() {
+      
+      try {
+        const response = await fetch(`/api/cars?manufacturer=${slug}`);
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error);
+        }
+        setData(result.data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
   }, []);
   return (
     <Suspense fallback={<Loading />}>

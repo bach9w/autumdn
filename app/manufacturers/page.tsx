@@ -13,10 +13,21 @@ const Manufacturers = () => {
   const router = useRouter();
 
   useEffect(() => {
-    fetchManufacturers().then((res) => {
-      setManufacturers(res.data);
-      setLoading(false);
-    });
+    async function fetchData() {
+      try {
+        const response = await fetch(`/api/manufacturer`);
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error);
+        }
+        setManufacturers(result.data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
   }, []);
 
   return (
