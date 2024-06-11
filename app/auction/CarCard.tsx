@@ -7,6 +7,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+
+  
+        
+      
+
 import {
   Carousel,
   CarouselContent,
@@ -130,11 +135,13 @@ const CarCard = ({ car }: { car: any }) => {
             </div>
             <div className="col-span-2 w-full flex-col items-center justify-center rounded-md">
               <div className="flex h-full w-full flex-col items-center justify-center rounded-xl bg-red-500 font-bold text-white shadow-md shadow-black">
-                КУПИ СЕГА
+              <button className="inline-flex h-full w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:text-red-600">
+          Купи сега
+        </button>
               </div>
             </div>
 
-            <button className="flex aspect-square min-h-full w-full flex-col items-center justify-center rounded-md border bg-orange-600 text-white hover:bg-red-800">
+            <button className="flex aspect-square min-h-full w-full flex-col items-center justify-center rounded-md animate-shimmer  hover:bg-red-800 border border-slate-800 bg-[linear-gradient(110deg,#FF7900,5%,#1e2631,55%,#000103)] bg-[length:100%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:text-red-600 shadows-md">
               Направи запитване
               <PhoneCall color="white" />
             </button>

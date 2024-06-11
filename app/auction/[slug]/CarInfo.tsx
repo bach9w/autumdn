@@ -184,7 +184,7 @@ export function CarInfo({ data }: { data: any }) {
                   <div className="grid gap-3">
                     <Label htmlFor="name">Марка</Label>
                     <Badge className="flex w-full justify-center uppercase">
-                      {data && data.manufacturer && data.manufacturer.name}
+                      {data && data.manufacturer ? data.manufacturer.name : "Няма информация"}
                     </Badge>
                   </div>
                   <div className="grid gap-3">
