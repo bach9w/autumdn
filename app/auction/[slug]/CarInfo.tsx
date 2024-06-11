@@ -306,7 +306,7 @@ export function CarInfo({ data }: { data: any }) {
           >
             <a
               className="flex animate-pulse items-center justify-center gap-1"
-              href="tel:+359897962266"
+              href="tel:+359876995555"
             >
               Получи информация <PhoneCall className="h-4 w-4" />
             </a>
@@ -318,8 +318,8 @@ export function CarInfo({ data }: { data: any }) {
             <ReactWhatsapp
               className="flex animate-pulse items-center justify-center gap-1"
               element="webview"
-              number="+359897962266"
-              message={`Здравейте, интересувам се от автомил с VIN: ${data.vin}`}
+              number="+359876995555"
+              message={`Здравейте, интересувам се от автомил с VIN: ${data.vin}, https://myride.bg/auction/${data.vin}`}
             >
               Изпрати запитване{" "}
               <MessageCircleQuestionIcon className="h-4 w-4" />
