@@ -10,7 +10,7 @@ export default async function Home({ searchParams }: HomeProps) {
     status: "3",
     condition: "0",
     fuel_type: "1",
-    year: "2020",
+    year: "2022",
     sale_date_in_days: "7",
   };
   return (
