@@ -54,121 +54,124 @@ const CarCard = ({ car }: { car: any }) => {
     <Drawer>
       <DrawerTrigger>
         <>
-          <Card className="m-2 h-full overflow-hidden border-none p-2 shadow-md shadow-black">
-            <CardHeader>
-              <div className="flex w-full justify-start">
-                {car.lots[0] &&
-                car.lots[0].condition &&
-                car.lots[0].condition.name === "run_and_drives" ? (
-                  <Badge className="rounded-none">В движение</Badge>
-                ) : (
-                  <Badge>Неподвижен</Badge>
-                )}
-              </div>
-
-              <CardTitle>
-                <div className="mt-2 flex w-full justify-between">
-                  <div className="flex flex-col">
-                    {car.manufacturer && car.manufacturer.name} -{" "}
-                    {car.model && car.model.name}
-                  </div>
-                  <div className="flex">
-                    {car.vin && (
-                      <Badge className="flex items-center justify-center rounded-md">
-                        {car.vin}
-                      </Badge>
-                    )}
-                  </div>
+          <div className="container">
+            <Card className="box m-2 h-full overflow-hidden border-none p-2 shadow-md shadow-black">
+              <CardHeader>
+                <div className="flex w-full justify-start">
+                  {car.lots[0] &&
+                  car.lots[0].condition &&
+                  car.lots[0].condition.name === "run_and_drives" ? (
+                    <Badge className="rounded-none">В движение</Badge>
+                  ) : (
+                    <Badge>Неподвижен</Badge>
+                  )}
                 </div>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-2">
-                {car.lots &&
-                  car.lots.map((lot: any) => (
-                    <Carousel key={lot.id}>
-                      <CarouselContent>
-                        {lot.images && lot.images?.normal !== null ? (
-                          lot.images.normal.map((img: any, index: any) => (
-                            <CarouselItem key={index}>
-                              <img
-                                src={img}
-                                alt={`Car image ${index + 1}`}
-                                height={300}
-                                className="aspect-square w-full rounded-md object-cover"
-                                width="300"
-                              />
-                            </CarouselItem>
-                          ))
-                        ) : (
-                          <CarouselItem>
-                            <div className="aspect-square h-[300px] w-[300px] rounded-md object-cover">
-                              No Image
-                            </div>
-                          </CarouselItem>
-                        )}
-                      </CarouselContent>
-                      <CardFooter>
-                        <Breadcrumb>
-                          <BreadcrumbList className="flex w-full">
-                            <BreadcrumbItem>
-                              <BreadcrumbLink href="/">
-                                {car.model && car.model.name}
-                              </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                              <BreadcrumbLink href="/components">
-                                {car.manufacturer && car.manufacturer.name}
-                              </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                              <BreadcrumbPage>
-                                {car.year && car.year}
-                              </BreadcrumbPage>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                              <BreadcrumbPage>
-                                {car.transmission &&
-                                car.transmission.name.toUpperCase() === "MANUAL"
-                                  ? "РЪЧНА"
-                                  : "Автоматична скоростна кутия"}
-                              </BreadcrumbPage>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                              <BreadcrumbPage>
-                                {car.drive_wheel &&
-                                car.drive_wheel.name.toUpperCase() === "FRONT"
-                                  ? "ПРЕДНО" || "ЗАДНО"
-                                  : "4x4"}
-                              </BreadcrumbPage>
-                            </BreadcrumbItem>
-                          </BreadcrumbList>
-                        </Breadcrumb>
-                      </CardFooter>
-                    </Carousel>
-                  ))}
-                <div className="grid grid-cols-3 gap-2 uppercase">
-                  <div className="col-span-3 w-full flex-col items-center justify-center rounded-md"></div>
-                  <div className="col-span-2 w-full flex-col items-center justify-center rounded-md">
-                    <div className="flex h-full w-full flex-col items-center justify-center rounded-xl bg-red-500 font-bold text-white shadow-md shadow-black">
-                      <button className="inline-flex h-full w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                        Купи сега
-                      </button>
+
+                <CardTitle>
+                  <div className="mt-2 flex w-full justify-between">
+                    <div className="flex flex-col">
+                      {car.manufacturer && car.manufacturer.name} -{" "}
+                      {car.model && car.model.name}
+                    </div>
+                    <div className="flex">
+                      {car.vin && (
+                        <Badge className="flex items-center justify-center rounded-md">
+                          {car.vin}
+                        </Badge>
+                      )}
                     </div>
                   </div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-2">
+                  {car.lots &&
+                    car.lots.map((lot: any) => (
+                      <Carousel key={lot.id}>
+                        <CarouselContent>
+                          {lot.images && lot.images?.normal !== null ? (
+                            lot.images.normal.map((img: any, index: any) => (
+                              <CarouselItem key={index}>
+                                <img
+                                  src={img}
+                                  alt={`Car image ${index + 1}`}
+                                  height={300}
+                                  className="aspect-square w-full rounded-md object-cover"
+                                  width="300"
+                                />
+                              </CarouselItem>
+                            ))
+                          ) : (
+                            <CarouselItem>
+                              <div className="aspect-square h-[300px] w-[300px] rounded-md object-cover">
+                                No Image
+                              </div>
+                            </CarouselItem>
+                          )}
+                        </CarouselContent>
+                        <CardFooter className="text-white">
+                          <Breadcrumb>
+                            <BreadcrumbList className="flex w-full">
+                              <BreadcrumbItem>
+                                <BreadcrumbLink href="/">
+                                  {car.model && car.model.name}
+                                </BreadcrumbLink>
+                              </BreadcrumbItem>
+                              <BreadcrumbSeparator />
+                              <BreadcrumbItem>
+                                <BreadcrumbLink href="/components">
+                                  {car.manufacturer && car.manufacturer.name}
+                                </BreadcrumbLink>
+                              </BreadcrumbItem>
+                              <BreadcrumbSeparator />
+                              <BreadcrumbItem>
+                                <BreadcrumbPage>
+                                  {car.year && car.year}
+                                </BreadcrumbPage>
+                              </BreadcrumbItem>
+                              <BreadcrumbSeparator />
+                              <BreadcrumbItem>
+                                <BreadcrumbPage>
+                                  {car.transmission &&
+                                  car.transmission.name.toUpperCase() ===
+                                    "MANUAL"
+                                    ? "РЪЧНА"
+                                    : "Автоматична скоростна кутия"}
+                                </BreadcrumbPage>
+                              </BreadcrumbItem>
+                              <BreadcrumbSeparator />
+                              <BreadcrumbItem>
+                                <BreadcrumbPage>
+                                  {car.drive_wheel &&
+                                  car.drive_wheel.name.toUpperCase() === "FRONT"
+                                    ? "ПРЕДНО" || "ЗАДНО"
+                                    : "4x4"}
+                                </BreadcrumbPage>
+                              </BreadcrumbItem>
+                            </BreadcrumbList>
+                          </Breadcrumb>
+                        </CardFooter>
+                      </Carousel>
+                    ))}
+                  <div className="grid grid-cols-3 gap-2 uppercase">
+                    <div className="col-span-3 w-full flex-col items-center justify-center rounded-md"></div>
+                    <div className="col-span-2 w-full flex-col items-center justify-center rounded-md">
+                      <div className="flex h-full w-full flex-col items-center justify-center rounded-xl bg-red-500 font-bold text-white shadow-md shadow-black">
+                        <button className="inline-flex h-full w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                          Купи сега
+                        </button>
+                      </div>
+                    </div>
 
-                  <button className="shadows-md flex aspect-square min-h-full w-full animate-shimmer flex-col items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#FF7900,5%,#1e2631,55%,#000103)] bg-[length:100%_100%] px-6 font-medium text-white transition-colors hover:bg-red-800 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                    Направи запитване
-                    <PhoneCall color="white" />
-                  </button>
+                    <button className="shadows-md flex aspect-square min-h-full w-full animate-shimmer flex-col items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#FF7900,5%,#1e2631,55%,#000103)] bg-[length:100%_100%] px-6 font-medium text-white transition-colors hover:bg-red-800 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                      Направи запитване
+                      <PhoneCall color="white" />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         </>
       </DrawerTrigger>
       <DrawerContent className="border-none bg-orange-600">
