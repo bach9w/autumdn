@@ -1,24 +1,21 @@
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request, { params }: { params: { slug: string } }) {
-   
-
-
+export async function GET(
+  request: Request,
+  { params }: { params: { slug: string } },
+) {
   const headers = {
     "x-api-key": "a48f8f672e29bd479c652f76f100bcf4", // Поставете вашия API ключ тук
   };
 
   const vin = params.slug;
-  
+
   if (!vin) {
-    return NextResponse.json(
-      { error: "VIN is required" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "VIN is required" }, { status: 400 });
   }
 
   // URL за API заявката
-  const url = new URL(`https://import-motor.com/api/search-vin/${vin}`);
+  const url = new URL(`https://carstat.dev/api/search-vin/${vin}`);
 
   try {
     // Изпращане на заявката до API-то
@@ -28,7 +25,7 @@ export async function GET(request: Request, { params }: { params: { slug: string
     if (!response.ok) {
       return NextResponse.json(
         { error: "Failed to fetch data" },
-        { status: response.status }
+        { status: response.status },
       );
     }
 
@@ -40,7 +37,7 @@ export async function GET(request: Request, { params }: { params: { slug: string
     console.error("Error fetching data:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

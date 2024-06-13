@@ -11,19 +11,17 @@ export async function GET(request: Request) {
 
   const manufacturer = searchParams.get("manufacturer");
 
-
   const headers = {
     "x-api-key": "a48f8f672e29bd479c652f76f100bcf4", // Поставете вашия API ключ тук
   };
 
-  const url = new URL("https://import-motor.com/api/cars");
+  const url = new URL("https://carstat.dev/api/cars");
   url.searchParams.append("minutes", minutes);
   url.searchParams.append("per_page", per_page);
   url.searchParams.append("sale_date_in_days", sale_date);
   url.searchParams.append("condition", condition);
 
   if (manufacturer) url.searchParams.append("manufacturer_id", manufacturer);
-
 
   try {
     const response = await fetch(url, {
