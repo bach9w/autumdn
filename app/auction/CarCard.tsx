@@ -22,9 +22,15 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 import Image from "next/image";
 import { PhoneCall, Upload } from "lucide-react";
@@ -62,13 +68,19 @@ const CarCard = ({ car }: { car: any }) => {
 
               <CardTitle>
                 <div className="mt-2 flex w-full justify-between">
-                  {car.manufacturer && car.manufacturer.name}/
-                  {car.model && car.model.name}
-                  {car.vin && <Badge>{car.vin}</Badge>}
+                  <div className="flex flex-col">
+                    {car.manufacturer && car.manufacturer.name} -{" "}
+                    {car.model && car.model.name}
+                  </div>
+                  <div className="flex">
+                    {car.vin && (
+                      <Badge className="flex items-center justify-center rounded-md">
+                        {car.vin}
+                      </Badge>
+                    )}
+                  </div>
                 </div>
               </CardTitle>
-
-              <CardDescription>{car.year}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-2">
@@ -96,6 +108,47 @@ const CarCard = ({ car }: { car: any }) => {
                           </CarouselItem>
                         )}
                       </CarouselContent>
+                      <CardFooter>
+                        <Breadcrumb>
+                          <BreadcrumbList className="flex w-full">
+                            <BreadcrumbItem>
+                              <BreadcrumbLink href="/">
+                                {car.model && car.model.name}
+                              </BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                              <BreadcrumbLink href="/components">
+                                {car.manufacturer && car.manufacturer.name}
+                              </BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                              <BreadcrumbPage>
+                                {car.year && car.year}
+                              </BreadcrumbPage>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                              <BreadcrumbPage>
+                                {car.transmission &&
+                                car.transmission.name.toUpperCase() === "MANUAL"
+                                  ? "РЪЧНА"
+                                  : "Автоматична скоростна кутия"}
+                              </BreadcrumbPage>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                              <BreadcrumbPage>
+                                {car.drive_wheel &&
+                                car.drive_wheel.name.toUpperCase() === "FRONT"
+                                  ? "ПРЕДНО" || "ЗАДНО"
+                                  : "4x4"}
+                              </BreadcrumbPage>
+                            </BreadcrumbItem>
+                          </BreadcrumbList>
+                        </Breadcrumb>
+                      </CardFooter>
                     </Carousel>
                   ))}
                 <div className="grid grid-cols-3 gap-2 uppercase">

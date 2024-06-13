@@ -16,7 +16,9 @@ function Cars({ filters }: { filters: any }) {
     async function fetchData() {
       const query = new URLSearchParams(filters).toString();
       try {
-        const response = await fetch(`/api/cars?${query}`, {next: { revalidate: 30}});
+        const response = await fetch(`/api/cars?${query}`, {
+          next: { revalidate: 30 },
+        });
         const result = await response.json();
         if (!response.ok) {
           throw new Error(result.error);
@@ -29,6 +31,7 @@ function Cars({ filters }: { filters: any }) {
     }
 
     fetchData();
+    console.log(data);
   }, [filters]);
 
   return (
