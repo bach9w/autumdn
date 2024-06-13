@@ -14,7 +14,7 @@ export default async function Home({ searchParams }: HomeProps) {
     sale_date_in_days: "7",
   };
   return (
-    <div className="grid h-full grid-cols-1 gap-4 md:grid-cols-2">
+    <div className="grid h-full grid-cols-1 gap-0 overflow-x-hidden md:grid-cols-2 xl:grid-cols-3">
       <Cars filters={filters} />
     </div>
   );

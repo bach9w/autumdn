@@ -46,7 +46,7 @@ function Cars({ filters }: { filters: any }) {
             car.lots[0].images &&
             car.lots[0].sale_date !== null &&
             car.lots[0].images?.normal && (
-              <div key={car.id}>
+              <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
                 <CarCard car={car} />
               </div>
             ),

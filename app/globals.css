@@ -85,11 +85,11 @@
 }
 
 .padding-x {
-  @apply px-6 sm:px-16;
+  @apply px-0 sm:px-0;
 }
 
 .padding-y {
-  @apply py-4;
+  @apply py-0;
 }
 
 .flex-center {
@@ -286,8 +286,6 @@
 }
 /* END: search manufacturer styles */
 .container {
-  color: white;
-
   font-family: sans-serif;
 }
 
@@ -300,25 +298,25 @@
 .container::before {
   border-radius: 50%;
 
-  top: 30%;
+  top: 80%;
   right: 7%;
 }
 
 .container::after {
   content: "";
   position: absolute;
-  height: 3rem;
+  height: 2rem;
   top: 8%;
   right: 5%;
   border: 1px solid;
 }
 
 .container .box {
-  padding: 0rem;
-  background-color: rgba(255, 255, 255, 0.074);
-  border: 1px solid rgba(255, 255, 255, 0.222);
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
+  border: 0px solid rgba(255, 255, 255, 0.222);
+  background-color: rgba(255, 255, 255, 1.522);
+  height: auto;
+  -webkit-backdrop-filter: blur(102px);
+  backdrop-filter: blur(120px);
   border-radius: 0.1rem;
   transition: all ease 0.3s;
 }

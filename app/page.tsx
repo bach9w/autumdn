@@ -28,14 +28,14 @@ export default async function Home({ searchParams }: HomeProps) {
       <div className="h-full">
         <HeroParallaxDemo />
         <div className="padding-x padding-y max-width mt-12" id="discover">
-          <div className="home__text-container">
+          <div className="home__text-container p-2">
             <h1 className="text-4xl font-extrabold text-white">
               Каталог аукциони
             </h1>
             <p className="text-white">Наскоро добавени аукциони</p>
           </div>
 
-          <section id="auctions" className="home__filters">
+          <section id="auctions" className="home__filters p-5">
             <SearchBar />
 
             <div className="home__filter-container mt-2">
@@ -47,7 +47,7 @@ export default async function Home({ searchParams }: HomeProps) {
       </div>
 
       <Suspense fallback={<Loading />}>
-        <div className="grid h-full grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+        <div className="-ml-5 -mr-5 grid h-full grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
           <Cars filters={filters} />
         </div>
       </Suspense>

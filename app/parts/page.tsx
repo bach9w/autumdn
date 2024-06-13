@@ -4,11 +4,11 @@ import parts from "./parts.json";
 const Page = () => {
   return (
     <div>
-      <div className="h-full w-full text-center text-white">
+      <div className="container h-full w-full text-center text-white">
         Части за автомобили (втора употреба)
         <div className="grid grid-cols-1 gap-4 p-2 md:grid-cols-2 xl:grid-cols-3">
           {parts.map((part) => (
-            <Card key={part.id}>
+            <Card key={part.id} className="box">
               <CardHeader>{part.name}</CardHeader>
               <CardContent>
                 <div>
@@ -19,13 +19,12 @@ const Page = () => {
                   />
                 </div>
                 <div className="mt-2 flex w-full justify-between">
-                  <Badge>{part.price.amount} ЛВ</Badge>
                   <Badge>{part.is_new ? "НОВ" : "ВТОРА УПОТРЕБА"}</Badge>
 
-                  <Badge className="bg-orange-500 shadow-md shadow-black drop-shadow-sm">
+                  <Badge className="bg-orange-600 shadow-black drop-shadow-sm">
                     Получи информация
                   </Badge>
-                  <Badge className="bg-red-500 shadow-md shadow-black drop-shadow-sm">
+                  <Badge className="shadow-xs bg-red-500 shadow-black drop-shadow-sm">
                     Позвъни сега
                   </Badge>
                 </div>

@@ -14,9 +14,10 @@ const Manufacture = ({ params }: { params: { slug: number } }) => {
 
   useEffect(() => {
     async function fetchData() {
-      
       try {
-        const response = await fetch(`/api/cars?manufacturer=${slug}`, {cache: "no-store"});
+        const response = await fetch(`/api/cars?manufacturer=${slug}`, {
+          cache: "no-store",
+        });
         const result = await response.json();
         if (!response.ok) {
           throw new Error(result.error);
@@ -32,17 +33,17 @@ const Manufacture = ({ params }: { params: { slug: number } }) => {
   }, []);
   return (
     <Suspense fallback={<Loading />}>
-      <div className="grid grid-cols-1 p-4 py-10 md:grid-cols-2">
-        <Button variant="outline" size="icon" className="mb-2 h-7 w-7">
-          <ChevronLeft
-            className="h-4 w-4"
-            onClick={() => {
-              window.history.back();
-            }}
-          />
-          <span className="sr-only">Назад</span>
-        </Button>
-        {loading && <Loading />}
+      {loading && <Loading />}
+      <Button variant="outline" size="icon" className="mb-2 ml-5 mt-5 h-7 w-7">
+        <ChevronLeft
+          className="h-4 w-4"
+          onClick={() => {
+            window.history.back();
+          }}
+        />
+        <span className="sr-only">Назад</span>
+      </Button>
+      <div className="grid grid-cols-1 overflow-x-hidden p-4 py-10 md:grid-cols-2 xl:grid-cols-3">
         {data &&
           Array.isArray(data) &&
           data.map(
@@ -54,7 +55,10 @@ const Manufacture = ({ params }: { params: { slug: number } }) => {
               car.lots[0].damage &&
               car.lots[0].damage.main &&
               car.lots[0].images?.normal && (
-                <div key={car.id} className="mb-[25px]">
+                <div
+                  key={car.id}
+                  className="-ml-10 -mr-10 mb-[25px] md:-ml-0 md:-mr-0"
+                >
                   <CarCard car={car} />
                 </div>
               ),

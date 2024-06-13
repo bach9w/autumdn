@@ -55,30 +55,32 @@ const CarCard = ({ car }: { car: any }) => {
       <DrawerTrigger>
         <>
           <div className="container">
-            <Card className="box m-2 h-full overflow-hidden border-none p-2 shadow-md shadow-black">
+            <Card className="box m-0 my-2 h-full overflow-hidden border-none p-0 shadow-md shadow-black">
               <CardHeader>
-                <div className="flex w-full justify-start">
+                <div className="flex w-full justify-between text-white">
                   {car.lots[0] &&
                   car.lots[0].condition &&
                   car.lots[0].condition.name === "run_and_drives" ? (
-                    <Badge className="rounded-none">В движение</Badge>
+                    <Badge className="rounded-none text-white">
+                      В движение
+                    </Badge>
                   ) : (
                     <Badge>Неподвижен</Badge>
                   )}
+                  <div className="flex">
+                    {car.vin && (
+                      <Badge className="flex items-center justify-center rounded-md">
+                        {car.vin}
+                      </Badge>
+                    )}
+                  </div>
                 </div>
 
                 <CardTitle>
                   <div className="mt-2 flex w-full justify-between">
-                    <div className="flex flex-col">
+                    <div className="flex flex-col text-black">
                       {car.manufacturer && car.manufacturer.name} -{" "}
                       {car.model && car.model.name}
-                    </div>
-                    <div className="flex">
-                      {car.vin && (
-                        <Badge className="flex items-center justify-center rounded-md">
-                          {car.vin}
-                        </Badge>
-                      )}
                     </div>
                   </div>
                 </CardTitle>
@@ -109,39 +111,60 @@ const CarCard = ({ car }: { car: any }) => {
                             </CarouselItem>
                           )}
                         </CarouselContent>
-                        <CardFooter className="text-white">
+                        <CardFooter className="">
                           <Breadcrumb>
                             <BreadcrumbList className="flex w-full">
+                              {car.model && (
+                                <>
+                                  <BreadcrumbItem>
+                                    <BreadcrumbLink className="text-black">
+                                      {car.model && car.model.name}
+                                    </BreadcrumbLink>
+                                  </BreadcrumbItem>
+                                  <BreadcrumbSeparator color="black" />
+                                </>
+                              )}
+                              {car.manufacturer && (
+                                <>
+                                  <BreadcrumbItem>
+                                    <BreadcrumbLink
+                                      className="text-black"
+                                      onClick={() => {
+                                        router.push(
+                                          `/manufacturers/${car.manufacturer.id}`,
+                                        );
+                                      }}
+                                    >
+                                      {car.manufacturer &&
+                                        car.manufacturer.name}
+                                    </BreadcrumbLink>
+                                  </BreadcrumbItem>
+
+                                  <BreadcrumbSeparator />
+                                </>
+                              )}
                               <BreadcrumbItem>
-                                <BreadcrumbLink href="/">
-                                  {car.model && car.model.name}
-                                </BreadcrumbLink>
-                              </BreadcrumbItem>
-                              <BreadcrumbSeparator />
-                              <BreadcrumbItem>
-                                <BreadcrumbLink href="/components">
-                                  {car.manufacturer && car.manufacturer.name}
-                                </BreadcrumbLink>
-                              </BreadcrumbItem>
-                              <BreadcrumbSeparator />
-                              <BreadcrumbItem>
-                                <BreadcrumbPage>
+                                <BreadcrumbPage className="text-black">
                                   {car.year && car.year}
                                 </BreadcrumbPage>
                               </BreadcrumbItem>
+
+                              {car.transmission && (
+                                <>
+                                  <BreadcrumbSeparator />
+                                  <BreadcrumbItem>
+                                    <BreadcrumbPage className="text-black">
+                                      {car.transmission.name.toUpperCase() ===
+                                      "MANUAL"
+                                        ? "РЪЧНА"
+                                        : "АВТОМАТИЧНА"}
+                                    </BreadcrumbPage>
+                                  </BreadcrumbItem>
+                                </>
+                              )}
                               <BreadcrumbSeparator />
                               <BreadcrumbItem>
-                                <BreadcrumbPage>
-                                  {car.transmission &&
-                                  car.transmission.name.toUpperCase() ===
-                                    "MANUAL"
-                                    ? "РЪЧНА"
-                                    : "Автоматична скоростна кутия"}
-                                </BreadcrumbPage>
-                              </BreadcrumbItem>
-                              <BreadcrumbSeparator />
-                              <BreadcrumbItem>
-                                <BreadcrumbPage>
+                                <BreadcrumbPage className="text-black">
                                   {car.drive_wheel &&
                                   car.drive_wheel.name.toUpperCase() === "FRONT"
                                     ? "ПРЕДНО" || "ЗАДНО"
@@ -154,7 +177,6 @@ const CarCard = ({ car }: { car: any }) => {
                       </Carousel>
                     ))}
                   <div className="grid grid-cols-3 gap-2 uppercase">
-                    <div className="col-span-3 w-full flex-col items-center justify-center rounded-md"></div>
                     <div className="col-span-2 w-full flex-col items-center justify-center rounded-md">
                       <div className="flex h-full w-full flex-col items-center justify-center rounded-xl bg-red-500 font-bold text-white shadow-md shadow-black">
                         <button className="inline-flex h-full w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
