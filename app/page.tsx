@@ -15,6 +15,7 @@ import Link from "next/link";
 import Loading from "@components/loading";
 import { Suspense } from "react";
 import SearchForm from "@components/SearchForm";
+import StickySearchForm from "@components/search/sticky-search";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
@@ -35,10 +36,6 @@ export default async function Home({ searchParams }: HomeProps) {
             </h1>
             <p className="text-white">Наскоро добавени аукциони</p>
           </div>
-
-          <section id="auctions" className="home__filters p-5">
-            <SearchForm />
-          </section>
         </div>
       </div>
 

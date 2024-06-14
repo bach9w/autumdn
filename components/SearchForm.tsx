@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, XIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -44,7 +44,7 @@ export default function SearchForm() {
   const [modelName, setModelName] = useState<any>();
   const [manufacturers, setManufacturers] = useState<any>();
   const [models, setModels] = useState<any>();
-  const [year, setYear] = useState<any>(null);
+  const [year, setYear] = useState<any>();
 
   useEffect(() => {
     async function fetchData() {
@@ -93,7 +93,7 @@ export default function SearchForm() {
       return alert("Please provide some input");
     }
 
-    updateSearchParams(modelName.id, man.id, year, fuel);
+    updateSearchParams(modelName, man.id, year, fuel);
   };
 
   const updateSearchParams = (
@@ -106,8 +106,8 @@ export default function SearchForm() {
     const searchParams = new URLSearchParams(window.location.search);
 
     // Update or delete the 'model' search parameter based on the 'model' value
-    if (model) {
-      searchParams.set("model", model);
+    if (model && model.id) {
+      searchParams.set("model", model.id);
     } else {
       searchParams.delete("model");
     }
@@ -143,7 +143,7 @@ export default function SearchForm() {
     <div className="rounded-md bg-gray-800 p-4">
       <div className="mb-4 flex items-center justify-between">
         <Tabs defaultValue="car" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger
               value="car"
               className="data-[state=active]:bg-orange-600"
@@ -154,21 +154,7 @@ export default function SearchForm() {
               value="truck"
               className="data-[state=active]:bg-orange-700"
             >
-              {" "}
-              <TruckIcon className="h-6 w-6 text-black shadow-xl shadow-white" />
-            </TabsTrigger>
-            <TabsTrigger
-              value="hang"
-              className="data-[state=active]:bg-orange-700"
-            >
-              {" "}
-              <CaravanIcon className="filter- h-6 w-6 text-black shadow-xl shadow-white" />
-            </TabsTrigger>
-            <TabsTrigger
-              value="bike"
-              className="data-[state=active]:bg-orange-700"
-            >
-              <BikeIcon className="h-6 w-6 text-black shadow-xl shadow-white" />
+              <XIcon color="black" />
             </TabsTrigger>
           </TabsList>
           <TabsContent value="car">

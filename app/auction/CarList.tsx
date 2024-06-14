@@ -22,7 +22,9 @@ function Cars({ filters }: { filters: any }) {
           throw new Error(result.error);
         }
         setData(result.data);
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       } catch (error) {
         console.error(error);
       }
