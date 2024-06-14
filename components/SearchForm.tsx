@@ -22,18 +22,18 @@ import { useRouter } from "next/navigation";
 const fuels = [
   {
     id: 1,
+    name: "Дизел",
+  },
+  {
+    id: 4,
+    name: "Газ",
+  },
+  {
+    id: 5,
     name: "Бензин",
   },
   {
     id: 2,
-    name: "Дизел",
-  },
-  {
-    id: 3,
-    name: "Газ",
-  },
-  {
-    id: 4,
     name: "Електричество",
   },
 ];
@@ -44,6 +44,7 @@ export default function SearchForm() {
   const [modelName, setModelName] = useState<any>();
   const [manufacturers, setManufacturers] = useState<any>();
   const [models, setModels] = useState<any>();
+  const [year, setYear] = useState<any>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -88,14 +89,19 @@ export default function SearchForm() {
   const router = useRouter();
 
   const handleSearch = () => {
-    if (man === "" && modelName.trim() === "") {
+    if (man === "") {
       return alert("Please provide some input");
     }
 
-    updateSearchParams(modelName.id, man.id);
+    updateSearchParams(modelName.id, man.id, year, fuel);
   };
 
-  const updateSearchParams = (model: string, manufacturer: string) => {
+  const updateSearchParams = (
+    model: any,
+    manufacturer: any,
+    year: any,
+    fuel: any,
+  ) => {
     // Create a new URLSearchParams object using the current URL search parameters
     const searchParams = new URLSearchParams(window.location.search);
 
@@ -111,6 +117,18 @@ export default function SearchForm() {
       searchParams.set("manufacturer", manufacturer);
     } else {
       searchParams.delete("manufacturer");
+    }
+
+    if (year) {
+      searchParams.set("year", year);
+    } else {
+      searchParams.delete("year");
+    }
+
+    if (fuel && fuel.id) {
+      searchParams.set("fuel", fuel.id);
+    } else {
+      searchParams.delete("fuel");
     }
 
     // Generate the new pathname with the updated search parameters
@@ -201,6 +219,8 @@ export default function SearchForm() {
                       <input
                         id="year"
                         type="text"
+                        value={year}
+                        onChange={(e) => setYear(e.target.value)}
                         placeholder="Година"
                         className="flex-1 bg-gray-700 text-white placeholder-gray-400 outline-none"
                       />

@@ -26,7 +26,7 @@ export async function GET(request: Request) {
   if (fuel_type) url.searchParams.append("fuel_type", fuel_type);
   if (year) url.searchParams.append("year", year);
   if (manufacturer) url.searchParams.append("manufacturer_id", manufacturer);
-  if (model) url.searchParams.append("model", model);
+  if (model) url.searchParams.append("model_id", model);
 
   try {
     const response = await fetch(url, {
