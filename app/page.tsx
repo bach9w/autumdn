@@ -14,6 +14,7 @@ import { Button } from "@components/ui/button";
 import Link from "next/link";
 import Loading from "@components/loading";
 import { Suspense } from "react";
+import SearchForm from "@components/SearchForm";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
@@ -36,19 +37,14 @@ export default async function Home({ searchParams }: HomeProps) {
           </div>
 
           <section id="auctions" className="home__filters p-5">
-            <SearchBar />
-
-            <div className="home__filter-container mt-2">
-              <CustomFilter title="fuel" options={fuels} />
-              <CustomFilter title="year" options={yearsOfProduction} />
-            </div>
+            <SearchForm />
           </section>
         </div>
       </div>
 
       <Suspense fallback={<Loading />}>
         <div className="-ml-5 -mr-5 grid h-full grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
-          <Cars filters={filters} />
+          {/*<Cars filters={filters} />*/}
         </div>
       </Suspense>
       <div className="mt-6 flex w-full items-start justify-center">
