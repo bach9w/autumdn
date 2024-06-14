@@ -1,18 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { fetchAuction, fetchAuctionFilter } from "@app/api/cars";
-import { AuctionProps } from "@types";
+
 import CarCard from "./CarCard";
-import cars from "./cars.json";
 
 import Loading from "@components/loading";
 
 function Cars({ filters }: { filters: any }) {
-  const [allAuctions, setAllAuctions] = useState<AuctionProps>();
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     async function fetchData() {
       const query = new URLSearchParams(filters).toString();
       try {
