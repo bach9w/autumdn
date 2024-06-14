@@ -12,27 +12,123 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
 
-export default async function SearchForm() {
-  const [model, setModel] = useState<any>();
+import { cn } from "@/lib/utils";
+
+import { ComboBoxResponsive } from "./search/responsive-combobox";
+import { useRouter } from "next/navigation";
+
+const fuels = [
+  {
+    id: 1,
+    name: "Бензин",
+  },
+  {
+    id: 2,
+    name: "Дизел",
+  },
+  {
+    id: 3,
+    name: "Газ",
+  },
+  {
+    id: 4,
+    name: "Електричество",
+  },
+];
+
+export default function SearchForm() {
+  const [man, setMan] = useState<any>();
+  const [fuel, setFuel] = useState<any>();
   const [modelName, setModelName] = useState<any>();
+  const [manufacturers, setManufacturers] = useState<any>();
+  const [models, setModels] = useState<any>();
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(`/api/manufacturer`, {
+          next: { revalidate: 3600 },
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error);
+        }
+        setManufacturers(result.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        if (man === undefined) return;
+        if (man.id !== null) {
+          const response = await fetch(`/api/models/${man.id}`, {
+            next: { revalidate: 3600 },
+          });
+          const result = await response.json();
+          if (!response.ok) {
+            throw new Error(result.error);
+          }
+          setModels(result.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, [man]);
+
+  const router = useRouter();
+
+  const handleSearch = () => {
+    if (man === "" && modelName.trim() === "") {
+      return alert("Please provide some input");
+    }
+
+    updateSearchParams(modelName.id, man.id);
+  };
+
+  const updateSearchParams = (model: string, manufacturer: string) => {
+    // Create a new URLSearchParams object using the current URL search parameters
+    const searchParams = new URLSearchParams(window.location.search);
+
+    // Update or delete the 'model' search parameter based on the 'model' value
+    if (model) {
+      searchParams.set("model", model);
+    } else {
+      searchParams.delete("model");
+    }
+
+    // Update or delete the 'manufacturer' search parameter based on the 'manufacturer' value
+    if (manufacturer) {
+      searchParams.set("manufacturer", manufacturer);
+    } else {
+      searchParams.delete("manufacturer");
+    }
+
+    // Generate the new pathname with the updated search parameters
+    const newPathname = `${
+      window.location.pathname
+    }?${searchParams.toString()}`;
+
+    router.push(newPathname, { scroll: false });
+  };
 
   return (
     <div className="rounded-md bg-gray-800 p-4">
-      <div className="mb-4 flex items-center">
-        <SearchIcon className="mr-2 h-6 w-6 text-white" />
-        <Input
-          type="text"
-          placeholder="...желания  автомобил"
-          className="flex-1 border-2 border-white bg-gray-800 text-[17px] text-white placeholder-gray-400 outline-none"
-        />
-      </div>
       <div className="mb-4 flex items-center justify-between">
         <Tabs defaultValue="car" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger
               value="car"
-              className="data-[state=active]:bg-orange-700"
+              className="data-[state=active]:bg-orange-600"
             >
               <CarIcon className="" />
             </TabsTrigger>
@@ -64,123 +160,80 @@ export default async function SearchForm() {
                 <CardDescription>Намери желания автомобил</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <div className="mb-4 grid grid-cols-2 gap-4">
+                <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="make" className="text-sm text-white">
+                    <Label
+                      htmlFor="manufacturer"
+                      className="text-sm text-white"
+                    >
                       Марка
-                    </label>
-                    <div className="flex items-center rounded-md bg-orange-700 p-2">
-                      <input
-                        id="make"
-                        type="text"
-                        value={model}
-                        onSelect={() => {
-                          console.log(modelName);
-                        }}
-                        onChange={(e) => {
-                          setTimeout(() => {
-                            setModelName(e.target.value);
-                          }, 2500);
-                        }}
-                        placeholder="Марка"
-                        className="flex-1 bg-orange-700 text-white outline-none"
-                      />
-                      <ChevronDownIcon className="h-4 w-4 text-gray-400" />
-                    </div>
+                    </Label>
+                    <ComboBoxResponsive
+                      disabled={false}
+                      setSelected={(e) => {
+                        setMan(e);
+                      }}
+                      model="Марки"
+                      data={manufacturers}
+                    />
                   </div>
                   <div>
                     <label htmlFor="model" className="text-sm text-white">
                       Модел
                     </label>
-                    <div className="flex items-center rounded-md bg-gray-700 p-2">
-                      <input
-                        id="model"
-                        type="text"
-                        placeholder="Модел"
-                        className="flex-1 bg-gray-700 text-white placeholder-gray-400 outline-none"
-                      />
-                      <ChevronDownIcon className="h-4 w-4 text-gray-400" />
-                    </div>
-                  </div>
-                </div>
-                <div className="mb-4 grid grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="price" className="text-sm text-white">
-                      цена до (€)
-                    </label>
-                    <div className="flex items-center rounded-md bg-gray-700 p-2">
-                      <input
-                        id="price"
-                        type="text"
-                        placeholder="цена до (€)"
-                        className="flex-1 bg-gray-700 text-white placeholder-gray-400 outline-none"
-                      />
-                      <ChevronDownIcon className="h-4 w-4 text-gray-400" />
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="registration"
-                      className="text-sm text-white"
-                    >
-                      Първа регистрация след
-                    </label>
-                    <div className="flex items-center rounded-md bg-gray-700 p-2">
-                      <input
-                        id="registration"
-                        type="text"
-                        placeholder="Първа регистрация след"
-                        className="flex-1 bg-gray-700 text-white placeholder-gray-400 outline-none"
-                      />
-                      <ChevronDownIcon className="h-4 w-4 text-gray-400" />
-                    </div>
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="region" className="text-sm text-gray-400">
-                    Държава
-                  </label>
-                  <div className="flex items-center rounded-md bg-gray-700 p-2">
-                    <input
-                      id="region"
-                      type="text"
-                      placeholder="Европа"
-                      className="flex-1 bg-gray-700 text-white placeholder-gray-400 outline-none"
+
+                    <ComboBoxResponsive
+                      setSelected={(e) => {
+                        setModelName(e);
+                      }}
+                      disabled={man ? false : true}
+                      model="Модели"
+                      data={models && models}
                     />
-                    <ChevronDownIcon className="h-4 w-4 text-gray-400" />
                   </div>
                 </div>
+                <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="year" className="text-sm text-white">
+                      Година
+                    </label>
+                    <div className="flex items-center rounded-md bg-gray-700 p-2">
+                      <input
+                        id="year"
+                        type="text"
+                        placeholder="Година"
+                        className="flex-1 bg-gray-700 text-white placeholder-gray-400 outline-none"
+                      />
+                    </div>
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="fuel" className="text-sm text-gray-400">
+                      Гориво
+                    </label>
+                    <div className="flex items-center rounded-md">
+                      <ComboBoxResponsive
+                        setSelected={(e) => {
+                          setFuel(e);
+                        }}
+                        disabled={false}
+                        model="Гориво"
+                        data={fuels}
+                      />
+                    </div>
+                  </div>
+                </div>
+
                 <div className="mb-4"></div>
                 <div className="mb-4 rounded-md bg-orange-600 p-4 font-bold text-white">
-                  2 063 927 резултати
+                  Избери сред 63 927 резултата
                 </div>
-                <button className="w-full rounded-md bg-gray-700 px-4 py-2 text-white">
+                <button
+                  onClick={handleSearch}
+                  className="w-full rounded-md bg-gray-700 px-4 py-2 text-white"
+                >
                   Разширено търсене
                 </button>
               </CardContent>
-            </Card>
-          </TabsContent>
-          <TabsContent value="password">
-            <Card>
-              <CardHeader>
-                <CardTitle>Password</CardTitle>
-                <CardDescription>
-                  Change your password here. After saving, you'll be logged out.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="space-y-1">
-                  <Label htmlFor="current">Current password</Label>
-                  <Input id="current" type="password" />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="new">New password</Label>
-                  <Input id="new" type="password" />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button>Save password</Button>
-              </CardFooter>
             </Card>
           </TabsContent>
         </Tabs>
