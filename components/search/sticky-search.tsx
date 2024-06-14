@@ -1,21 +1,35 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { FiAlertCircle, FiSearch } from "react-icons/fi";
 import { ComboBoxResponsive } from "./responsive-combobox";
 import SearchForm from "@components/SearchForm";
 
 const StickySearchForm = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const [isHome, setIsHome] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    if (typeof window !== "undefined") {
+      setIsHome(window.location.pathname === "/");
+    }
+  }, []);
+
   return (
-    <div className="">
-      <button
-        onClick={() => setIsOpen(true)}
-        className="flex items-center justify-center rounded rounded-t-none bg-gradient-to-r from-black to-gray-600 px-4 py-2 font-medium text-white transition-opacity hover:opacity-90"
-      >
-        <FiSearch /> Търсачка
-      </button>
-      <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
-    </div>
+    <>
+      {isMounted && isHome && (
+        <div className="">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="flex items-center justify-center rounded rounded-t-none bg-gradient-to-r from-black to-gray-600 px-4 py-2 font-medium text-white transition-opacity hover:opacity-90"
+          >
+            <FiSearch /> Търсачка
+          </button>
+          <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
+        </div>
+      )}
+    </>
   );
 };
 

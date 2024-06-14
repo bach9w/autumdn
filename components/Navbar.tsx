@@ -17,8 +17,6 @@ import { Menu } from "lucide-react";
 import StickySearchForm from "./search/sticky-search";
 import SearchForm from "./SearchForm";
 
-import { useSearchParams } from "next/navigation";
-
 const NavBar = () => {
   const router = useRouter();
 
