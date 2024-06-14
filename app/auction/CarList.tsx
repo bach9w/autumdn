@@ -31,7 +31,6 @@ function Cars({ filters }: { filters: any }) {
     }
 
     fetchData();
-    console.log(data);
   }, [filters]);
 
   return (
