@@ -4,7 +4,7 @@ import { FiAlertCircle, FiSearch } from "react-icons/fi";
 import { ComboBoxResponsive } from "./responsive-combobox";
 import SearchForm from "@components/SearchForm";
 
-const StickySearchForm = ({ children }: { children: React.ReactNode }) => {
+const StickySearchForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isHome, setIsHome] = useState(false);
