@@ -38,7 +38,13 @@ const fuels = [
   },
 ];
 
-export default function SearchForm() {
+export default function SearchForm({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: (value: boolean) => void;
+}) {
   const [man, setMan] = useState<any>();
   const [fuel, setFuel] = useState<any>();
   const [modelName, setModelName] = useState<any>();
@@ -93,7 +99,8 @@ export default function SearchForm() {
       return alert("Please provide some input");
     }
 
-    updateSearchParams(modelName, man.id, year, fuel);
+    updateSearchParams(modelName, man, year, fuel);
+    setIsOpen(!isOpen);
   };
 
   const updateSearchParams = (
@@ -113,8 +120,8 @@ export default function SearchForm() {
     }
 
     // Update or delete the 'manufacturer' search parameter based on the 'manufacturer' value
-    if (manufacturer) {
-      searchParams.set("manufacturer", manufacturer);
+    if (manufacturer && manufacturer.id) {
+      searchParams.set("manufacturer", manufacturer.id);
     } else {
       searchParams.delete("manufacturer");
     }

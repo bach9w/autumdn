@@ -111,20 +111,21 @@ function StatusList({
       <CommandList>
         <CommandEmpty>Няма намерени резултати.</CommandEmpty>
         <CommandGroup>
-          {data.map((status) => (
-            <CommandItem
-              key={status.name}
-              value={status.name}
-              onSelect={(value: any) => {
-                setSelectedStatus(
-                  data.find((priority) => priority.name === value) || null,
-                );
-                setOpen(false);
-              }}
-            >
-              {status.name}
-            </CommandItem>
-          ))}
+          {data &&
+            data.map((status) => (
+              <CommandItem
+                key={status.name}
+                value={status.name}
+                onSelect={(value: any) => {
+                  setSelectedStatus(
+                    data.find((priority) => priority.name === value) || null,
+                  );
+                  setOpen(false);
+                }}
+              >
+                {status.name}
+              </CommandItem>
+            ))}
         </CommandGroup>
       </CommandList>
     </Command>

@@ -40,7 +40,7 @@ export default async function Home({ searchParams }: HomeProps) {
       </div>
 
       <Suspense fallback={<Loading />}>
-        <div className="-ml-5 -mr-5 grid h-full grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+        <div className="">
           <Cars filters={filters} />
         </div>
       </Suspense>

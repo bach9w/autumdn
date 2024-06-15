@@ -24,7 +24,7 @@ function Cars({ filters }: { filters: any }) {
         setData(result.data);
         setTimeout(() => {
           setLoading(false);
-        }, 1000);
+        }, 1500);
       } catch (error) {
         console.error(error);
       }
@@ -36,20 +36,22 @@ function Cars({ filters }: { filters: any }) {
   return (
     <>
       {loading && <Loading />}
-      {data &&
-        Array.isArray(data) &&
-        data.map(
-          (car: any) =>
-            car.lots &&
-            car.lots[0] &&
-            car.lots[0].images &&
-            car.lots[0].sale_date !== null &&
-            car.lots[0].images?.normal && (
-              <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
-                <CarCard car={car} />
-              </div>
-            ),
-        )}
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+        {data &&
+          Array.isArray(data) &&
+          data.map(
+            (car: any) =>
+              car.lots &&
+              car.lots[0] &&
+              car.lots[0].images &&
+              car.lots[0].sale_date !== null &&
+              car.lots[0].images?.normal && (
+                <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
+                  <CarCard car={car} />
+                </div>
+              ),
+          )}
+      </div>
     </>
   );
 }

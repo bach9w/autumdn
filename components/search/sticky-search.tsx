@@ -57,7 +57,7 @@ const SpringModal = ({
             onClick={(e) => e.stopPropagation()}
             className="relative top-[20%] w-full max-w-lg cursor-default overflow-hidden rounded-lg p-0 text-white shadow-xl sm:top-0"
           >
-            <SearchForm />
+            <SearchForm isOpen={isOpen} setIsOpen={setIsOpen} />
           </motion.div>
         </motion.div>
       )}
