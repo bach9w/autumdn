@@ -5,6 +5,7 @@ import CarCard from "@app/auction/CarCard";
 import Loading from "@components/loading";
 import { Button } from "@components/ui/button";
 import { Card } from "@components/ui/card";
+import { cn } from "@lib/utils";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -22,7 +23,7 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
       if (slug.length === 1) {
         try {
           const response = await fetch(`/api/models/${slug[0]}`, {
-            next: { revalidate: 3600 },
+            next: { revalidate: 600 },
           });
           const result = await response.json();
           if (!response.ok) {
@@ -37,6 +38,9 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
         try {
           const response = await fetch(
             `/api/cars?minutes=10&per_page=50&page=1&manufacturer_id=${slug[0]}&model=${slug[1]}`,
+            {
+              next: { revalidate: 3600 },
+            },
           );
           const result = await response.json();
           if (!response.ok) {
@@ -70,7 +74,12 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
           <span className="sr-only">Назад</span>
         </Button>
         {slug[0] && (
-          <div className="grid grid-cols-3 items-center justify-center gap-2 overflow-x-hidden p-4 py-10 text-center md:grid-cols-4 xl:grid-cols-5">
+          <div
+            className={cn(
+              "grid grid-cols-3 items-center justify-center gap-2 overflow-x-hidden p-4 py-10 text-center md:grid-cols-4 xl:grid-cols-5",
+              slug[1] && "hidden",
+            )}
+          >
             {data &&
               data.map((models: any) => {
                 return (
@@ -88,7 +97,7 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
           </div>
         )}
         {slug[0] && slug[1] && (
-          <div className="">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {data &&
               Array.isArray(data) &&
               data.map(

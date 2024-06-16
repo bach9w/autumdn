@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 
 import CarCard from "./CarCard";
 
@@ -12,13 +12,18 @@ function Cars({ filters }: { filters: any }) {
   useEffect(() => {
     setLoading(true);
     async function fetchData() {
-      const query = new URLSearchParams(filters).toString();
+      const query = new URLSearchParams(filters);
+      if (filters.page) {
+        query.set("page", filters.page);
+      }
       try {
         const response = await fetch(`/api/cars?${query}`, {
-          next: { revalidate: 30 },
+          next: {
+            revalidate: 600,
+          },
         });
         const result = await response.json();
-        console.log(result);
+
         if (!response.ok) {
           throw new Error(result.error);
         }
@@ -32,24 +37,19 @@ function Cars({ filters }: { filters: any }) {
     fetchData();
   }, [filters]);
 
+  const filteredData = useMemo(() => {
+    return data.filter((car: any) => car.lots?.[0]?.images?.normal);
+  }, [data]);
+
   return (
     <>
       {loading && <Loading />}
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
-        {data &&
-          Array.isArray(data) &&
-          data.map(
-            (car: any) =>
-              car.lots &&
-              car.lots[0] &&
-              car.lots[0].images &&
-              car.lots[0].sale_date !== null &&
-              car.lots[0].images?.normal && (
-                <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
-                  <CarCard car={car} />
-                </div>
-              ),
-          )}
+        {filteredData.map((car: any) => (
+          <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
+            <CarCard car={car} />
+          </div>
+        ))}
       </div>
     </>
   );

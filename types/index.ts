@@ -169,7 +169,7 @@ export interface FilterProps {
   year?: number;
   model?: string;
   limit?: number;
-  fuel_type?: string;
+  fuel_type?: number;
   page?: number;
   sale_date_in_days?: number;
   status?: string;
