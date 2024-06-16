@@ -7,7 +7,6 @@ import {
   CardFooter,
 } from "@components/ui/card";
 import { Label } from "@components/ui/label";
-import ReactPlayer from "react-player";
 
 const Video360 = ({ video }: { video: any }) => {
   return (
@@ -21,10 +20,8 @@ const Video360 = ({ video }: { video: any }) => {
         <CardContent>
           <div className="mt-10 h-full w-full">
             <iframe
-              width={500}
-              height={600}
               src={video}
-              className="w-full"
+              className="h-[400px] w-full border-4 border-black p-2 sm:h-[600px]"
               allowFullScreen
               title="360 view"
             />

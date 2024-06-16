@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/breadcrumb";
 
 import Image from "next/image";
-import { PhoneCall, Upload } from "lucide-react";
+import { PhoneCall, Rotate3D, Upload } from "lucide-react";
 import { Separator } from "@components/ui/separator";
 import { useRouter } from "next/navigation";
 
@@ -79,8 +79,15 @@ const CarCard = ({ car }: { car: any }) => {
                 <CardTitle>
                   <div className="mt-2 flex w-full justify-between">
                     <div className="flex flex-col text-black">
-                      {car.manufacturer && car.manufacturer.name} -{" "}
+                      <p>{car.manufacturer && car.manufacturer.name}</p>
                       {car.model && car.model.name}
+                    </div>
+                    <div className="flex w-full items-center justify-end">
+                      {car.lots[0].images.external_panorama_url && (
+                        <Badge className="bg-red-500">
+                          <Rotate3D /> 360 video
+                        </Badge>
+                      )}
                     </div>
                   </div>
                 </CardTitle>
@@ -176,6 +183,7 @@ const CarCard = ({ car }: { car: any }) => {
                         </CardFooter>
                       </Carousel>
                     ))}
+
                   <div className="grid grid-cols-3 gap-2 uppercase">
                     <div className="col-span-2 w-full flex-col items-center justify-center rounded-md">
                       <div className="flex h-full w-full flex-col items-center justify-center rounded-xl bg-red-500 font-bold text-white shadow-md shadow-black">
