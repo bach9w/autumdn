@@ -33,6 +33,7 @@ export async function GET(request: Request) {
   try {
     const response = await fetch(url, {
       headers: headers,
+      cache: "no-store",
     });
 
     if (!response.ok) {
