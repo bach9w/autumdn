@@ -4,6 +4,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
   const minutes = searchParams.get("minutes") || "10";
+  const model = searchParams.get("model");
   const per_page = searchParams.get("per_page") || "100";
   const status = searchParams.get("status") || "3";
   const condition = searchParams.get("condition") || "0";
@@ -21,9 +22,11 @@ export async function GET(request: Request) {
   url.searchParams.append("per_page", per_page);
   url.searchParams.append("sale_date_in_days", sale_date);
   url.searchParams.append("condition", condition);
+  url.searchParams.append("status", status);
   url.searchParams.append("page", page);
 
   if (manufacturer) url.searchParams.append("manufacturer_id", manufacturer);
+  if (model) url.searchParams.append("model_id", model);
 
   try {
     const response = await fetch(url, {
