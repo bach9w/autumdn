@@ -4,7 +4,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
   const minutes = searchParams.get("minutes") || "10";
-  const per_page = searchParams.get("per_page") || "100";
+  const per_page = searchParams.get("per_page") || "30";
   const status = searchParams.get("status") || "3";
   const sale_date = searchParams.get("sale_date_in_days") || "7";
   const condition = searchParams.get("condition") || "0";
@@ -12,6 +12,7 @@ export async function GET(request: Request) {
   const year = searchParams.get("year");
   const manufacturer = searchParams.get("manufacturer");
   const model = searchParams.get("model");
+  const page = searchParams.get("page") || "1";
 
   const headers = {
     "x-api-key": "a48f8f672e29bd479c652f76f100bcf4", // Поставете вашия API ключ тук
@@ -20,6 +21,7 @@ export async function GET(request: Request) {
   const url = new URL("https://carstat.dev/api/cars");
   url.searchParams.append("minutes", minutes);
   url.searchParams.append("per_page", per_page);
+  url.searchParams.append("page", page);
 
   url.searchParams.append("condition", condition);
   url.searchParams.append("sale_date_in_days", sale_date);

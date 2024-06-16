@@ -5,12 +5,15 @@ import { HomeProps } from "@types";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
-    minutes: "10",
+    minutes: "30",
     per_page: "30",
-    status: "3",
-    condition: "0",
-    fuel_type: "1",
-    year: "2022",
+    status: searchParams.status || "3",
+
+    fuel: searchParams.fuel_type || "",
+    year: searchParams.year || "",
+    manufacturer: searchParams.manufacturer || "",
+    model: searchParams.model || "",
+    page: searchParams.page || "",
     sale_date_in_days: "7",
   };
   return (

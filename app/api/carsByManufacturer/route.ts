@@ -8,6 +8,7 @@ export async function GET(request: Request) {
   const status = searchParams.get("status") || "3";
   const condition = searchParams.get("condition") || "0";
   const sale_date = searchParams.get("sale_date_in_days") || "7";
+  const page = searchParams.get("page") || "1";
 
   const manufacturer = searchParams.get("manufacturer");
 
@@ -20,6 +21,7 @@ export async function GET(request: Request) {
   url.searchParams.append("per_page", per_page);
   url.searchParams.append("sale_date_in_days", sale_date);
   url.searchParams.append("condition", condition);
+  url.searchParams.append("page", page);
 
   if (manufacturer) url.searchParams.append("manufacturer_id", manufacturer);
 

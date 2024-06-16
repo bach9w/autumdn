@@ -20,7 +20,7 @@ import StickySearchForm from "@components/search/sticky-search";
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
     year: searchParams.year || "",
-    fuel: searchParams.fuel || "",
+    fuel: searchParams.fuel_type || "",
     manufacturer: searchParams.manufacturer || "",
     model: searchParams.model || "",
   };

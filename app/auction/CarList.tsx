@@ -18,13 +18,12 @@ function Cars({ filters }: { filters: any }) {
           next: { revalidate: 30 },
         });
         const result = await response.json();
+        console.log(result);
         if (!response.ok) {
           throw new Error(result.error);
         }
         setData(result.data);
-        setTimeout(() => {
-          setLoading(false);
-        }, 1500);
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
