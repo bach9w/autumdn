@@ -25,6 +25,7 @@ import {
 } from "@components/ui/carousel";
 
 import ReactWhatsapp from "react-whatsapp";
+import Video360 from "./Video360";
 
 function splitDateAndTime(date: string) {
   if (!date) {
@@ -328,6 +329,11 @@ export function CarInfo({ data }: { data: any }) {
             </ReactWhatsapp>
           </Button>
         </div>
+      </div>
+      <div>
+        <Video360
+          video={data.lots[data.lots.length - 1].images.external_panorama_url}
+        />
       </div>
     </main>
   );

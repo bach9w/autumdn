@@ -5,6 +5,7 @@ import { fetchCarDetails } from "@app/api/cars";
 import Loading from "@components/loading";
 import { Suspense, useEffect, useState } from "react";
 import { CarInfo } from "./CarInfo";
+import Video360 from "./Video360";
 
 const Manufacture = ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
@@ -13,9 +14,10 @@ const Manufacture = ({ params }: { params: { slug: string } }) => {
 
   useEffect(() => {
     async function fetchData() {
-      
       try {
-        const response = await fetch(`/api/carByVin/${slug}`, {cache: "no-store"});
+        const response = await fetch(`/api/carByVin/${slug}`, {
+          cache: "no-store",
+        });
         const result = await response.json();
         if (!response.ok) {
           throw new Error(result.error);
