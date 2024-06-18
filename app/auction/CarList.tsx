@@ -17,9 +17,9 @@ function Cars({ filters }: { filters: any }) {
         query.set("page", filters.page);
       }
       try {
-        const response = await fetch(`/api/cars?${query}`, {
+        const response = await fetch(`/api/cars?${query}&status=3`, {
           next: {
-            revalidate: 600,
+            revalidate: 60,
           },
         });
         const result = await response.json();
@@ -40,6 +40,8 @@ function Cars({ filters }: { filters: any }) {
   const filteredData = useMemo(() => {
     return data.filter((car: any) => car.lots?.[0]?.images?.normal);
   }, [data]);
+
+  console.log(filteredData);
 
   return (
     <>

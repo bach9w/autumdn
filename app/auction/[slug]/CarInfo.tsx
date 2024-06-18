@@ -37,6 +37,7 @@ function splitDateAndTime(date: string) {
 }
 
 export function CarInfo({ data }: { data: any }) {
+  console.log(data);
   return (
     <main className="grid flex-1 items-start gap-4 p-0 sm:px-3 sm:py-0 md:gap-8">
       <div className="mx-auto grid max-w-[59rem] flex-1 auto-rows-max gap-4">
@@ -100,7 +101,10 @@ export function CarInfo({ data }: { data: any }) {
                   <div className="grid gap-3">
                     <div className="flex flex-col">
                       <Badge className="mb-2 flex h-[40px] w-full justify-center rounded-none uppercase">
-                        {data.lots && splitDateAndTime(data.lots[0].sale_date)}
+                        {data.lots &&
+                          splitDateAndTime(
+                            data.lots[data.lots.length - 1].sale_date,
+                          )}
                       </Badge>
 
                       {data.lots[data.lots.length - 1].buy_now ? (
@@ -131,8 +135,8 @@ export function CarInfo({ data }: { data: any }) {
               <CardContent>
                 <Carousel>
                   <CarouselContent>
-                    {data.lots &&
-                      data.lots[data.lots.length - 1].images.normal.map(
+                    {data?.lots &&
+                      data?.lots[data.lots.length - 1]?.images?.normal?.map(
                         (imageUrl: string, index: number) => (
                           <CarouselItem key={index}>
                             <img
@@ -301,6 +305,11 @@ export function CarInfo({ data }: { data: any }) {
             </Card>
           </div>
         </div>
+        {data.lots[data.lots.length - 1].images.external_panorama_url && (
+          <Video360
+            video={data.lots[data.lots.length - 1].images.external_panorama_url}
+          />
+        )}
         <div className="flex items-center justify-center gap-2 md:hidden">
           <Button
             className="flex items-center justify-center gap-1 hover:bg-red-500 hover:text-white"
@@ -330,11 +339,7 @@ export function CarInfo({ data }: { data: any }) {
           </Button>
         </div>
       </div>
-      <div>
-        <Video360
-          video={data.lots[data.lots.length - 1].images.external_panorama_url}
-        />
-      </div>
+      <div></div>
     </main>
   );
 }

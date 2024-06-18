@@ -43,6 +43,7 @@ import { Button } from "@components/ui/button";
 
 function splitDateAndTime(date: string) {
   const [datePart, timePart] = date.split("T");
+
   const [year, month, day] = datePart.split("-");
 
   return `${day}.${month}.${year}`;
@@ -242,9 +243,9 @@ const CarCard = ({ car }: { car: any }) => {
 
             <Badge className="flex w-full items-center justify-center rounded-t-none">
               Търг -{" "}
-              {car.lots[0] && car.lots[0].sale_date
-                ? splitDateAndTime(car.lots[0].sale_date)
-                : "Очаква се дата"}
+              {car.lots[0] && car.lots[car.lots.length - 1].sale_date
+                ? splitDateAndTime(car.lots[car.lots.length - 1].sale_date)
+                : `Цена в момента -  ${car.lots[car.lots.length - 1].buy_now} `}
             </Badge>
           </DrawerDescription>
           <Button

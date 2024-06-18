@@ -5,7 +5,6 @@ import { HomeProps } from "@types";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
-    minutes: "30",
     per_page: "30",
     status: searchParams.status || "3",
 

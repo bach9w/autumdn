@@ -37,7 +37,7 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
       } else if (slug.length === 2) {
         try {
           const response = await fetch(
-            `/api/cars?per_page=50&manufacturer=${slug[0]}&model=${slug[1]}&page=1`,
+            `/api/cars?per_page=50&manufacturer=${slug[0]}&model=${slug[1]}&sale_date_in_days=10&page=1`,
             {
               next: { revalidate: 3600 },
             },
