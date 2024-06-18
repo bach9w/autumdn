@@ -37,11 +37,12 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
       } else if (slug.length === 2) {
         try {
           const response = await fetch(
-            `/api/cars?minutes=10&per_page=50&page=1&manufacturer_id=${slug[0]}&model=${slug[1]}`,
+            `/api/cars?per_page=50&manufacturer=${slug[0]}&model=${slug[1]}&page=1`,
             {
               next: { revalidate: 3600 },
             },
           );
+
           const result = await response.json();
           if (!response.ok) {
             throw new Error(result.error);
@@ -59,7 +60,7 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
   return (
     <Suspense fallback={<Loading />}>
       {loading && <Loading />}
-      <div>
+      <div className="min-h-screen">
         <Button
           variant="outline"
           size="icon"
@@ -76,7 +77,7 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
         {slug[0] && (
           <div
             className={cn(
-              "grid grid-cols-3 items-center justify-center gap-2 overflow-x-hidden p-4 py-10 text-center md:grid-cols-4 xl:grid-cols-5",
+              "grid grid-cols-2 items-center justify-center gap-2 overflow-x-hidden p-4 py-10 text-center md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5",
               slug[1] && "hidden",
             )}
           >
@@ -89,7 +90,12 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
                         router.push(`/manufacturers/${slug}/${models.id}`);
                       }}
                     >
-                      <Card key={models.id}>{models.name}</Card>
+                      <Card
+                        className="flex min-h-[100px] cursor-pointer items-center justify-center rounded-lg bg-gray-100 text-2xl shadow-lg"
+                        key={models.id}
+                      >
+                        {models.name}
+                      </Card>
                     </div>
                   </div>
                 );
@@ -100,18 +106,13 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {data &&
               Array.isArray(data) &&
-              data.map(
-                (car: any) =>
-                  car.lots &&
-                  car.lots[0] &&
-                  car.lots[0].images &&
-                  car.lots[0].sale_date !== null &&
-                  car.lots[0].images?.normal && (
-                    <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
-                      <CarCard car={car} />
-                    </div>
-                  ),
-              )}
+              data
+                .filter((car: any) => car.lots)
+                .map((car: any) => (
+                  <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
+                    <CarCard car={car} />
+                  </div>
+                ))}
           </div>
         )}
       </div>

@@ -8,18 +8,18 @@ export async function GET(request: Request) {
   const status = searchParams.get("status") || "";
   const sale_date = searchParams.get("sale_date_in_days") || "";
   const condition = searchParams.get("condition") || "";
-  const fuel_type = searchParams.get("fuel");
-  const year = searchParams.get("year");
-  const manufacturer = searchParams.get("manufacturer");
-  const model = searchParams.get("model");
-  const page = searchParams.get("page");
+  const fuel_type = searchParams.get("fuel_type") || "";
+  const year = searchParams.get("year") || "";
+  const manufacturer = searchParams.get("manufacturer") || "";
+  const model = searchParams.get("model") || "";
+  const page = searchParams.get("page") || "";
 
   const headers = {
     "x-api-key": "a48f8f672e29bd479c652f76f100bcf4", // Поставете вашия API ключ тук
   };
 
   const url = new URL("https://carstat.dev/api/cars");
-  url.searchParams.set("minutes", minutes);
+
   url.searchParams.set("per_page", per_page);
 
   if (condition) url.searchParams.set("condition", condition);

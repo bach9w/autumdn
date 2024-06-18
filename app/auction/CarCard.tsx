@@ -83,11 +83,13 @@ const CarCard = ({ car }: { car: any }) => {
                       {car.model && car.model.name}
                     </div>
                     <div className="flex w-full items-center justify-end">
-                      {car.lots[0].images.external_panorama_url && (
-                        <Badge className="bg-red-500">
-                          <Rotate3D /> 360 video
-                        </Badge>
-                      )}
+                      {car.lots[0] &&
+                        car.lots[0].images &&
+                        car.lots[0].images.external_panorama_url && (
+                          <Badge className="bg-red-500">
+                            <Rotate3D /> 360 video
+                          </Badge>
+                        )}
                     </div>
                   </div>
                 </CardTitle>
