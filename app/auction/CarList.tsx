@@ -5,9 +5,22 @@ import CarCard from "./CarCard";
 
 import Loading from "@components/loading";
 
+function formatDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+}
+
 function Cars({ filters }: { filters: any }) {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const currentDate = new Date();
+  const formattedDate = formatDate(currentDate);
 
   useEffect(() => {
     setLoading(true);
@@ -17,11 +30,14 @@ function Cars({ filters }: { filters: any }) {
         query.set("page", filters.page);
       }
       try {
-        const response = await fetch(`/api/cars?${query}&status=3`, {
-          next: {
-            revalidate: 60,
+        const response = await fetch(
+          `/api/cars?${query}&status=3&sale_date_from=${formattedDate}`,
+          {
+            next: {
+              revalidate: 60,
+            },
           },
-        });
+        );
         const result = await response.json();
 
         if (!response.ok) {
@@ -40,8 +56,6 @@ function Cars({ filters }: { filters: any }) {
   const filteredData = useMemo(() => {
     return data.filter((car: any) => car.lots?.[0]?.images?.normal);
   }, [data]);
-
-  console.log(filteredData);
 
   return (
     <>

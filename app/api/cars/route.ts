@@ -7,6 +7,7 @@ export async function GET(request: Request) {
   const per_page = searchParams.get("per_page") || "10";
   const status = searchParams.get("status") || "";
   const sale_date = searchParams.get("sale_date_in_days") || "";
+  const sale_date_from = searchParams.get("sale_date_from") || "";
   const condition = searchParams.get("condition") || "";
   const fuel_type = searchParams.get("fuel_type") || "";
   const year = searchParams.get("year") || "";
@@ -24,6 +25,7 @@ export async function GET(request: Request) {
 
   if (condition) url.searchParams.set("condition", condition);
   if (sale_date) url.searchParams.set("sale_date_in_days", sale_date);
+  if (sale_date_from) url.searchParams.set("sale_date_from", sale_date_from);
   if (fuel_type) url.searchParams.set("fuel_type", fuel_type);
   if (year) url.searchParams.set("year", year);
   if (manufacturer) url.searchParams.set("manufacturer_id", manufacturer);

@@ -243,9 +243,10 @@ const CarCard = ({ car }: { car: any }) => {
 
             <Badge className="flex w-full items-center justify-center rounded-t-none">
               Търг -{" "}
-              {car.lots[0] && car.lots[car.lots.length - 1].sale_date
+              {car.lots[car.lots.length - 1] &&
+              car.lots[car.lots.length - 1].sale_date
                 ? splitDateAndTime(car.lots[car.lots.length - 1].sale_date)
-                : `Цена в момента -  ${car.lots[car.lots.length - 1].buy_now} `}
+                : `  сега `}
             </Badge>
           </DrawerDescription>
           <Button
