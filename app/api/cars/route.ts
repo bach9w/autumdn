@@ -5,7 +5,7 @@ export async function GET(request: Request) {
 
   const minutes = searchParams.get("minutes") || "";
   const per_page = searchParams.get("per_page") || "10";
-  const status = searchParams.get("status") || "";
+  const status = searchParams.get("status") || "3";
   const sale_date = searchParams.get("sale_date_in_days") || "";
   const sale_date_from = searchParams.get("sale_date_from") || "";
   const condition = searchParams.get("condition") || "";
