@@ -31,6 +31,7 @@ export async function GET(request: Request) {
   if (manufacturer) url.searchParams.set("manufacturer_id", manufacturer);
   if (model) url.searchParams.set("model_id", model);
   if (page) url.searchParams.set("page", page);
+if (status) url.searchParams.set("status", status);
 
   try {
     const response = await fetch(url.toString(), {
