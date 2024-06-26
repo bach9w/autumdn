@@ -32,7 +32,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-import Image from "next/image";
+import Link from "next/link";
 import { PhoneCall, Rotate3D, Upload } from "lucide-react";
 import { Separator } from "@components/ui/separator";
 import { useRouter } from "next/navigation";
@@ -40,13 +40,25 @@ import { useRouter } from "next/navigation";
 import { Badge } from "@components/ui/badge";
 import { cn } from "@lib/utils";
 import { Button } from "@components/ui/button";
+import DamageCheck from "./components/DamageCheck";
 
 function splitDateAndTime(date: string) {
-  const [datePart, timePart] = date.split("T");
+  // Създаване на дата обект от предоставената дата
+  const targetDate = new Date(date);
 
-  const [year, month, day] = datePart.split("-");
+  // Получаване на днешната дата
+  const today = new Date();
 
-  return `${day}.${month}.${year}`;
+  // Изчистване на времевата част за днешната дата
+  today.setHours(0, 0, 0, 0);
+
+  // Изчисляване на разликата в милисекунди между двете дати
+  const diffInMs = targetDate.getTime() - today.getTime();
+
+  // Преобразуване на разликата в дни
+  const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+
+  return diffInDays;
 }
 
 const CarCard = ({ car }: { car: any }) => {
@@ -123,12 +135,17 @@ const CarCard = ({ car }: { car: any }) => {
                         </CarouselContent>
                         <CardFooter className="">
                           <Breadcrumb>
-                            <BreadcrumbList className="flex w-full">
+                            <BreadcrumbList className="mt-4 flex w-full">
                               {car.model && (
                                 <>
                                   <BreadcrumbItem>
-                                    <BreadcrumbLink className="text-black">
-                                      {car.model && car.model.name}
+                                    <BreadcrumbLink
+                                      href={`/auction?manufacturer=${car.manufacturer.id}&model=${car.model.id}`}
+                                      className="text-black"
+                                    >
+                                      <Badge>
+                                        {car.model && car.model.name}
+                                      </Badge>
                                     </BreadcrumbLink>
                                   </BreadcrumbItem>
                                   <BreadcrumbSeparator color="black" />
@@ -139,14 +156,11 @@ const CarCard = ({ car }: { car: any }) => {
                                   <BreadcrumbItem>
                                     <BreadcrumbLink
                                       className="text-black"
-                                      onClick={() => {
-                                        router.push(
-                                          `/manufacturers/${car.manufacturer.id}`,
-                                        );
-                                      }}
+                                      href={`/manufacturers/${car.manufacturer.id}`}
                                     >
-                                      {car.manufacturer &&
-                                        car.manufacturer.name}
+                                      {car.manufacturer && (
+                                        <Badge>{car.manufacturer.name}</Badge>
+                                      )}
                                     </BreadcrumbLink>
                                   </BreadcrumbItem>
 
@@ -155,7 +169,7 @@ const CarCard = ({ car }: { car: any }) => {
                               )}
                               <BreadcrumbItem>
                                 <BreadcrumbPage className="text-black">
-                                  {car.year && car.year}
+                                  <Badge>{car.year && car.year}</Badge>
                                 </BreadcrumbPage>
                               </BreadcrumbItem>
 
@@ -232,30 +246,30 @@ const CarCard = ({ car }: { car: any }) => {
             <Separator orientation="horizontal" />
 
             <h2 className="bg-black text-center">
-              Повреда -{" "}
               {car.lots[0] &&
               car.lots[0].damage &&
-              car.lots[0].damage.main.name !== null
-                ? `${car.lots[0].damage.main.name}`
-                : "Няма"}
+              car.lots[0].damage.main.name !== null ? (
+                <DamageCheck damage={car.lots[0].damage.main.name} />
+              ) : (
+                "Няма"
+              )}
             </h2>
             <Separator orientation="horizontal" />
 
             <Badge className="flex w-full items-center justify-center rounded-t-none">
-              Търг -{" "}
+              ТЪРГ -{" "}
               {car.lots[car.lots.length - 1] &&
               car.lots[car.lots.length - 1].sale_date
-                ? splitDateAndTime(car.lots[car.lots.length - 1].sale_date)
+                ? `СЛЕД ${splitDateAndTime(car.lots[car.lots.length - 1].sale_date)} ДНИ`
                 : `  сега `}
             </Badge>
           </DrawerDescription>
-          <Button
-            onClick={() => {
-              router.push(`/auction/${car.vin}`);
-            }}
+          <Link
+            className="flex w-full items-center justify-center"
+            href={`/auction/${car.vin}`}
           >
-            Премини към офертата
-          </Button>
+            <Button>Премини към офертата</Button>
+          </Link>
           <DrawerClose>
             <Button variant="outline">Разгледай другите</Button>
           </DrawerClose>

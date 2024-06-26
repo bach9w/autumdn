@@ -26,6 +26,7 @@ import {
 
 import ReactWhatsapp from "react-whatsapp";
 import Video360 from "./Video360";
+import DamageCheck from "../components/DamageCheck";
 
 function splitDateAndTime(date: string) {
   if (!date) {
@@ -136,7 +137,7 @@ export function CarInfo({ data }: { data: any }) {
                 <Carousel>
                   <CarouselContent>
                     {data?.lots &&
-                      data?.lots[data.lots.length - 1]?.images?.normal?.map(
+                      data?.lots[data.lots.length - 1]?.images?.big?.map(
                         (imageUrl: string, index: number) => (
                           <CarouselItem key={index}>
                             <img
@@ -243,16 +244,35 @@ export function CarInfo({ data }: { data: any }) {
                     <Label htmlFor="name">Щети</Label>
                     <Badge className="flex w-full flex-col justify-between uppercase">
                       <p>
-                        Основна -{" "}
-                        {data.lots[data.lots.length - 1].damage.main !== null
-                          ? data.lots[data.lots.length - 1].damage.main.name
-                          : "Няма"}
+                        {data.lots[data.lots.length - 1].damage.main !==
+                        null ? (
+                          <div>
+                            {" "}
+                            <DamageCheck
+                              damage={
+                                data.lots[data.lots.length - 1].damage.main.name
+                              }
+                            />
+                          </div>
+                        ) : (
+                          "Няма"
+                        )}
                       </p>
                       <p>
-                        Вторична -{" "}
-                        {data.lots[data.lots.length - 1].damage.second !== null
-                          ? data.lots[data.lots.length - 1].damage.second.name
-                          : "Няма"}
+                        {data.lots[data.lots.length - 1].damage.second !==
+                        null ? (
+                          <div className="flex gap-1">
+                            Вторична
+                            <DamageCheck
+                              damage={
+                                data.lots[data.lots.length - 1].damage.second
+                                  .name
+                              }
+                            />
+                          </div>
+                        ) : (
+                          "Няма"
+                        )}
                       </p>
                     </Badge>
                   </div>

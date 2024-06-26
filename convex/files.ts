@@ -1,5 +1,8 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { addPart } from "./parts";
+
+const storageLink = "https://wandering-bison-612.convex.site";
 
 export const getUrl = query({
   args: { name: v.string() },
@@ -60,10 +63,6 @@ export const saveStorageId = mutation({
     ),
   },
   handler: async (ctx, args) => {
-    // use `args` and/or `ctx.auth` to authorize the user
-    // ...
-
-    // Save the storageId to the database using `insert`
     ctx.db.insert("files", {
       name: args.name,
       model: args.model,
@@ -72,6 +71,15 @@ export const saveStorageId = mutation({
         storageId: file.storageId,
         type: file.type!,
       })),
+    });
+
+    ctx.db.insert("parts", {
+      name: args.name,
+      base_image: {
+        id: args.uploaded[0].storageId,
+        filename: args.uploaded[0].type,
+        path: `${storageLink}/getImage?storageId=${args.uploaded[0].storageId}`,
+      },
     });
   },
 });

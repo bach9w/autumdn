@@ -80,8 +80,8 @@ export const ComboBoxResponsive = ({
           {selectedStatus ? <>{selectedStatus.name}</> : <>{model}</>}
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
-        <div className="mt-4 border-t">
+      <DrawerContent className="border-none bg-gray-800">
+        <div className="mt-4">
           <StatusList
             model={model}
             data={data}
@@ -107,13 +107,17 @@ function StatusList({
 }) {
   return (
     <Command>
-      <CommandInput placeholder={`${model} търсене...`} />
+      <CommandInput
+        className="text-[17px]"
+        placeholder={`${model} търсене...`}
+      />
       <CommandList>
         <CommandEmpty>Няма намерени резултати.</CommandEmpty>
         <CommandGroup>
           {data &&
             data.map((status) => (
               <CommandItem
+                className="text-[17px]"
                 key={status.name}
                 value={status.name}
                 onSelect={(value: any) => {

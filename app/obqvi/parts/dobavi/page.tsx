@@ -158,7 +158,7 @@ const Dobavi = () => {
 
   return (
     <div className="mt-4 flex h-full min-h-screen w-full flex-col items-center justify-center">
-      <Card className="m-2 flex min-h-full w-full flex-col items-center justify-center text-[17px]">
+      <Card className="m-2 flex min-h-full w-2/3 flex-col items-center justify-center text-[17px]">
         <CardHeader>Добави нова част</CardHeader>
         <CardContent>
           <div className="flex flex-col gap-4">
@@ -181,15 +181,14 @@ const Dobavi = () => {
               data={models}
               onChange={(value) => setSelectedModel(value)}
             />
-            <Button disabled={models ? false : true}>
+            <Button disabled={name ? false : true}>
               <UploadButton
                 isNameSet={true}
                 uploadUrl={generateUploadUrl}
-                fileTypes={[".pdf", "image/*"]}
+                fileTypes={["image/*"]}
                 multiple
                 onUploadComplete={saveAfterUpload}
                 onUploadError={(error: unknown) => {
-                  // Do something with the error.
                   alert(`ERROR! ${error}`);
                 }}
               />

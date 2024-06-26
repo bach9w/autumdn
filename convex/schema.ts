@@ -319,6 +319,7 @@ export default defineSchema({
     name: v.string(),
     model: v.any(),
     manufacturer: v.any(),
+
     uploaded: v.array(
       v.object({
         storageId: v.string(),

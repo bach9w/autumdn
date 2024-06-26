@@ -238,7 +238,7 @@ export default function SearchForm({
 
                 <div className="mb-4"></div>
                 <div className="mb-4 rounded-md bg-orange-600 p-4 font-bold text-white">
-                  Избери сред 63 927 резултата
+                  Избери сред 113 927 резултата
                 </div>
                 <button
                   onClick={handleSearch}
