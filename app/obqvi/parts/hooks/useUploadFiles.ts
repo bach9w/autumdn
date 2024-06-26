@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useEvent } from "./useEvent";
 import { UploadFileResponse, uploadFiles } from "./uploadFiles";
 
-export const useUploadFiles = (
+const useUploadFiles = (
   uploadUrl: string | (() => Promise<string>),
   opts?: {
     onUploadComplete?: (res: UploadFileResponse[]) => Promise<void>;
@@ -64,3 +64,5 @@ export const useUploadFiles = (
     isUploading,
   };
 };
+
+export default useUploadFiles;

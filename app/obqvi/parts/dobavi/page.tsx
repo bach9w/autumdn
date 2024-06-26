@@ -22,9 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useMutation, useQuery } from "convex/react";
-export * from "./UploadButton";
-export * from "./UploadDropzone";
-export * from "./UploadSpinner";
+
 export * from "../hooks/useUploadFiles";
 export * from "../hooks/useUploadFiles";
 
@@ -39,8 +37,8 @@ import {
   CarouselItem,
 } from "@components/ui/carousel";
 import { UploadFileResponse } from "../hooks/uploadFiles";
-import { UploadButton } from "./UploadButton";
-import { UploadDropzone } from "./UploadDropzone";
+import UploadButton from "./UploadButton";
+
 import { Badge } from "@components/ui/badge";
 import { PictureInPicture } from "lucide-react";
 import { Select } from "@components/ui/select";

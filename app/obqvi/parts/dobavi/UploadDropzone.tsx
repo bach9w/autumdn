@@ -3,7 +3,7 @@ import type { Accept, FileWithPath } from "react-dropzone";
 import { useDropzone } from "react-dropzone";
 import { twMerge } from "tailwind-merge";
 import { UploadFileResponse } from "../hooks/uploadFiles";
-import { useUploadFiles } from "../hooks/useUploadFiles";
+import useUploadFiles from "../hooks/useUploadFiles";
 import { UploadSpinner } from "./UploadSpinner";
 
 type UploadDropzoneState = {

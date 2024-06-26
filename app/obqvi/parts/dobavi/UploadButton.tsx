@@ -2,9 +2,9 @@ import { useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { UploadSpinner } from "./UploadSpinner";
 import { UploadFileResponse } from "../hooks/uploadFiles";
-import { useUploadFiles } from "../hooks/useUploadFiles";
+import useUploadFiles from "../hooks/useUploadFiles";
 
-export function UploadButton(props: {
+function UploadButton(props: {
   /// Required props
 
   // Either the absolute upload URL or an async function that generates it
@@ -106,3 +106,5 @@ const progressWidths: Record<number, string> = {
   90: "after:w-[90%]",
   100: "after:w-[100%]",
 };
+
+export default UploadButton;
