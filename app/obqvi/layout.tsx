@@ -5,5 +5,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <ConvexClientProvider>{children}</ConvexClientProvider>;
+  return <div>{children}</div>;
 }

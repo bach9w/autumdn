@@ -3,6 +3,7 @@ import "./globals.css";
 import Footer from "@components/Footer";
 import NavBar from "@components/Navbar";
 import { cn } from "@lib/utils";
+import { ConvexClientProvider } from "@providers/convex-client-provider";
 import { Montserrat } from "next/font/google";
 
 export const metadata = {
@@ -21,12 +22,14 @@ export default function RootLayout({
     <html lang="en">
       <body className="relative">
         <main className={cn(montserrat.className, "bg-orange-700")}>
-          <NavBar />
+          <ConvexClientProvider>
+            <NavBar />
 
-          <div className="">{children}</div>
-          <div className="bg-black">
-            <Footer />
-          </div>
+            <div className="">{children}</div>
+            <div className="bg-black">
+              <Footer />
+            </div>
+          </ConvexClientProvider>
         </main>
       </body>
     </html>

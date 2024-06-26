@@ -15,6 +15,7 @@ import {
 } from "@clerk/nextjs";
 import Navbar from "../components/navbar";
 import All from "../all/page";
+import { Card, CardHeader } from "@components/ui/card";
 export default function Home() {
   const storeUser = useMutation(api.users.store);
 
@@ -24,18 +25,36 @@ export default function Home() {
   });
 
   return (
-    <main className="absolute top-0 z-50 h-full min-h-screen w-full bg-orange-500">
+    <main className="z-50 flex h-full min-h-screen w-full items-center justify-center">
       <SignedOut>
         <div className="flex h-full w-full items-center justify-center sm:h-full">
           <SignIn forceRedirectUrl="/obqvi" />
         </div>
       </SignedOut>
       <SignedIn>
-        <Navbar />
-        <div className="flex h-full w-full flex-col items-center justify-center sm:h-full">
-          <SignOutButton redirectUrl="/obqvi">
-            <Button>Изход</Button>
-          </SignOutButton>
+        <div className="flex h-full w-full flex-col items-center sm:h-full">
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+            <Card onClick={() => router.push("/obqvi/all")}>
+              <CardHeader>
+                <p>Всички автомобили</p>
+              </CardHeader>
+            </Card>
+            <Card>
+              <CardHeader>
+                <p>Всички части</p>
+              </CardHeader>
+            </Card>
+            <Card>
+              <CardHeader>
+                <p>Добави автомобил</p>
+              </CardHeader>
+            </Card>
+            <Card>
+              <CardHeader>
+                <p>Добави част</p>
+              </CardHeader>
+            </Card>
+          </div>
         </div>
       </SignedIn>
     </main>

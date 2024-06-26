@@ -263,6 +263,69 @@ export default defineSchema({
     number: v.optional(v.any()),
     domain_id: v.any(),
   }),
+  parts: defineTable({
+    price: v.optional(
+      v.object({
+        amount: v.optional(v.any()),
+        formatted: v.optional(v.any()),
+        currency: v.optional(v.any()),
+        inCurrentCurrency: v.object({
+          amount: v.optional(v.any()),
+          formatted: v.optional(v.any()),
+          currency: v.optional(v.any()),
+        }),
+      }),
+    ),
+    special_price: v.optional(v.any()),
+    special_price_type: v.optional(v.any()),
+    selling_price: v.optional(
+      v.object({
+        amount: v.optional(v.any()),
+        formatted: v.optional(v.any()),
+        currency: v.optional(v.any()),
+        inCurrentCurrency: v.optional(
+          v.object({
+            amount: v.optional(v.any()),
+            formatted: v.optional(v.any()),
+            currency: v.optional(v.any()),
+          }),
+        ),
+      }),
+    ),
+    special_price_start: v.optional(v.any()),
+    special_price_end: v.optional(v.any()),
+    id: v.optional(v.any()),
+    manage_stock: v.optional(v.any()),
+    qty: v.optional(v.any()),
+    new_from: v.optional(v.any()),
+    new_to: v.optional(v.any()),
+    base_image: v.object({
+      id: v.optional(v.any()),
+      filename: v.optional(v.any()),
+      path: v.optional(v.any()),
+    }),
+    formatted_price: v.optional(v.any()),
+    rating_percent: v.optional(v.any()),
+    is_in_stock: v.optional(v.any()),
+    is_out_of_stock: v.optional(v.any()),
+    is_new: v.optional(v.any()),
+    has_percentage_special_price: v.optional(v.any()),
+    special_price_percent: v.optional(v.any()),
+    name: v.optional(v.any()),
+    slug: v.optional(v.any()),
+    reviews: v.optional(v.any()),
+  }),
+  files: defineTable({
+    name: v.string(),
+    model: v.any(),
+    manufacturer: v.any(),
+    uploaded: v.array(
+      v.object({
+        storageId: v.string(),
+        type: v.string(),
+      }),
+    ),
+  }),
   users: defineTable({
     tokenIdentifier: v.any(),
     email: v.any(),

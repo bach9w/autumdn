@@ -16,9 +16,11 @@ import { useRouter } from "next/navigation";
 import { Menu } from "lucide-react";
 import StickySearchForm from "./search/sticky-search";
 import SearchForm from "./SearchForm";
+import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 
 const NavBar = () => {
   const router = useRouter();
+  const user = useUser();
 
   return (
     <>
@@ -98,6 +100,54 @@ const NavBar = () => {
                     >
                       За нас
                     </Link>
+                    {user.isSignedIn && (
+                      <>
+                        <div className="flex items-center justify-center gap-2 bg-black text-white">
+                          <UserButton afterSignOutUrl="/" />
+                          {user.user.username}
+                        </div>
+
+                        <div className="flex w-full flex-col justify-center">
+                          <SheetClose asChild>
+                            <Link
+                              href="/obqvi/all"
+                              className="text-muted-foreground hover:text-foreground"
+                            >
+                              Всички автомобили
+                            </Link>
+                          </SheetClose>
+                          <SheetClose asChild>
+                            <Link
+                              href="/obqvi/parts"
+                              className="text-muted-foreground hover:text-foreground"
+                            >
+                              Всички части
+                            </Link>
+                          </SheetClose>
+                          <SheetClose asChild>
+                            <Link
+                              href="/obqvi/dobavi"
+                              className="text-muted-foreground hover:text-foreground"
+                            >
+                              Добави автомобил
+                            </Link>
+                          </SheetClose>
+                          <SheetClose asChild>
+                            <Link
+                              href="/obqvi/parts/dobavi"
+                              className="text-muted-foreground hover:text-foreground"
+                            >
+                              Добави част
+                            </Link>
+                          </SheetClose>
+                          <SheetClose asChild>
+                            <SignOutButton>
+                              <Button>Изход</Button>
+                            </SignOutButton>
+                          </SheetClose>
+                        </div>
+                      </>
+                    )}
                   </nav>
                 </SheetContent>
               </Sheet>

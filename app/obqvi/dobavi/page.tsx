@@ -24,14 +24,13 @@ export default function Home() {
   });
 
   return (
-    <main className="absolute top-0 z-50 h-full min-h-screen w-full bg-orange-500">
+    <main className="top-0 z-50 flex h-full min-h-screen w-full items-center justify-center">
       <SignedOut>
         <div className="flex h-1/2 w-full items-center justify-center sm:h-full">
           <SignIn forceRedirectUrl="/obqvi" />
         </div>
       </SignedOut>
       <SignedIn>
-        <Navbar />
         <div className="flex h-1/2 w-full flex-col items-center justify-center sm:h-full">
           <AddForm />
         </div>

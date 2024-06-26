@@ -27,7 +27,7 @@ export function SelectDemo({
   return (
     <>
       <Select onValueChange={onChange}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-[180px] text-[18px]">
           <SelectValue placeholder={`Изберете ${title}`} />
         </SelectTrigger>
         <SelectContent>
@@ -35,11 +35,7 @@ export function SelectDemo({
             <SelectLabel>{typeOf}</SelectLabel>
             {data &&
               data.map((cars: any) => (
-                <SelectItem
-                  onSelect={() => console.log(cars.id)}
-                  key={cars.id}
-                  value={cars.id}
-                >
+                <SelectItem key={cars.id} value={cars.id}>
                   {cars.name}
                 </SelectItem>
               ))}

@@ -26,13 +26,11 @@ export default function Home() {
   return (
     <main>
       <SignedOut>
-        <div className="flex h-full w-full items-center justify-center sm:h-full">
+        <div className="flex h-full min-h-screen w-full items-center justify-center sm:h-full">
           <SignIn forceRedirectUrl="/obqvi" />
         </div>
       </SignedOut>
       <SignedIn>
-        <Navbar />
-
         <div className="grid grid-cols-1 md:grid-cols-2">
           {cars?.map((cars) => {
             return (
