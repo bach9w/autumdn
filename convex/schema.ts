@@ -183,6 +183,8 @@ export default defineSchema({
   manufacturer: defineTable({
     id: v.any(),
     name: v.any(),
+    image: v.any(),
+    cars_qty: v.any(),
   }),
   model: defineTable({
     id: v.any(),

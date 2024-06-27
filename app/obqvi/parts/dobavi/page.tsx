@@ -7,19 +7,9 @@ import {
   CardHeader,
 } from "@components/ui/card";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+
 import { Input } from "@/components/ui/input";
 import { useMutation, useQuery } from "convex/react";
 
@@ -30,7 +20,7 @@ import "@xixixao/uploadstuff/react/styles.css";
 
 import { api } from "@convex/_generated/api";
 
-import { useState, Fragment, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -41,13 +31,9 @@ import UploadButton from "./UploadButton";
 
 import { Badge } from "@components/ui/badge";
 import { PictureInPicture } from "lucide-react";
-import { Select } from "@components/ui/select";
+
 import { SelectDemo } from "@components/SelectC";
 import { Label } from "@components/ui/label";
-
-const formSchema = z.object({
-  name: z.string().min(4),
-});
 
 function Display({ name }: { name: string }) {
   const array = useQuery(api.files.getUrl, { name });
@@ -63,6 +49,19 @@ function Display({ name }: { name: string }) {
     getImageUrl.searchParams.set("storageId", storageId);
 
     return <img src={getImageUrl.href} height="300px" width="300px" />;
+  }
+  function Manufacturer({ id }: { id: any }) {
+    const manufacturers = useQuery(api.manufacturer.getManufacturerById, {
+      id: id,
+    });
+
+    if (!manufacturers) {
+      return null;
+    }
+
+    return manufacturers.map((manufacturer) => (
+      <Badge key={manufacturer._id}>{manufacturer.name}</Badge>
+    ));
   }
   return (
     <>
@@ -85,8 +84,9 @@ function Display({ name }: { name: string }) {
               </Carousel>
             </CardDescription>
             <CardFooter>
-              <Badge>{item.manufacturer}</Badge>
-              <Badge>
+              <Manufacturer id={item.manufacturer} />
+
+              <Badge className="flex w-full items-center justify-center gap-2">
                 {item.uploaded.length} <PictureInPicture />
               </Badge>
             </CardFooter>
@@ -98,7 +98,7 @@ function Display({ name }: { name: string }) {
 }
 
 const Dobavi = () => {
-  const [manufacturers, setManufacturers] = useState<any[]>([]);
+  const manufacturers = useQuery(api.manufacturer.getManufacturers);
   const [models, setModels] = useState<any[]>([]);
   const [selectedManufacturer, setSelectedManufacturer] = useState<string>("");
   const [selectedModel, setSelectedModel] = useState<string>("");
@@ -121,25 +121,6 @@ const Dobavi = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`/api/manufacturer`, {
-          next: { revalidate: 3600 },
-        });
-        const result = await response.json();
-        if (!response.ok) {
-          throw new Error(result.error);
-        }
-        setManufacturers(result.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
         const response = await fetch(`/api/models/${selectedManufacturer}`, {
           next: { revalidate: 3600 },
         });
@@ -157,7 +138,7 @@ const Dobavi = () => {
   }, [selectedManufacturer]);
 
   return (
-    <div className="mt-4 flex h-full min-h-screen w-full flex-col items-center justify-center">
+    <div className="mt-4 flex h-full min-h-screen w-full flex-col items-center justify-start">
       <Card className="m-2 flex min-h-full w-2/3 flex-col items-center justify-center text-[17px]">
         <CardHeader>Добави нова част</CardHeader>
         <CardContent>
