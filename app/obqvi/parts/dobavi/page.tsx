@@ -152,7 +152,9 @@ const Dobavi = () => {
                 title="марка"
                 type="Производител"
                 data={manufacturers}
-                onChange={(value) => setSelectedManufacturer(value.id)}
+                onChange={(value) =>
+                  setSelectedManufacturer(JSON.parse(value).id)
+                }
               />
             </div>
             <Label htmlFor="title">Модел</Label>
