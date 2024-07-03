@@ -136,7 +136,7 @@ const CarCard = ({ car }: { car: any }) => {
                         <CardFooter className="">
                           <Breadcrumb>
                             <BreadcrumbList className="mt-4 flex w-full">
-                              {car.model && (
+                              {car.model && car.manufacturer && (
                                 <>
                                   <BreadcrumbItem>
                                     <BreadcrumbLink
@@ -151,7 +151,7 @@ const CarCard = ({ car }: { car: any }) => {
                                   <BreadcrumbSeparator color="black" />
                                 </>
                               )}
-                              {car.manufacturer && (
+                              {car.manufacturer && car.manufacturer.id && (
                                 <>
                                   <BreadcrumbItem>
                                     <BreadcrumbLink

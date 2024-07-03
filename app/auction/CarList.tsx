@@ -4,6 +4,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import CarCard from "./CarCard";
 
 import Loading from "@components/loading";
+import { Button } from "@components/ui/button";
 
 function formatDate(date: Date): string {
   const year = date.getFullYear();

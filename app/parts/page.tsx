@@ -5,6 +5,13 @@ import { Badge } from "@components/ui/badge";
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import SearchBar from "./components/search-bar";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@components/ui/carousel";
+
+import Image from "next/image";
 
 const Page = () => {
   const parts = useQuery(api.parts.getParts);
@@ -18,13 +25,19 @@ const Page = () => {
             <Card key={part.id} className="box">
               <CardHeader>{part.name}</CardHeader>
               <CardContent>
-                <div>
-                  <img
-                    src={part.base_image.path}
-                    alt={part.name}
-                    className="aspect-square h-full w-full"
-                  />
-                </div>
+                <Carousel>
+                  <CarouselContent>
+                    {part.base_image.map((file) => (
+                      <CarouselItem className="flex aspect-square items-center justify-center">
+                        <img
+                          className="h-full w-full object-fill"
+                          src={file.path}
+                        />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                </Carousel>
+
                 <div className="mt-2 flex w-full justify-center">
                   <Badge className="rounded-r-none">
                     {part.is_new ? "НОВ" : "ВТОРА УПОТРЕБА"}

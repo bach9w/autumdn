@@ -75,11 +75,11 @@ export const saveStorageId = mutation({
 
     ctx.db.insert("parts", {
       name: args.name,
-      base_image: {
-        id: args.uploaded[0].storageId,
-        filename: args.uploaded[0].type,
-        path: `${storageLink}/getImage?storageId=${args.uploaded[0].storageId}`,
-      },
+      base_image: args.uploaded.map((image) => ({
+        id: image.storageId,
+        filename: image.storageId,
+        path: `${storageLink}/getImage?storageId=${image.storageId}`,
+      })),
     });
   },
 });

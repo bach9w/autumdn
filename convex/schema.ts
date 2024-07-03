@@ -301,11 +301,14 @@ export default defineSchema({
     qty: v.optional(v.any()),
     new_from: v.optional(v.any()),
     new_to: v.optional(v.any()),
-    base_image: v.object({
-      id: v.optional(v.any()),
-      filename: v.optional(v.any()),
-      path: v.optional(v.any()),
-    }),
+    base_image: v.array(
+      v.object({
+        id: v.optional(v.any()),
+        filename: v.optional(v.any()),
+        path: v.optional(v.any()),
+      }),
+    ),
+
     formatted_price: v.optional(v.any()),
     rating_percent: v.optional(v.any()),
     is_in_stock: v.optional(v.any()),

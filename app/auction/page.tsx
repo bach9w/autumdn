@@ -2,6 +2,8 @@ import React from "react";
 import Cars from "./CarList";
 import { fetchAuctionFilter } from "@app/api/cars";
 import { HomeProps } from "@types";
+import { Button } from "@components/ui/button";
+import Pagination from "./components/Pagination";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
@@ -18,6 +20,9 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <div className="">
       <Cars filters={filters} />
+      <div className="">
+        <Pagination page={filters.page} />
+      </div>
     </div>
   );
 }
