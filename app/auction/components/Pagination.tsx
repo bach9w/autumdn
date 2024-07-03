@@ -19,30 +19,45 @@ const Pagination = ({ page }: { page: any }) => {
   );
   return (
     <div className="flex w-full items-center justify-center gap-2">
-      {page !== "1" && (
+      {page !== "1" ||
+        ("" && (
+          <Button
+            onClick={() => {
+              router.push(
+                pathname +
+                  "?" +
+                  createQueryString("page", String(Number(page) - 1)),
+              );
+            }}
+          >
+            Предишна страница
+          </Button>
+        ))}
+      {page === "" ? (
         <Button
           onClick={() => {
             router.push(
               pathname +
                 "?" +
-                createQueryString("page", String(Number(page) - 1)),
+                createQueryString("page", String(Number(page) + 2)),
             );
           }}
         >
-          Предишна страница
+          Следваща страница
+        </Button>
+      ) : (
+        <Button
+          onClick={() => {
+            router.push(
+              pathname +
+                "?" +
+                createQueryString("page", String(Number(page) + 1)),
+            );
+          }}
+        >
+          Следваща страница
         </Button>
       )}
-      <Button
-        onClick={() => {
-          router.push(
-            pathname +
-              "?" +
-              createQueryString("page", String(Number(page) + 1)),
-          );
-        }}
-      >
-        Следваща страница
-      </Button>
     </div>
   );
 };
