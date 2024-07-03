@@ -68,13 +68,15 @@ const Parts = () => {
                 parts.map((part) => (
                   <TableRow>
                     <TableCell className="hidden sm:table-cell">
-                      <img
-                        alt="Product image"
-                        className="aspect-square rounded-md object-cover"
-                        height="64"
-                        src={part.base_image.path}
-                        width="64"
-                      />
+                      {part.base_image.map((img) => (
+                        <img
+                          alt="Product image"
+                          className="aspect-square rounded-md object-cover"
+                          height="64"
+                          src={img.path}
+                          width="64"
+                        />
+                      ))}
                     </TableCell>
                     <TableCell className="font-medium">{part.name}</TableCell>
                     <TableCell>
