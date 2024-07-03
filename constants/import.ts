@@ -31,15 +31,32 @@ export const body_type = [
   { id: 27, name: "other" },
 ];
 
+export const drive_wheel = [
+  {
+    id: 1,
+    name: "Предно",
+  },
+  {
+    id: 2,
+    name: "Задно",
+  },
+  {
+    id: 3,
+    name: "4х4",
+  },
+];
+
 export const airbags = [
   {
     id: 1,
     name: "Да",
+    value: true,
   },
 
   {
     id: 2,
     name: "Не",
+    value: false,
   },
 ];
 

@@ -80,6 +80,14 @@ const NavBar = () => {
                     </SheetClose>
                     <SheetClose asChild>
                       <Link
+                        href="/nalichni"
+                        className="text-muted-foreground hover:text-foreground"
+                      >
+                        Налични автомобили
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link
                         href="/manufacturers"
                         className="text-muted-foreground hover:text-foreground"
                       >

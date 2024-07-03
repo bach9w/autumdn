@@ -329,6 +329,26 @@ export default defineSchema({
       }),
     ),
   }),
+  availableCars: defineTable({
+    vin: v.any(),
+    manufacturerId: v.any(),
+    modelId: v.any(),
+    body_type: v.any(),
+    color: v.any(),
+    airbags: v.boolean(),
+    keys: v.boolean(),
+    fuel: v.any(),
+    engine: v.any(),
+    transmission: v.any(),
+    drive_wheel: v.any(),
+    km: v.any(),
+    images: v.optional(
+      v.object({
+        url: v.optional(v.any()),
+      }),
+    ),
+    year: v.any(),
+  }),
   users: defineTable({
     tokenIdentifier: v.any(),
     email: v.any(),

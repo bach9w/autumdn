@@ -24,7 +24,6 @@ import {
 } from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { SelectDemo } from "./SelectC";
 
 export function DrawerDialogDemo() {
   const [open, setOpen] = React.useState(true);

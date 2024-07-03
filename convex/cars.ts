@@ -191,3 +191,48 @@ export const getAllCars = query({
     return cars;
   },
 });
+
+export const newAvailableCar = mutation({
+  args: {
+    airbags: v.boolean(),
+    body_type: v.any(),
+    color: v.any(),
+    drive_wheel: v.any(),
+    engine: v.any(),
+    fuel: v.any(),
+    images: v.optional(v.object({ url: v.any() })),
+    keys: v.boolean(),
+    km: v.any(),
+    manufacturerId: v.any(),
+    modelId: v.any(),
+    transmission: v.any(),
+    vin: v.any(),
+    year: v.any(),
+  },
+  handler: async (ctx, args) => {
+    const car = await ctx.db.insert("availableCars", {
+      airbags: args.airbags,
+      body_type: args.body_type,
+      color: args.color,
+      drive_wheel: args.drive_wheel,
+      engine: args.engine,
+      fuel: args.fuel,
+      images: args.images,
+      keys: args.keys,
+      km: args.km,
+      manufacturerId: args.manufacturerId,
+      modelId: args.modelId,
+      transmission: args.transmission,
+      vin: args.vin,
+      year: args.year,
+    });
+  },
+});
+
+export const getAvailableCars = query({
+  args: {},
+  handler: async (ctx) => {
+    const cars = await ctx.db.query("availableCars").collect();
+    return cars;
+  },
+});

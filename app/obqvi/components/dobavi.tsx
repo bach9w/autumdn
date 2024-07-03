@@ -1,7 +1,13 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { body_type, colors, airbags, fuel_type } from "@constants/import";
+import {
+  body_type,
+  colors,
+  airbags,
+  fuel_type,
+  drive_wheel,
+} from "@constants/import";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,17 +21,48 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select } from "@components/ui/select";
 import { SelectDemo } from "@components/SelectC";
-import { useAction } from "convex/react";
+import { useAction, useMutation } from "convex/react";
 import { api } from "@convex/_generated/api";
 
 export function AddForm() {
   const [manufacturers, setManufacturers] = useState<any[]>([]);
   const [models, setModels] = useState<any[]>([]);
   const [selectedManufacturer, setSelectedManufacturer] = useState<string>("");
+  const [selectedManufacturerId, setSelectedManufacturerId] = useState<any>();
   const [selectedModel, setSelectedModel] = useState<string>("");
   const [selectedBodyType, setSelectedBodyType] = useState<string>("");
+  const [selectedColor, setSelectedColor] = useState<string>("");
+  const [selectedDriveWheel, setSelectedDriveWheel] = useState<string>("");
+  const [selectedEngine, setSelectedEngine] = useState<string>("");
+  const [selectedFuel, setSelectedFuel] = useState<string>("");
+  const [selectedAirbags, setSelectedAirbags] = useState<boolean>();
+  const [selectedKeys, setSelectedKeys] = useState<boolean>();
+  const [selectedTransmission, setSelectedTransmission] = useState<string>("");
+  const [vin, setVin] = useState<string>("");
+  const [year, setYear] = useState<string>("");
+  const [km, setKm] = useState<string>("");
+  const [images, setImages] = useState<any>([]);
 
-  const getCar = useAction(api.cars.getCar);
+  const update = useMutation(api.cars.newAvailableCar);
+
+  function onSubmit() {
+    update({
+      vin: vin,
+      manufacturerId: selectedManufacturer,
+      modelId: selectedModel,
+      body_type: selectedBodyType,
+      color: selectedColor,
+      drive_wheel: selectedDriveWheel,
+      engine: selectedEngine,
+      fuel: selectedFuel,
+      airbags: selectedAirbags || false,
+      keys: selectedKeys || false,
+      transmission: selectedTransmission,
+      year: year,
+      km: km,
+      images: images.url,
+    });
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -49,7 +86,7 @@ export function AddForm() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`/api/models/${selectedManufacturer}`, {
+        const response = await fetch(`/api/models/${selectedManufacturerId}`, {
           next: { revalidate: 3600 },
         });
         const result = await response.json();
@@ -61,77 +98,133 @@ export function AddForm() {
         console.error(error);
       }
     }
-
-    fetchData();
+    if (selectedManufacturer) {
+      fetchData();
+    }
   }, [selectedManufacturer]);
 
-  let page = 338;
-
-  async function fetchData(page: number) {
-    try {
-      const response = await fetch(
-        `/api/cars?status=3&sale_date_in_days=10&page=${page}&per_page=50`,
-      );
-
-      if (!response.ok) {
-        const result = await response.json();
-        throw new Error(result.error);
-      }
-
-      const result = await response.json();
-      for (const data of result.data) {
-        getCar({ vin: data.vin });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  function startFetching() {
-    const interval = setInterval(() => {
-      if (page > 400) {
-        //2363 - 5726
-        clearInterval(interval);
-        return;
-      }
-
-      fetchData(page);
-      page += 1;
-    }, 1000);
-  }
-
   return (
-    <Card className="mx-auto w-full max-w-md">
+    <Card className="mx-auto w-full">
       <CardHeader>
         <CardTitle className="text-xl">Добави обява</CardTitle>
         <CardDescription>Добави информация за новата обява</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
-          <div className="grid w-full grid-cols-2 flex-col items-center justify-center gap-3">
+          <div className="grid w-full grid-cols-2 items-center justify-center gap-3 md:grid-cols-4">
             <Label htmlFor="title">VIN</Label>
-            <Input id="title" name="title" type="text" placeholder="VIN" />
+            <Input
+              id="title"
+              name="title"
+              type="text"
+              onChange={(e) => {
+                setVin(e.target.value);
+              }}
+              placeholder="VIN"
+            />
             <Label htmlFor="title">Марка</Label>
             <SelectDemo
               title="марка"
               type="Производител"
               data={manufacturers}
-              onChange={(value) => setSelectedManufacturer(value)}
+              onChange={(value) => {
+                setSelectedManufacturer(JSON.parse(value).name);
+                setSelectedManufacturerId(JSON.parse(value).id);
+              }}
             />
             <Label htmlFor="title">Модел</Label>
-            <SelectDemo title="модел" type="Модел" data={models} />
+            <SelectDemo
+              title="модел"
+              type="Модел"
+              data={models}
+              onChange={(value) => {
+                setSelectedModel(JSON.parse(value).name);
+              }}
+            />
 
             <Label htmlFor="title">Тип</Label>
-            <SelectDemo title="тип" type="Тип" data={body_type} />
+            <SelectDemo
+              title="тип"
+              type="Тип"
+              data={body_type}
+              onChange={(value) => {
+                setSelectedBodyType(JSON.parse(value).name);
+              }}
+            />
 
             <Label htmlFor="title">Цвят</Label>
-            <SelectDemo title="цвят" type="Цвят" data={colors} />
+            <SelectDemo
+              title="цвят"
+              type="Цвят"
+              data={colors}
+              onChange={(value) => {
+                setSelectedColor(JSON.parse(value).name);
+              }}
+            />
+            <Label htmlFor="title">Задвижване</Label>
+            <SelectDemo
+              title="задвижване"
+              type="Задвижване"
+              data={drive_wheel}
+              onChange={(value) => {
+                setSelectedDriveWheel(JSON.parse(value).name);
+              }}
+            />
+
             <Label htmlFor="title">Airbags</Label>
-            <SelectDemo title="airbags" type="Airbags" data={airbags} />
+            <SelectDemo
+              title="airbags"
+              type="Airbags"
+              onChange={(value) => {
+                JSON.parse(value).id === 1
+                  ? setSelectedAirbags(true)
+                  : setSelectedAirbags(false);
+              }}
+              data={airbags}
+            />
+
             <Label htmlFor="title">Ключове</Label>
-            <SelectDemo title="ключове" type="Ключове" data={airbags} />
+            <SelectDemo
+              title="ключове"
+              type="Ключове"
+              data={airbags}
+              onChange={(value) => {
+                JSON.parse(value).id === 1
+                  ? setSelectedKeys(true)
+                  : setSelectedKeys(false);
+              }}
+            />
             <Label htmlFor="title">Гориво</Label>
-            <SelectDemo title="гориво" type="Гориво" data={fuel_type} />
+            <SelectDemo
+              title="гориво"
+              type="Гориво"
+              data={fuel_type}
+              onChange={(value) => {
+                setSelectedFuel(JSON.parse(value).name);
+              }}
+            />
+            <Label htmlFor="title">Двигател</Label>
+            <Input
+              id="title"
+              name="title"
+              type="text"
+              placeholder="Двигател"
+              className="text-[17px]"
+              onChange={(e) => {
+                setSelectedEngine(e.target.value);
+              }}
+            />
+            <Label htmlFor="title">Трансмисия</Label>
+            <Input
+              id="title"
+              name="title"
+              type="text"
+              placeholder="Трансмисия"
+              className="text-[17px]"
+              onChange={(e) => {
+                setSelectedTransmission(e.target.value);
+              }}
+            />
             <Label htmlFor="title">Километри</Label>
             <Input
               id="title"
@@ -139,6 +232,9 @@ export function AddForm() {
               type="text"
               placeholder="Километри"
               className="text-[17px]"
+              onChange={(e) => {
+                setKm(e.target.value);
+              }}
             />
             <Label htmlFor="title">Година</Label>
             <Input
@@ -147,15 +243,14 @@ export function AddForm() {
               className="text-[17px]"
               type="text"
               placeholder="Година"
+              onChange={(e) => {
+                setYear(e.target.value);
+              }}
             />
           </div>
-          <Button type="submit" className="w-full">
+          <Button onClick={() => onSubmit()} type="submit" className="w-full">
             Добави обява
           </Button>
-        </div>
-
-        <div className="mt-4 flex items-center justify-center gap-2 text-center text-sm">
-          {/*<Button onClick={startFetching}>Зареди</Button>*/}
         </div>
       </CardContent>
     </Card>

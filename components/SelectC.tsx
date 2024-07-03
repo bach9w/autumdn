@@ -35,7 +35,10 @@ export function SelectDemo({
             <SelectLabel>{typeOf}</SelectLabel>
             {data &&
               data.map((cars: any) => (
-                <SelectItem key={cars.id} value={cars.id}>
+                <SelectItem
+                  key={cars.id}
+                  value={JSON.stringify({ id: cars.id, name: cars.name })}
+                >
                   {cars.name}
                 </SelectItem>
               ))}
