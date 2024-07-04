@@ -9,7 +9,6 @@ import {
   drive_wheel,
 } from "@constants/import";
 
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -19,10 +18,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select } from "@components/ui/select";
 import { SelectDemo } from "@components/SelectC";
 import { useAction, useMutation } from "convex/react";
 import { api } from "@convex/_generated/api";
+import { UploadFileResponse } from "../parts/hooks/uploadFiles";
+import { UploadDropzone } from "../parts/dobavi/UploadDropzone";
+import "@xixixao/uploadstuff/react/styles.css";
+import { useRouter } from "next/navigation";
 
 export function AddForm() {
   const [manufacturers, setManufacturers] = useState<any[]>([]);
@@ -41,28 +43,37 @@ export function AddForm() {
   const [vin, setVin] = useState<string>("");
   const [year, setYear] = useState<string>("");
   const [km, setKm] = useState<string>("");
-  const [images, setImages] = useState<any>([]);
 
+  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
   const update = useMutation(api.cars.newAvailableCar);
+  const router = useRouter();
 
-  function onSubmit() {
-    update({
-      vin: vin,
-      manufacturerId: selectedManufacturer,
-      modelId: selectedModel,
-      body_type: selectedBodyType,
-      color: selectedColor,
-      drive_wheel: selectedDriveWheel,
-      engine: selectedEngine,
-      fuel: selectedFuel,
-      airbags: selectedAirbags || false,
-      keys: selectedKeys || false,
-      transmission: selectedTransmission,
-      year: year,
-      km: km,
-      images: images.url,
-    });
-  }
+  const onSubmit = async (uploaded: UploadFileResponse[]) => {
+    try {
+      await update({
+        vin: vin,
+        manufacturerId: selectedManufacturer,
+        modelId: selectedModel,
+        body_type: selectedBodyType,
+        color: selectedColor,
+        drive_wheel: selectedDriveWheel,
+        engine: selectedEngine,
+        fuel: selectedFuel,
+        airbags: selectedAirbags || false,
+        keys: selectedKeys || false,
+        transmission: selectedTransmission,
+        year: year,
+        km: km,
+        images: uploaded.map(({ response }) => ({
+          url: (response as any).storageId,
+        })),
+      });
+
+      router.push("/obqvi");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -248,9 +259,18 @@ export function AddForm() {
               }}
             />
           </div>
-          <Button onClick={() => onSubmit()} type="submit" className="w-full">
-            Добави обява
-          </Button>
+          <UploadDropzone
+            uploadUrl={generateUploadUrl}
+            fileTypes={{
+              "image/*": [".png", ".gif", ".jpeg", ".jpg"],
+            }}
+            multiple
+            onUploadComplete={onSubmit}
+            onUploadError={(error: unknown) => {
+              // Do something with the error.
+              alert(`ERROR! ${error}`);
+            }}
+          />
         </div>
       </CardContent>
     </Card>

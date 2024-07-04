@@ -346,9 +346,11 @@ export default defineSchema({
     drive_wheel: v.any(),
     km: v.any(),
     images: v.optional(
-      v.object({
-        url: v.optional(v.any()),
-      }),
+      v.array(
+        v.object({
+          url: v.optional(v.any()),
+        }),
+      ),
     ),
     year: v.any(),
   }),

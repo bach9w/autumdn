@@ -7,11 +7,23 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Carousel, CarouselContent } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
 import { Badge } from "@components/ui/badge";
 
 import { Button } from "@components/ui/button";
+const storageLink = "https://wandering-bison-612.convex.site";
+function Image({ storageId }: { storageId: string }) {
+  // e.g. https://happy-animal-123.convex.site/getImage?storageId=456
+  const getImageUrl = new URL(`${storageLink}/getImage`);
+  getImageUrl.searchParams.set("storageId", storageId);
+
+  return <img src={getImageUrl.href} height="300px" width="300px" />;
+}
 
 const CarCard = ({ car }: { car: any }) => {
   return (
@@ -39,8 +51,14 @@ const CarCard = ({ car }: { car: any }) => {
         </CardHeader>
         <CardContent>
           {car.images && (
-            <Carousel key={car.images.id}>
-              <CarouselContent></CarouselContent>
+            <Carousel key={car.images.url}>
+              <CarouselContent>
+                {car.images.map((image: any) => (
+                  <CarouselItem className="flex h-full w-full items-center justify-center">
+                    <Image storageId={image.url} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
             </Carousel>
           )}
           {car.fuel} / {car.transmission} / {car.airbags ? "Да" : "Не"} /{" "}
