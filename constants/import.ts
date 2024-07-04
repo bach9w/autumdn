@@ -69,6 +69,18 @@ export const colors = [
     id: 2,
     name: "Зелен",
   },
+  {
+    id: 3,
+    name: "Бял",
+  },
+  {
+    id: 4,
+    name: "Черен",
+  },
+  {
+    id: 5,
+    name: "Кафяв",
+  },
 ];
 
 export const fuel_type = [

@@ -27,7 +27,7 @@ export function SelectDemo({
   return (
     <>
       <Select onValueChange={onChange}>
-        <SelectTrigger className="w-[180px] text-[18px] text-black">
+        <SelectTrigger className="w-full text-[18px] text-black">
           <SelectValue placeholder={`Изберете ${title}`} />
         </SelectTrigger>
         <SelectContent>
