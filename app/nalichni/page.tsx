@@ -1,5 +1,6 @@
 "use client";
-import CarCard from "./components/card";
+
+import { CardMain } from "./components/card";
 import { Card } from "@components/ui/card";
 import { api } from "@convex/_generated/api";
 import { useQuery } from "convex/react";
@@ -12,12 +13,12 @@ const Page = () => {
       <div className="py-10 text-center text-2xl font-bold uppercase text-white drop-shadow-lg">
         Налични автомобили
       </div>
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 p-2 sm:grid-cols-2 lg:grid-cols-3">
         {cars &&
           cars.length !== 0 &&
           cars.map((car: any) => (
             <div key={car._id}>
-              <CarCard car={car} />
+              <CardMain car={car} />
             </div>
           ))}
       </div>

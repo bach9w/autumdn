@@ -62,144 +62,107 @@ function splitDateAndTime(date: string) {
 }
 
 const CarCard = ({ car }: { car: any }) => {
-  const router = useRouter();
   return (
     <Drawer>
       <DrawerTrigger>
         <>
           <div className="container">
-            <Card className="box m-0 my-2 h-full overflow-hidden border-none p-0 shadow-md shadow-black">
-              <CardHeader>
-                <div className="flex w-full justify-between text-white">
-                  {car.lots[0] &&
-                  car.lots[0].condition &&
-                  car.lots[0].condition.name === "run_and_drives" ? (
-                    <Badge className="rounded-none text-white">
-                      В движение
-                    </Badge>
-                  ) : (
-                    <Badge>Неподвижен</Badge>
-                  )}
-                  <div className="flex">
-                    {car.vin && (
-                      <Badge className="flex items-center justify-center rounded-md">
-                        {car.vin}
-                      </Badge>
-                    )}
+            <Card className="w-full overflow-hidden rounded-lg border-none bg-card text-card-foreground shadow-lg">
+              <div className="">
+                <div className="bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                  <div className="flex items-end justify-between">
+                    <div className="text-white">
+                      <h3 className="text-2xl font-bold">
+                        {car.manufacturer && car.manufacturer.name}/
+                        {car.model && car.model.name}
+                      </h3>
+                      <p className="flex w-full text-sm">
+                        {car.year} |{" "}
+                        {car.lots[0] &&
+                          car.lots[0].odometer &&
+                          car.lots[0].odometer.km}{" "}
+                        км
+                      </p>
+                    </div>
+                    <div className="text-2xl font-bold text-white">
+                      {car.lots[car.lots.length - 1].pre_accident_price
+                        ? car.lots[car.lots.length - 1].pre_accident_price
+                        : car.lots[car.lots.length - 1].buy_now
+                          ? car.lots[car.lots.length - 1].buy_now
+                          : "0"}
+                      $
+                    </div>
                   </div>
                 </div>
-
-                <CardTitle>
-                  <div className="mt-2 flex w-full justify-between">
-                    <div className="flex flex-col text-black">
-                      <p>{car.manufacturer && car.manufacturer.name}</p>
-                      {car.model && car.model.name}
-                    </div>
-                    <div className="flex w-full items-center justify-end">
-                      {car.lots[0] &&
-                        car.lots[0].images &&
-                        car.lots[0].images.external_panorama_url && (
-                          <Badge className="bg-red-500">
-                            <Rotate3D /> 360 video
-                          </Badge>
-                        )}
-                    </div>
-                  </div>
-                </CardTitle>
-              </CardHeader>
+              </div>
+              {car.lots &&
+                car.lots.map((lot: any) => (
+                  <Carousel key={lot.id}>
+                    <CarouselContent>
+                      {lot.images && lot.images?.normal !== null ? (
+                        lot.images.normal.map((img: any, index: any) => (
+                          <CarouselItem key={index}>
+                            <img
+                              src={img}
+                              alt={`Car image ${index + 1}`}
+                              height={300}
+                              className="aspect-square w-full rounded-md object-cover"
+                              width="300"
+                            />
+                          </CarouselItem>
+                        ))
+                      ) : (
+                        <CarouselItem>
+                          <div className="aspect-square h-[300px] w-[300px] rounded-md object-cover">
+                            No Image
+                          </div>
+                        </CarouselItem>
+                      )}
+                    </CarouselContent>
+                  </Carousel>
+                ))}
               <CardContent>
-                <div className="grid gap-2">
-                  {car.lots &&
-                    car.lots.map((lot: any) => (
-                      <Carousel key={lot.id}>
-                        <CarouselContent>
-                          {lot.images && lot.images?.normal !== null ? (
-                            lot.images.normal.map((img: any, index: any) => (
-                              <CarouselItem key={index}>
-                                <img
-                                  src={img}
-                                  alt={`Car image ${index + 1}`}
-                                  height={300}
-                                  className="aspect-square w-full rounded-md object-cover"
-                                  width="300"
-                                />
-                              </CarouselItem>
-                            ))
-                          ) : (
-                            <CarouselItem>
-                              <div className="aspect-square h-[300px] w-[300px] rounded-md object-cover">
-                                No Image
-                              </div>
-                            </CarouselItem>
-                          )}
-                        </CarouselContent>
-                        <CardFooter className="">
-                          <Breadcrumb>
-                            <BreadcrumbList className="mt-4 flex w-full">
-                              {car.model && car.manufacturer && (
-                                <>
-                                  <BreadcrumbItem>
-                                    <BreadcrumbLink
-                                      href={`/auction?manufacturer=${car.manufacturer.id}&model=${car.model.id}`}
-                                      className="text-black"
-                                    >
-                                      <Badge>
-                                        {car.model && car.model.name}
-                                      </Badge>
-                                    </BreadcrumbLink>
-                                  </BreadcrumbItem>
-                                  <BreadcrumbSeparator color="black" />
-                                </>
-                              )}
-                              {car.manufacturer && car.manufacturer.id && (
-                                <>
-                                  <BreadcrumbItem>
-                                    <BreadcrumbLink
-                                      className="text-black"
-                                      href={`/manufacturers/${car.manufacturer.id}`}
-                                    >
-                                      {car.manufacturer && (
-                                        <Badge>{car.manufacturer.name}</Badge>
-                                      )}
-                                    </BreadcrumbLink>
-                                  </BreadcrumbItem>
+                <div className="mt-4 grid gap-2">
+                  <CardFooter className="">
+                    <Breadcrumb>
+                      <BreadcrumbList className="mt-4 flex w-full">
+                        {car.model && car.manufacturer && (
+                          <>
+                            <BreadcrumbItem>
+                              <BreadcrumbLink
+                                href={`/auction?manufacturer=${car.manufacturer.id}&model=${car.model.id}`}
+                                className="text-black"
+                              >
+                                <Badge>{car.model && car.model.name}</Badge>
+                              </BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator color="black" />
+                          </>
+                        )}
+                        {car.manufacturer && car.manufacturer.id && (
+                          <>
+                            <BreadcrumbItem>
+                              <BreadcrumbLink
+                                className="text-black"
+                                href={`/manufacturers/${car.manufacturer.id}`}
+                              >
+                                {car.manufacturer && (
+                                  <Badge>{car.manufacturer.name}</Badge>
+                                )}
+                              </BreadcrumbLink>
+                            </BreadcrumbItem>
 
-                                  <BreadcrumbSeparator />
-                                </>
-                              )}
-                              <BreadcrumbItem>
-                                <BreadcrumbPage className="text-black">
-                                  <Badge>{car.year && car.year}</Badge>
-                                </BreadcrumbPage>
-                              </BreadcrumbItem>
-
-                              {car.transmission && (
-                                <>
-                                  <BreadcrumbSeparator />
-                                  <BreadcrumbItem>
-                                    <BreadcrumbPage className="text-black">
-                                      {car.transmission.name.toUpperCase() ===
-                                      "MANUAL"
-                                        ? "РЪЧНА"
-                                        : "АВТОМАТИЧНА"}
-                                    </BreadcrumbPage>
-                                  </BreadcrumbItem>
-                                </>
-                              )}
-                              <BreadcrumbSeparator />
-                              <BreadcrumbItem>
-                                <BreadcrumbPage className="text-black">
-                                  {car.drive_wheel &&
-                                  car.drive_wheel.name.toUpperCase() === "FRONT"
-                                    ? "ПРЕДНО" || "ЗАДНО"
-                                    : "4x4"}
-                                </BreadcrumbPage>
-                              </BreadcrumbItem>
-                            </BreadcrumbList>
-                          </Breadcrumb>
-                        </CardFooter>
-                      </Carousel>
-                    ))}
+                            <BreadcrumbSeparator />
+                          </>
+                        )}
+                        <BreadcrumbItem>
+                          <BreadcrumbPage className="text-black">
+                            <Badge>{car.year && car.year}</Badge>
+                          </BreadcrumbPage>
+                        </BreadcrumbItem>
+                      </BreadcrumbList>
+                    </Breadcrumb>
+                  </CardFooter>
 
                   <div className="grid grid-cols-3 gap-2 uppercase">
                     <div className="col-span-2 w-full flex-col items-center justify-center rounded-md">
@@ -268,10 +231,12 @@ const CarCard = ({ car }: { car: any }) => {
             className="flex w-full items-center justify-center"
             href={`/auction/${car.vin}`}
           >
-            <Button>Премини към офертата</Button>
+            <Button className="w-full">Отвори аукциона</Button>
           </Link>
           <DrawerClose>
-            <Button variant="outline">Разгледай другите</Button>
+            <Button className="w-full" variant="outline">
+              Разгледай другите
+            </Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>

@@ -65,7 +65,7 @@ const NavBar = () => {
                     <SheetClose asChild>
                       <Link
                         href="/"
-                        className="text-muted-foreground hover:text-foreground"
+                        className="text-black hover:text-orange-700"
                       >
                         Начало
                       </Link>
@@ -73,7 +73,7 @@ const NavBar = () => {
                     <SheetClose asChild>
                       <Link
                         href="/auction"
-                        className="text-muted-foreground hover:text-foreground"
+                        className="text-black hover:text-orange-700"
                       >
                         Аукциони
                       </Link>
@@ -81,7 +81,7 @@ const NavBar = () => {
                     <SheetClose asChild>
                       <Link
                         href="/nalichni"
-                        className="text-muted-foreground hover:text-foreground"
+                        className="text-black hover:text-orange-700"
                       >
                         Налични автомобили
                       </Link>
@@ -89,7 +89,7 @@ const NavBar = () => {
                     <SheetClose asChild>
                       <Link
                         href="/manufacturers"
-                        className="text-muted-foreground hover:text-foreground"
+                        className="text-black hover:text-orange-700"
                       >
                         Марки
                       </Link>
@@ -97,15 +97,12 @@ const NavBar = () => {
                     <SheetClose asChild>
                       <Link
                         href="/parts"
-                        className="text-muted-foreground hover:text-foreground"
+                        className="text-black hover:text-orange-700"
                       >
                         Части за автомобили
                       </Link>
                     </SheetClose>
-                    <Link
-                      href="#"
-                      className="text-muted-foreground hover:text-foreground"
-                    >
+                    <Link href="#" className="text-black hover:text-orange-700">
                       За нас
                     </Link>
                     {user.isSignedIn && (
@@ -119,7 +116,7 @@ const NavBar = () => {
                           <SheetClose asChild>
                             <Link
                               href="/obqvi/all"
-                              className="text-muted-foreground hover:text-foreground"
+                              className="text-black hover:text-orange-700"
                             >
                               Всички автомобили
                             </Link>
@@ -127,7 +124,7 @@ const NavBar = () => {
                           <SheetClose asChild>
                             <Link
                               href="/obqvi/parts"
-                              className="text-muted-foreground hover:text-foreground"
+                              className="text-black hover:text-orange-700"
                             >
                               Всички части
                             </Link>
@@ -135,7 +132,7 @@ const NavBar = () => {
                           <SheetClose asChild>
                             <Link
                               href="/obqvi/dobavi"
-                              className="text-muted-foreground hover:text-foreground"
+                              className="text-black hover:text-orange-700"
                             >
                               Добави автомобил
                             </Link>
@@ -143,7 +140,7 @@ const NavBar = () => {
                           <SheetClose asChild>
                             <Link
                               href="/obqvi/parts/dobavi"
-                              className="text-muted-foreground hover:text-foreground"
+                              className="text-black hover:text-orange-700"
                             >
                               Добави част
                             </Link>
