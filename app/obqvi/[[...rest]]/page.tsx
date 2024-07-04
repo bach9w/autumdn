@@ -34,22 +34,22 @@ export default function Home() {
       <SignedIn>
         <div className="flex h-full w-full flex-col items-center sm:h-full">
           <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-            <Card onClick={() => router.push("/obqvi/all")}>
+            <Card onClick={() => router.push("/nalichni")}>
               <CardHeader>
                 <p>Всички автомобили</p>
               </CardHeader>
             </Card>
-            <Card>
+            <Card onClick={() => router.push("/obqvi/parts")}>
               <CardHeader>
                 <p>Всички части</p>
               </CardHeader>
             </Card>
-            <Card>
+            <Card onClick={() => router.push("/obqvi/dobavi")}>
               <CardHeader>
                 <p>Добави автомобил</p>
               </CardHeader>
             </Card>
-            <Card>
+            <Card onClick={() => router.push("/obqvi/parts/dobavi")}>
               <CardHeader>
                 <p>Добави част</p>
               </CardHeader>

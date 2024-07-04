@@ -132,6 +132,7 @@ export function AddForm() {
                 setVin(e.target.value);
               }}
               placeholder="VIN"
+              className="text-[18px]"
             />
             <Label htmlFor="title">Марка</Label>
             <SelectDemo
