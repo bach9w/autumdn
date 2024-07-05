@@ -14,12 +14,10 @@ import { Button } from "@components/ui/button";
 import Link from "next/link";
 import Loading from "@components/loading";
 import { Suspense } from "react";
-import SearchForm from "@components/SearchForm";
-import StickySearchForm from "@components/search/sticky-search";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
-    year: searchParams.year || "",
+    year: searchParams.year || "2021",
     fuel: searchParams.fuel_type || "",
     manufacturer: searchParams.manufacturer || "",
     model: searchParams.model || "",

@@ -61,6 +61,20 @@ function splitDateAndTime(date: string) {
   return diffInDays;
 }
 
+function PriceBox({ price }: { price: any }) {
+  return (
+    <div className="flex h-[85px] items-center bg-red-500 p-0 text-xl font-bold text-white">
+      <div className="flex flex-col items-center justify-between">
+        {price} $
+        <Badge className="relative top-5 h-full w-full rounded-none">
+          {" "}
+          Купи сега!{" "}
+        </Badge>
+      </div>
+    </div>
+  );
+}
+
 const CarCard = ({ car }: { car: any }) => {
   return (
     <Drawer>
@@ -69,30 +83,23 @@ const CarCard = ({ car }: { car: any }) => {
           <div className="container">
             <Card className="w-full overflow-hidden rounded-lg border-none bg-card text-card-foreground shadow-lg">
               <div className="">
-                <div className="bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                  <div className="flex items-end justify-between">
-                    <div className="text-white">
-                      <h3 className="text-2xl font-bold">
-                        {car.manufacturer && car.manufacturer.name}/
-                        {car.model && car.model.name}
-                      </h3>
-                      <p className="flex w-full text-sm">
-                        {car.year} |{" "}
-                        {car.lots[0] &&
-                          car.lots[0].odometer &&
-                          car.lots[0].odometer.km}{" "}
-                        км
-                      </p>
-                    </div>
-                    <div className="text-2xl font-bold text-white">
-                      {car.lots[car.lots.length - 1].pre_accident_price
-                        ? car.lots[car.lots.length - 1].pre_accident_price
-                        : car.lots[car.lots.length - 1].buy_now
-                          ? car.lots[car.lots.length - 1].buy_now
-                          : "0"}
-                      $
-                    </div>
+                <div className="bottom-0 left-0 right-0 flex w-full items-center justify-between bg-gradient-to-t from-black/80 to-transparent p-0">
+                  <div className="p-4 text-white">
+                    <h3 className="text-2xl font-bold">
+                      {car.manufacturer && car.manufacturer.name}/
+                      {car.model && car.model.name}
+                    </h3>
+                    <p className="flex w-full text-sm">
+                      {car.year} |{" "}
+                      {car.lots[0] &&
+                        car.lots[0].odometer &&
+                        car.lots[0].odometer.km}{" "}
+                      км
+                    </p>
                   </div>
+                  {car.lots[car.lots.length - 1].buy_now !== 0 && (
+                    <PriceBox price={car.lots[car.lots.length - 1].buy_now} />
+                  )}
                 </div>
               </div>
               {car.lots &&
