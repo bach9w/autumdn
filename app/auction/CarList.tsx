@@ -61,7 +61,7 @@ function Cars({ filters }: { filters: any }) {
   return (
     <>
       {loading && <Loading />}
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
         {filteredData.map((car: any) => (
           <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
             <CarCard car={car} />

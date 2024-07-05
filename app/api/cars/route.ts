@@ -4,7 +4,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
   const minutes = searchParams.get("minutes") || "";
-  const per_page = searchParams.get("per_page") || "10";
+  const per_page = searchParams.get("per_page") || "12";
   const status = searchParams.get("status") || "3";
   const sale_date = searchParams.get("sale_date_in_days") || "";
   const sale_date_from = searchParams.get("sale_date_from") || "";
@@ -31,7 +31,7 @@ export async function GET(request: Request) {
   if (manufacturer) url.searchParams.set("manufacturer_id", manufacturer);
   if (model) url.searchParams.set("model_id", model);
   if (page) url.searchParams.set("page", page);
-if (status) url.searchParams.set("status", status);
+  if (status) url.searchParams.set("status", status);
 
   try {
     const response = await fetch(url.toString(), {

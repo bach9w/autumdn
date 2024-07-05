@@ -12,7 +12,7 @@ const StickySearchForm = () => {
   useEffect(() => {
     setIsMounted(true);
     if (typeof window !== "undefined") {
-      setIsHome(window.location.pathname === "/");
+      setIsHome(window.location.pathname === "/auction");
     }
   }, []);
 

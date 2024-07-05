@@ -23,6 +23,7 @@ export default async function Home({ searchParams }: HomeProps) {
     fuel: searchParams.fuel_type || "",
     manufacturer: searchParams.manufacturer || "",
     model: searchParams.model || "",
+    page: searchParams.page || "",
   };
 
   return (

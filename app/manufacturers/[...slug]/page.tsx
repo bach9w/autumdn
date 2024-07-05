@@ -2,13 +2,19 @@
 
 import { fetchCarByManufacturer } from "@app/api/cars";
 import CarCard from "@app/auction/CarCard";
+import Pagination from "@app/auction/components/Pagination";
 import Loading from "@components/loading";
 import { Button } from "@components/ui/button";
-import { Card } from "@components/ui/card";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+} from "@components/ui/card";
 import { cn } from "@lib/utils";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
 const Manufacture = ({ params }: { params: { slug: any } }) => {
@@ -17,6 +23,9 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const page = searchParams.get("page") || 1;
 
   useEffect(() => {
     async function fetchData() {
@@ -37,7 +46,7 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
       } else if (slug.length === 2) {
         try {
           const response = await fetch(
-            `/api/cars?per_page=50&manufacturer=${slug[0]}&model=${slug[1]}&sale_date_in_days=10&page=1`,
+            `/api/cars?per_page=20&manufacturer=${slug[0]}&model=${slug[1]}&sale_date_in_days=10&page=${page}`,
             {
               next: { revalidate: 3600 },
             },
@@ -54,9 +63,9 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
         }
       }
     }
-
+    setLoading(true);
     fetchData();
-  }, []);
+  }, [page]);
   return (
     <Suspense fallback={<Loading />}>
       {loading && <Loading />}
@@ -91,10 +100,13 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
                       }}
                     >
                       <Card
-                        className="flex min-h-[100px] cursor-pointer items-center justify-center rounded-lg bg-gray-100 text-2xl shadow-lg"
+                        className="flex min-h-[100px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg border-none bg-card text-card-foreground shadow-lg"
                         key={models.id}
                       >
-                        {models.name}
+                        <CardHeader>{models.name}</CardHeader>
+                        <CardFooter className="full flex w-full items-center justify-center bg-white uppercase text-black hover:bg-orange-700 hover:text-white">
+                          Налични обяви - {models.cars_qty}
+                        </CardFooter>
                       </Card>
                     </div>
                   </div>
@@ -103,17 +115,20 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
           </div>
         )}
         {slug[0] && slug[1] && (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-            {data &&
-              Array.isArray(data) &&
-              data
-                .filter((car: any) => car.lots)
-                .map((car: any) => (
-                  <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
-                    <CarCard car={car} />
-                  </div>
-                ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+              {data &&
+                Array.isArray(data) &&
+                data
+                  .filter((car: any) => car.lots)
+                  .map((car: any) => (
+                    <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
+                      <CarCard car={car} />
+                    </div>
+                  ))}
+            </div>
+            <Pagination page={page} />
+          </>
         )}
       </div>
     </Suspense>

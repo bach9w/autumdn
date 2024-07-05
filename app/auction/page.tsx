@@ -18,7 +18,7 @@ export default async function Home({ searchParams }: HomeProps) {
     sale_date_in_days: "7",
   };
   return (
-    <div className="">
+    <div className="mt-2 overflow-x-hidden">
       <Cars filters={filters} />
       <div className="">
         <Pagination page={filters.page} />

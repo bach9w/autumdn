@@ -15,7 +15,9 @@ const Manufacturers = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`/api/manufacturer`, { next: { revalidate: 3600} });
+        const response = await fetch(`/api/manufacturer`, {
+          next: { revalidate: 3600 },
+        });
         const result = await response.json();
         if (!response.ok) {
           throw new Error(result.error);
@@ -42,22 +44,26 @@ const Manufacturers = () => {
             {manufacturers.map((manufacturer: any) => (
               <div
                 key={manufacturer.id}
-                className={cn(manufacturer.image ? "flex p-1" : "hidden")}
+                className="flex p-1"
                 onClick={() => {
                   router.push(`/manufacturers/${manufacturer.id}`);
                 }}
               >
-                <Card className="flex h-[200px] w-full flex-col items-center justify-center">
+                <Card className="flex h-[200px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border-none bg-card text-card-foreground shadow-lg">
                   <CardHeader>
                     <p>{manufacturer.name}</p>
                   </CardHeader>
                   <CardDescription>
-                    <img
-                      width={100}
-                      height={100}
-                      src={manufacturer.image}
-                      alt={manufacturer.name}
-                    />
+                    {manufacturer.image ? (
+                      <img
+                        width={100}
+                        height={100}
+                        src={manufacturer.image}
+                        alt={manufacturer.name}
+                      />
+                    ) : (
+                      <p className="text-2xl">{manufacturer.name}</p>
+                    )}
                   </CardDescription>
                 </Card>
               </div>

@@ -11,8 +11,6 @@ import {
   CarouselItem,
 } from "@components/ui/carousel";
 
-import Image from "next/image";
-
 const Page = () => {
   const parts = useQuery(api.parts.getParts);
   return (
@@ -22,7 +20,10 @@ const Page = () => {
       <div className="grid grid-cols-1 gap-4 p-2 md:grid-cols-2 xl:grid-cols-3">
         {parts &&
           parts.map((part) => (
-            <Card key={part.id} className="box">
+            <Card
+              key={part.id}
+              className="w-full overflow-hidden rounded-lg border-none bg-card text-card-foreground shadow-lg"
+            >
               <CardHeader>{part.name}</CardHeader>
               <CardContent>
                 <Carousel>
