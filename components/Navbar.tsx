@@ -102,9 +102,14 @@ const NavBar = () => {
                         Части за автомобили
                       </Link>
                     </SheetClose>
-                    <Link href="#" className="text-black hover:text-orange-700">
-                      За нас
-                    </Link>
+                    <SheetClose asChild>
+                      <Link
+                        href="/about"
+                        className="text-black hover:text-orange-700"
+                      >
+                        За нас
+                      </Link>
+                    </SheetClose>
                     {user.isSignedIn && (
                       <>
                         <div className="flex items-center justify-center gap-2 bg-black text-white">
