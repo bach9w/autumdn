@@ -61,7 +61,7 @@ export function CarInfo({ data }: { data: any }) {
           >
             В движение
           </Badge>
-          <div className="hidden items-center gap-2 md:ml-auto md:flex">
+          <div className="hidden w-full items-center gap-2 md:ml-auto md:flex">
             <Button
               className="flex items-center justify-center gap-1 hover:bg-red-500 hover:text-white"
               variant="outline"
@@ -89,6 +89,36 @@ export function CarInfo({ data }: { data: any }) {
               </ReactWhatsapp>
             </Button>
           </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-2 md:hidden">
+          <Button
+            className="inline-flex h-[40px] w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+            variant="outline"
+            size="sm"
+          >
+            <a
+              className="flex animate-pulse items-center justify-center gap-1"
+              href="tel:+359876995555"
+            >
+              Получи информация <PhoneCall className="h-4 w-4" />
+            </a>
+          </Button>
+
+          <Button
+            className="inline-flex h-[40px] w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+            size="sm"
+          >
+            <ReactWhatsapp
+              className="flex animate-pulse items-center justify-center gap-1"
+              element="webview"
+              number="+359876995555"
+              message={`Здравейте, интересувам се от автомил с VIN: ${data.vin}, https://myride.bg/auction/${data.vin}`}
+            >
+              Изпрати запитване{" "}
+              <MessageCircleQuestionIcon className="h-4 w-4" />
+            </ReactWhatsapp>
+          </Button>
         </div>
 
         <div className="grid gap-4 md:grid-cols-[1fr_250px] lg:gap-8">
@@ -330,34 +360,6 @@ export function CarInfo({ data }: { data: any }) {
             video={data.lots[data.lots.length - 1].images.external_panorama_url}
           />
         )}
-        <div className="flex items-center justify-center gap-2 md:hidden">
-          <Button
-            className="flex items-center justify-center gap-1 hover:bg-red-500 hover:text-white"
-            variant="outline"
-            size="sm"
-          >
-            <a
-              className="flex animate-pulse items-center justify-center gap-1"
-              href="tel:+359876995555"
-            >
-              Получи информация <PhoneCall className="h-4 w-4" />
-            </a>
-          </Button>
-          <Button
-            className="flex items-center justify-center gap-1 hover:bg-red-500 hover:text-white"
-            size="sm"
-          >
-            <ReactWhatsapp
-              className="flex animate-pulse items-center justify-center gap-1"
-              element="webview"
-              number="+359876995555"
-              message={`Здравейте, интересувам се от автомил с VIN: ${data.vin}, https://myride.bg/auction/${data.vin}`}
-            >
-              Изпрати запитване{" "}
-              <MessageCircleQuestionIcon className="h-4 w-4" />
-            </ReactWhatsapp>
-          </Button>
-        </div>
       </div>
       <div></div>
     </main>

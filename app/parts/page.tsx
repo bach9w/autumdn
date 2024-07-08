@@ -16,7 +16,7 @@ import { Button } from "@components/ui/button";
 const Page = () => {
   const parts = useQuery(api.parts.getParts);
   return (
-    <div className="container h-full w-full text-center text-white">
+    <div className="container h-full min-h-screen w-full text-center text-white">
       Части за автомобили
       <SearchBar />
       <div className="grid grid-cols-1 gap-4 p-2 md:grid-cols-2 xl:grid-cols-3">
