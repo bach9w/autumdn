@@ -17,14 +17,42 @@ import { Menu } from "lucide-react";
 import StickySearchForm from "./search/sticky-search";
 import SearchForm from "./SearchForm";
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import { useState, useEffect } from "react";
 
 const NavBar = () => {
   const router = useRouter();
   const user = useUser();
+  const [showNav, setShowNav] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const handleScroll = () => {
+    if (typeof window !== "undefined") {
+      if (window.scrollY > lastScrollY) {
+        // Скрол надолу
+        setShowNav(false);
+      } else {
+        // Скрол нагоре
+        setShowNav(true);
+      }
+      setLastScrollY(window.scrollY);
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, [lastScrollY]);
 
   return (
     <>
-      <div className="sticky top-0 z-40 flex flex-col">
+      <div
+        className={`sticky top-0 z-40 flex flex-col transition duration-150 ease-out ${showNav ? "show" : "hideNav"}`}
+      >
         <nav className="top-0 z-40 h-[10%] w-full bg-gradient-to-b from-[#151515] to-[#191919] p-2">
           <div className="flex w-full items-center justify-between">
             <div className="flex">

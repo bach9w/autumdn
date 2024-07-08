@@ -6,6 +6,7 @@ import { cn } from "@lib/utils";
 import { ConvexClientProvider } from "@providers/convex-client-provider";
 import { Viewport } from "next";
 import { Montserrat } from "next/font/google";
+import StickyBottomNav from "@/components/bottom/sticky-bottom";
 
 export const metadata = {
   title: "MYRIDE",
@@ -31,6 +32,7 @@ export default function RootLayout({
             <NavBar />
 
             <div className="">{children}</div>
+            <StickyBottomNav />
             <div className="bg-black">
               <Footer />
             </div>
