@@ -4,11 +4,16 @@ import Footer from "@components/Footer";
 import NavBar from "@components/Navbar";
 import { cn } from "@lib/utils";
 import { ConvexClientProvider } from "@providers/convex-client-provider";
+import { Viewport } from "next";
 import { Montserrat } from "next/font/google";
 
 export const metadata = {
   title: "MYRIDE",
   description: "MYRIDE IMPORT",
+};
+
+export const viewport: Viewport = {
+  themeColor: "black",
 };
 
 const montserrat = Montserrat({ subsets: ["latin"] });
