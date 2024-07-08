@@ -2,7 +2,7 @@ import { Button } from "@components/ui/button";
 
 const About = () => {
   return (
-    <div className="flex h-screen w-full flex-col items-center">
+    <div className="flex h-full min-h-screen w-full flex-col items-center">
       <h1 className="text-center text-2xl text-white">За нас </h1>
       <p className="p-2 text-xl text-white">Кратка информация</p>
       <div className="flex w-full flex-col items-center justify-center gap-4 p-4 text-white">
