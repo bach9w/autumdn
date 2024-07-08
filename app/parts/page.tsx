@@ -10,6 +10,8 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@components/ui/carousel";
+import { Label } from "@components/ui/label";
+import { Button } from "@components/ui/button";
 
 const Page = () => {
   const parts = useQuery(api.parts.getParts);
@@ -45,7 +47,7 @@ const Page = () => {
                   </Badge>
 
                   <Badge className="rounded-none bg-orange-600 shadow-black drop-shadow-sm">
-                    Получи информация
+                    Направи запитване
                   </Badge>
                   <Badge className="shadow-xs rounded-l-none bg-red-500 shadow-black drop-shadow-sm">
                     Позвъни сега
@@ -54,6 +56,12 @@ const Page = () => {
               </CardContent>
             </Card>
           ))}
+      </div>
+      <div className="flex flex-col">
+        <Label className="text-md uppercase">
+          При неналичието на желаната част
+        </Label>
+        <Button>Направи запитване</Button>
       </div>
     </div>
   );

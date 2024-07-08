@@ -6,39 +6,26 @@ import Loading from "@components/loading";
 import { Suspense, useEffect, useState } from "react";
 import { CarInfo } from "./CarInfo";
 import Video360 from "./Video360";
+import useSWR from "swr";
+
+const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
 const Manufacture = ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
-  const [data, setData] = useState<{ id: string } | undefined>();
+
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(`/api/carByVin/${slug}`, {
-          next: { revalidate: 600 },
-        });
-        const result = await response.json();
-        if (!response.ok) {
-          throw new Error(result.error);
-        }
-        setData(result.data);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    }
+  //
 
-    fetchData();
-  }, []);
+  const { data, error, isLoading } = useSWR(`/api/carByVin/${slug}`, fetcher);
 
-  console.log(data);
+  if (error) return "An error has occurred.";
+  if (isLoading) return <Loading />;
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className="p-1 py-10">
-        {loading && <Loading />}
-        {data && <CarInfo data={data} />}
+      <div className="min-h-screen p-1 py-10">
+        {data && <CarInfo data={data.data} />}
       </div>
     </Suspense>
   );

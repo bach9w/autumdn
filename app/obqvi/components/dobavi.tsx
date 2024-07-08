@@ -123,7 +123,7 @@ export function AddForm() {
       <CardContent>
         <div className="grid gap-4">
           <div className="grid w-full grid-cols-2 items-center justify-center gap-3 md:grid-cols-4">
-            <Label htmlFor="title">VIN</Label>
+            <Label htmlFor="title">Цена</Label>
             <Input
               id="title"
               name="title"
@@ -131,7 +131,7 @@ export function AddForm() {
               onChange={(e) => {
                 setVin(e.target.value);
               }}
-              placeholder="VIN"
+              placeholder="Цена"
               className="text-[18px]"
             />
             <Label htmlFor="title">Марка</Label>

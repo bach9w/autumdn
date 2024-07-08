@@ -7,7 +7,7 @@ import Pagination from "./components/Pagination";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
-    per_page: "30",
+    per_page: "20",
     status: searchParams.status || "3",
 
     fuel: searchParams.fuel_type || "",

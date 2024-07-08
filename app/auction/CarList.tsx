@@ -5,64 +5,32 @@ import CarCard from "./CarCard";
 
 import Loading from "@components/loading";
 import { Button } from "@components/ui/button";
+import { useFormatDate } from "@hooks/useFormatData";
+import useSWR from "swr";
 
-function formatDate(date: Date): string {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-  const seconds = String(date.getSeconds()).padStart(2, "0");
-
-  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-}
+const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
 function Cars({ filters }: { filters: any }) {
-  const [data, setData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const currentDate = new Date();
-  const formattedDate = formatDate(currentDate);
+  const formattedDate = useFormatDate(currentDate);
 
-  useEffect(() => {
-    setLoading(true);
-    async function fetchData() {
-      const query = new URLSearchParams(filters);
-      if (filters.page) {
-        query.set("page", filters.page);
-      }
-      try {
-        const response = await fetch(
-          `/api/cars?${query}&status=3&sale_date_from=${formattedDate}`,
-          {
-            next: {
-              revalidate: 60,
-            },
-          },
-        );
-        const result = await response.json();
+  const query = new URLSearchParams(filters);
+  if (filters.page) {
+    query.set("page", filters.page);
+  }
 
-        if (!response.ok) {
-          throw new Error(result.error);
-        }
-        setData(result.data);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    }
+  const { data, error, isLoading } = useSWR(
+    `/api/cars?${query.toString()}&status=3&sale_date_from=${formattedDate}`,
+    fetcher,
+  );
 
-    fetchData();
-  }, [filters]);
-
-  const filteredData = useMemo(() => {
-    return data.filter((car: any) => car.lots?.[0]?.images?.normal);
-  }, [data]);
+  if (error) return "An error has occurred.";
+  if (isLoading) return <Loading />;
 
   return (
     <>
-      {loading && <Loading />}
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-        {filteredData.map((car: any) => (
+        {data?.data.map((car: any) => (
           <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
             <CarCard car={car} />
           </div>

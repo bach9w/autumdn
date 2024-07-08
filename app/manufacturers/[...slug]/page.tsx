@@ -69,7 +69,7 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
   return (
     <Suspense fallback={<Loading />}>
       {loading && <Loading />}
-      <div className="min-h-screen">
+      <div className="min-h-screen overflow-x-hidden">
         <Button
           variant="outline"
           size="icon"
