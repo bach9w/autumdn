@@ -27,11 +27,15 @@ const NavBar = () => {
 
   const handleScroll = () => {
     if (typeof window !== "undefined") {
-      if (window.scrollY > lastScrollY) {
-        // Скрол надолу
-        setShowNav(false);
+      if (window.scrollY > 500) {
+        // Скрива се при скрол надолу, ако е над 500
+        if (window.scrollY > lastScrollY) {
+          setShowNav(false);
+        } else {
+          setShowNav(true);
+        }
       } else {
-        // Скрол нагоре
+        // Винаги се показва, ако е под 500
         setShowNav(true);
       }
       setLastScrollY(window.scrollY);

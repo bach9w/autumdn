@@ -4,16 +4,20 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const StickyBottomNav = () => {
-  const [showNav, setShowNav] = useState(true);
+  const [showNav, setShowNav] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const handleScroll = () => {
     if (typeof window !== "undefined") {
-      if (window.scrollY > lastScrollY) {
-        // Скрол надолу
-        setShowNav(false);
+      if (window.scrollY > 200) {
+        // Скрива се при скрол надолу, ако е над 500
+        if (window.scrollY > lastScrollY) {
+          setShowNav(false);
+        } else {
+          setShowNav(true);
+        }
       } else {
-        // Скрол нагоре
+        // Винаги се показва, ако е под 500
         setShowNav(true);
       }
       setLastScrollY(window.scrollY);
@@ -23,6 +27,7 @@ const StickyBottomNav = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", handleScroll);
+      console.log(lastScrollY);
 
       return () => {
         window.removeEventListener("scroll", handleScroll);
