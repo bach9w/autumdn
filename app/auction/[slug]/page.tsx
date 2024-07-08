@@ -24,7 +24,7 @@ const Manufacture = ({ params }: { params: { slug: string } }) => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className="min-h-screen p-1 py-10">
+      <div className="min-h-screen overflow-x-hidden p-1 py-10">
         {data && <CarInfo data={data.data} />}
       </div>
     </Suspense>
