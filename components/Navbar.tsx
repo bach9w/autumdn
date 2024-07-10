@@ -196,11 +196,6 @@ const NavBar = () => {
             </div>
           </div>
         </nav>
-        <div className="flex w-full items-center justify-end">
-          <section id="auctions" className="sticky w-[100%]">
-            <StickySearchForm />
-          </section>
-        </div>
       </div>
     </>
   );

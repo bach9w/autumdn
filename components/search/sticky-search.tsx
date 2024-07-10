@@ -1,3 +1,4 @@
+"use client";
 import { AnimatePresence, motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { FiAlertCircle, FiSearch } from "react-icons/fi";

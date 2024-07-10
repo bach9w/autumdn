@@ -50,9 +50,9 @@ const StickyBottomNav = () => {
               ЧАСТИ
             </li>
           </Link>
-          <Link href="/about">
+          <Link href="/uslugi">
             <li className="flex items-center justify-center hover:bg-black">
-              КОНТАКТИ
+              УСЛУГИ
             </li>
           </Link>
         </ul>
