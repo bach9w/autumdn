@@ -96,7 +96,7 @@ const CarCard = ({ car }: { car: any }) => {
                       км
                     </p>
                   </div>
-                  {car.lots[car.lots.length - 1].buy_now !== 0 && (
+                  {car.lots && car.lots[car.lots.length - 1].buy_now !== 0 && (
                     <PriceBox price={car.lots[car.lots.length - 1].buy_now} />
                   )}
                 </div>
