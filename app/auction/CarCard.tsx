@@ -84,10 +84,13 @@ const CarCard = ({ car }: { car: any }) => {
               <div className="">
                 <div className="bottom-0 left-0 right-0 flex w-full items-center justify-between bg-gradient-to-t from-black/80 to-transparent p-0">
                   <div className="p-4 text-white">
-                    <h3 className="text-2xl font-bold">
-                      {car.manufacturer && car.manufacturer.name}/
+                    <div className="flex flex-col text-2xl font-bold md:flex-none md:flex-row">
+                      <p className="flex w-full items-start justify-start">
+                        {car.manufacturer && car.manufacturer.name}
+                      </p>
+                      <p className="hidden md:flex">/</p>
                       {car.model && car.model.name}
-                    </h3>
+                    </div>
                     <p className="flex w-full text-sm">
                       {car.year} |{" "}
                       {car.lots[0] &&
