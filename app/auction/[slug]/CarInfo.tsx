@@ -368,11 +368,15 @@ export function CarInfo({ data }: { data: any }) {
             </Card>
           </div>
         </div>
-        {data.lots[data.lots.length - 1].images.external_panorama_url && (
-          <Video360
-            video={data.lots[data.lots.length - 1].images.external_panorama_url}
-          />
-        )}
+        {data.lots[data.lots.length - 1].images &&
+          data.lots[data.lots.length - 1].images.external_panorama_url !==
+            null && (
+            <Video360
+              video={
+                data.lots[data.lots.length - 1].images.external_panorama_url
+              }
+            />
+          )}
       </div>
       <div></div>
     </main>
