@@ -166,20 +166,33 @@ export function CarInfo({ data }: { data: any }) {
               <CardContent>
                 <Carousel>
                   <CarouselContent>
-                    {data?.lots &&
-                      data?.lots[data.lots.length - 1]?.images?.big?.map(
-                        (imageUrl: string, index: number) => (
-                          <CarouselItem key={index}>
-                            <img
-                              src={imageUrl}
-                              alt={`Car image ${index + 1}`}
-                              height={300}
-                              className="aspect-square w-full rounded-md object-fill"
-                              width="300"
-                            />
-                          </CarouselItem>
-                        ),
-                      )}
+                    {data?.lots && data?.lots[data.lots.length - 1].images
+                      ? data?.lots[data.lots.length - 1]?.images?.big?.map(
+                          (imageUrl: string, index: number) => (
+                            <CarouselItem key={index}>
+                              <img
+                                src={imageUrl}
+                                alt={`Car image ${index + 1}`}
+                                height={300}
+                                className="aspect-square w-full rounded-md object-fill"
+                                width="300"
+                              />
+                            </CarouselItem>
+                          ),
+                        )
+                      : data?.lots[data.lots.length - 1].images?.normal.map(
+                          (imageUrl: string, index: number) => (
+                            <CarouselItem key={index}>
+                              <img
+                                src={imageUrl}
+                                alt={`Car image ${index + 1}`}
+                                height={300}
+                                className="aspect-square w-full rounded-md object-fill"
+                                width="300"
+                              />
+                            </CarouselItem>
+                          ),
+                        )}
                   </CarouselContent>
                 </Carousel>
               </CardContent>
