@@ -127,7 +127,7 @@ const SocialsBlock = () => (
         className="grid h-full place-content-center gap-4 text-3xl text-white"
       >
         Поръчка и доставка на автомобил от Америка или Канада
-        <b className="bg-orange-600 text-sm">Вкл. ПЪТНА ПОМОЩ</b>
+        <b className="bg-orange-600 text-sm">УСЛУГИ С ПЪТНА ПОМОЩ</b>
       </a>
     </Block>
     <Block

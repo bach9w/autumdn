@@ -9,7 +9,7 @@ const StickyBottomNav = () => {
 
   const handleScroll = () => {
     if (typeof window !== "undefined") {
-      if (window.scrollY > 200) {
+      if (window.scrollY >= 300) {
         // Скрива се при скрол надолу, ако е над 500
         if (window.scrollY > lastScrollY) {
           setShowNav(false);
@@ -27,7 +27,6 @@ const StickyBottomNav = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", handleScroll);
-      console.log(lastScrollY);
 
       return () => {
         window.removeEventListener("scroll", handleScroll);
