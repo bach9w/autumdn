@@ -7,6 +7,7 @@ import { ConvexClientProvider } from "@providers/convex-client-provider";
 import { Viewport } from "next";
 import { Montserrat } from "next/font/google";
 import StickyBottomNav from "@/components/bottom/sticky-bottom";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: "MYRIDE",
@@ -36,6 +37,7 @@ export default function RootLayout({
             <div className="bg-black">
               <Footer />
             </div>
+            <Analytics />
           </ConvexClientProvider>
         </main>
       </body>
