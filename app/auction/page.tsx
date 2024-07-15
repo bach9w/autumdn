@@ -8,7 +8,7 @@ import StickySearchForm from "@components/search/sticky-search";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
-    per_page: "20",
+    per_page: "21",
     status: searchParams.status || "3",
 
     fuel: searchParams.fuel_type || "",
@@ -27,7 +27,7 @@ export default async function Home({ searchParams }: HomeProps) {
       </div>
       <div className="mt-2 overflow-x-hidden">
         <Cars filters={filters} />
-        <div className="">
+        <div className="mt-2">
           <Pagination page={filters.page} />
         </div>
       </div>

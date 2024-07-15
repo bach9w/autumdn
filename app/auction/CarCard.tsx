@@ -1,11 +1,5 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+"use client";
+import { motion } from "framer-motion";
 
 import {
   Drawer,
@@ -40,6 +34,8 @@ import { Badge } from "@components/ui/badge";
 import { cn } from "@lib/utils";
 import { Button } from "@components/ui/button";
 import DamageCheck from "./components/DamageCheck";
+import { useEffect, useState } from "react";
+import { Skeleton } from "@components/ui/skeleton";
 
 function splitDateAndTime(date: string) {
   // Създаване на дата обект от предоставената дата
@@ -60,81 +56,100 @@ function splitDateAndTime(date: string) {
   return diffInDays;
 }
 
-function PriceBox({ price }: { price: any }) {
-  return (
-    <div className="flex h-[85px] items-center bg-red-500 p-0 text-xl font-bold text-white">
-      <div className="flex flex-col items-center justify-between">
-        {price} $
-        <Badge className="relative top-5 h-full w-full rounded-none">
-          {" "}
-          Купи сега!{" "}
-        </Badge>
-      </div>
-    </div>
-  );
-}
-
 const CarCard = ({ car }: { car: any }) => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
   return (
     <Drawer>
       <DrawerTrigger>
         <>
           <div className="container">
-            <Card className="w-full overflow-hidden rounded-lg border-none bg-card text-card-foreground shadow-lg">
-              <div className="">
-                <div className="bottom-0 left-0 right-0 flex w-full items-center justify-between bg-gradient-to-t from-black/80 to-transparent p-0">
-                  <div className="p-4 text-white">
-                    <div className="flex flex-col text-2xl font-bold md:flex-none md:flex-row">
-                      <p className="flex w-full items-start justify-start">
-                        {car.manufacturer && car.manufacturer.name}
-                      </p>
-                      <p className="hidden md:flex">/</p>
-                      {car.model && car.model.name}
-                    </div>
-                    <p className="flex w-full text-sm">
-                      {car.year} |{" "}
-                      {car.lots[0] &&
-                        car.lots[0].odometer &&
-                        car.lots[0].odometer.km}{" "}
-                      км
-                    </p>
+            <motion.div
+              className=""
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              {loading ? (
+                <div className="flex items-center space-x-4 p-4">
+                  <Skeleton className="h-96 w-[85vw] rounded-full sm:w-[340px]" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-full" />
                   </div>
-                  {car.lots && car.lots[car.lots.length - 1].buy_now !== 0 && (
-                    <PriceBox price={car.lots[car.lots.length - 1].buy_now} />
-                  )}
                 </div>
-              </div>
-              {car.lots &&
-                car.lots.map((lot: any) => (
-                  <Carousel key={lot.id}>
-                    <CarouselContent>
-                      {lot.images && lot.images?.normal !== null ? (
-                        lot.images.normal.map((img: any, index: any) => (
-                          <CarouselItem key={index}>
-                            <img
-                              src={img}
-                              alt={`Car image ${index + 1}`}
-                              height={300}
-                              className="aspect-square w-full rounded-md object-cover"
-                              width="300"
-                            />
-                          </CarouselItem>
-                        ))
-                      ) : (
-                        <CarouselItem>
-                          <div className="aspect-square h-[300px] w-[300px] rounded-md object-cover">
-                            No Image
-                          </div>
-                        </CarouselItem>
-                      )}
-                    </CarouselContent>
-                  </Carousel>
-                ))}
-              <CardContent>
-                <div className="mt-4 grid gap-2">
-                  <CardFooter className="">
+              ) : (
+                <div className="relative">
+                  {car.lots?.length &&
+                    car.lots[car.lots.length - 1]?.images && (
+                      <Carousel className="h-96 w-full" key={car.id}>
+                        <CarouselContent>
+                          {car.lots[car.lots.length - 1].images?.normal !==
+                          null ? (
+                            car.lots[car.lots.length - 1].images.normal.map(
+                              (img: any, index: any) => (
+                                <CarouselItem key={index}>
+                                  <motion.img
+                                    src={img}
+                                    alt={`Car image ${index + 1}`}
+                                    width={600}
+                                    height={400}
+                                    className="h-96 w-full object-cover"
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ duration: 0.3 }}
+                                  />
+                                </CarouselItem>
+                              ),
+                            )
+                          ) : (
+                            <CarouselItem>
+                              <div className="aspect-square h-[300px] w-[300px] rounded-md object-cover">
+                                No Image
+                              </div>
+                            </CarouselItem>
+                          )}
+                        </CarouselContent>
+                      </Carousel>
+                    )}
+                  <motion.div
+                    className={cn(
+                      car.lots?.[car.lots.length - 1]?.buy_now
+                        ? `absolute right-2 top-2 rounded-md bg-red-600/90 px-2 py-1 uppercase text-white shadow-lg backdrop-blur-sm`
+                        : `hidden`,
+                    )}
+                    initial={{ y: -10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 0.5 }}
+                  >
+                    <div className="text-2xl font-bold">
+                      ${car.lots?.[car.lots.length - 1]?.buy_now}
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    className="absolute left-2 top-2 rounded-md bg-orange-700/75 px-2 py-1 uppercase text-white shadow-lg backdrop-blur-sm"
+                    initial={{ y: -10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 0.5 }}
+                  >
+                    <div className="text-xl font-bold">
+                      {splitDateAndTime(
+                        car?.lots[car.lots.length - 1]?.sale_date,
+                      )}{" "}
+                      дни до търга
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ y: -10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 0.5 }}
+                    className="absolute bottom-0 w-full bg-white"
+                  >
                     <Breadcrumb>
-                      <BreadcrumbList className="mt-4 flex w-full">
+                      <BreadcrumbList className="mb-2 mt-2 flex w-full items-center justify-evenly">
                         {car.model && car.manufacturer && (
                           <>
                             <BreadcrumbItem>
@@ -171,16 +186,38 @@ const CarCard = ({ car }: { car: any }) => {
                         </BreadcrumbItem>
                       </BreadcrumbList>
                     </Breadcrumb>
-                  </CardFooter>
-
-                  <div className="flex w-full">
-                    <button className="inline-flex h-[40px] w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                      Купи сега <GiTakeMyMoney size={30} />
-                    </button>
-                  </div>
+                  </motion.div>
                 </div>
-              </CardContent>
-            </Card>
+              )}
+              <div className="bg-card p-4 text-white shadow-lg">
+                <motion.div
+                  className="mb-2 flex items-start justify-between"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1, duration: 0.5 }}
+                >
+                  <div className="flex w-full flex-col">
+                    <h3 className="text-xl font-bold">
+                      {car.year && car.year}{" "}
+                      {car.manufacturer && car.manufacturer.name}{" "}
+                      {car.model && car.model.name}
+                    </h3>
+                    <p className="text-sm">Sedan, Gasoline</p>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  className="flex w-full justify-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 2.5, duration: 0.5 }}
+                >
+                  <button className="inline-flex h-[40px] w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                    Купи сега <GiTakeMyMoney size={30} />
+                  </button>
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
         </>
       </DrawerTrigger>
