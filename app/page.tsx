@@ -14,6 +14,7 @@ import { Button } from "@components/ui/button";
 import Link from "next/link";
 import Loading from "@components/loading";
 import { Suspense } from "react";
+import Cookie from "@components/bottom/cookie/Cookie";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {

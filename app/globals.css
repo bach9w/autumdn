@@ -240,7 +240,7 @@
 }
 
 .footer__copyrights-link {
-  @apply flex flex-1 justify-center gap-10 max-sm:mt-4 sm:justify-end;
+  @apply grid grid-cols-2 md:grid-cols-4;
 }
 /* END: Footer styles */
 

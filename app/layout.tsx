@@ -8,6 +8,7 @@ import { Viewport } from "next";
 import { Montserrat } from "next/font/google";
 import StickyBottomNav from "@/components/bottom/sticky-bottom";
 import { Analytics } from "@vercel/analytics/react";
+import Cookie from "@components/bottom/cookie/Cookie";
 
 export const metadata = {
   title: "MYRIDE",
@@ -33,7 +34,7 @@ export default function RootLayout({
             <NavBar />
 
             <div className="">{children}</div>
-            <StickyBottomNav />
+            <Cookie />
             <div className="bg-black">
               <Footer />
             </div>

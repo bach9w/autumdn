@@ -3,9 +3,9 @@ import React from "react";
 import { HeroParallax } from "./ui/hero-parallax";
 
 export function HeroParallaxDemo() {
-	return (
-		<div className="">
-			<HeroParallax />
-		</div>
-	);
+  return (
+    <div className="">
+      <HeroParallax />
+    </div>
+  );
 }
