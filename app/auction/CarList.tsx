@@ -4,7 +4,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import CarCard from "./CarCard";
 
 import Loading from "@components/loading";
-import { Button } from "@components/ui/button";
+
 import { useFormatDate } from "@hooks/useFormatData";
 import useSWR from "swr";
 
@@ -24,7 +24,7 @@ function Cars({ filters }: { filters: any }) {
     fetcher,
   );
 
-  if (error) return "An error has occurred.";
+  if (error) return "Изникна грешка, моля презаредете страницата.";
   if (isLoading) return <Loading />;
 
   return (

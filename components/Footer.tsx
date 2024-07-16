@@ -44,11 +44,17 @@ const Footer = () => (
       <p>@2024 MYRIDE. Всички права запазени</p>
 
       <div className="footer__copyrights-link">
-        <Link href="/" className="text-gray-500">
-          Правила за поверителност
+        <Link href="/pravila" className="text-gray-500">
+          Правила за ползване
         </Link>
-        <Link href="/" className="text-gray-500">
-          Условия и положения
+        <Link href="/politika" className="text-gray-500">
+          Политика за поверителост
+        </Link>
+        <Link href="/otgovornost" className="text-gray-500">
+          Отговорност
+        </Link>
+        <Link href="/biskvitki" className="text-gray-500">
+          Бисквитки
         </Link>
       </div>
     </div>

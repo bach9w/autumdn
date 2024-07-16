@@ -15,8 +15,6 @@ const Manufacture = ({ params }: { params: { slug: string } }) => {
 
   const [loading, setLoading] = useState(false);
 
-  //
-
   const { data, error, isLoading } = useSWR(`/api/carByVin/${slug}`, fetcher);
 
   if (error) return "An error has occurred.";
