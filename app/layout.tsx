@@ -9,12 +9,15 @@ import { Montserrat } from "next/font/google";
 import StickyBottomNav from "@/components/bottom/sticky-bottom";
 import { Analytics } from "@vercel/analytics/react";
 import Cookie from "@components/bottom/cookie/Cookie";
-import Head from "next/head";
 
 export const metadata = {
   title: "MYRIDE",
   description: "MYRIDE IMPORT",
+  metadataBase: new URL("https://myride.bg"),
   openGraph: {
+    title: "MYRIDE.BG",
+    description: "Внос на автомобили от Америка и Канада",
+    url: "https://myride.bg",
     images: "/myride_logo.jpg",
   },
 };
@@ -32,16 +35,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
-        <meta property="og:image" content="/myride_logo.jpg" />
-        <meta property="og:title" content="MyRide.BG" />
-        <meta
-          property="og:description"
-          content="Внос на автомобили от Америка и Канада"
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://myride.bg" />
-      </Head>
       <body className="relative">
         <main className={cn(montserrat.className, "bg-orange-700")}>
           <ConvexClientProvider>
