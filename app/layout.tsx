@@ -30,13 +30,6 @@ export const metadata = {
       },
     ],
   },
-  other: {
-    fb: [
-      {
-        app_id: "157594147428347",
-      },
-    ],
-  },
 };
 
 export const viewport: Viewport = {
@@ -52,6 +45,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta property="fb:app_id" content="157594147428347" />
+      </head>
       <body className="relative">
         <main className={cn(montserrat.className, "bg-orange-700")}>
           <ConvexClientProvider>
