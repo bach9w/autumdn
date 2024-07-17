@@ -18,7 +18,15 @@ export const metadata = {
     title: "MYRIDE.BG",
     description: "Внос на автомобили от Америка и Канада",
     url: "https://myride.bg",
-    images: "/myride_logo.jpg",
+    images: [
+      {
+        url: "https://myride.bg/myride_logo.jpg",
+        secureUrl: "https://myride.bg/myride_logo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "MYRIDE.BG",
+      },
+    ],
   },
 };
 
