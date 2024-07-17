@@ -4,6 +4,7 @@ import { fetchCarByManufacturer } from "@app/api/cars";
 import CarCard from "@app/auction/CarCard";
 import Pagination from "@app/auction/components/Pagination";
 import Loading from "@components/loading";
+import { SelectDemo } from "@components/SelectC";
 import { Button } from "@components/ui/button";
 import {
   Card,
@@ -16,6 +17,8 @@ import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import { years } from "@constants/import";
+import { ComboBoxResponsive } from "@components/search/responsive-combobox";
 
 const Manufacture = ({ params }: { params: { slug: any } }) => {
   const { slug } = params;
@@ -24,6 +27,8 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [fromYear, setFromYear] = useState<any>(null);
+  const [toYear, setToYear] = useState<any>(null);
 
   const page = searchParams.get("page") || 1;
 
@@ -45,27 +50,54 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
         }
       } else if (slug.length === 2) {
         try {
-          const response = await fetch(
-            `/api/cars?per_page=21&manufacturer=${slug[0]}&model=${slug[1]}&sale_date_in_days=10&page=${page}`,
-            {
-              next: { revalidate: 3600 },
-            },
-          );
+          if (
+            (fromYear !== undefined && fromYear !== null) ||
+            (toYear !== undefined && toYear !== null)
+          ) {
+            let query = `/api/cars?per_page=21&manufacturer=${slug[0]}&model=${slug[1]}&sale_date_in_days=10&page=${page}`;
 
-          const result = await response.json();
-          if (!response.ok) {
-            throw new Error(result.error);
+            if (fromYear !== undefined && fromYear !== null) {
+              query += `&from_year=${fromYear}`;
+            }
+
+            if (toYear !== undefined && toYear !== null) {
+              query += `&to_year=${toYear}`;
+            }
+
+            const response = await fetch(query, {
+              next: { revalidate: 3600 },
+            });
+
+            const result = await response.json();
+            if (!response.ok) {
+              throw new Error(result.error);
+            }
+            setData(result.data);
+            setLoading(false);
+          } else {
+            const response = await fetch(
+              `/api/cars?per_page=21&manufacturer=${slug[0]}&model=${slug[1]}&sale_date_in_days=10&page=${page}`,
+              {
+                next: { revalidate: 3600 },
+              },
+            );
+
+            const result = await response.json();
+            if (!response.ok) {
+              throw new Error(result.error);
+            }
+            setData(result.data);
+            setLoading(false);
           }
-          setData(result.data);
-          setLoading(false);
         } catch (error) {
           console.error(error);
         }
       }
     }
-    setLoading(true);
+
     fetchData();
-  }, [page]);
+  }, [page, fromYear, toYear]);
+
   return (
     <Suspense fallback={<Loading />}>
       {loading && <Loading />}
@@ -116,6 +148,24 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
         )}
         {slug[0] && slug[1] && (
           <>
+            <div className="mb-2 grid gap-2 md:grid-cols-2">
+              <ComboBoxResponsive
+                disabled={false}
+                setSelected={(e) => {
+                  setFromYear(e?.name);
+                }}
+                model="Година от"
+                data={years}
+              />
+              <ComboBoxResponsive
+                disabled={false}
+                setSelected={(e) => {
+                  setToYear(e?.name);
+                }}
+                model="Година до"
+                data={years}
+              />
+            </div>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
               {data &&
                 Array.isArray(data) &&

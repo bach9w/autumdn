@@ -20,7 +20,7 @@ export function SelectDemo({
   title: string;
   type: string;
   data: any;
-  onChange?: (value: string) => void;
+  onChange?: (value: any) => void;
 }) {
   const [typeOf, setTypeOf] = React.useState(type);
 

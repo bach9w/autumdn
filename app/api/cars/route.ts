@@ -14,6 +14,8 @@ export async function GET(request: Request) {
   const manufacturer = searchParams.get("manufacturer") || "";
   const model = searchParams.get("model") || "";
   const page = searchParams.get("page") || "";
+  const from_year = searchParams.get("from_year") || "";
+  const to_year = searchParams.get("to_year") || "";
 
   const headers = {
     "x-api-key": "a48f8f672e29bd479c652f76f100bcf4", // Поставете вашия API ключ тук
@@ -32,6 +34,8 @@ export async function GET(request: Request) {
   if (model) url.searchParams.set("model_id", model);
   if (page) url.searchParams.set("page", page);
   if (status) url.searchParams.set("status", status);
+  if (from_year) url.searchParams.set("from_year", from_year);
+  if (to_year) url.searchParams.set("to_year", to_year);
 
   try {
     const response = await fetch(url.toString(), {
