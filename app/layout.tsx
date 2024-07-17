@@ -18,7 +18,7 @@ export const metadata = {
     title: "MYRIDE.BG",
     description: "Внос на автомобили от Америка и Канада",
     url: "https://myride.bg",
-    type: "image/jpg",
+    type: "website",
 
     images: [
       {
