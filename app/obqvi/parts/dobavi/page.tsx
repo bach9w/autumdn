@@ -34,6 +34,7 @@ import { PictureInPicture } from "lucide-react";
 
 import { SelectDemo } from "@components/SelectC";
 import { Label } from "@components/ui/label";
+import { Textarea } from "@components/ui/textarea";
 
 function Display({ name }: { name: string }) {
   const array = useQuery(api.files.getUrl, { name });
@@ -103,6 +104,9 @@ const Dobavi = () => {
   const [selectedManufacturer, setSelectedManufacturer] = useState<string>("");
   const [selectedModel, setSelectedModel] = useState<string>("");
   const [name, setName] = useState<string>("");
+  const [price, setPrice] = useState<any>();
+  const [information, setInformation] = useState<string>("");
+
   const generateUploadUrl = useMutation(api.files.generateUploadUrl);
   const saveStorageId = useMutation(api.files.saveStorageId);
   const saveAfterUpload = async (uploaded: UploadFileResponse[]) => {
@@ -110,6 +114,9 @@ const Dobavi = () => {
       name: name,
       manufacturer: selectedManufacturer,
       model: selectedModel,
+      price: price,
+      information: information,
+      is_in_stock: true,
 
       uploaded: uploaded.map(({ response }) => ({
         storageId: (response as any).storageId,
@@ -142,21 +149,27 @@ const Dobavi = () => {
       <Card className="m-2 flex min-h-full w-2/3 flex-col items-center justify-center text-[17px]">
         <CardHeader>Добави нова част</CardHeader>
         <CardContent>
-          <div className="flex flex-col gap-4">
-            <div>
-              <label className="">Добави име</label>
-              <Input value={name} onChange={(e) => setName(e.target.value)} />
+          <div className="grid gap-4">
+            <Label htmlFor="title">Добави име</Label>
+            <Input value={name} onChange={(e) => setName(e.target.value)} />
+            <Label htmlFor="title">Цена</Label>
+            <Input value={price} onChange={(e) => setPrice(e.target.value)} />
+            <label className="">Информация</label>
+            <Textarea
+              value={information}
+              onChange={(e) => setInformation(e.target.value)}
+            />
 
-              <Label htmlFor="title">Марка</Label>
-              <SelectDemo
-                title="марка"
-                type="Производител"
-                data={manufacturers}
-                onChange={(value) =>
-                  setSelectedManufacturer(JSON.parse(value).id)
-                }
-              />
-            </div>
+            <Label htmlFor="title">Марка</Label>
+            <SelectDemo
+              title="марка"
+              type="Производител"
+              data={manufacturers}
+              onChange={(value) =>
+                setSelectedManufacturer(JSON.parse(value).id)
+              }
+            />
+
             <Label htmlFor="title">Модел</Label>
             <SelectDemo
               title="модел"

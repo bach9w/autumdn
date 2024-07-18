@@ -1,5 +1,5 @@
 "use client";
-import { Card, CardContent, CardHeader } from "@components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@components/ui/card";
 import { Badge } from "@components/ui/badge";
 
 import { useQuery } from "convex/react";
@@ -12,6 +12,8 @@ import {
 } from "@components/ui/carousel";
 import { Label } from "@components/ui/label";
 import { Button } from "@components/ui/button";
+import { motion } from "framer-motion";
+import { cn } from "@lib/utils";
 
 const Page = () => {
   const parts = useQuery(api.parts.getParts);
@@ -39,6 +41,20 @@ const Page = () => {
                       </CarouselItem>
                     ))}
                   </CarouselContent>
+                  <motion.div
+                    className={cn(
+                      part.formatted_price
+                        ? `absolute right-2 top-2 rounded-md bg-red-600/90 px-2 py-1 uppercase text-white shadow-lg backdrop-blur-sm`
+                        : `hidden`,
+                    )}
+                    initial={{ y: -10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 0.5 }}
+                  >
+                    <div className="text-2xl font-bold">
+                      {part.formatted_price}
+                    </div>
+                  </motion.div>
                 </Carousel>
 
                 <div className="mt-2 flex w-full justify-center">
@@ -54,6 +70,10 @@ const Page = () => {
                   </Badge>
                 </div>
               </CardContent>
+              <CardFooter className="flex w-full flex-col items-center justify-center">
+                <div>Допълнителна информация</div>
+                <div>{part.information}</div>
+              </CardFooter>
             </Card>
           ))}
       </div>

@@ -28,13 +28,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Link from "next/link";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 
 const Parts = () => {
   const parts = useQuery(api.parts.getParts);
+  const deletePart = useMutation(api.parts.deletePart);
   return (
-    <div className="mt-4 flex h-full min-h-screen items-center justify-center">
+    <div className="mt-4 flex h-full min-h-screen items-center justify-center p-2">
       <Card className="m-2">
         <CardHeader>
           <CardTitle className="flex w-full justify-between">
@@ -53,11 +54,11 @@ const Parts = () => {
                   <span className="sr-only">снимка</span>
                 </TableHead>
                 <TableHead>Име</TableHead>
-                <TableHead>Наличност</TableHead>
-
                 <TableHead className="hidden md:table-cell">
-                  Добавена на
+                  Наличност
                 </TableHead>
+
+                <TableHead>Цена</TableHead>
                 <TableHead>
                   <span className="sr-only">Actions</span>
                 </TableHead>
@@ -68,26 +69,22 @@ const Parts = () => {
                 parts.map((part) => (
                   <TableRow>
                     <TableCell className="hidden sm:table-cell">
-                      {part.base_image.map((img) => (
-                        <img
-                          alt="Product image"
-                          className="aspect-square rounded-md object-cover"
-                          height="64"
-                          src={img.path}
-                          width="64"
-                        />
-                      ))}
+                      <img
+                        alt="Product image"
+                        className="aspect-square rounded-md object-cover"
+                        height="64"
+                        src={part.base_image[0].path}
+                        width="64"
+                      />
                     </TableCell>
                     <TableCell className="font-medium">{part.name}</TableCell>
-                    <TableCell>
+                    <TableCell className="hidden md:table-cell">
                       <Badge variant="outline">
                         {part.is_in_stock ? "Да " : "Не"}
                       </Badge>
                     </TableCell>
 
-                    <TableCell className="hidden md:table-cell">
-                      {part._creationTime}
-                    </TableCell>
+                    <TableCell>{part.formatted_price}</TableCell>
                     <TableCell>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -102,8 +99,20 @@ const Parts = () => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Действия</DropdownMenuLabel>
-                          <DropdownMenuItem>Промени</DropdownMenuItem>
-                          <DropdownMenuItem>Изтрий</DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <Link href={`/obqvi/parts/${part._id}`}>
+                              Промени
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              deletePart({
+                                id: part._id,
+                              });
+                            }}
+                          >
+                            Изтрий
+                          </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>

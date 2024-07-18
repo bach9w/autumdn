@@ -301,6 +301,7 @@ export default defineSchema({
     qty: v.optional(v.any()),
     new_from: v.optional(v.any()),
     new_to: v.optional(v.any()),
+    information: v.optional(v.any()),
     base_image: v.array(
       v.object({
         id: v.optional(v.any()),

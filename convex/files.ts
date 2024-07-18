@@ -54,6 +54,9 @@ export const saveStorageId = mutation({
   args: {
     name: v.string(),
     model: v.any(),
+    information: v.string(),
+    price: v.any(),
+    is_in_stock: v.boolean(),
     manufacturer: v.any(),
     uploaded: v.array(
       v.object({
@@ -75,6 +78,10 @@ export const saveStorageId = mutation({
 
     ctx.db.insert("parts", {
       name: args.name,
+      information: args.information,
+      is_in_stock: args.is_in_stock,
+      formatted_price: args.price,
+
       base_image: args.uploaded.map((image) => ({
         id: image.storageId,
         filename: image.storageId,
