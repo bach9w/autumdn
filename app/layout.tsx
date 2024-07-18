@@ -49,7 +49,12 @@ export default function RootLayout({
         <meta property="fb:app_id" content="157594147428347" />
       </head>
       <body className="relative">
-        <main className={cn(montserrat.className, "bg-orange-700")}>
+        <main
+          className={cn(
+            montserrat.className,
+            "bg-gradient-to-r from-gray-800 to-black",
+          )}
+        >
           <ConvexClientProvider>
             <NavBar />
 
