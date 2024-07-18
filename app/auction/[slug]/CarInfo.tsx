@@ -37,6 +37,11 @@ function splitDateAndTime(date: string) {
   return `${day}.${month}.${year}`;
 }
 
+function priceBGN(price: number) {
+  const changed = price * 1.792846;
+  return changed.toFixed(2);
+}
+
 export function CarInfo({ data }: { data: any }) {
   console.log(data);
   return (
@@ -139,9 +144,10 @@ export function CarInfo({ data }: { data: any }) {
                       </Badge>
 
                       {data.lots[data.lots.length - 1].buy_now ? (
-                        <Badge className="flex w-full justify-center uppercase">
+                        <Badge className="text-md flex h-10 w-full justify-center bg-red-700 uppercase">
                           Купи сега за -{" "}
-                          {data.lots[data.lots.length - 1].buy_now} $
+                          {priceBGN(data.lots[data.lots.length - 1].buy_now)}{" "}
+                          ЛВ.
                         </Badge>
                       ) : (
                         <Badge className="flex w-full justify-center uppercase">

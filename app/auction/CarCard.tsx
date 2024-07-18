@@ -56,6 +56,11 @@ function splitDateAndTime(date: string) {
   return diffInDays;
 }
 
+function priceBGN(price: number) {
+  const changed = price * 1.792846;
+  return changed.toFixed(2);
+}
+
 const CarCard = ({ car }: { car: any }) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -126,7 +131,7 @@ const CarCard = ({ car }: { car: any }) => {
                     transition={{ delay: 0.5, duration: 0.5 }}
                   >
                     <div className="text-2xl font-bold">
-                      ${car.lots?.[car.lots.length - 1]?.buy_now}
+                      {priceBGN(car.lots?.[car.lots.length - 1]?.buy_now)} ЛВ.
                     </div>
                   </motion.div>
                   <motion.div
