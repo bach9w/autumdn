@@ -23,12 +23,15 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@components/ui/carousel";
 
 import ReactWhatsapp from "react-whatsapp";
 import Video360 from "./Video360";
 import DamageCheck from "../components/DamageCheck";
 import { motion } from "framer-motion";
+import { cn } from "@lib/utils";
 
 function splitDateAndTime(date: string) {
   if (!date) {
@@ -178,6 +181,22 @@ export function CarInfo({ data }: { data: any }) {
               </CardHeader>
               <CardContent>
                 <Carousel>
+                  <motion.div
+                    className="absolute right-8 z-50 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
+                    initial={{ y: -10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 0.5 }}
+                  >
+                    <CarouselNext className="bg-red-500" color="black" />
+                  </motion.div>
+                  <motion.div
+                    className="absolute left-8 z-50 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
+                    initial={{ y: -10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 0.5 }}
+                  >
+                    <CarouselPrevious className="bg-red-500" color="black" />
+                  </motion.div>
                   <CarouselContent>
                     {data?.lots && data?.lots[data.lots.length - 1].images
                       ? data?.lots[data.lots.length - 1]?.images?.big?.map(
