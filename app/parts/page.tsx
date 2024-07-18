@@ -18,7 +18,7 @@ import { cn } from "@lib/utils";
 const Page = () => {
   const parts = useQuery(api.parts.getParts);
   return (
-    <div className="container h-full min-h-screen w-full text-center text-white">
+    <div className="h-full min-h-screen w-full text-center text-white">
       Части за автомобили
       <SearchBar />
       <div className="grid grid-cols-1 gap-4 p-2 md:grid-cols-2 xl:grid-cols-3">
@@ -57,7 +57,7 @@ const Page = () => {
                   </motion.div>
                 </Carousel>
 
-                <div className="mt-2 flex w-full justify-center">
+                <div className="mt-2 flex h-10 w-full justify-center">
                   <Badge className="rounded-r-none">
                     {part.is_new ? "НОВ" : "ВТОРА УПОТРЕБА"}
                   </Badge>

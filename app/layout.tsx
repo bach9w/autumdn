@@ -9,6 +9,7 @@ import { Montserrat } from "next/font/google";
 import StickyBottomNav from "@/components/bottom/sticky-bottom";
 import { Analytics } from "@vercel/analytics/react";
 import Cookie from "@components/bottom/cookie/Cookie";
+import CarbonBackgroundComponent from "@components/layout/carbon";
 
 export const metadata = {
   title: "MYRIDE",
@@ -49,23 +50,25 @@ export default function RootLayout({
         <meta property="fb:app_id" content="157594147428347" />
       </head>
       <body className="relative">
-        <main
-          className={cn(
-            montserrat.className,
-            "bg-gradient-to-r from-gray-800 to-black",
-          )}
-        >
-          <ConvexClientProvider>
-            <NavBar />
+        <CarbonBackgroundComponent>
+          <main
+            className={cn(
+              montserrat.className,
+              "bg-gradient-to-b from-gray-800/30 to-black",
+            )}
+          >
+            <ConvexClientProvider>
+              <NavBar />
 
-            <div className="">{children}</div>
-            <Cookie />
-            <div className="bg-black">
-              <Footer />
-            </div>
-            <Analytics />
-          </ConvexClientProvider>
-        </main>
+              <div className="">{children}</div>
+              <Cookie />
+              <div className="bg-black">
+                <Footer />
+              </div>
+              <Analytics />
+            </ConvexClientProvider>
+          </main>
+        </CarbonBackgroundComponent>
       </body>
     </html>
   );

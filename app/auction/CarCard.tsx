@@ -36,6 +36,7 @@ import { Button } from "@components/ui/button";
 import DamageCheck from "./components/DamageCheck";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@components/ui/skeleton";
+import CarbonBackgroundComponent from "@components/layout/carbon";
 
 function splitDateAndTime(date: string) {
   // Създаване на дата обект от предоставената дата
@@ -226,61 +227,65 @@ const CarCard = ({ car }: { car: any }) => {
           </div>
         </>
       </DrawerTrigger>
-      <DrawerContent className="border-none bg-orange-600">
-        <DrawerHeader>
-          <DrawerTitle className="text-white">Допълнителни детайли</DrawerTitle>
-        </DrawerHeader>
+      <DrawerContent className="border-none bg-orange-600/60">
+        <CarbonBackgroundComponent>
+          <DrawerHeader className="mt-4">
+            <DrawerTitle className="text-white">
+              Допълнителни детайли
+            </DrawerTitle>
+          </DrawerHeader>
 
-        <DrawerFooter>
-          <DrawerDescription className="w-full text-xl text-white">
-            <Badge className="flex w-full justify-center rounded-b-none text-center text-xl">
-              Детайли
-            </Badge>
-            <Separator orientation="horizontal" />
-            <h2 className="bg-black text-center">
-              Пробег -{" "}
-              {car.lots[0] && car.lots[0].odometer && car.lots[0].odometer.km}{" "}
-              км
-            </h2>
-            <Separator orientation="horizontal" />
+          <DrawerFooter>
+            <DrawerDescription className="w-full text-xl text-white">
+              <Badge className="flex w-full justify-center rounded-b-none text-center text-xl">
+                Детайли
+              </Badge>
+              <Separator orientation="horizontal" />
+              <h2 className="bg-black text-center">
+                Пробег -{" "}
+                {car.lots[0] && car.lots[0].odometer && car.lots[0].odometer.km}{" "}
+                км
+              </h2>
+              <Separator orientation="horizontal" />
 
-            <h2 className={cn("bg-black text-center text-[20px]")}>
-              Двигател - {car.engine && car.engine.name}
-            </h2>
+              <h2 className={cn("bg-black text-center text-[20px]")}>
+                Двигател - {car.engine && car.engine.name}
+              </h2>
 
-            <Separator orientation="horizontal" />
+              <Separator orientation="horizontal" />
 
-            <h2 className="bg-black text-center">
-              {car.lots[0] &&
-              car.lots[0].damage &&
-              car.lots[0].damage.main.name !== null ? (
-                <DamageCheck damage={car.lots[0].damage.main.name} />
-              ) : (
-                "Няма"
-              )}
-            </h2>
-            <Separator orientation="horizontal" />
+              <h2 className="bg-black text-center">
+                {car.lots[0] &&
+                car.lots[0].damage &&
+                car.lots[0].damage.main.name !== null ? (
+                  <DamageCheck damage={car.lots[0].damage.main.name} />
+                ) : (
+                  "Няма"
+                )}
+              </h2>
+              <Separator orientation="horizontal" />
 
-            <Badge className="flex w-full items-center justify-center rounded-t-none">
-              ТЪРГ -{" "}
-              {car.lots[car.lots.length - 1] &&
-              car.lots[car.lots.length - 1].sale_date
-                ? `СЛЕД ${splitDateAndTime(car.lots[car.lots.length - 1].sale_date)} ДНИ`
-                : `  сега `}
-            </Badge>
-          </DrawerDescription>
-          <Link
-            className="flex w-full items-center justify-center"
-            href={`/auction/${car.vin}`}
-          >
-            <Button className="w-full">Отвори аукциона</Button>
-          </Link>
-          <DrawerClose>
-            <Button className="w-full" variant="outline">
-              Разгледай другите
-            </Button>
-          </DrawerClose>
-        </DrawerFooter>
+              <Badge className="flex w-full items-center justify-center rounded-t-none">
+                ТЪРГ -{" "}
+                {car.lots[car.lots.length - 1] &&
+                car.lots[car.lots.length - 1].sale_date
+                  ? `СЛЕД ${splitDateAndTime(car.lots[car.lots.length - 1].sale_date)} ДНИ`
+                  : `  сега `}
+              </Badge>
+            </DrawerDescription>
+            <Link
+              className="flex w-full items-center justify-center"
+              href={`/auction/${car.vin}`}
+            >
+              <Button className="w-full">Отвори аукциона</Button>
+            </Link>
+            <DrawerClose>
+              <Button className="w-full" variant="outline">
+                Разгледай другите
+              </Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </CarbonBackgroundComponent>
       </DrawerContent>
     </Drawer>
   );

@@ -22,6 +22,12 @@ function Cars({ filters }: { filters: any }) {
   const { data, error, isLoading } = useSWR(
     `/api/cars?${query.toString()}&status=3&sale_date_from=${formattedDate}`,
     fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      dedupingInterval: 60000,
+      refreshInterval: 300000,
+    },
   );
 
   if (error) return "Изникна грешка, моля презаредете страницата.";
