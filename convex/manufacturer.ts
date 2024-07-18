@@ -14,6 +14,10 @@ export const getManufacturerById = query({
 export const getManufacturers = query({
   args: {},
   handler: async (ctx) => {
-    return await ctx.db.query("manufacturer").collect();
+    const result = await ctx.db.query("manufacturer").order("desc").take(10);
+    const result2 = await ctx.db.query("manufacturer").collect();
+
+    const mix = result.concat(result2);
+    return mix;
   },
 });

@@ -19,6 +19,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { years } from "@constants/import";
 import { ComboBoxResponsive } from "@components/search/responsive-combobox";
+import { motion } from "framer-motion";
 
 const Manufacture = ({ params }: { params: { slug: any } }) => {
   const { slug } = params;
@@ -125,23 +126,27 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
             {data &&
               data.map((models: any) => {
                 return (
-                  <div key={models.id}>
-                    <div
-                      onClick={() => {
-                        router.push(`/manufacturers/${slug}/${models.id}`);
+                  <Link href={`/manufacturers/${slug}/${models.id}`}>
+                    <motion.div
+                      key={models.id}
+                      initial={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      whileInView={{ opacity: 1 }}
+                      whileHover={{
+                        scale: 1.05,
+                        boxShadow: "0px 0px 10px rgba(0, 255, 255, 0.2)",
                       }}
+                      viewport={{ once: true }}
+                      className="flex p-1"
                     >
                       <Card
-                        className="flex min-h-[100px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg border-none bg-card text-card-foreground shadow-lg"
+                        className="flex h-[200px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border-none bg-card text-card-foreground shadow-lg"
                         key={models.id}
                       >
                         <CardHeader>{models.name}</CardHeader>
-                        <CardFooter className="full flex w-full items-center justify-center bg-white uppercase text-black hover:bg-orange-700 hover:text-white">
-                          Налични обяви - {models.cars_qty}
-                        </CardFooter>
                       </Card>
-                    </div>
-                  </div>
+                    </motion.div>
+                  </Link>
                 );
               })}
           </div>
