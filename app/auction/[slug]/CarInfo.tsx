@@ -39,9 +39,9 @@ function splitDateAndTime(date: string) {
   return `${day}.${month}.${year}`;
 }
 
-function priceBGN(price: number) {
+function priceBGN(price: number): string {
   const changed = price * 1.792846;
-  return changed.toFixed(2);
+  return Number(changed.toFixed(0)).toLocaleString("bg-BG");
 }
 
 export function CarInfo({ data }: { data: any }) {

@@ -56,9 +56,9 @@ function splitDateAndTime(date: string) {
   return diffInDays;
 }
 
-function priceBGN(price: number) {
+function priceBGN(price: number): string {
   const changed = price * 1.792846;
-  return changed.toFixed(2);
+  return Number(changed.toFixed(0)).toLocaleString("bg-BG");
 }
 
 const CarCard = ({ car }: { car: any }) => {
