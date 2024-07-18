@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -27,6 +28,7 @@ import {
 import ReactWhatsapp from "react-whatsapp";
 import Video360 from "./Video360";
 import DamageCheck from "../components/DamageCheck";
+import { motion } from "framer-motion";
 
 function splitDateAndTime(date: string) {
   if (!date) {
@@ -46,8 +48,13 @@ export function CarInfo({ data }: { data: any }) {
   console.log(data);
   return (
     <main className="grid flex-1 items-start gap-4 p-0 sm:px-3 sm:py-0 md:gap-8">
-      <div className="mx-auto grid max-w-[59rem] flex-1 auto-rows-max gap-4 xl:max-w-[80rem]">
-        <div className="flex items-center gap-4">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="mx-auto grid max-w-[59rem] flex-1 auto-rows-max gap-4 xl:max-w-[80rem]"
+      >
+        <div className="flex items-center justify-between gap-4">
           <Button variant="outline" size="icon" className="h-7 w-7">
             <ChevronLeft
               className="h-4 w-4"
@@ -57,43 +64,43 @@ export function CarInfo({ data }: { data: any }) {
             />
             <span className="sr-only">Назад</span>
           </Button>
-          <h1 className="text-wrap h-full flex-1 shrink-0 text-xl font-semibold tracking-tight text-white sm:grow-0 sm:whitespace-nowrap">
+
+          <h1 className="text-nowrap h-full flex-1 shrink-0 text-xl font-semibold tracking-tight text-white sm:grow-0 sm:whitespace-nowrap">
             {data.title}
           </h1>
-          <Badge
-            variant="outline"
-            className="ml-auto rounded-none bg-white sm:ml-0"
-          >
-            В движение
+          <Badge className="h-8 bg-orange-600 p-4 font-bold">
+            ПАЛИ И ТРЪГВА
           </Badge>
-          <div className="hidden w-full items-center gap-2 md:ml-auto md:flex">
-            <Button
-              className="flex items-center justify-center gap-1 hover:bg-red-500 hover:text-white"
-              variant="outline"
-              size="sm"
+        </div>
+
+        <div className="hidden w-full items-center justify-evenly gap-2 md:ml-auto md:flex">
+          <Button
+            className="inline-flex h-[40px] w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+            variant="outline"
+            size="sm"
+          >
+            <a
+              className="flex animate-pulse items-center justify-center gap-1"
+              href="tel:+359876995555"
             >
-              <a
-                className="flex animate-pulse items-center justify-center gap-1"
-                href="tel:+359876995555"
-              >
-                Получи информация <PhoneCall className="h-4 w-4" />
-              </a>
-            </Button>
-            <Button
-              className="flex items-center justify-center gap-1 hover:bg-red-500 hover:text-white"
-              size="sm"
+              Получи информация <PhoneCall className="h-4 w-4" />
+            </a>
+          </Button>
+
+          <Button
+            className="inline-flex h-[40px] w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+            size="sm"
+          >
+            <ReactWhatsapp
+              className="flex animate-pulse items-center justify-center gap-1"
+              element="webview"
+              number="+359876995555"
+              message={`Здравейте, интересувам се от автомил с VIN: ${data.vin}, https://myride.bg/auction/${data.vin}`}
             >
-              <ReactWhatsapp
-                className="flex animate-pulse items-center justify-center gap-1"
-                element="webview"
-                number="+359876995555"
-                message={`Здравейте, интересувам се от автомил с VIN: ${data.vin}, https://myride.bg/auction/${data.vin}`}
-              >
-                Изпрати запитване{" "}
-                <MessageCircleQuestionIcon className="h-4 w-4" />
-              </ReactWhatsapp>
-            </Button>
-          </div>
+              Изпрати запитване{" "}
+              <MessageCircleQuestionIcon className="h-4 w-4" />
+            </ReactWhatsapp>
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 items-center justify-center gap-2 md:hidden">
@@ -383,8 +390,7 @@ export function CarInfo({ data }: { data: any }) {
               }
             />
           )}
-      </div>
-      <div></div>
+      </motion.div>
     </main>
   );
 }
