@@ -63,7 +63,7 @@ export function CardMain({ car }: { car: CarProps }) {
                 {car.year} | {car.km} km
               </p>
             </div>
-            <div className="text-2xl font-bold text-white">$45,999</div>
+            <div className="text-2xl font-bold text-white">{car?.vin} ЛВ.</div>
           </div>
         </div>
       </div>
@@ -110,10 +110,7 @@ export function CardMain({ car }: { car: CarProps }) {
                   <h4 className="text-sm font-medium">Двигател</h4>
                   <p>{car.engine}</p>
                 </div>
-                <div>
-                  <h4 className="text-sm font-medium">VIN</h4>
-                  <p>{car.vin}</p>
-                </div>
+                
               </div>
             </AccordionContent>
           </AccordionItem>
