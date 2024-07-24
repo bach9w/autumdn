@@ -7,6 +7,7 @@ import Loading from "@components/loading";
 
 import { useFormatDate } from "@hooks/useFormatData";
 import useSWR from "swr";
+import NewCard from "./components/NewCard";
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
@@ -20,7 +21,7 @@ function Cars({ filters }: { filters: any }) {
   }
 
   const { data, error, isLoading } = useSWR(
-    `/api/cars?${query.toString()}&status=3&sale_date_from=${formattedDate}`,
+    `/api/cars?${query.toString()}&status=3&buy_now=1&sale_date_from=${formattedDate}&sale_date_in_days=10`,
     fetcher,
     {
       revalidateOnFocus: false,
@@ -37,8 +38,8 @@ function Cars({ filters }: { filters: any }) {
     <>
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
         {data?.data.map((car: any) => (
-          <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
-            <CarCard car={car} />
+          <div className="overflow-x-hidden p-2" key={car.id}>
+            <NewCard card={car} />
           </div>
         ))}
       </div>
@@ -47,64 +48,3 @@ function Cars({ filters }: { filters: any }) {
 }
 
 export default Cars;
-
-/*
-{car.lots &&
-							car.lots.map((lot) => (
-								<div key={lot.id}>
-									<p>
-										<strong>Odometer:</strong> {lot.odometer?.km || "Unknown"}{" "}
-										km / {lot.odometer?.mi || "Unknown"} mi
-									</p>
-									<p>
-										<strong>Main Damage:</strong>{" "}
-										{lot.damage?.main?.name || "Unknown"}
-									</p>
-									<p>
-										<strong>Secondary Damage:</strong>{" "}
-										{lot.damage?.second?.name || "Unknown"}
-									</p>
-									<p>
-										<strong>Keys Available:</strong>{" "}
-										{lot.keys_available ? "Yes" : "No"}
-									</p>
-									<p>
-										<strong>Airbags:</strong> {lot.airbags?.name || "Unknown"}
-									</p>
-									<p>
-										<strong>Condition:</strong>{" "}
-										{lot.condition?.name || "Unknown"}
-									</p>
-									<p>
-										<strong>Location:</strong>{" "}
-										{lot.location?.city?.name || "Unknown"},{" "}
-										{lot.location?.state?.name || "Unknown"},{" "}
-										{lot.location?.country?.name || "Unknown"}
-									</p>
-
-									<h2>Images</h2>
-									<div style={{ display: "flex", flexWrap: "wrap" }}>
-										{lot.images?.normal &&
-											lot.images.normal.map((img, index) => (
-												<img
-													key={index}
-													src={img}
-													alt={`Car image ${index + 1}`}
-													style={{
-														width: "200px",
-														height: "150px",
-														margin: "5px",
-													}}
-												/>
-											))}
-									</div>
-
-									<h2>Video</h2>
-									{lot.images?.video && (
-										<video controls width="500">
-											<source src={lot.images.video} type="video/mp4" />
-											Your browser does not support the video tag.
-										</video>
-									)}
-								</div>
-							))}*/

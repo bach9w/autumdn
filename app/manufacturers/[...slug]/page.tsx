@@ -20,6 +20,7 @@ import { Suspense, useEffect, useState } from "react";
 import { years } from "@constants/import";
 import { ComboBoxResponsive } from "@components/search/responsive-combobox";
 import { motion } from "framer-motion";
+import NewCard from "@app/auction/components/NewCard";
 
 const Manufacture = ({ params }: { params: { slug: any } }) => {
   const { slug } = params;
@@ -171,14 +172,14 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
                 data={years}
               />
             </div>
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
               {data &&
                 Array.isArray(data) &&
                 data
                   .filter((car: any) => car.lots)
                   .map((car: any) => (
-                    <div className="-ml-5 -mr-5 overflow-x-hidden" key={car.id}>
-                      <CarCard car={car} />
+                    <div className="overflow-x-hidden p-2" key={car.id}>
+                      <NewCard card={car} />
                     </div>
                   ))}
             </div>

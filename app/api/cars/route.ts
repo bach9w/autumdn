@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   const status = searchParams.get("status") || "3";
   const sale_date = searchParams.get("sale_date_in_days") || "";
   const sale_date_from = searchParams.get("sale_date_from") || "";
-  const condition = searchParams.get("condition") || "";
+  const condition = searchParams.get("condition") || "0";
   const fuel_type = searchParams.get("fuel_type") || "";
   const year = searchParams.get("year") || "";
   const manufacturer = searchParams.get("manufacturer") || "";
@@ -16,6 +16,7 @@ export async function GET(request: Request) {
   const page = searchParams.get("page") || "";
   const from_year = searchParams.get("from_year") || "";
   const to_year = searchParams.get("to_year") || "";
+  const buy_now = searchParams.get("buy_now") || "1";
 
   const headers = {
     "x-api-key": "a48f8f672e29bd479c652f76f100bcf4", // Поставете вашия API ключ тук
@@ -36,6 +37,7 @@ export async function GET(request: Request) {
   if (status) url.searchParams.set("status", status);
   if (from_year) url.searchParams.set("from_year", from_year);
   if (to_year) url.searchParams.set("to_year", to_year);
+  if (buy_now) url.searchParams.set("buy_now", buy_now);
 
   try {
     const response = await fetch(url.toString(), {
