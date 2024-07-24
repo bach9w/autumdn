@@ -226,7 +226,7 @@ function NewCard({ card }: { card: any }) {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex h-40 flex-col items-start gap-4 overflow-auto pb-10 text-xs text-neutral-600 [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch] [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] dark:text-neutral-400 md:h-fit md:text-sm lg:text-base"
+                    className="flex h-20 flex-col items-start gap-4 overflow-auto pb-10 text-xs text-neutral-600 [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch] [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] dark:text-neutral-400 md:h-fit md:text-sm lg:text-base"
                   >
                     {typeof active.lots[active.lots.length - 1].status.name ===
                     "string" ? (
@@ -242,6 +242,26 @@ function NewCard({ card }: { card: any }) {
                       active.lots[active.lots.length - 1].status.id
                     )}
                   </motion.div>
+                  <motion.button
+                    key={`button-${active.title}-${id}`}
+                    layout
+                    initial={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: 1,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      transition: {
+                        duration: 0.05,
+                      },
+                    }}
+                    className="flex h-6 w-full items-center justify-center rounded-full bg-white lg:hidden"
+                    onClick={() => setActive(null)}
+                  >
+                    Затвори <CloseIcon />
+                  </motion.button>
                 </div>
               </div>
             </motion.div>

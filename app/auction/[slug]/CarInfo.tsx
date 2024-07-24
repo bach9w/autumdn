@@ -42,13 +42,23 @@ function splitDateAndTime(date: string) {
   return `${day}.${month}.${year}`;
 }
 
-function priceBGN(price: number): string {
+function priceBGN(price: number): any {
+  if (price === 0)
+    return (
+      <div className="flex w-full items-center justify-between">
+        <p>ЗАПОЧНИ НАДДАВАНЕТО</p>0 ЛВ.
+      </div>
+    );
   const changed = price * 1.792846;
-  return Number(changed.toFixed(0)).toLocaleString("bg-BG");
+  return (
+    <div className="flex w-full items-center justify-between">
+      <p>Купи сега</p>
+      {Number(changed.toFixed(0)).toLocaleString("bg-BG")} ЛВ.
+    </div>
+  );
 }
 
 export function CarInfo({ data }: { data: any }) {
-  console.log(data);
   return (
     <main className="grid flex-1 items-start gap-4 p-0 sm:px-3 sm:py-0 md:gap-8">
       <motion.div
@@ -153,22 +163,9 @@ export function CarInfo({ data }: { data: any }) {
                           )}
                       </Badge>
 
-                      {data.lots[data.lots.length - 1].buy_now ? (
-                        <Badge className="text-md flex h-10 w-full justify-center bg-red-700 uppercase">
-                          Купи сега за -{" "}
-                          {priceBGN(data.lots[data.lots.length - 1].buy_now)}{" "}
-                          ЛВ.
-                        </Badge>
-                      ) : (
-                        <Badge className="flex w-full justify-center uppercase">
-                          Очаквана цена -{" "}
-                          {
-                            data.lots[data.lots.length - 1]
-                              .clean_wholesale_price
-                          }{" "}
-                          $
-                        </Badge>
-                      )}
+                      <Badge className="text-md flex h-10 w-full justify-center bg-red-700 uppercase">
+                        {priceBGN(data.lots[data.lots.length - 1].buy_now)}
+                      </Badge>
                     </div>
                   </div>
                 </div>

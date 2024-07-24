@@ -46,7 +46,7 @@ function Image({ storageId }: { storageId: string }) {
   const getImageUrl = new URL(`${storageLink}/getImage`);
   getImageUrl.searchParams.set("storageId", storageId);
 
-  return <img src={getImageUrl.href} />;
+  return <img height={500} src={getImageUrl.href} />;
 }
 
 export function CardMain({ car }: { car: CarProps }) {
@@ -110,7 +110,6 @@ export function CardMain({ car }: { car: CarProps }) {
                   <h4 className="text-sm font-medium">Двигател</h4>
                   <p>{car.engine}</p>
                 </div>
-                
               </div>
             </AccordionContent>
           </AccordionItem>
