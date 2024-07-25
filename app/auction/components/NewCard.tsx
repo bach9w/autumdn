@@ -322,7 +322,7 @@ function NewCard({ card }: { card: any }) {
                       дни до търг
                     </div>
                   ) : (
-                    "Очаквана дата"
+                    "Наскоро добавена"
                   )}
                 </div>
               </motion.div>
