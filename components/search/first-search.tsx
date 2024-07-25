@@ -17,6 +17,7 @@ import useSWR from "swr";
 import { error } from "console";
 import Loading from "@components/loading";
 import { years } from "@constants/import";
+import { useRouter } from "next/navigation";
 
 export default function SearchComponentFirst() {
   const [chosedManufacturer, setChosedManufacturer] = useState<any>("all");
@@ -25,18 +26,21 @@ export default function SearchComponentFirst() {
   const [yearFrom, setYearFrom] = useState<any>();
   const [yearTo, setYearTo] = useState<any>();
   const [vin, setVin] = useState<string>();
+  const router = useRouter();
 
   const manufacturers = useQuery(api.manufacturer.getManufacturers);
 
   const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
   const { data: modelsData } = useSWR(
-    chosedManufacturer !== "all" ? `/api/models/${chosedManufacturer}` : null,
+    chosedManufacturer !== undefined
+      ? `/api/models/${chosedManufacturer}`
+      : null,
     fetcher,
   );
 
   const { data: generationsData } = useSWR(
-    chosedModel !== "all" ? `/api/generations/${chosedModel}` : null,
+    chosedModel !== undefined ? `/api/generations/${chosedModel}` : null,
     fetcher,
   );
 
@@ -165,6 +169,11 @@ export default function SearchComponentFirst() {
           <Button
             disabled={availabeLoading ? true : false}
             className="rounded-md bg-[#0A1F44] px-6 py-2 text-sm text-white hover:bg-[#0A1F44]/90 focus:ring-2 focus:ring-[#0A1F44] focus:ring-offset-2 md:px-8 md:py-3 md:text-base lg:px-10 lg:py-4 lg:text-lg"
+            onClick={() => {
+              router.push(
+                `?manufacturer=${chosedManufacturer}&model=${chosedModel}&generation=${chosedGeneration}$&from_year=${yearFrom}&to_year=${yearTo}`,
+              );
+            }}
           >
             Покажи {availableCars?.meta?.total}
             <SearchIcon className="relative h-4 w-4 text-[#C0C0C0]" />
