@@ -318,8 +318,16 @@ function NewCard({ card }: { card: any }) {
                     <div>
                       {splitDateAndTime(
                         card.lots[card.lots.length - 1]?.sale_date,
-                      )}{" "}
-                      дни до търг
+                      ) < 0 ? (
+                        <div className="text-red-500">Търгува се</div>
+                      ) : (
+                        <div>
+                          {splitDateAndTime(
+                            card.lots[card.lots.length - 1]?.sale_date,
+                          )}{" "}
+                          дни до търг
+                        </div>
+                      )}
                     </div>
                   ) : (
                     "Наскоро добавена"
