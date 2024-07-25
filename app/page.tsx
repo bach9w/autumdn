@@ -15,6 +15,7 @@ import Link from "next/link";
 import Loading from "@components/loading";
 import { Suspense } from "react";
 import Cookie from "@components/bottom/cookie/Cookie";
+import SearchComponentFirst from "@components/search/first-search";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
@@ -28,7 +29,12 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <main className="overflow-hidden">
       <div className="h-full">
-        <HeroParallaxDemo />
+        <div className="min-h-screen">
+          <HeroParallaxDemo />
+          <div className="p-2 xl:mt-32">
+            <SearchComponentFirst />
+          </div>
+        </div>
         <div className="padding-x padding-y max-width mt-12" id="discover">
           <div className="home__text-container p-2">
             <h1 className="text-4xl font-extrabold text-white">

@@ -7,6 +7,7 @@ const nextConfig = {
       "cdn.ferrari.com",
       "cs.copart.com",
       "vis.iaai.com",
+      "carstat.dev",
     ],
   },
 };
