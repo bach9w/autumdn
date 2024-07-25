@@ -91,7 +91,7 @@ function NewCard({ card }: { card: any }) {
       </AnimatePresence>
       <AnimatePresence>
         {active && typeof active === "object" ? (
-          <div className="fixed inset-0 z-[100] grid place-items-center items-center">
+          <div className="fixed inset-0 z-[90] grid place-items-center items-center">
             <motion.button
               key={`button-${active.title}-${id}`}
               layout
@@ -107,7 +107,7 @@ function NewCard({ card }: { card: any }) {
                   duration: 0.05,
                 },
               }}
-              className="absolute right-1/2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-card lg:hidden"
+              className="absolute right-1/2 top-2 z-[100] flex h-6 w-6 items-center justify-center rounded-full bg-card lg:hidden"
               onClick={() => setActive(null)}
             >
               <CloseIcon />
