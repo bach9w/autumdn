@@ -69,12 +69,9 @@ export async function fetchCarDetails(vin: string) {
   const headers = {
     "x-api-key": "a48f8f672e29bd479c652f76f100bcf4",
   };
-  const response = await fetch(
-    `https://import-motor.com/api/search-vin/${vin}`,
-    {
-      headers: headers,
-    },
-  );
+  const response = await fetch(`https://carstat.dev/api/search-vin/${vin}`, {
+    headers: headers,
+  });
 
   const result = await response.json();
   return result;

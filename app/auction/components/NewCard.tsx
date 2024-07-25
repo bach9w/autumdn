@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { act, useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/hooks/use-outside-click";
+import { CiLocationOn } from "react-icons/ci";
 import {
   Carousel,
   CarouselContent,
@@ -41,7 +42,7 @@ function priceBGN(price: number): any {
         <p>ЗАПОЧНИ НАДДАВАНЕТО</p>0 ЛВ.
       </div>
     );
-  const changed = price * 1.792846;
+  const changed = price * 1.792846 + 10000;
   return (
     <div className="flex w-full items-center justify-between">
       <p>Купи сега</p>
@@ -106,7 +107,7 @@ function NewCard({ card }: { card: any }) {
                   duration: 0.05,
                 },
               }}
-              className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white lg:hidden"
+              className="absolute right-1/2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-card lg:hidden"
               onClick={() => setActive(null)}
             >
               <CloseIcon />
@@ -146,6 +147,17 @@ function NewCard({ card }: { card: any }) {
                           </CarouselItem>
                         )}
                       </CarouselContent>
+                      <motion.div
+                        initial={{ opacity: 0, y: -50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          duration: 0.3,
+                        }}
+                        exit={{ opacity: 0, y: 50 }}
+                        className="absolute right-5 top-5"
+                      >
+                        <Badge className="bg-sky-600">ПАЛИ И ТРЪГВА</Badge>
+                      </motion.div>
                     </Carousel>
                   )}
               </motion.div>
@@ -159,28 +171,28 @@ function NewCard({ card }: { card: any }) {
                     >
                       {active.manufacturer.name} / {active.model.name}
                     </motion.h3>
+
                     <motion.p
                       layoutId={`description-${active.id}-${id}`}
                       className="text-base text-neutral-600 dark:text-neutral-400"
                     >
                       {active.year} / {active.drive_wheel.name} /{" "}
-                      {active.transmission.name} /{" "}
+                      {active.transmission && active.transmission.name} /{" "}
                       {active.body_type && active.body_type.name}
                     </motion.p>
                   </div>
-
-                  <motion.a
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    target="_blank"
-                    className="flex flex-col rounded-full bg-red-500 px-4 py-3 text-sm font-bold text-white"
-                  >
-                    {active.lots[active.lots.length - 1].buy_now} ЛВ.
-                  </motion.a>
                 </div>
-                <div className="relative px-4 pt-4">
+                <motion.a
+                  layout
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  target="_blank"
+                  className="flex w-full bg-red-500 px-4 py-3 text-sm font-bold text-white"
+                >
+                  {priceBGN(active.lots[active.lots.length - 1].buy_now)}
+                </motion.a>
+                <div className="relative pt-4 uppercase">
                   <motion.div
                     layout
                     initial={{ opacity: 0 }}
@@ -188,7 +200,7 @@ function NewCard({ card }: { card: any }) {
                     transition={{ delay: 0.3 }}
                     exit={{ opacity: 0 }}
                   >
-                    <Badge className="flex w-full justify-center rounded-b-none text-center text-xl">
+                    <Badge className="flex w-full justify-center rounded-none bg-card/90 text-center text-xl">
                       Детайли
                     </Badge>
                     <Separator orientation="horizontal" />
@@ -211,14 +223,28 @@ function NewCard({ card }: { card: any }) {
 
                     <Separator orientation="horizontal" />
 
-                    <h2 className="bg-black text-center text-white">
-                      {active.lots[0] &&
-                      active.lots[0].damage &&
-                      active.lots[0].damage.main.name !== null ? (
+                    <h2 className="bg-black text-center font-bold uppercase text-white">
+                      {active.lots[active.lots.length - 1] &&
+                      active.lots[active.lots.length - 1].damage &&
+                      active.lots[active.lots.length - 1].damage.main.name !==
+                        null ? (
                         <DamageCheck damage={active.lots[0].damage.main.name} />
                       ) : (
                         "Няма"
                       )}
+                    </h2>
+                    <h2
+                      className={cn(
+                        "flex items-center justify-center bg-sky-500/80 text-center text-[20px] text-white",
+                      )}
+                    >
+                      <CiLocationOn />
+                      Локация -{" "}
+                      {
+                        active.lots[active.lots.length - 1].location.country
+                          .name
+                      }{" "}
+                      / {active.lots[active.lots.length - 1].location.city.name}
                     </h2>
                   </motion.div>
                   <motion.div
@@ -231,7 +257,7 @@ function NewCard({ card }: { card: any }) {
                     {typeof active.lots[active.lots.length - 1].status.name ===
                     "string" ? (
                       <Link
-                        className="w-full rounded-t-none"
+                        className="mt-2 w-full rounded-t-none"
                         href={`/auction/${active.vin}`}
                       >
                         <Button className="w-full rounded-t-none">
@@ -287,7 +313,7 @@ function NewCard({ card }: { card: any }) {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
               >
-                <div className="font-bold2 flex justify-between text-2xl">
+                <div className="flex justify-between text-2xl font-bold">
                   {priceBGN(card.lots?.[card.lots.length - 1]?.buy_now)}
                 </div>
               </motion.div>
@@ -344,6 +370,7 @@ function NewCard({ card }: { card: any }) {
                 {card.manufacturer && card.manufacturer.name} /{" "}
                 {card.model && card.model.name}
               </motion.h3>
+
               <motion.p
                 layoutId={`description-${card.id}-${id}`}
                 className="text-center text-base text-neutral-600 dark:text-neutral-400 md:text-left"
@@ -384,7 +411,7 @@ export const CloseIcon = () => {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="h-4 w-4 text-black"
+      className="h-4 w-4 text-white"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M18 6l-12 12" />

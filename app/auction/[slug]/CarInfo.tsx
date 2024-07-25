@@ -49,7 +49,7 @@ function priceBGN(price: number): any {
         <p>ЗАПОЧНИ НАДДАВАНЕТО</p>0 ЛВ.
       </div>
     );
-  const changed = price * 1.792846;
+  const changed = price * 1.792846 + 10000;
   return (
     <div className="flex w-full items-center justify-between">
       <p>Купи сега</p>
