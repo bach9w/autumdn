@@ -173,6 +173,9 @@ export interface FilterProps {
   page?: number;
   sale_date_in_days?: number;
   status?: string;
+  genaration?: string;
+  from_year?: number;
+  to_year?: number;
 }
 
 export interface HomeProps {

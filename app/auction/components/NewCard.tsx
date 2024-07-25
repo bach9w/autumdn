@@ -294,7 +294,15 @@ function NewCard({ card }: { card: any }) {
               <Image
                 width={300}
                 height={300}
-                src={card.lots[card.lots.length - 1].images.normal[0]}
+                src={
+                  (card.lots[card.lots.length - 1].images &&
+                    card.lots[card.lots.length - 1].images.normal &&
+                    card.lots[card.lots.length - 1].images.normal[0]) ||
+                  (card.lots[card.lots.length - 1].images &&
+                    card.lots[card.lots.length - 1].images.big &&
+                    card.lots[card.lots.length - 1].images.big[0]) ||
+                  "/no-image.jpeg"
+                }
                 alt={card.title}
                 className="h-100 w-full rounded-lg object-cover md:h-[300px]"
               />
@@ -306,8 +314,16 @@ function NewCard({ card }: { card: any }) {
                 transition={{ delay: 0.5, duration: 0.5 }}
               >
                 <div className="text-center text-xl font-bold">
-                  {splitDateAndTime(card.lots[card.lots.length - 1]?.sale_date)}{" "}
-                  дни до търга
+                  {card.lots?.[card.lots.length - 1]?.sale_date !== null ? (
+                    <div>
+                      {splitDateAndTime(
+                        card.lots[card.lots.length - 1]?.sale_date,
+                      )}{" "}
+                      дни до търг
+                    </div>
+                  ) : (
+                    "Очаквана дата"
+                  )}
                 </div>
               </motion.div>
             </motion.div>

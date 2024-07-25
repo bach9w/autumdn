@@ -24,6 +24,11 @@ export default async function Home({ searchParams }: HomeProps) {
     manufacturer: searchParams.manufacturer || "",
     model: searchParams.model || "",
     page: searchParams.page || "",
+    status: "3",
+    buy_now: "1",
+    generation: searchParams.genaration || "",
+    from_year: searchParams.from_year || "",
+    to_year: searchParams.to_year || "",
   };
 
   return (

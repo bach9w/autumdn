@@ -45,7 +45,7 @@ export default function SearchComponentFirst() {
   );
 
   const { data: availableCars, isLoading: availabeLoading } = useSWR(
-    `/api/searchNumber?manufacturer=${chosedManufacturer}&model=${chosedModel}&generation=${chosedGeneration}$&from_year=${yearFrom}&to_year=${yearTo}`,
+    `/api/searchNumber?manufacturer=${chosedManufacturer}&model=${chosedModel}&generation=${chosedGeneration}$&from_year=${yearFrom}&to_year=${yearTo}&status=3`,
     fetcher,
   );
 
@@ -171,7 +171,7 @@ export default function SearchComponentFirst() {
             className="rounded-md bg-[#0A1F44] px-6 py-2 text-sm text-white hover:bg-[#0A1F44]/90 focus:ring-2 focus:ring-[#0A1F44] focus:ring-offset-2 md:px-8 md:py-3 md:text-base lg:px-10 lg:py-4 lg:text-lg"
             onClick={() => {
               router.push(
-                `?manufacturer=${chosedManufacturer}&model=${chosedModel}&generation=${chosedGeneration}$&from_year=${yearFrom}&to_year=${yearTo}`,
+                `/auction?manufacturer=${chosedManufacturer}&model=${chosedModel}&generation=${chosedGeneration}$&from_year=${yearFrom}&to_year=${yearTo}&per_page=10`,
               );
             }}
           >
