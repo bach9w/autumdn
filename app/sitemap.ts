@@ -20,5 +20,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "hourly",
       priority: 0.5,
     },
+    {
+      url: "https://myride.bg/manufacturers",
+      lastModified: new Date(),
+      changeFrequency: "hourly",
+      priority: 0.5,
+    },
+    {
+      url: "https://myride.bg/parts",
+      lastModified: new Date(),
+      changeFrequency: "hourly",
+      priority: 0.5,
+    },
+    {
+      url: "https://myride.bg/about",
+      lastModified: new Date(),
+      changeFrequency: "hourly",
+      priority: 0.5,
+    },
+    {
+      url: "https://myride.bg/nalichni",
+      lastModified: new Date(),
+      changeFrequency: "hourly",
+      priority: 0.5,
+    },
   ];
 }
