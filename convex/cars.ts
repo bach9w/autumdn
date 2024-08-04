@@ -236,6 +236,13 @@ export const newAvailableCar = mutation({
   },
 });
 
+export const editAvailableCar = mutation({
+  args: { id: v.id("availableCars"), vin: v.any() },
+  handler: async (ctx, args) => {
+    return ctx.db.patch(args.id, { vin: args.vin });
+  },
+});
+
 export const getAvailableCars = query({
   args: {},
   handler: async (ctx) => {

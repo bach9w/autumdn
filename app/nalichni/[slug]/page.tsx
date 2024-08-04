@@ -1,6 +1,27 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@components/ui/card";
+import { api } from "@convex/_generated/api";
+import { Id } from "@convex/_generated/dataModel";
+import { useMutation, useQuery } from "convex/react";
+import { useAuth } from "@clerk/nextjs";
+import { Button } from "@components/ui/button";
+import { motion } from "framer-motion";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@components/ui/accordion";
+
 import {
   Carousel,
   CarouselContent,
@@ -8,72 +29,41 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { CardMain } from "@components/card";
-import { Badge } from "@components/ui/badge";
-import { Button } from "@components/ui/button";
-
-import { api } from "@convex/_generated/api";
-import { useQuery } from "convex/react";
-import { motion } from "framer-motion";
-import {
-  MessageCircleQuestionIcon,
-  PhoneCall,
-  PhoneForwarded,
-} from "lucide-react";
 import Image from "next/image";
 import ReactWhatsapp from "react-whatsapp";
-import { useAuth } from "@clerk/nextjs";
-import Link from "next/link";
+import { MessageCircleQuestionIcon, PhoneCall } from "lucide-react";
+import { useState } from "react";
+import Edit from "../components/edit";
 
-const NalichniPage = () => {
+const url = "https://wandering-bison-612.convex.site/getImage?storageId=";
+
+export default function Page({
+  params,
+}: {
+  params: { slug: Id<"availableCars"> };
+}) {
+  const cars = useQuery(api.listAuctions.getLiveById, { id: params.slug });
   const { isSignedIn } = useAuth();
-  const images = useQuery(api.listAuctions.getLive);
-  const url = "https://wandering-bison-612.convex.site/getImage?storageId=";
 
   return (
-    <section className="min-h-screen">
-      <div className="py-10 text-center text-2xl font-bold uppercase text-white drop-shadow-lg">
-        Налични автомобили
-      </div>
-
-      {images && images.length && (
-        <div className="grid h-full grid-cols-1 gap-2 p-2 md:grid-cols-2">
-          {images.map((image) => (
-            <>
+    <div className="min-h-full">
+      <Card className="mt-8">
+        <CardHeader>
+          <CardTitle className="flex w-full justify-between text-black">
+            <div>
+              {cars?.manufacturerId}/ {cars?.modelId}
+            </div>
+            {isSignedIn && <Edit car={cars} />}
+            <Badge className="bg-red-500">{cars?.vin} ЛВ.</Badge>
+          </CardTitle>
+          <CardContent>
+            <CardDescription>
               <div
-                key={image._id}
+                key={cars?._id}
                 className="h-full w-full bg-white/10 p-2 hover:bg-white/30"
               >
-                <Link href={`/nalichni/${image._id}`}>
-                  <div className="bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                    <div className="flex items-end justify-between">
-                      <div className="text-white">
-                        <div className="flex h-full w-full">
-                          <h3 className="text-2xl font-bold">
-                            {image.manufacturerId}/{image.modelId}
-                          </h3>
-                          {isSignedIn && (
-                            <Button className="w-full">Промени</Button>
-                          )}
-                        </div>
-                        <p className="text-sm">
-                          {image.year} | {image.km} km
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-                <div className="mt-2 flex w-full justify-between bg-white">
-                  <Badge className="rounded-none">
-                    {" "}
-                    {image.modelId}/{image.manufacturerId}{" "}
-                  </Badge>
-                  <Badge className="rounded-none bg-red-500">
-                    {image.vin} ЛВ.
-                  </Badge>
-                </div>
                 <div className="flex w-full flex-col items-center justify-end">
-                  <Carousel className="w-full max-w-md">
+                  <Carousel className="w-full max-w-md md:max-w-xl">
                     <motion.div
                       className="absolute right-8 z-50 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
                       initial={{ y: -10, opacity: 0 }}
@@ -91,7 +81,7 @@ const NalichniPage = () => {
                       <CarouselPrevious className="bg-red-500" color="black" />
                     </motion.div>
                     <CarouselContent>
-                      {image.images?.map((img, index) => (
+                      {cars?.images?.map((img, index) => (
                         <>
                           <CarouselItem key={index}>
                             <div className="p-1">
@@ -102,7 +92,7 @@ const NalichniPage = () => {
                                       className="object-scale-down"
                                       src={url + `${img.url}`}
                                       alt={`Image ${img.url}`}
-                                      width={300}
+                                      width={1000}
                                       height={300}
                                     />
                                   </span>
@@ -114,6 +104,49 @@ const NalichniPage = () => {
                       ))}
                     </CarouselContent>
                   </Carousel>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger>
+                        Допълнителна информация
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="grid grid-cols-2 gap-4 text-center uppercase">
+                          <div>
+                            <h4 className="text-sm font-medium">Ключове</h4>
+                            {cars?.keys && (
+                              <Badge variant="destructive">Да</Badge>
+                            )}
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-medium">Airbags</h4>
+                            {cars?.airbags && (
+                              <Badge variant="destructive">Да</Badge>
+                            )}
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-medium">Тип</h4>
+                            <p className="uppercase">{cars?.body_type}</p>
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-medium">Цвят</h4>
+                            <p>{cars?.color}</p>
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-medium">Гориво</h4>
+                            <p>{cars?.fuel}</p>
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-medium">Трансмисия</h4>
+                            <p>{cars?.transmission}</p>
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-medium">Двигател</h4>
+                            <p>{cars?.engine}</p>
+                          </div>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 </div>
 
                 <div className="mt-2 flex w-full justify-between">
@@ -138,7 +171,7 @@ const NalichniPage = () => {
                       className="flex animate-pulse items-center justify-center gap-1"
                       element="webview"
                       number="+359876995555"
-                      message={`Здравейте, интересувам се от автомил ${image.manufacturerId}/${image.modelId}/ с цена ${image.vin} лв.`}
+                      message={`Здравейте, интересувам се от автомил ${cars?.manufacturerId}/${cars?.modelId}/ с цена ${cars?.vin} лв.`}
                     >
                       Изпрати запитване{" "}
                       <MessageCircleQuestionIcon className="h-4 w-4" />
@@ -146,18 +179,10 @@ const NalichniPage = () => {
                   </Button>
                 </div>
               </div>
-            </>
-          ))}
-        </div>
-      )}
-      {images && images.length === 0 && (
-        <div className="flex min-h-screen w-full flex-col items-center justify-center text-2xl font-bold uppercase text-white">
-          <p>Няма налични автомобили</p>
-          <p>Проверете отново</p>
-        </div>
-      )}
-    </section>
+            </CardDescription>
+          </CardContent>
+        </CardHeader>
+      </Card>
+    </div>
   );
-};
-
-export default NalichniPage;
+}
