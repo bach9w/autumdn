@@ -17,6 +17,8 @@ export default async function Home({ searchParams }: HomeProps) {
     model: searchParams.model || "",
     page: searchParams.page || "",
     sale_date_in_days: "7",
+    from_year: searchParams.from_year || "",
+    to_year: searchParams.to_year || "",
   };
   return (
     <>
