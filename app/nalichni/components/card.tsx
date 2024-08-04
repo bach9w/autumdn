@@ -46,7 +46,7 @@ function Image({ storageId }: { storageId: string }) {
   const getImageUrl = new URL(`${storageLink}/getImage`);
   getImageUrl.searchParams.set("storageId", storageId);
 
-  return <img height={500} src={getImageUrl.href} />;
+  return <img width={500} height={500} src={getImageUrl.href} />;
 }
 
 export function CardMain({ car }: { car: CarProps }) {

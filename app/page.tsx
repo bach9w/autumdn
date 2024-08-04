@@ -16,6 +16,7 @@ import Loading from "@components/loading";
 import { Suspense } from "react";
 import Cookie from "@components/bottom/cookie/Cookie";
 import SearchComponentFirst from "@components/search/first-search";
+import NalichniPage from "./nalichni/page";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
@@ -36,6 +37,7 @@ export default async function Home({ searchParams }: HomeProps) {
       <div className="h-full">
         <div className="min-h-screen">
           <HeroParallaxDemo />
+          <NalichniPage />
           <div className="p-2 xl:mt-32">
             <SearchComponentFirst />
           </div>

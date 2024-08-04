@@ -317,7 +317,7 @@ function NewCard({ card }: { card: any }) {
                   {priceBGN(card.lots?.[card.lots.length - 1]?.buy_now)}
                 </div>
               </motion.div>
-              <Image
+              <img
                 width={300}
                 height={300}
                 src={

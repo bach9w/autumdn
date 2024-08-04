@@ -8,6 +8,7 @@ const nextConfig = {
       "cs.copart.com",
       "vis.iaai.com",
       "carstat.dev",
+      "wandering-bison-612.convex.site",
     ],
   },
 };

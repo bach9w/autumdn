@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState, useMemo } from "react";
+import { motion } from "framer-motion";
 
 import CarCard from "./CarCard";
 
@@ -36,13 +37,17 @@ function Cars({ filters }: { filters: any }) {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3"
+      >
         {data?.data.map((car: any) => (
           <div className="overflow-x-hidden p-2" key={car.id}>
             <NewCard card={car} />
           </div>
         ))}
-      </div>
+      </motion.div>
     </>
   );
 }
