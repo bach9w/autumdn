@@ -63,6 +63,7 @@ export function AddForm() {
         keys: selectedKeys || false,
         transmission: selectedTransmission,
         year: year,
+        is_sold: false,
         km: km,
         images: uploaded.map(({ response }) => ({
           url: (response as any).storageId,
