@@ -60,10 +60,10 @@ export default function Page({
             <CardDescription>
               <div
                 key={cars?._id}
-                className="h-full w-full bg-white/10 p-2 hover:bg-white/30"
+                className="flex h-full w-full flex-col bg-white/10 p-2 hover:bg-white/30"
               >
-                <div className="flex w-full flex-col items-center justify-end">
-                  <Carousel className="w-full max-w-md md:max-w-xl">
+                <div className="flex h-full w-full flex-col items-center justify-end">
+                  <Carousel className="h-full w-full">
                     <motion.div
                       className="absolute right-8 z-50 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
                       initial={{ y: -10, opacity: 0 }}
@@ -84,16 +84,16 @@ export default function Page({
                       {cars?.images?.map((img, index) => (
                         <>
                           <CarouselItem key={index}>
-                            <div className="p-1">
+                            <div className="p-0">
                               <Card>
-                                <CardContent className="flex aspect-square items-center justify-center p-6">
+                                <CardContent className="flex h-full w-full items-center justify-center p-0">
                                   <span className="text-4xl font-semibold">
                                     <Image
-                                      className="object-scale-down"
+                                      className="h-full w-full"
                                       src={url + `${img.url}`}
                                       alt={`Image ${img.url}`}
-                                      width={1000}
-                                      height={300}
+                                      width={1200}
+                                      height={1000}
                                     />
                                   </span>
                                 </CardContent>
@@ -149,7 +149,7 @@ export default function Page({
                   </Accordion>
                 </div>
 
-                <div className="mt-2 flex w-full justify-between">
+                <div className="mt-2 grid w-full grid-cols-1 justify-between gap-2 md:grid-cols-2">
                   <Button
                     className="inline-flex h-[40px] w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
                     variant="outline"

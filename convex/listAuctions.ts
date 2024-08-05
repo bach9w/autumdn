@@ -7,7 +7,7 @@ export const getLive = query({
   handler: async (ctx, args) => {
     return await ctx.db
       .query("availableCars")
-
+      .filter((E) => E.eq(E.field("is_sold"), false))
       .take(10);
   },
 });

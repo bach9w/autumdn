@@ -195,6 +195,7 @@ export const getAllCars = query({
 export const newAvailableCar = mutation({
   args: {
     airbags: v.boolean(),
+    is_sold: v.boolean(),
     body_type: v.any(),
     color: v.any(),
     drive_wheel: v.any(),
@@ -223,6 +224,7 @@ export const newAvailableCar = mutation({
       drive_wheel: args.drive_wheel,
       engine: args.engine,
       fuel: args.fuel,
+      is_sold: args.is_sold,
 
       keys: args.keys,
       km: args.km,
@@ -237,16 +239,23 @@ export const newAvailableCar = mutation({
 });
 
 export const editAvailableCar = mutation({
-  args: { id: v.id("availableCars"), vin: v.any() },
+  args: {
+    id: v.id("availableCars"),
+    vin: v.optional(v.any()),
+    is_sold: v.any(),
+  },
   handler: async (ctx, args) => {
-    return ctx.db.patch(args.id, { vin: args.vin });
+    return ctx.db.patch(args.id, { vin: args.vin, is_sold: args.is_sold });
   },
 });
 
 export const getAvailableCars = query({
   args: {},
   handler: async (ctx) => {
-    const cars = await ctx.db.query("availableCars").collect();
+    const cars = await ctx.db
+      .query("availableCars")
+      .filter((q) => q.eq(q.field("is_sold"), "false"))
+      .collect();
     return cars;
   },
 });

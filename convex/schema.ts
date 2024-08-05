@@ -335,6 +335,7 @@ export default defineSchema({
   }),
   availableCars: defineTable({
     vin: v.any(),
+    is_sold: v.optional(v.any()),
     manufacturerId: v.any(),
     modelId: v.any(),
     body_type: v.any(),
