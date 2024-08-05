@@ -18,10 +18,14 @@ import { useMutation } from "convex/react";
 import { useEffect, useState } from "react";
 
 const Edit = ({ car }: { car: any }) => {
-  const [price, setPrice] = useState<any>(car?.vin);
+  const [price, setPrice] = useState<any>();
 
-  const [status, setStatus] = useState<any>(`${car?.is_sold}`);
+  const [status, setStatus] = useState<any>();
   const update = useMutation(api.cars.editAvailableCar);
+
+  useEffect(() => {
+    setPrice(car?.vin);
+  }, [status]);
 
   const saveChanges = () => {
     update({ id: car._id, vin: price, is_sold: status });
@@ -58,7 +62,7 @@ const Edit = ({ car }: { car: any }) => {
                 Продадено
                 {status}
                 <Switch
-                  checked={status}
+                  checked={!status}
                   onCheckedChange={(e) => setStatus(!status)}
                 />
                 Непродадено

@@ -73,7 +73,7 @@ const NalichniPage = () => {
                   </Badge>
                 </div>
                 <div className="flex w-full flex-col items-center justify-end">
-                  <Carousel className="w-full max-w-md">
+                  <Carousel className="w-full">
                     <motion.div
                       className="absolute right-8 z-50 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
                       initial={{ y: -10, opacity: 0 }}
@@ -94,16 +94,16 @@ const NalichniPage = () => {
                       {image.images?.map((img, index) => (
                         <>
                           <CarouselItem key={index}>
-                            <div className="p-1">
+                            <div className="p-0">
                               <Card>
-                                <CardContent className="flex aspect-square items-center justify-center p-6">
+                                <CardContent className="flex w-full items-center justify-center p-0">
                                   <span className="text-4xl font-semibold">
                                     <Image
-                                      className="object-scale-down"
+                                      className="object-cover"
                                       src={url + `${img.url}`}
                                       alt={`Image ${img.url}`}
-                                      width={300}
-                                      height={300}
+                                      width={1000}
+                                      height={800}
                                     />
                                   </span>
                                 </CardContent>
@@ -116,7 +116,7 @@ const NalichniPage = () => {
                   </Carousel>
                 </div>
 
-                <div className="mt-2 flex w-full justify-between">
+                <div className="mt-2 grid w-full grid-cols-1 justify-between gap-2 md:grid-cols-2">
                   <Button
                     className="inline-flex h-[40px] w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
                     variant="outline"
