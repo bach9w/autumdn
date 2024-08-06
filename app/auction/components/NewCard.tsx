@@ -66,7 +66,7 @@ function NewCard({ card }: { card: any }) {
     }
 
     if (active && typeof active === "object") {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = "scroll";
     } else {
       document.body.style.overflow = "auto";
     }
@@ -176,7 +176,8 @@ function NewCard({ card }: { card: any }) {
                       layoutId={`description-${active.id}-${id}`}
                       className="text-base text-neutral-600 dark:text-neutral-400"
                     >
-                      {active.year} / {active.drive_wheel.name} /{" "}
+                      {active.year} /{" "}
+                      {active.drive_wheel && active.drive_wheel.name} /{" "}
                       {active.transmission && active.transmission.name} /{" "}
                       {active.body_type && active.body_type.name}
                     </motion.p>

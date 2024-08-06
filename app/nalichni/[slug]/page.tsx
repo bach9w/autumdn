@@ -53,7 +53,7 @@ export default function Page({
   }
 
   return (
-    <div className="min-h-full">
+    <div className="min-h-screen">
       {testove && <Testove testove={testove} setTestove={setTestove} id={id} />}
       <Card className="mt-8">
         <CardHeader>

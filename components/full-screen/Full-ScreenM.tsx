@@ -85,7 +85,7 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
                         </Button>
                         <CardContent className="">
                           <Image
-                            src={url + `${id}`}
+                            src={`${id}`}
                             alt=""
                             className="relative bottom-32 min-h-screen w-full"
                             width="2000"
