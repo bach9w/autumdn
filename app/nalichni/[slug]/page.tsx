@@ -34,7 +34,7 @@ import ReactWhatsapp from "react-whatsapp";
 import { MessageCircleQuestionIcon, PhoneCall } from "lucide-react";
 import { useState } from "react";
 import Edit from "../components/edit";
-import Testove from "@app/testove/page";
+import Testove from "@components/full-screen/Full-Screen";
 
 const url = "https://wandering-bison-612.convex.site/getImage?storageId=";
 
