@@ -16,15 +16,13 @@ import { motion } from "framer-motion";
 
 const url = "https://wandering-bison-612.convex.site/getImage?storageId=";
 
-const Testove = ({
-  testove,
-  setTestove,
-  id,
-}: {
+type TestoveProps = {
   testove: boolean;
   setTestove: (testove: boolean) => void;
   id: any;
-}) => {
+};
+
+const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
   const [infomation, setInfomation] = useState<string | any>(null);
   const status = testove;
 
@@ -68,7 +66,7 @@ const Testove = ({
             className="w-[100vw] max-w-[100%]"
           >
             <CarouselContent>
-              {Array.from({ length: 5 }).map((_, index) => (
+              {Array.from({ length: 1 }).map((_, index) => (
                 <CarouselItem key={index} className="">
                   <div className="p-0">
                     <Card>
