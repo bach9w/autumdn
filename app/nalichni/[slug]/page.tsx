@@ -34,6 +34,7 @@ import ReactWhatsapp from "react-whatsapp";
 import { MessageCircleQuestionIcon, PhoneCall } from "lucide-react";
 import { useState } from "react";
 import Edit from "../components/edit";
+import Testove from "@app/testove/page";
 
 const url = "https://wandering-bison-612.convex.site/getImage?storageId=";
 
@@ -44,9 +45,16 @@ export default function Page({
 }) {
   const cars = useQuery(api.listAuctions.getLiveById, { id: params.slug });
   const { isSignedIn } = useAuth();
+  const [testove, setTestove] = useState(false);
+  const [id, setId] = useState(null);
+
+  function onClick() {
+    setTestove(!testove);
+  }
 
   return (
     <div className="min-h-full">
+      {testove && <Testove testove={testove} setTestove={setTestove} id={id} />}
       <Card className="mt-8">
         <CardHeader>
           <CardTitle className="flex w-full justify-between text-black">
@@ -94,6 +102,10 @@ export default function Page({
                                       alt={`Image ${img.url}`}
                                       width={1200}
                                       height={1000}
+                                      onClick={() => {
+                                        setTestove(true);
+                                        setId(img.url);
+                                      }}
                                     />
                                   </span>
                                 </CardContent>
