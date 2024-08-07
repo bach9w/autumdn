@@ -20,7 +20,7 @@ const Hero = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div className="hero relative" ref={ref}>
+    <div className="hero relative overflow-x-hidden" ref={ref}>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
