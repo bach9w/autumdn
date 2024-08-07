@@ -64,7 +64,7 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
               damping: 0.5,
               ease: "easeInOut",
             }}
-            className="absolute top-[400px] h-full sm:top-[150px]"
+            className="absolute top-[550px] h-full sm:top-[150px]"
           >
             <Carousel
               opts={{
