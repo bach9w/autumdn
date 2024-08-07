@@ -19,7 +19,7 @@ const CarbonBackgroundComponent = ({
 }) => {
   return (
     <motion.div
-      className="h-full w-full"
+      className="h-full min-h-screen w-full"
       style={{
         backgroundImage: `url("${carbonBackgroundSVG}")`,
         backgroundRepeat: "repeat",

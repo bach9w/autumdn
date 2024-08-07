@@ -33,7 +33,7 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const infomation = Infomation();
-      console.log(infomation);
+
       setInfomation(infomation);
 
       // Забрана на превъртане
@@ -43,7 +43,7 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
 
       return () => {
         // Връщане към нормалното състояние при напускане на компонента
-        document.body.style.overflow = "";
+        document.body.style.overflow = "scroll";
         document.body.style.position = "";
         document.body.style.width = "";
       };
@@ -53,7 +53,7 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
   return (
     <motion.div className="full-screen">
       {infomation ? (
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           <motion.div
             initial={{ opacity: 1, y: 200 }}
             animate={{ opacity: 1, y: 0 }}
@@ -64,7 +64,7 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
               damping: 0.5,
               ease: "easeInOut",
             }}
-            className="absolute top-[300px] h-full"
+            className="absolute top-[400px] h-full sm:top-[150px]"
           >
             <Carousel
               opts={{

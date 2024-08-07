@@ -33,7 +33,7 @@ export default async function Home({ searchParams }: HomeProps) {
   };
 
   return (
-    <main className="overflow-hidden">
+    <main className="">
       <div className="h-full">
         <div className="min-h-screen">
           <HeroParallaxDemo />
