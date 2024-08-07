@@ -26,7 +26,7 @@ export async function GET(request: Request) {
     "x-api-key": "a48f8f672e29bd479c652f76f100bcf4", // Поставете вашия API ключ тук
   };
 
-  const url = new URL("https://carstat.dev/api/cars");
+  const url = new URL("https://carstat.dev/api/cars?sortDirection=desc");
 
   if (condition) url.searchParams.set("condition", condition);
 
