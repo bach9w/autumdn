@@ -37,21 +37,25 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
       setInfomation(infomation);
 
       // Забрана на превъртане
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = "auto";
       document.body.style.position = "fixed";
+      document.body.style.top = "0";
+      document.body.style.zIndex = "9999";
+
       document.body.style.width = "100%";
 
       return () => {
         // Връщане към нормалното състояние при напускане на компонента
         document.body.style.overflow = "auto";
         document.body.style.position = "auto";
+
         document.body.style.width = "auto";
       };
     }
   }, []);
 
   return (
-    <motion.div className="full-screen">
+    <motion.div className="full-screen z-100 only:absolute">
       {testove && infomation ? (
         <AnimatePresence>
           <motion.div
@@ -64,7 +68,7 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
               damping: 0.5,
               ease: "easeInOut",
             }}
-            className="absolute top-32 h-full"
+            className="absolute top-40 h-full"
           >
             <Carousel
               opts={{
