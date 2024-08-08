@@ -74,7 +74,7 @@ export default function Page({
             <CardDescription>
               <div
                 key={cars?._id}
-                className="flex h-full w-full flex-col bg-white/10 p-2 hover:bg-white/30"
+                className="flex h-full w-full flex-col bg-white/10 p-0 hover:bg-white/30"
               >
                 <div className="flex h-full w-full flex-col items-center justify-end">
                   <Carousel className="h-full w-full">
@@ -121,7 +121,7 @@ export default function Page({
                         </>
                       ))}
                     </CarouselContent>
-                    <div className="grid grid-cols-3 rounded md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8">
+                    <div className="grid grid-cols-2 rounded sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8">
                       {cars?.images?.map((img, index) => (
                         <>
                           <div
