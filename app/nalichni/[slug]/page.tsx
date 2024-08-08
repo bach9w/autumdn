@@ -77,7 +77,7 @@ export default function Page({
                 className="flex h-full w-full flex-col bg-white/10 p-2 hover:bg-white/30"
               >
                 <div className="flex h-full w-full flex-col items-center justify-end">
-                  <Carousel className="h-full w-full border-0">
+                  <Carousel className="h-full w-full">
                     <motion.div
                       className="absolute right-8 z-50 h-full rounded-md border-0 text-white"
                       initial={{ y: -10, opacity: 0 }}
@@ -87,7 +87,7 @@ export default function Page({
                       <CarouselNext className="bg-red-500" color="black" />
                     </motion.div>
                     <motion.div
-                      className="absolute left-8 z-50 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
+                      className="absolute left-8 z-50 h-full rounded-md border-0 text-white shadow-lg backdrop-blur-sm"
                       initial={{ y: -10, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.5, duration: 0.5 }}
@@ -99,8 +99,8 @@ export default function Page({
                         <>
                           <CarouselItem key={index}>
                             <div className="p-0">
-                              <Card>
-                                <CardContent className="flex h-full w-full items-center justify-center p-0">
+                              <Card className="border-0">
+                                <CardContent className="flex h-full w-full items-center justify-center border-0 bg-black p-0">
                                   <span className="text-4xl font-semibold">
                                     <Image
                                       className="h-full w-full"

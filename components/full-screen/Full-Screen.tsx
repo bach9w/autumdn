@@ -40,7 +40,6 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
       document.body.style.overflow = "auto";
       document.body.style.position = "fixed";
       document.body.style.top = "0";
-      document.body.style.zIndex = "9999";
 
       document.body.style.width = "100%";
 
@@ -48,8 +47,6 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
         // Връщане към нормалното състояние при напускане на компонента
         document.body.style.overflow = "auto";
         document.body.style.position = "auto";
-
-        document.body.style.width = "auto";
       };
     }
   }, []);
