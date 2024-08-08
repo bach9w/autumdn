@@ -33,7 +33,7 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const infomation = Infomation();
-      console.log(infomation);
+
       setInfomation(infomation);
 
       // Забрана на превъртане
@@ -43,16 +43,16 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
 
       return () => {
         // Връщане към нормалното състояние при напускане на компонента
-        document.body.style.overflow = "";
-        document.body.style.position = "";
-        document.body.style.width = "";
+        document.body.style.overflow = "auto";
+        document.body.style.position = "auto";
+        document.body.style.width = "auto";
       };
     }
   }, []);
 
   return (
     <motion.div className="full-screen">
-      {infomation ? (
+      {testove && infomation ? (
         <AnimatePresence>
           <motion.div
             initial={{ opacity: 1, y: 200 }}

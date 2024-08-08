@@ -52,12 +52,18 @@ export default function Page({
     setTestove(!testove);
   }
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 5;
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedImages = cars?.images?.slice(startIndex, endIndex);
+
   return (
     <div className="min-h-screen">
       {testove && <Testove testove={testove} setTestove={setTestove} id={id} />}
-      <Card className="mt-8">
+      <Card className="mt-8 border-0 bg-black">
         <CardHeader>
-          <CardTitle className="flex w-full justify-between text-black">
+          <CardTitle className="flex w-full justify-between text-white">
             <div>
               {cars?.manufacturerId}/ {cars?.modelId}
             </div>
@@ -71,9 +77,9 @@ export default function Page({
                 className="flex h-full w-full flex-col bg-white/10 p-2 hover:bg-white/30"
               >
                 <div className="flex h-full w-full flex-col items-center justify-end">
-                  <Carousel className="h-full w-full">
+                  <Carousel className="h-full w-full border-0">
                     <motion.div
-                      className="absolute right-8 z-50 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
+                      className="absolute right-8 z-50 h-full rounded-md border-0 text-white"
                       initial={{ y: -10, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.5, duration: 0.5 }}
@@ -115,14 +121,36 @@ export default function Page({
                         </>
                       ))}
                     </CarouselContent>
+                    <div className="grid grid-cols-3 rounded md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8">
+                      {cars?.images?.map((img, index) => (
+                        <>
+                          <div
+                            key={index}
+                            className="h-40 w-40 items-center justify-center rounded-full bg-gray-200"
+                            onClick={() => {
+                              setTestove(true);
+                              setId(img.url);
+                            }}
+                          >
+                            <Image
+                              className="h-full w-full"
+                              src={url + `${img.url}`}
+                              alt={`Image ${img.url}`}
+                              width={50}
+                              height={50}
+                            />
+                          </div>
+                        </>
+                      ))}
+                    </div>
                   </Carousel>
                   <Accordion type="single" collapsible>
                     <AccordionItem value="item-1">
-                      <AccordionTrigger>
+                      <AccordionTrigger className="text-white">
                         Допълнителна информация
                       </AccordionTrigger>
                       <AccordionContent>
-                        <div className="grid grid-cols-2 gap-4 text-center uppercase">
+                        <div className="grid grid-cols-2 gap-4 text-center uppercase text-white">
                           <div>
                             <h4 className="text-sm font-medium">Ключове</h4>
                             {cars?.keys && (
@@ -159,8 +187,7 @@ export default function Page({
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>
-                </div>
-
+                </div>{" "}
                 <div className="mt-2 grid w-full grid-cols-1 justify-between gap-2 md:grid-cols-2">
                   <Button
                     className="inline-flex h-[40px] w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#220103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
