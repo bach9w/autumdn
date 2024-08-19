@@ -211,7 +211,7 @@ export function CarInfo({ data }: { data: any }) {
                                 onClick={() => setOpen(!open)}
                                 key={index}
                               >
-                                <Image
+                                <img
                                   src={imageUrl}
                                   alt={`Car image ${index + 1}`}
                                   height={500}
