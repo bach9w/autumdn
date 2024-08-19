@@ -27,7 +27,7 @@ const Hero = () => {
       <div className="hero__image-container relative bottom-[400px] mb-[-350px] md:bottom-0 md:mb-[0px] xl:absolute xl:bottom-0">
         <div className="hero__image">
           <motion.div
-            className="absolute bottom-[250px] sm:bottom-[200px]"
+            className="absolute bottom-[50px] sm:bottom-[100px]"
             exit={{ opacity: 0, y: 0, scale: 0.6 }}
           >
             <Image
