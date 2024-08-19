@@ -37,7 +37,7 @@ const NalichniPage = () => {
       </div>
 
       {images && images.length && (
-        <div className="grid h-full grid-cols-1 gap-2 p-2 md:grid-cols-2">
+        <div className="grid h-full grid-cols-1 gap-2 p-2 md:grid-cols-2 xl:grid-cols-3">
           {images.map((image) => (
             <>
               <Link href={`/nalichni/${image._id}`}>

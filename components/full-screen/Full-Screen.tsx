@@ -12,7 +12,12 @@ import {
 import { Card, CardContent } from "@components/ui/card";
 import { Button } from "@components/ui/button";
 import Image from "next/image";
-import { AnimatePresence, motion, MotionConfig } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  MotionConfig,
+  useScroll,
+} from "framer-motion";
 
 const url = "https://wandering-bison-612.convex.site/getImage?storageId=";
 
@@ -24,6 +29,8 @@ type TestoveProps = {
 
 const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
   const [infomation, setInfomation] = useState<string | any>(null);
+  const { scrollYProgress } = useScroll();
+
   const status = testove;
 
   function onClick() {
@@ -31,6 +38,9 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
   }
 
   useEffect(() => {
+    if (scrollYProgress) {
+      console.log(scrollYProgress);
+    }
     if (typeof window !== "undefined") {
       const infomation = Infomation();
 
@@ -49,16 +59,20 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
         document.body.style.position = "auto";
       };
     }
-  }, []);
+  }, [scrollYProgress]);
 
   return (
     <motion.div className="full-screen z-100 only:absolute">
       {testove && infomation ? (
         <AnimatePresence>
           <motion.div
-            initial={{ opacity: 1, y: 200 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 1000, transition: { duration: 0.5 } }}
+            initial={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: finalPostion }}
+            exit={{
+              opacity: 0,
+              y: scollYProgress,
+              transition: { duration: 0.5 },
+            }}
             transition={{
               delay: 0,
               duration: 0.4,

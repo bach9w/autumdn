@@ -8,14 +8,6 @@ import { useEffect, useRef } from "react";
 import Button from "@components/CustomButton";
 
 const Hero = () => {
-  const handleScroll = () => {
-    const nextSection = document.getElementById("auctions");
-
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -36,17 +28,6 @@ const Hero = () => {
         <div className="hero__image">
           <motion.div
             className="absolute bottom-[250px] sm:bottom-[200px]"
-            whileInView={{
-              opacity: 100,
-              y: 50,
-              scale: 1,
-              transition: {
-                type: "spring",
-                stiffness: 10,
-                damping: 2,
-                duration: 2,
-              },
-            }}
             exit={{ opacity: 0, y: 0, scale: 0.6 }}
           >
             <Image

@@ -35,12 +35,12 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <main className="">
       <div className="h-full">
+        <HeroParallaxDemo />
+        <div className="p-2 xl:mt-32">
+          <SearchComponentFirst />
+        </div>
         <div className="min-h-screen">
-          <HeroParallaxDemo />
           <NalichniPage />
-          <div className="p-2 xl:mt-32">
-            <SearchComponentFirst />
-          </div>
         </div>
         <div className="padding-x padding-y max-width mt-12" id="discover">
           <div className="home__text-container p-2">

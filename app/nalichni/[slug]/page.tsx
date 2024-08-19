@@ -74,7 +74,7 @@ export default function Page({
             <CardDescription>
               <div
                 key={cars?._id}
-                className="flex h-full w-full flex-col bg-white/10 p-0 hover:bg-white/30"
+                className="flex h-full w-full flex-col p-0 hover:bg-white/30"
               >
                 <div className="flex h-full w-full flex-col items-center justify-end">
                   <Carousel className="h-full w-full">
@@ -126,7 +126,7 @@ export default function Page({
                         <>
                           <div
                             key={index}
-                            className="h-40 w-40 items-center justify-center rounded-full bg-gray-200"
+                            className="h-full w-full items-center justify-center rounded-full bg-gray-200"
                             onClick={() => {
                               setTestove(true);
                               setId(img.url);
@@ -136,8 +136,8 @@ export default function Page({
                               className="h-full w-full"
                               src={url + `${img.url}`}
                               alt={`Image ${img.url}`}
-                              width={50}
-                              height={50}
+                              width={400}
+                              height={400}
                             />
                           </div>
                         </>
