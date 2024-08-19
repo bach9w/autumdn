@@ -67,10 +67,10 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
         <AnimatePresence>
           <motion.div
             initial={{ opacity: 1, y: 0 }}
-            animate={{ opacity: 1, y: finalPostion }}
+            animate={{ opacity: 1, y: 10 }}
             exit={{
               opacity: 0,
-              y: scollYProgress,
+              y: 10,
               transition: { duration: 0.5 },
             }}
             transition={{
