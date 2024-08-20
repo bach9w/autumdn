@@ -152,33 +152,10 @@ export function CarInfo({ data }: { data: any }) {
             </Button>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-[1fr_250px] lg:gap-8">
+          <div className="grid gap-4 md:grid-cols-2 lg:gap-8">
             <div className="grid auto-rows-max items-start gap-4 lg:gap-8 xl:grid-cols-1">
-              <Card x-chunk="dashboard-07-chunk-3" className="col-span-2">
-                <CardHeader>
-                  <CardTitle>Начало на аукцион</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-6">
-                    <div className="grid gap-3">
-                      <div className="flex flex-col">
-                        <Badge className="mb-2 flex h-[40px] w-full justify-center rounded-none uppercase">
-                          {data.lots &&
-                            splitDateAndTime(
-                              data.lots[data.lots.length - 1].sale_date,
-                            )}
-                        </Badge>
-
-                        <Badge className="text-md flex h-10 w-full justify-center bg-red-700 uppercase">
-                          {priceBGN(data.lots[data.lots.length - 1].buy_now)}
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
               <Card
-                className="col-span-2 max-w-2xl"
+                className="col-span-2 max-w-full sm:col-span-4"
                 x-chunk="dashboard-07-chunk-4"
               >
                 <CardHeader>
@@ -240,7 +217,7 @@ export function CarInfo({ data }: { data: any }) {
                 </CardContent>
               </Card>
               <Card
-                className="col-span-2 max-w-full lg:col-span-4"
+                className="col-span-4 max-w-full lg:col-span-4"
                 x-chunk="dashboard-07-chunk-5"
               >
                 <CardHeader>

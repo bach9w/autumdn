@@ -22,7 +22,7 @@ import LenisProvider from "@providers/lenis-client";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
-    year: searchParams.year || "2021",
+    year: searchParams.year || "2024",
     fuel: searchParams.fuel_type || "",
     manufacturer: searchParams.manufacturer || "",
     model: searchParams.model || "",
@@ -53,7 +53,9 @@ export default async function Home({ searchParams }: HomeProps) {
         </Suspense>
         <div className="mt-6 flex w-full items-start justify-center">
           <Link href="/auction">
-            <Button>Разгледай всички аукциони</Button>
+            <Button className="text-md bg-[#2f3ccf]/80 font-bold uppercase hover:bg-[#2f3ccf]">
+              Разгледай всички аукциони
+            </Button>
           </Link>
         </div>
       </LenisProvider>

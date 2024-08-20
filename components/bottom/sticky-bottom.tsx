@@ -65,8 +65,8 @@ const StickyBottomNav = ({ inView }: { inView: boolean }) => {
   return (
     <div className={`stickyNav ${showNav ? "show" : "hide"}`}>
       {/* Съдържание на навигационното меню */}
-      <nav className="group h-full bg-orange-500">
-        <ul className="grid h-full grid-cols-3">
+      <nav className="group h-full bg-[#2f3ccf]">
+        <ul className="text-md grid h-full grid-cols-3 font-bold xl:text-xl">
           <Link href="/auction">
             <li className="flex items-center justify-center hover:bg-black">
               АУКЦИОНИ
