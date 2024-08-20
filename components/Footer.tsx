@@ -17,7 +17,7 @@ const Footer = () => {
       <footer ref={ref} className="mt-5 flex flex-col text-gray-100">
         <div className="flex flex-wrap justify-between gap-5 px-6 py-10 max-md:flex-col sm:px-16">
           <div className="flex items-center justify-start gap-6">
-            <Image
+            <img
               src="/myride_logo.jpg"
               alt="logo"
               width={158}

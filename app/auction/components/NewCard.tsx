@@ -169,7 +169,8 @@ function NewCard({ card }: { card: any }) {
                       layoutId={`title-${active.title}-${id}`}
                       className="text-base font-medium text-neutral-700 dark:text-neutral-200"
                     >
-                      {active.manufacturer.name} / {active.model.name}
+                      {active.manufacturer.name} /{" "}
+                      {active.model && active.model.name}
                     </motion.h3>
 
                     <motion.p
@@ -335,7 +336,7 @@ function NewCard({ card }: { card: any }) {
               />
 
               <motion.div
-                className="relative bottom-2 rounded-md bg-orange-700/75 px-2 py-1 uppercase text-white shadow-lg backdrop-blur-sm"
+                className="relative bottom-2 rounded-md bg-[#1b2e5c]/75 px-2 py-1 uppercase text-white shadow-lg backdrop-blur-sm"
                 initial={{ y: -10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
@@ -346,7 +347,7 @@ function NewCard({ card }: { card: any }) {
                       {splitDateAndTime(
                         card.lots[card.lots.length - 1]?.sale_date,
                       ) < 0 ? (
-                        <div className="text-red-500">Търгува се</div>
+                        <div className="">Търгува се</div>
                       ) : (
                         <div>
                           {splitDateAndTime(

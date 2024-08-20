@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Infomation from "./calculation";
-import "./Page.css"; // Импортирайте CSS файла
+
 import {
   Carousel,
   CarouselContent,
@@ -12,7 +12,7 @@ import {
 import { Card, CardContent } from "@components/ui/card";
 import { Button } from "@components/ui/button";
 import Image from "next/image";
-import { AnimatePresence, motion, MotionConfig } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const url = "https://wandering-bison-612.convex.site/getImage?storageId=";
 
@@ -84,12 +84,12 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
                           Затвори
                         </Button>
                         <CardContent className="">
-                          <Image
+                          <img
                             src={`${id}`}
                             alt=""
                             className="relative bottom-32 min-h-screen w-full"
-                            width="2000"
-                            height="2000"
+                            width="1000"
+                            height="1000"
                           />
                         </CardContent>
                       </Card>

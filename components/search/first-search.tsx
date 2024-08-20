@@ -168,7 +168,7 @@ export default function SearchComponentFirst() {
           </div>
           <Button
             disabled={availabeLoading ? true : false}
-            className="rounded-md bg-[#0A1F44] px-6 py-2 text-sm text-white hover:bg-[#0A1F44]/90 focus:ring-2 focus:ring-[#0A1F44] focus:ring-offset-2 md:px-8 md:py-3 md:text-base lg:px-10 lg:py-4 lg:text-lg"
+            className="rounded-md bg-[#3967d3] px-6 py-2 text-sm text-white hover:bg-[#1b2e5c]/100 focus:ring-2 focus:ring-[#3967d3] focus:ring-offset-2 md:px-8 md:py-3 md:text-base lg:px-10 lg:py-4 lg:text-lg"
             onClick={() => {
               router.push(
                 `/auction?manufacturer=${chosedManufacturer}&model=${chosedModel}&generation=${chosedGeneration}$&from_year=${yearFrom}&to_year=${yearTo}&per_page=10`,

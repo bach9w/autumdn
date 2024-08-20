@@ -259,3 +259,13 @@ export const getAvailableCars = query({
     return cars;
   },
 });
+
+export const getAddAvailableCars = query({
+  args: {},
+  handler: async (ctx) => {
+    const available = await ctx.db
+      .query("availableCars")
+      .filter((q) => q.eq(q.field("is_sold"), "false"))
+      .take(5);
+  },
+});

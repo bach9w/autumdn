@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Infomation from "./calculation";
-import "./Page.css"; // Импортирайте CSS файла
+// Импортирайте CSS файла
 import {
   Carousel,
   CarouselContent,

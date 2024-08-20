@@ -17,6 +17,8 @@ import { Suspense } from "react";
 import Cookie from "@components/bottom/cookie/Cookie";
 import SearchComponentFirst from "@components/search/first-search";
 import NalichniPage from "./nalichni/page";
+import SmoothScrollHero from "@components/hero/hero-main";
+import LenisProvider from "@providers/lenis-client";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
@@ -34,34 +36,27 @@ export default async function Home({ searchParams }: HomeProps) {
 
   return (
     <main className="">
-      <div className="h-full">
-        <HeroParallaxDemo />
-        <div className="p-2 xl:mt-32">
-          <SearchComponentFirst />
+      <LenisProvider>
+        <div>
+          <SmoothScrollHero />
         </div>
-        <div className="min-h-screen">
-          <NalichniPage />
-        </div>
-        <div className="padding-x padding-y max-width mt-12" id="discover">
-          <div className="home__text-container p-2">
-            <h1 className="text-4xl font-extrabold text-white">
-              Каталог аукциони
-            </h1>
-            <p className="text-white">Наскоро добавени аукциони</p>
+        <div className="h-full">
+          <div className="p-2 xl:mt-2">
+            <SearchComponentFirst />
           </div>
         </div>
-      </div>
 
-      <Suspense fallback={<Loading />}>
-        <div className="">
-          <Cars filters={filters} />
+        <Suspense fallback={<Loading />}>
+          <div className="">
+            <Cars filters={filters} />
+          </div>
+        </Suspense>
+        <div className="mt-6 flex w-full items-start justify-center">
+          <Link href="/auction">
+            <Button>Разгледай всички аукциони</Button>
+          </Link>
         </div>
-      </Suspense>
-      <div className="mt-6 flex w-full items-start justify-center">
-        <Link href="/auction">
-          <Button>Разгледай всички аукциони</Button>
-        </Link>
-      </div>
+      </LenisProvider>
     </main>
   );
 }

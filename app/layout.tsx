@@ -10,6 +10,7 @@ import StickyBottomNav from "@/components/bottom/sticky-bottom";
 import { Analytics } from "@vercel/analytics/react";
 import Cookie from "@components/bottom/cookie/Cookie";
 import CarbonBackgroundComponent from "@components/layout/carbon";
+import LenisProvider from "@providers/lenis-client";
 
 export const metadata = {
   title: "MYRIDE",
@@ -58,14 +59,16 @@ export default function RootLayout({
             )}
           >
             <ConvexClientProvider>
-              <NavBar />
+              <LenisProvider>
+                <NavBar />
 
-              <div className="">{children}</div>
-              <Cookie />
-              <div className="bg-black">
-                <Footer />
-              </div>
-              <Analytics />
+                <div className="">{children}</div>
+                <Cookie />
+                <div className="">
+                  <Footer />
+                </div>
+                <Analytics />
+              </LenisProvider>
             </ConvexClientProvider>
           </main>
         </CarbonBackgroundComponent>

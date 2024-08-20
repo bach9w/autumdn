@@ -22,7 +22,7 @@ function Cars({ filters }: { filters: any }) {
   }
 
   const { data, error, isLoading } = useSWR(
-    `/api/searchNumber?${query.toString()}&status=3&buy_now=1&sale_date_from=${formattedDate}`,
+    `/api/searchNumber?${query.toString()}&status=3buy_now=1&sale_date_from=${formattedDate}`,
     fetcher,
     {
       revalidateOnFocus: false,
