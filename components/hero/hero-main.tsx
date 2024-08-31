@@ -9,28 +9,46 @@ import {
 } from "framer-motion";
 import { SiSpacex } from "react-icons/si";
 import { FiArrowRight, FiMapPin } from "react-icons/fi";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import hero from "public/hero.png";
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import NalichniPage from "@app/nalichni/page";
 import { Card } from "@components/ui/card";
 import { cn } from "@lib/utils";
+import useSWR, { Fetcher } from "swr";
+import { useFormatDate } from "@hooks/useFormatData";
+import { VelocityHero } from "./velocity";
 
 const SmoothScrollHero = () => {
+  const currentDate = new Date();
+  const formattedDate = useFormatDate(currentDate);
+
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    async function fetchCars() {
+      const response = await fetch("/api/cars");
+      const data = await response.json();
+      setData(data);
+    }
+    fetchCars();
+  }, []);
   return (
     <div className="bg-black/20">
-      <ReactLenis
-        root
-        options={{
-          // Learn more -> https://github.com/darkroomengineering/lenis?tab=readme-ov-file#instance-settings
-          lerp: 0.05,
-          //   infinite: true,
-          //   syncTouch: true,
-        }}
-      >
-        <Hero />
-      </ReactLenis>
+      {data && (
+        <ReactLenis
+          root
+          options={{
+            // Learn more -> https://github.com/darkroomengineering/lenis?tab=readme-ov-file#instance-settings
+            lerp: 0.05,
+            //   infinite: true,
+            //   syncTouch: true,
+          }}
+        >
+          <VelocityHero />
+          <Hero />
+        </ReactLenis>
+      )}
     </div>
   );
 };
@@ -70,8 +88,14 @@ const Hero = () => {
   );
 };
 
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 const CenterImage = () => {
   const { scrollY } = useScroll();
+  const { data, isLoading, error } = useSWR(
+    "/api/searchNumber?manufacturer=46",
+    fetcher,
+  );
 
   const clip1 = useTransform(scrollY, [0, 1500], [25, 0]);
   const clip2 = useTransform(scrollY, [0, 1500], [75, 100]);
@@ -90,18 +114,35 @@ const CenterImage = () => {
   );
 
   return (
-    <motion.div
-      className="sticky top-0 h-screen w-full"
-      style={{
-        clipPath,
-        backgroundSize,
-        opacity,
-        backgroundImage:
-          "url(https://vis.iaai.com/deepzoom?imageKey=40380312~SID~B111~S0~I1~RW2576~H1932~TH0&level=12&x=0&y=0&overlap=0&tilesize=5000)",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    />
+    <>
+      {data && (
+        <>
+          <motion.h1
+            className="flex w-full items-center justify-center text-xl font-bold text-white lg:text-5xl"
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.5 },
+            }}
+          >
+            ВНОС НА АВТОМОБИЛИ
+          </motion.h1>
+          <motion.div
+            className="sticky top-0 h-screen w-full"
+            style={{
+              clipPath,
+              backgroundSize,
+              opacity,
+              backgroundImage: `url(${data.data[0].lots[0].images.big[0]})`,
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          />
+        </>
+      )}
+    </>
   );
 };
 
