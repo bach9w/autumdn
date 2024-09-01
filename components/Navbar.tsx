@@ -18,6 +18,7 @@ import StickySearchForm from "./search/sticky-search";
 import SearchForm from "./SearchForm";
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
+import Nav from "./navbar/corner-navbar";
 
 const NavBar = () => {
   const router = useRouter();
@@ -78,121 +79,7 @@ const NavBar = () => {
               <Button className="rounded-l-none bg-red-500">Търси</Button>
             </div>
             <div className="text-black">
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="outline" size="icon" className="shrink-0">
-                    <Menu className="h-5 w-5" />
-                    <span className="sr-only">Toggle navigation menu</span>
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right">
-                  <nav className="grid gap-6 text-lg font-medium">
-                    <Link
-                      href="/"
-                      className="flex items-center gap-2 text-lg font-semibold"
-                    >
-                      <Image src={Logo} width={70} height={30} alt="logo" />
-                      <span className="sr-only">MYRIDE</span>
-                    </Link>
-                    <SheetClose asChild>
-                      <Link
-                        href="/"
-                        className="text-black hover:text-orange-700"
-                      >
-                        Начало
-                      </Link>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <Link
-                        href="/auction"
-                        className="text-black hover:text-orange-700"
-                      >
-                        Аукциони
-                      </Link>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <Link
-                        href="/nalichni"
-                        className="text-black hover:text-orange-700"
-                      >
-                        Налични автомобили
-                      </Link>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <Link
-                        href="/manufacturers"
-                        className="text-black hover:text-orange-700"
-                      >
-                        Марки
-                      </Link>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <Link
-                        href="/parts"
-                        className="text-black hover:text-orange-700"
-                      >
-                        Части за автомобили
-                      </Link>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <Link
-                        href="/about"
-                        className="text-black hover:text-orange-700"
-                      >
-                        За нас
-                      </Link>
-                    </SheetClose>
-                    {user.isSignedIn && (
-                      <>
-                        <div className="flex items-center justify-center gap-2 bg-black text-white">
-                          <UserButton afterSignOutUrl="/" />
-                          {user.user.username}
-                        </div>
-
-                        <div className="flex w-full flex-col justify-center">
-                          <SheetClose asChild>
-                            <Link
-                              href="/obqvi/all"
-                              className="text-black hover:text-orange-700"
-                            >
-                              Всички автомобили
-                            </Link>
-                          </SheetClose>
-                          <SheetClose asChild>
-                            <Link
-                              href="/obqvi/parts"
-                              className="text-black hover:text-orange-700"
-                            >
-                              Всички части
-                            </Link>
-                          </SheetClose>
-                          <SheetClose asChild>
-                            <Link
-                              href="/obqvi/dobavi"
-                              className="text-black hover:text-orange-700"
-                            >
-                              Добави автомобил
-                            </Link>
-                          </SheetClose>
-                          <SheetClose asChild>
-                            <Link
-                              href="/obqvi/parts/dobavi"
-                              className="text-black hover:text-orange-700"
-                            >
-                              Добави част
-                            </Link>
-                          </SheetClose>
-                          <SheetClose asChild>
-                            <SignOutButton>
-                              <Button>Изход</Button>
-                            </SignOutButton>
-                          </SheetClose>
-                        </div>
-                      </>
-                    )}
-                  </nav>
-                </SheetContent>
-              </Sheet>
+              <Nav />
             </div>
           </div>
         </nav>
