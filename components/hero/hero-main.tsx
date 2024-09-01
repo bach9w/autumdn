@@ -10,7 +10,7 @@ import {
 import { SiSpacex } from "react-icons/si";
 import { FiArrowRight, FiMapPin } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
-import hero from "public/hero.png";
+
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import NalichniPage from "@app/nalichni/page";
@@ -20,35 +20,26 @@ import useSWR, { Fetcher } from "swr";
 import { useFormatDate } from "@hooks/useFormatData";
 import { VelocityHero } from "./velocity";
 
+import { USFlag, CanadaFlag } from "./usa-flag";
+
 const SmoothScrollHero = () => {
   const currentDate = new Date();
   const formattedDate = useFormatDate(currentDate);
 
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    async function fetchCars() {
-      const response = await fetch("/api/cars");
-      const data = await response.json();
-      setData(data);
-    }
-    fetchCars();
-  }, []);
   return (
     <div className="bg-black/20">
-      {data && (
-        <ReactLenis
-          root
-          options={{
-            // Learn more -> https://github.com/darkroomengineering/lenis?tab=readme-ov-file#instance-settings
-            lerp: 0.05,
-            //   infinite: true,
-            //   syncTouch: true,
-          }}
-        >
-          <VelocityHero />
-          <Hero />
-        </ReactLenis>
-      )}
+      <ReactLenis
+        root
+        options={{
+          // Learn more -> https://github.com/darkroomengineering/lenis?tab=readme-ov-file#instance-settings
+          lerp: 0.05,
+          //   infinite: true,
+          //   syncTouch: true,
+        }}
+      >
+        <VelocityHero />
+        <Hero />
+      </ReactLenis>
     </div>
   );
 };
@@ -113,12 +104,23 @@ const CenterImage = () => {
     [1, 0],
   );
 
+  const [randomNumber, setRandomNumber] = useState(0);
+
+  useEffect(() => {
+    if (data && data.data && data.data.length > 0) {
+      setRandomNumber(Math.floor(Math.random() * data.data.length));
+    }
+  }, [data]);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading data</div>;
+
   return (
     <>
-      {data && (
+      {data && data.data[randomNumber] && (
         <>
-          <motion.h1
-            className="flex w-full items-center justify-center text-xl font-bold text-white lg:text-5xl"
+          <motion.div
+            className="absolute flex w-full items-center justify-center text-xl font-bold text-white lg:text-5xl"
             initial={{
               opacity: 0,
             }}
@@ -127,15 +129,22 @@ const CenterImage = () => {
               transition: { duration: 0.5 },
             }}
           >
-            ВНОС НА АВТОМОБИЛИ
-          </motion.h1>
+            <div className="col grid grid-cols-2 gap-x-4">
+              <div className="col-span-2 text-center"> ВНОС НА АВТОМОБИЛИ</div>
+              <div className="col-span-2 text-center"> ОТ</div>
+
+              <CanadaFlag />
+              <USFlag />
+            </div>
+          </motion.div>
+
           <motion.div
             className="sticky top-0 h-screen w-full"
             style={{
               clipPath,
               backgroundSize,
               opacity,
-              backgroundImage: `url(${data.data[0].lots[0].images.big[0]})`,
+              backgroundImage: `url(${data.data[randomNumber].lots[0].images.big[0]})`,
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
             }}
