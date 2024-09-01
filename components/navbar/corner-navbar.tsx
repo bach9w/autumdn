@@ -254,7 +254,7 @@ const LINKS = [
 
   {
     title: "ЗА НАС",
-    href: "#",
+    href: "/about",
   },
 ];
 
