@@ -84,7 +84,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const CenterImage = () => {
   const { scrollY } = useScroll();
   const { data, isLoading, error } = useSWR(
-    "/api/searchNumber?manufacturer=46",
+    "/api/searchNumber?sortDirection=desc",
     fetcher,
   );
 

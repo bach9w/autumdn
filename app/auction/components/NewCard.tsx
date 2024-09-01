@@ -107,15 +107,18 @@ function NewCard({ card }: { card: any }) {
                   duration: 0.05,
                 },
               }}
-              className="absolute right-1/2 top-2 z-[100] flex h-6 w-6 items-center justify-center rounded-full bg-card lg:hidden"
+              className="absolute top-2 z-[100] flex h-12 w-1/2 items-center justify-center rounded-full bg-[#2f3ccf] uppercase text-white"
               onClick={() => setActive(null)}
             >
+              {" "}
+              затвори
               <CloseIcon />
             </motion.button>
             <motion.div
               layoutId={`card-${active.title}-${id}`}
               ref={ref}
-              className="flex h-full w-full max-w-[500px] flex-col justify-center overflow-hidden bg-white dark:bg-neutral-900 sm:rounded-3xl md:h-fit md:max-h-[90%]"
+              className="fixed inset-0 flex h-full w-full flex-col justify-center overflow-hidden bg-white dark:bg-neutral-900"
+              style={{ padding: "2vw", boxSizing: "border-box" }}
             >
               <motion.div layoutId={`image-${active.title}-${id}`}>
                 {active.lots?.length &&
@@ -154,9 +157,9 @@ function NewCard({ card }: { card: any }) {
                           duration: 0.3,
                         }}
                         exit={{ opacity: 0, y: 50 }}
-                        className="absolute right-5 top-5"
+                        className="absolute bottom-5 right-5"
                       >
-                        <Badge className="bg-sky-600">ПАЛИ И ТРЪГВА</Badge>
+                        <Badge className="bg-[#2f3ccf]">ПАЛИ И ТРЪГВА</Badge>
                       </motion.div>
                     </Carousel>
                   )}
@@ -169,7 +172,7 @@ function NewCard({ card }: { card: any }) {
                       layoutId={`title-${active.title}-${id}`}
                       className="text-base font-medium text-neutral-700 dark:text-neutral-200"
                     >
-                      {active.manufacturer.name} /{" "}
+                      {active.manufacturer && active.manufacturer.name} /{" "}
                       {active.model && active.model.name}
                     </motion.h3>
 
@@ -237,7 +240,7 @@ function NewCard({ card }: { card: any }) {
                     </h2>
                     <h2
                       className={cn(
-                        "flex items-center justify-center bg-sky-500/80 text-center text-[20px] text-white",
+                        "flex items-center justify-center bg-[#2f3ccf]/80 text-center text-[20px] text-white",
                       )}
                     >
                       <CiLocationOn />
@@ -254,7 +257,6 @@ function NewCard({ card }: { card: any }) {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex h-20 flex-col items-start gap-4 overflow-auto pb-10 text-xs text-neutral-600 [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch] [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] dark:text-neutral-400 md:h-fit md:text-sm lg:text-base"
                   >
                     {typeof active.lots[active.lots.length - 1].status.name ===
                     "string" ? (
@@ -262,7 +264,7 @@ function NewCard({ card }: { card: any }) {
                         className="mt-2 w-full rounded-t-none"
                         href={`/auction/${active.vin}`}
                       >
-                        <Button className="w-full rounded-t-none">
+                        <Button className="w-full rounded-t-none bg-[#2f3ccf]">
                           Разгледай аукциона
                         </Button>
                       </Link>
@@ -270,26 +272,6 @@ function NewCard({ card }: { card: any }) {
                       active.lots[active.lots.length - 1].status.id
                     )}
                   </motion.div>
-                  <motion.button
-                    key={`button-${active.title}-${id}`}
-                    layout
-                    initial={{
-                      opacity: 0,
-                    }}
-                    animate={{
-                      opacity: 1,
-                    }}
-                    exit={{
-                      opacity: 0,
-                      transition: {
-                        duration: 0.05,
-                      },
-                    }}
-                    className="flex h-6 w-full items-center justify-center rounded-full bg-white lg:hidden"
-                    onClick={() => setActive(null)}
-                  >
-                    Затвори <CloseIcon />
-                  </motion.button>
                 </div>
               </div>
             </motion.div>

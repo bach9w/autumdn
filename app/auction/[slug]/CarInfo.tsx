@@ -155,7 +155,7 @@ export function CarInfo({ data }: { data: any }) {
           <div className="grid gap-4 md:grid-cols-2 lg:gap-8">
             <div className="grid auto-rows-max items-start gap-4 lg:gap-8 xl:grid-cols-1">
               <Card
-                className="col-span-2 max-w-full sm:col-span-4"
+                className="col-span-4 max-w-full sm:col-span-4"
                 x-chunk="dashboard-07-chunk-4"
               >
                 <CardHeader>

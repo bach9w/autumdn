@@ -66,9 +66,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Montserrat";
-  font-weight: lighter;
-  font-size: 20px;
+  font-family: "Montserrat", sans-serif; /* Добавя шрифта Montserrat */
+  font-weight: 300; /* Лек стил на шрифта */
 }
 
 /* START: General styles */

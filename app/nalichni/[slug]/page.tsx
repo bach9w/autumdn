@@ -35,6 +35,7 @@ import { MessageCircleQuestionIcon, PhoneCall } from "lucide-react";
 import { useState } from "react";
 import Edit from "../components/edit";
 import Testove from "@components/full-screen/Full-Screen";
+import CardCarousel from "../components/card-carousel";
 
 const url = "https://wandering-bison-612.convex.site/getImage?storageId=";
 
@@ -72,10 +73,7 @@ export default function Page({
           </CardTitle>
           <CardContent>
             <CardDescription>
-              <div
-                key={cars?._id}
-                className="flex h-full w-full flex-col p-0 hover:bg-white/30"
-              >
+              <div key={cars?._id} className="flex h-full w-full flex-col p-0">
                 <div className="flex h-full w-full flex-col items-center justify-end">
                   <Carousel className="h-full w-full">
                     <motion.div
@@ -121,28 +119,6 @@ export default function Page({
                         </>
                       ))}
                     </CarouselContent>
-                    <div className="grid grid-cols-2 rounded sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8">
-                      {cars?.images?.map((img, index) => (
-                        <>
-                          <div
-                            key={index}
-                            className="h-full w-full items-center justify-center rounded-full bg-gray-200"
-                            onClick={() => {
-                              setTestove(true);
-                              setId(img.url);
-                            }}
-                          >
-                            <Image
-                              className="h-full w-full"
-                              src={url + `${img.url}`}
-                              alt={`Image ${img.url}`}
-                              width={400}
-                              height={400}
-                            />
-                          </div>
-                        </>
-                      ))}
-                    </div>
                   </Carousel>
                   <Accordion type="single" collapsible>
                     <AccordionItem value="item-1">

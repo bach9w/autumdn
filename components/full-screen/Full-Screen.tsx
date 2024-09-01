@@ -47,22 +47,25 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
       setInfomation(infomation);
 
       // Забрана на превъртане
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "hidden";
       document.body.style.position = "fixed";
-      document.body.style.top = "0";
 
       document.body.style.width = "100%";
+      document.body.style.height = "100%";
 
       return () => {
         // Връщане към нормалното състояние при напускане на компонента
-        document.body.style.overflow = "auto";
-        document.body.style.position = "auto";
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.width = "";
+        document.body.style.height = "";
       };
     }
   }, [scrollYProgress]);
 
   return (
-    <motion.div className="full-screen z-100 only:absolute">
+    <motion.div className="fixed inset-0 top-[-130px] z-50 flex items-center justify-center bg-black bg-opacity-75">
+      {" "}
       {testove && infomation ? (
         <AnimatePresence>
           <motion.div

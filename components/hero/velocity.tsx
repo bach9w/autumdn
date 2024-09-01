@@ -70,21 +70,25 @@ const ScrollArrow = () => {
         <span
           style={{
             writingMode: "vertical-lr",
+            color: "white",
+            fontSize: "1.25rem",
           }}
         >
           СКРОЛ
         </span>
-        <FiArrowDown className="mx-auto" />
+        <FiArrowDown className="mx-auto" color="white" size={20} />
       </div>
       <div className="absolute right-4 top-1/2 -translate-y-1/2 text-xs lg:block">
         <span
           style={{
             writingMode: "vertical-lr",
+            color: "white",
+            fontSize: "1.25rem",
           }}
         >
           SCROLL
         </span>
-        <FiArrowDown className="mx-auto" />
+        <FiArrowDown className="mx-auto" size={20} color="white" />
       </div>
     </>
   );

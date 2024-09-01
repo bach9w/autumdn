@@ -1,20 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Infomation from "./calculation";
-
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@components/ui/carousel";
 import { Card, CardContent } from "@components/ui/card";
 import { Button } from "@components/ui/button";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-
-const url = "https://wandering-bison-612.convex.site/getImage?storageId=";
 
 type TestoveProps = {
   testove: boolean;
@@ -24,38 +18,38 @@ type TestoveProps = {
 
 const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
   const [infomation, setInfomation] = useState<string | any>(null);
-  const status = testove;
 
-  function onClick() {
-    setTestove(!status);
-  }
+  const onClick = useCallback(() => {
+    setTestove(!testove);
+  }, [testove, setTestove]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const infomation = Infomation();
-
       setInfomation(infomation);
 
-      // Забрана на превъртане
+      // Забрана на превъртане и фиксиране на позицията
       document.body.style.overflow = "hidden";
       document.body.style.position = "fixed";
       document.body.style.width = "100%";
+      document.body.style.height = "100%";
 
       return () => {
-        // Връщане към нормалното състояние при напускане на компонента
-        document.body.style.overflow = "scroll";
+        // Възстановяване на нормалното състояние при демонтиране на компонента
+        document.body.style.overflow = "";
         document.body.style.position = "";
         document.body.style.width = "";
+        document.body.style.height = "";
       };
     }
   }, []);
 
   return (
-    <motion.div className="full-screen">
-      {infomation ? (
+    <motion.div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-25">
+      {infomation && (
         <AnimatePresence initial={false}>
           <motion.div
-            initial={{ opacity: 1, y: 200 }}
+            initial={{ opacity: 0, y: 200 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 1000, transition: { duration: 0.5 } }}
             transition={{
@@ -64,44 +58,34 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
               damping: 0.5,
               ease: "easeInOut",
             }}
-            className="absolute top-[550px] h-full sm:top-[150px]"
+            className="h-full w-full"
           >
             <Carousel
-              opts={{
-                align: "start",
-              }}
-              className="w-[100vw] max-w-[100%]"
+              opts={{ align: "start" }}
+              className="flex h-full w-full max-w-[100%]"
             >
-              <CarouselContent>
-                {Array.from({ length: 1 }).map((_, index) => (
-                  <CarouselItem key={index} className="">
-                    <div className="p-0">
-                      <Card>
-                        <Button
-                          onClick={onClick}
-                          className="absolute left-10 top-0 z-50 mb-2"
-                        >
-                          Затвори
-                        </Button>
-                        <CardContent className="">
-                          <img
-                            src={`${id}`}
-                            alt=""
-                            className="relative bottom-32 min-h-screen w-full"
-                            width="1000"
-                            height="1000"
-                          />
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-                ))}
+              <CarouselContent className="flex h-full items-center justify-center">
+                <CarouselItem key={0} className="h-full w-full">
+                  <Card className="relative h-full w-full">
+                    <Button
+                      onClick={onClick}
+                      className="absolute left-10 top-10 z-50"
+                    >
+                      Затвори
+                    </Button>
+                    <CardContent className="flex h-full w-full items-center justify-center">
+                      <img
+                        src={id}
+                        alt="Image"
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
               </CarouselContent>
             </Carousel>
           </motion.div>
         </AnimatePresence>
-      ) : (
-        ""
       )}
     </motion.div>
   );
