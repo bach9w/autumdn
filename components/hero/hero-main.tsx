@@ -74,7 +74,34 @@ const Hero = () => {
       <CenterImage />
 
       <ParallaxImages />
-
+      <motion.div
+        className="absolute flex w-full items-center justify-center text-xl font-bold text-white lg:text-5xl"
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+          transition: { duration: 0.5 },
+        }}
+      >
+        <div className="col z-0 gap-x-4 md:hidden">
+          <div className="relative top-10 flex w-full items-center justify-evenly p-2">
+            <CanadaFlag />
+            <USFlag />
+          </div>
+          <div className="bg-black/100 p-4 text-justify text-[15px] uppercase text-white md:text-2xl">
+            {" "}
+            Myride е вашият доверен партньор за внос на автомобили от Северна
+            Америка. Специализирани в бърз и безпроблемен процес, ние ви
+            помагаме да откриете и доставите мечтания автомобил от Канада и САЩ
+            директно до България. Предлагаме персонализирано обслужване,
+            включващо всичко от избор на автомобил, проверка на историята и
+            състоянието, до организиране на транспорт и митнически формалности.
+            Доверете се на опита ни и осигурете си качествен автомобил на
+            изгодна цена, без стрес и усложнения.
+          </div>
+        </div>
+      </motion.div>
       <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-b from-zinc-950/0 to-zinc-950" />
     </div>
   );
@@ -120,36 +147,6 @@ const CenterImage = () => {
     <>
       {data && data.data[randomNumber] && (
         <>
-          <motion.div
-            className="absolute flex w-full items-center justify-center text-xl font-bold text-white lg:text-5xl"
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-              transition: { duration: 0.5 },
-            }}
-          >
-            <div className="col z-50 gap-x-4">
-              <div className="bg-white/20 p-2 text-justify text-[15px] uppercase text-white md:text-2xl">
-                {" "}
-                Внос на Автомобили от Канада и Америка. <br />
-                Myride е вашият доверен партньор за внос на автомобили от
-                Северна Америка. Специализирани в бърз и безпроблемен процес,
-                ние ви помагаме да откриете и доставите мечтания автомобил от
-                Канада и САЩ директно до България. Предлагаме персонализирано
-                обслужване, включващо всичко от избор на автомобил, проверка на
-                историята и състоянието, до организиране на транспорт и
-                митнически формалности. Доверете се на опита ни и осигурете си
-                качествен автомобил на изгодна цена, без стрес и усложнения.
-              </div>
-              <div className="relative top-14 flex w-full items-center justify-between p-2">
-                <CanadaFlag />
-                <USFlag />
-              </div>
-            </div>
-          </motion.div>
-
           <motion.div
             className="sticky top-0 h-screen w-full"
             style={{
