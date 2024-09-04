@@ -77,7 +77,7 @@ export default function Page({
                 <div className="flex h-full w-full flex-col items-center justify-end">
                   <Carousel className="h-full w-full">
                     <motion.div
-                      className="absolute right-8 z-50 h-full rounded-md border-0 text-white"
+                      className="absolute right-8 z-20 h-full rounded-md border-0 text-white"
                       initial={{ y: -10, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.5, duration: 0.5 }}
@@ -85,7 +85,7 @@ export default function Page({
                       <CarouselNext className="bg-red-500" color="black" />
                     </motion.div>
                     <motion.div
-                      className="absolute left-8 z-50 h-full rounded-md border-0 text-white shadow-lg backdrop-blur-sm"
+                      className="absolute left-8 z-20 h-full rounded-md border-0 text-white shadow-lg backdrop-blur-sm"
                       initial={{ y: -10, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.5, duration: 0.5 }}
@@ -158,6 +158,10 @@ export default function Page({
                           <div>
                             <h4 className="text-sm font-medium">Двигател</h4>
                             <p>{cars?.engine}</p>
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-medium">Километри</h4>
+                            <p>{cars?.km}</p>
                           </div>
                         </div>
                       </AccordionContent>

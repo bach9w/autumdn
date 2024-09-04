@@ -107,9 +107,9 @@ const NavLink = ({
       }}
       exit={{ opacity: 0, y: -8 }}
       href={href}
-      className="block text-5xl font-semibold text-violet-400 transition-colors hover:text-violet-50 md:text-7xl"
+      className="block text-5xl font-semibold text-white transition-colors hover:text-violet-500 md:text-7xl"
     >
-      {children}.
+      {children}
     </motion.a>
   );
 };
@@ -151,7 +151,7 @@ const HamburgerButton = ({
         animate={active ? "open" : "closed"}
         variants={UNDERLAY_VARIANTS}
         style={{ top: 16, right: 16 }}
-        className="fixed z-10 rounded-xl bg-[#2f3ccf] shadow-lg shadow-violet-800/20"
+        className="fixed rounded-xl bg-[#2f3ccf] shadow-lg shadow-violet-800/20"
       />
 
       <motion.button

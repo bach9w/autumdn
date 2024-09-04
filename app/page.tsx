@@ -22,7 +22,7 @@ import LenisProvider from "@providers/lenis-client";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
-    year: searchParams.year || "2024",
+    year: searchParams.year || "",
     fuel: searchParams.fuel_type || "",
     manufacturer: searchParams.manufacturer || "",
     model: searchParams.model || "",
@@ -30,8 +30,8 @@ export default async function Home({ searchParams }: HomeProps) {
     status: "3",
     buy_now: "1",
     generation: searchParams.genaration || "",
-    from_year: searchParams.from_year || "",
-    to_year: searchParams.to_year || "",
+    from_year: searchParams.from_year || "2022",
+    to_year: searchParams.to_year || "2024",
   };
 
   return (

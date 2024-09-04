@@ -21,6 +21,7 @@ import { useFormatDate } from "@hooks/useFormatData";
 import { VelocityHero } from "./velocity";
 
 import { USFlag, CanadaFlag } from "./usa-flag";
+import Loading from "@components/loading";
 
 const SmoothScrollHero = () => {
   const currentDate = new Date();
@@ -112,7 +113,7 @@ const CenterImage = () => {
     }
   }, [data]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
   if (error) return <div>Error loading data</div>;
 
   return (

@@ -26,7 +26,7 @@ function Cars({ filters }: { filters: any }) {
     fetcher,
     {
       revalidateOnFocus: false,
-      revalidateOnReconnect: false,
+      revalidateOnReconnect: true,
       dedupingInterval: 60000,
       refreshInterval: 300000,
     },

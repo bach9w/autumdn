@@ -51,9 +51,9 @@ function priceBGN(price: number): any {
         <p>ЗАПОЧНИ НАДДАВАНЕТО</p>0 ЛВ.
       </div>
     );
-  const changed = price * 1.792846 + 10000;
+  const changed = price * 1.792846;
   return (
-    <div className="flex w-full items-center justify-between">
+    <div className="flex w-full items-center justify-between uppercase">
       <p>Купи сега</p>
       {Number(changed.toFixed(0)).toLocaleString("bg-BG")} ЛВ.
     </div>
@@ -165,7 +165,7 @@ export function CarInfo({ data }: { data: any }) {
                 <CardContent>
                   <Carousel>
                     <motion.div
-                      className="absolute right-8 z-50 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
+                      className="absolute right-8 z-20 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
                       initial={{ y: -10, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.5, duration: 0.5 }}
@@ -173,7 +173,7 @@ export function CarInfo({ data }: { data: any }) {
                       <CarouselNext className="bg-red-500" color="black" />
                     </motion.div>
                     <motion.div
-                      className="absolute left-8 z-50 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
+                      className="absolute left-8 z-20 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
                       initial={{ y: -10, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.5, duration: 0.5 }}
@@ -227,6 +227,13 @@ export function CarInfo({ data }: { data: any }) {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col">
+                  <Button
+                    className="rounded-none bg-red-500 hover:bg-red-500 hover:text-white"
+                    size="sm"
+                    variant="secondary"
+                  >
+                    {priceBGN(data.lots[data.lots.length - 1].buy_now)}{" "}
+                  </Button>
                   <Button
                     className="rounded-none hover:bg-red-500 hover:text-white"
                     size="sm"
