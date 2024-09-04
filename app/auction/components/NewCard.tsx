@@ -135,7 +135,7 @@ function NewCard({ card }: { card: any }) {
                                   alt={`Car image ${index + 1}`}
                                   width={600}
                                   height={400}
-                                  className="h-96 w-full object-cover"
+                                  className="h-[520px] w-full object-cover"
                                   whileHover={{ scale: 1.05 }}
                                   transition={{ duration: 0.3 }}
                                 />
@@ -157,7 +157,7 @@ function NewCard({ card }: { card: any }) {
                           duration: 0.3,
                         }}
                         exit={{ opacity: 0, y: 50 }}
-                        className="absolute bottom-5 right-5"
+                        className="absolute right-5 top-5"
                       >
                         <Badge className="bg-[#2f3ccf]">ПАЛИ И ТРЪГВА</Badge>
                       </motion.div>
@@ -193,7 +193,7 @@ function NewCard({ card }: { card: any }) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   target="_blank"
-                  className="flex w-full bg-red-500 px-4 py-3 text-sm font-bold text-white"
+                  className="relative flex w-full bg-red-500 px-4 py-3 text-sm font-bold text-white"
                 >
                   {priceBGN(active.lots[active.lots.length - 1].buy_now)}
                 </motion.a>
