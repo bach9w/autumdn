@@ -32,7 +32,7 @@ import Video360 from "./Video360";
 import DamageCheck from "../components/DamageCheck";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@lib/utils";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Testove from "@components/full-screen/Full-ScreenM";
 
 function splitDateAndTime(date: string) {
@@ -63,6 +63,30 @@ function priceBGN(price: number): any {
 export function CarInfo({ data }: { data: any }) {
   const [open, setOpen] = useState(false);
   const [url, setUrl] = useState("");
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+  const [startIndex, setStartIndex] = useState<number>(0);
+
+  const thumbnailsPerPage = 4;
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  const images = data?.lots?.[data.lots.length - 1]?.images?.big || [];
+  const totalImages = images.length;
+
+  const mainImage = activeImage || images[0];
+
+  const nextThumbnails = () => {
+    if (startIndex + thumbnailsPerPage < totalImages) {
+      setStartIndex(startIndex + thumbnailsPerPage);
+    }
+  };
+
+  const prevThumbnails = () => {
+    if (startIndex - thumbnailsPerPage >= 0) {
+      setStartIndex(startIndex - thumbnailsPerPage);
+    }
+  };
+
+  // Функция за включване на пълен екран
 
   return (
     <main className="items-start gap-4 p-0 sm:px-3 sm:py-0 md:gap-8">
@@ -164,55 +188,63 @@ export function CarInfo({ data }: { data: any }) {
                 </CardHeader>
                 <CardContent>
                   <Carousel>
-                    <motion.div
-                      className="absolute right-8 z-20 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
-                      initial={{ y: -10, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.5, duration: 0.5 }}
-                    >
-                      <CarouselNext className="bg-red-500" color="black" />
-                    </motion.div>
-                    <motion.div
-                      className="absolute left-8 z-20 h-full rounded-md text-white shadow-lg backdrop-blur-sm"
-                      initial={{ y: -10, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.5, duration: 0.5 }}
-                    >
-                      <CarouselPrevious className="bg-red-500" color="black" />
-                    </motion.div>
+                    {/* Главна снимка с функционалност за fullscreen */}
                     <CarouselContent>
-                      {data?.lots && data?.lots[data.lots.length - 1].images
-                        ? data?.lots[data.lots.length - 1]?.images?.big?.map(
-                            (imageUrl: string, index: number) => (
-                              <CarouselItem
-                                onClick={() => setOpen(!open)}
-                                key={index}
-                              >
-                                <img
-                                  src={imageUrl}
-                                  alt={`Car image ${index + 1}`}
-                                  height={500}
-                                  className="aspect-square w-full rounded-md object-fill"
-                                  width="500"
-                                  onClick={() => setUrl(imageUrl)}
-                                />
-                              </CarouselItem>
-                            ),
-                          )
-                        : data?.lots[data.lots.length - 1].images?.normal.map(
-                            (imageUrl: string, index: number) => (
-                              <CarouselItem key={index}>
-                                <img
-                                  src={imageUrl}
-                                  alt={`Car image ${index + 1}`}
-                                  height={300}
-                                  className="aspect-square w-full rounded-md object-fill"
-                                  width="300"
-                                />
-                              </CarouselItem>
-                            ),
-                          )}
+                      {mainImage && (
+                        <CarouselItem>
+                          <img
+                            ref={imageRef}
+                            src={mainImage}
+                            alt="Main car image"
+                            height={500}
+                            className="aspect-square w-full cursor-pointer rounded-md object-fill"
+                            width="500"
+                            onClick={() => {
+                              setUrl(mainImage);
+                              setOpen(true);
+                            }}
+                          />
+                        </CarouselItem>
+                      )}
                     </CarouselContent>
+
+                    {/* Секция за thumbnails */}
+                    <div className="thumbnails-container mt-4 flex items-center justify-center gap-2">
+                      {startIndex > 0 && (
+                        <button
+                          onClick={prevThumbnails}
+                          className="rounded-md bg-red-500 p-2 text-white"
+                        >
+                          {"<"}
+                        </button>
+                      )}
+
+                      {images
+                        .slice(startIndex, startIndex + thumbnailsPerPage)
+                        .map((thumbnailUrl: string, index: number) => (
+                          <div key={index} className="thumbnail">
+                            <img
+                              src={thumbnailUrl}
+                              alt={`Thumbnail ${startIndex + index + 1}`}
+                              className={`aspect-square h-24 w-24 cursor-pointer rounded-md object-cover ${
+                                thumbnailUrl === mainImage
+                                  ? "border-4 border-red-500"
+                                  : ""
+                              }`}
+                              onClick={() => setActiveImage(thumbnailUrl)}
+                            />
+                          </div>
+                        ))}
+
+                      {startIndex + thumbnailsPerPage < totalImages && (
+                        <button
+                          onClick={nextThumbnails}
+                          className="rounded-md bg-red-500 p-2 text-white"
+                        >
+                          {">"}
+                        </button>
+                      )}
+                    </div>
                   </Carousel>
                 </CardContent>
               </Card>
