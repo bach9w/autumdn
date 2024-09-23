@@ -5,6 +5,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@components/ui/carousel";
 import { Card, CardContent } from "@components/ui/card";
 import { Button } from "@components/ui/button";
@@ -60,30 +62,36 @@ const Testove: React.FC<TestoveProps> = ({ testove, setTestove, id }) => {
             }}
             className="h-full w-full"
           >
-            <Carousel
-              opts={{ align: "start" }}
-              className="flex h-full w-full max-w-[100%]"
-            >
-              <CarouselContent className="flex h-full items-center justify-center">
-                <CarouselItem key={0} className="h-full w-full">
-                  <Card className="relative h-full w-full">
-                    <Button
-                      onClick={onClick}
-                      className="absolute left-10 top-10 z-50"
-                    >
-                      Затвори
-                    </Button>
-                    <CardContent className="flex h-full w-full items-center justify-center">
-                      <img
-                        src={id}
-                        alt="Image"
-                        className="max-h-full max-w-full object-contain"
-                      />
-                    </CardContent>
-                  </Card>
-                </CarouselItem>
-              </CarouselContent>
-            </Carousel>
+            <Card className="relative h-full w-full">
+              <Button
+                onClick={onClick}
+                className="absolute left-10 top-10 z-50"
+              >
+                Затвори
+              </Button>
+              <CardContent className="min-w-screen flex h-full items-center justify-center">
+                {" "}
+                <Carousel className="w-full min-w-[100vw]">
+                  <CarouselContent>
+                    {id.map((_: any, index: string) => (
+                      <CarouselItem key={index}>
+                        <div className="p-1">
+                          <Card>
+                            <CardContent className="flex aspect-square items-center justify-center p-6">
+                              <span className="text-4xl font-semibold">
+                                <img src={`${_}`} alt="" />
+                              </span>
+                            </CardContent>
+                          </Card>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
+              </CardContent>
+            </Card>
           </motion.div>
         </AnimatePresence>
       )}

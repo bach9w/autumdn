@@ -37,9 +37,6 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <main className="">
       <LenisProvider>
-        <div>
-          <SmoothScrollHero />
-        </div>
         <div className="h-full">
           <div className="p-2 xl:mt-2">
             <SearchComponentFirst />

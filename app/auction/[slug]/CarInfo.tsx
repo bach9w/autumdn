@@ -200,7 +200,7 @@ export function CarInfo({ data }: { data: any }) {
                             className="aspect-square w-full cursor-pointer rounded-md object-fill"
                             width="500"
                             onClick={() => {
-                              setUrl(mainImage);
+                              setUrl(images);
                               setOpen(true);
                             }}
                           />
