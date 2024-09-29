@@ -1,7 +1,7 @@
 import { fetchAuctionFilter } from "@/app/api/cars";
 import { HomeProps } from "@types";
 import { fuels, yearsOfProduction } from "@constants";
-import Hero from "@components/Hero";
+import { Hero } from "@components/components/hero/Hero";
 import CarCard from "@components/CarCard";
 import SearchBar from "@components/Searchbar";
 import CustomFilter from "@components/CustomFilter";
@@ -19,6 +19,8 @@ import SearchComponentFirst from "@components/search/first-search";
 import NalichniPage from "./nalichni/page";
 import SmoothScrollHero from "@components/hero/hero-main";
 import LenisProvider from "@providers/lenis-client";
+import { Logos } from "@components/components/logos/Logos";
+import { Stats } from "@components/components/features/stats/Stats";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
@@ -37,6 +39,12 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <main className="">
       <LenisProvider>
+        <div className="overflow-hidden bg-blue-500/60">
+          <Hero />
+          <Logos />
+        </div>
+
+        <Stats />
         <div className="h-full">
           <div className="p-2 xl:mt-2">
             <SearchComponentFirst />

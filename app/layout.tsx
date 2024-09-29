@@ -11,6 +11,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Cookie from "@components/bottom/cookie/Cookie";
 import CarbonBackgroundComponent from "@components/layout/carbon";
 import LenisProvider from "@providers/lenis-client";
+import { Hero } from "@components/components/hero/Hero";
 
 export const metadata = {
   title: "MYRIDE",

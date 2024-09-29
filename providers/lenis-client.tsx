@@ -1,4 +1,5 @@
 "use client";
+import { Hero } from "@components/components/hero/Hero";
 import ReactLenis from "lenis/dist/lenis-react";
 
 const LenisProvider = ({ children }: { children: React.ReactNode }) => {
