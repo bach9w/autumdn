@@ -11,8 +11,8 @@ import {
   FiUser,
 } from "react-icons/fi";
 import { useEffect, useState } from "react";
-import { CornerBlur } from "@/components/utils/CornerBlur";
-import { PulseLine } from "@/components/utils/PulseLine";
+import { CornerBlur } from "@components/components/utils/CornerBlur";
+import { PulseLine } from "@components/components/utils/PulseLine";
 
 export const Tower = () => {
   return (
@@ -46,7 +46,7 @@ const Mockup = () => (
 
 const MockupSideBar = () => (
   <div className="h-full w-24 border-r border-zinc-700 bg-zinc-900 p-2">
-    <div className="mb-4 flex items-center justify-between ">
+    <div className="mb-4 flex items-center justify-between">
       <SiGithub className="text-zinc-700" />
       <FiBell className="text-blue-500" />
     </div>

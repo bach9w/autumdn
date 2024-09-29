@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "../../utils/Card";
 import { CalloutChip } from "../../utils/CalloutChip";
 import { SiTwitter } from "react-icons/si";
-import { CornerBlur } from "@/components/utils/CornerBlur";
+import { CornerBlur } from "@components/components/utils/CornerBlur";
 
 export const MiniCard2 = () => {
   return (

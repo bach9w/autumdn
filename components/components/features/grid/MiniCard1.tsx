@@ -3,7 +3,7 @@ import { Card } from "../../utils/Card";
 import { CalloutChip } from "../../utils/CalloutChip";
 import { motion } from "framer-motion";
 import { FiLink } from "react-icons/fi";
-import { BubbleButton } from "@/components/buttons/BubbleButton";
+import { BubbleButton } from "@components/components/buttons/BubbleButton";
 
 export const MiniCard1 = () => {
   return (
@@ -59,7 +59,7 @@ const Band = ({ delay }: { delay: number }) => {
         ease: "linear",
         delay,
       }}
-      className="absolute left-[50%] top-[50%] z-0 size-80 rounded-full border border-blue-600 bg-gradient-to-br from-blue-600/50 to-blue-950/20"
+      className="size-80 absolute left-[50%] top-[50%] z-0 rounded-full border border-blue-600 bg-gradient-to-br from-blue-600/50 to-blue-950/20"
     />
   );
 };

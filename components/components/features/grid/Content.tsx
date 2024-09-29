@@ -1,13 +1,13 @@
-import { MaxWidthWrapper } from "@/components/utils/MaxWidthWrapper";
+import { MaxWidthWrapper } from "@components/components/utils/MaxWidthWrapper";
 import React from "react";
 import { Tower } from "./Tower";
 import { MiniCard1 } from "./MiniCard1";
 import { MiniCard2 } from "./MiniCard2";
 import { LongCard } from "./LongCard";
 import { SimpleGrid } from "./SimpleGrid";
-import { SectionHeading } from "@/components/utils/SectionHeading";
-import { SectionSubheading } from "@/components/utils/SectionSubheading";
-import { SectionHeadingSpacing } from "@/components/utils/SectionHeadingSpacing";
+import { SectionHeading } from "@components/components/utils/SectionHeading";
+import { SectionSubheading } from "@components/components/utils/SectionSubheading";
+import { SectionHeadingSpacing } from "@components/components/utils/SectionHeadingSpacing";
 
 export const Content = () => {
   return (
