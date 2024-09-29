@@ -91,193 +91,183 @@ function NewCard({ card }: { card: any }) {
       </AnimatePresence>
       <AnimatePresence>
         {active && typeof active === "object" ? (
-          <div className="fixed inset-0 z-[90] grid place-items-center items-center">
+          <div className="fixed inset-0 z-[90] grid place-items-center">
+            {/* Close button */}
             <motion.button
               key={`button-${active.title}-${id}`}
               layout
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               exit={{
                 opacity: 0,
-                transition: {
-                  duration: 0.05,
-                },
+                transition: { duration: 0.05 },
               }}
               className="absolute top-2 z-[100] flex h-12 w-1/2 items-center justify-center rounded-full bg-[#2f3ccf] uppercase text-white"
               onClick={() => setActive(null)}
             >
-              {" "}
-              затвори
+              Затвори
               <CloseIcon />
             </motion.button>
+
+            {/* Main content area */}
             <motion.div
               layoutId={`card-${active.title}-${id}`}
               ref={ref}
-              className="fixed inset-0 flex h-full w-full flex-col justify-center overflow-hidden bg-white dark:bg-neutral-900"
+              className="fixed inset-0 flex flex-col justify-center overflow-hidden bg-white dark:bg-neutral-900"
               style={{ padding: "2vw", boxSizing: "border-box" }}
             >
+              {/* Carousel */}
               <motion.div layoutId={`image-${active.title}-${id}`}>
                 {active.lots?.length &&
-                  active.lots[active.lots.length - 1]?.images && (
-                    <Carousel className="h-96 w-full" key={active.id}>
-                      <CarouselContent>
-                        {active.lots[active.lots.length - 1].images?.normal !==
-                        null ? (
-                          active.lots[active.lots.length - 1].images.normal.map(
-                            (img: any, index: any) => (
-                              <CarouselItem key={index}>
+                active.lots[active.lots.length - 1]?.images ? (
+                  <Carousel className="max-h-md h-full w-full" key={active.id}>
+                    {/* Badge */}
+
+                    <CarouselContent className="w-full">
+                      {active.lots[active.lots.length - 1].images.normal
+                        ?.length > 0 ? (
+                        active.lots[active.lots.length - 1].images.big.map(
+                          (img: any, index: any) => (
+                            <CarouselItem key={index} className="w-full">
+                              <div className="relative aspect-video w-full overflow-hidden">
                                 <motion.img
                                   src={img}
                                   alt={`Car image ${index + 1}`}
-                                  width={600}
-                                  height={400}
-                                  className="h-[520px] w-full object-cover"
+                                  layout="size"
+                                  className="h-full w-full object-cover"
                                   whileHover={{ scale: 1.05 }}
                                   transition={{ duration: 0.3 }}
                                 />
-                              </CarouselItem>
-                            ),
-                          )
-                        ) : (
-                          <CarouselItem>
-                            <div className="aspect-square h-[300px] w-[300px] rounded-md object-cover">
-                              No Image
-                            </div>
-                          </CarouselItem>
-                        )}
-                      </CarouselContent>
-                      <motion.div
-                        initial={{ opacity: 0, y: -50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          duration: 0.3,
-                        }}
-                        exit={{ opacity: 0, y: 50 }}
-                        className="absolute right-5 top-5"
-                      >
-                        <Badge className="bg-[#2f3ccf]">ПАЛИ И ТРЪГВА</Badge>
-                      </motion.div>
-                    </Carousel>
-                  )}
+                                <motion.div
+                                  initial={{ opacity: 0, y: -50 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ duration: 0.3 }}
+                                  exit={{ opacity: 0, y: 50 }}
+                                  className="absolute right-5 top-5"
+                                >
+                                  <Badge className="bg-[#2f3ccf]">
+                                    ПАЛИ И ТРЪГВА
+                                  </Badge>
+                                </motion.div>
+                              </div>
+                            </CarouselItem>
+                          ),
+                        )
+                      ) : (
+                        <CarouselItem className="w-full">
+                          <div className="flex aspect-video w-full items-center justify-center bg-muted text-muted-foreground">
+                            No Image
+                          </div>
+                        </CarouselItem>
+                      )}
+                    </CarouselContent>
+                  </Carousel>
+                ) : null}
               </motion.div>
 
-              <div>
-                <div className="flex items-start justify-between p-4">
-                  <div className="">
-                    <motion.h3
-                      layoutId={`title-${active.title}-${id}`}
-                      className="text-base font-medium text-neutral-700 dark:text-neutral-200"
-                    >
-                      {active.manufacturer && active.manufacturer.name} /{" "}
-                      {active.model && active.model.name}
-                    </motion.h3>
+              {/* Information and details */}
+              <div className="p-4">
+                <motion.h3
+                  layoutId={`title-${active.title}-${id}`}
+                  className="text-base font-medium text-neutral-700 dark:text-neutral-200"
+                >
+                  {active.manufacturer?.name} / {active.model?.name}
+                </motion.h3>
 
-                    <motion.p
-                      layoutId={`description-${active.id}-${id}`}
-                      className="text-base text-neutral-600 dark:text-neutral-400"
-                    >
-                      {active.year} /{" "}
-                      {active.drive_wheel && active.drive_wheel.name} /{" "}
-                      {active.transmission && active.transmission.name} /{" "}
-                      {active.body_type && active.body_type.name}
-                    </motion.p>
-                  </div>
-                </div>
-                <motion.a
+                <motion.p
+                  layoutId={`description-${active.id}-${id}`}
+                  className="text-base text-neutral-600 dark:text-neutral-400"
+                >
+                  {active.year} / {active.drive_wheel?.name} /{" "}
+                  {active.transmission?.name} / {active.body_type?.name}
+                </motion.p>
+              </div>
+
+              {/* Price and auction link */}
+              <motion.a
+                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                target="_blank"
+                className="relative flex w-full bg-red-500 px-4 py-3 text-sm font-bold text-white"
+              >
+                {priceBGN(active.lots[active.lots.length - 1]?.buy_now)}
+              </motion.a>
+
+              {/* Vehicle details */}
+              <div className="relative pt-4 uppercase">
+                <motion.div
+                  layout
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <Badge className="flex w-full justify-center rounded-none bg-card/90 text-center text-xl">
+                    Детайли
+                  </Badge>
+                  <Separator orientation="horizontal" />
+
+                  <h2 className="bg-black text-center text-white">
+                    Пробег - {active.lots[0]?.odometer?.km} км
+                  </h2>
+                  <Separator orientation="horizontal" />
+
+                  <h2 className="bg-black text-center text-white">
+                    Двигател - {active.engine?.name}
+                  </h2>
+                  <Separator orientation="horizontal" />
+
+                  <h2 className="bg-black text-center font-bold uppercase text-white">
+                    {active.lots[active.lots.length - 1]?.damage?.main?.name ? (
+                      <DamageCheck
+                        damage={active.lots[0]?.damage?.main?.name}
+                      />
+                    ) : (
+                      "Няма"
+                    )}
+                  </h2>
+
+                  <h2 className="flex items-center justify-center bg-[#2f3ccf]/80 text-center text-[20px] text-white">
+                    <CiLocationOn />
+                    Локация -{" "}
+                    {
+                      active.lots[active.lots.length - 1]?.location?.country
+                        ?.name
+                    }{" "}
+                    /{" "}
+                    {active.lots[active.lots.length - 1]?.location?.city?.name}
+                  </h2>
+                </motion.div>
+
+                {/* Auction button */}
+                <motion.div
                   layout
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  target="_blank"
-                  className="relative flex w-full bg-red-500 px-4 py-3 text-sm font-bold text-white"
                 >
-                  {priceBGN(active.lots[active.lots.length - 1].buy_now)}
-                </motion.a>
-                <div className="relative pt-4 uppercase">
-                  <motion.div
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <Badge className="flex w-full justify-center rounded-none bg-card/90 text-center text-xl">
-                      Детайли
-                    </Badge>
-                    <Separator orientation="horizontal" />
-                    <h2 className="bg-black text-center text-white">
-                      Пробег -{" "}
-                      {active.lots[0] &&
-                        active.lots[0].odometer &&
-                        active.lots[0].odometer.km}{" "}
-                      км
-                    </h2>
-                    <Separator orientation="horizontal" />
-
-                    <h2
-                      className={cn(
-                        "bg-black text-center text-[20px] text-white",
-                      )}
+                  {typeof active.lots[active.lots.length - 1]?.status?.name ===
+                  "string" ? (
+                    <Link
+                      className="mt-2 w-full rounded-t-none"
+                      href={`/auction/${active.vin}`}
                     >
-                      Двигател - {active.engine && active.engine.name}
-                    </h2>
-
-                    <Separator orientation="horizontal" />
-
-                    <h2 className="bg-black text-center font-bold uppercase text-white">
-                      {active.lots[active.lots.length - 1] &&
-                      active.lots[active.lots.length - 1].damage &&
-                      active.lots[active.lots.length - 1].damage.main.name !==
-                        null ? (
-                        <DamageCheck damage={active.lots[0].damage.main.name} />
-                      ) : (
-                        "Няма"
-                      )}
-                    </h2>
-                    <h2
-                      className={cn(
-                        "flex items-center justify-center bg-[#2f3ccf]/80 text-center text-[20px] text-white",
-                      )}
-                    >
-                      <CiLocationOn />
-                      Локация -{" "}
-                      {
-                        active.lots[active.lots.length - 1].location.country
-                          .name
-                      }{" "}
-                      / {active.lots[active.lots.length - 1].location.city.name}
-                    </h2>
-                  </motion.div>
-                  <motion.div
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    {typeof active.lots[active.lots.length - 1].status.name ===
-                    "string" ? (
-                      <Link
-                        className="mt-2 w-full rounded-t-none"
-                        href={`/auction/${active.vin}`}
-                      >
-                        <Button className="w-full rounded-t-none bg-[#2f3ccf]">
-                          Разгледай аукциона
-                        </Button>
-                      </Link>
-                    ) : (
-                      active.lots[active.lots.length - 1].status.id
-                    )}
-                  </motion.div>
-                </div>
+                      <Button className="w-full rounded-t-none bg-[#2f3ccf]">
+                        Разгледай аукциона
+                      </Button>
+                    </Link>
+                  ) : (
+                    active.lots[active.lots.length - 1]?.status?.id
+                  )}
+                </motion.div>
               </div>
             </motion.div>
           </div>
         ) : null}
       </AnimatePresence>
+
       {card && (
         <motion.div
           layoutId={`card-${card.title}-${id}`}
