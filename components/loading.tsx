@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from "@/public/myride_logo.jpg";
+import Logo from "@/public/myride_logo.png";
 const Loading = () => {
   return (
     <div className="flex min-h-screen w-full min-w-full animate-pulse items-center justify-center text-black">

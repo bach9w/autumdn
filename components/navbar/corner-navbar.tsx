@@ -5,6 +5,7 @@ import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { Button } from "@components/ui/button";
+import { cn } from "@lib/utils";
 
 const Nav = () => {
   const [active, setActive] = useState(false);
@@ -118,17 +119,20 @@ const Logo = () => {
   // Temp logo from https://logoipsum.com/
   return (
     <motion.a
-      initial={{ opacity: 0, y: -12 }}
+      initial={{ opacity: 0, y: -12, height: 1000, width: 1000 }}
       animate={{
         opacity: 1,
+
         y: 0,
-        transition: { delay: 0.5, duration: 0.5, ease: "easeInOut" },
+        height: 200,
+        width: 200,
+        transition: { delay: 0, duration: 1.5, ease: "easeInOut" },
       }}
       exit={{ opacity: 0, y: -12 }}
       href="#"
-      className="flex h-40 w-40 items-center justify-center rounded-br-xl rounded-tl-xl bg-white transition-colors hover:bg-violet-50"
+      className="flex h-full w-full items-center justify-center rounded-br-xl rounded-tl-xl bg-white transition-colors hover:bg-violet-50"
     >
-      <img src="/LOGO-BLACK.png" className="w-[240px]" height={200} />
+      <img src="/LOGO-BLACK.png" />
     </motion.a>
   );
 };
@@ -147,14 +151,14 @@ const HamburgerButton = ({
         animate={active ? "open" : "closed"}
         variants={UNDERLAY_VARIANTS}
         style={{ top: 16, right: 16 }}
-        className="fixed rounded-xl bg-[#df0000]/100 shadow-lg shadow-violet-800/20"
+        className={cn("fixed rounded-xl", active ? "bg-[#df0000]/100" : "")}
       />
 
       <motion.button
         initial={false}
         animate={active ? "open" : "closed"}
         onClick={() => setActive((pv) => !pv)}
-        className={`group fixed right-4 top-4 z-50 h-20 w-20 bg-white/0 transition-all hover:bg-white/20 ${
+        className={`group fixed right-4 top-4 z-50 h-10 w-20 bg-white/0 transition-all hover:bg-white/20 ${
           active ? "rounded-bl-xl rounded-tr-xl" : "rounded-xl"
         }`}
       >
