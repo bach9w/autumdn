@@ -151,7 +151,10 @@ const HamburgerButton = ({
         animate={active ? "open" : "closed"}
         variants={UNDERLAY_VARIANTS}
         style={{ top: 16, right: 16 }}
-        className={cn("fixed rounded-xl", active ? "bg-[#df0000]/100" : "")}
+        className={cn(
+          "fixed rounded-xl",
+          active ? "overflow-y-hidden overscroll-y-none bg-[#df0000]/100" : "",
+        )}
       />
 
       <motion.button
