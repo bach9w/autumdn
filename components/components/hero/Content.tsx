@@ -26,7 +26,11 @@ export const Content = () => {
         className="relative"
       >
         <GlowingChip>
-          <img src="/myride_logo.jpg" width={200} height={200} alt="" />
+          <img
+            src="/myride_logo.png"
+            className="h-full w-full drop-shadow-[5px_5px_5px_rgba(223,0,0,0.5)] filter hover:drop-shadow-[5px_5px_5px_rgba(223,0,0,2.5)]"
+            alt=""
+          />
         </GlowingChip>
       </motion.div>
       <motion.h1

@@ -3,6 +3,7 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
 import { footerLinks } from "@constants";
 import StickyBottomNav from "./bottom/sticky-bottom";
@@ -16,16 +17,16 @@ const Footer = () => {
       <StickyBottomNav inView={isInView} />
       <footer ref={ref} className="mt-5 flex flex-col text-gray-100">
         <div className="flex flex-wrap justify-between gap-5 px-6 py-10 max-md:flex-col sm:px-16">
-          <div className="flex items-center justify-start gap-6">
+          <div className="flex flex-col items-center justify-start gap-6 sm:flex-none">
             <img
-              src="/myride_logo.jpg"
+              src="/myride_logo.png"
               alt="logo"
-              width={158}
-              height={18}
-              className="object-contain hover:shadow-2xl hover:shadow-orange-500"
+              width={450}
+              height={30}
+              className="object-contain shadow-orange-500 drop-shadow-[5px_5px_5px_rgba(223,0,0,0.5)] filter hover:drop-shadow-[5px_5px_5px_rgba(223,0,0,2.5)]"
             />
             <p className="text-base text-gray-400">
-              MYRIDE 2024 <br />
+              <br />
               Всички права запазени &copy;
             </p>
           </div>

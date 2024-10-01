@@ -2,21 +2,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "/public/myride_logo.png";
+import React from "react";
 
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import { Input } from "./ui/input";
 
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-import { Menu } from "lucide-react";
-import StickySearchForm from "./search/sticky-search";
-import SearchForm from "./SearchForm";
-import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+
+import { useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 import Nav from "./navbar/corner-navbar";
 
@@ -56,15 +49,15 @@ const NavBar = () => {
   return (
     <>
       <div
-        className={`sticky top-0 z-40 flex flex-col transition duration-150 ease-out ${showNav ? "show" : "hideNav"}`}
+        className={`sticky top-0 z-40 flex h-[10%] flex-col transition duration-150 ease-out ${showNav ? "show" : "hideNav"}`}
       >
-        <nav className="top-0 z-40 h-[10%] w-full bg-gradient-to-b from-[#151515] to-[#191919] p-2">
+        <nav className="top-0 z-40 h-full w-full bg-gradient-to-b from-[#151515] to-[#191919] p-2">
           <div className="flex w-full items-center justify-between">
             <div className="flex">
-              <Image
-                src={Logo}
-                width={100}
-                height={250}
+              <img
+                src="/myride_logo.png"
+                width={120}
+                height={300}
                 alt="logo"
                 onClick={() => router.push("/")}
                 className="cursor-pointer rounded-xl"
@@ -78,7 +71,7 @@ const NavBar = () => {
 
               <Button className="rounded-l-none bg-red-500">Търси</Button>
             </div>
-            <div className="text-black">
+            <div className="h-full">
               <Nav />
             </div>
           </div>

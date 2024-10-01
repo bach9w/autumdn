@@ -126,13 +126,9 @@ const Logo = () => {
       }}
       exit={{ opacity: 0, y: -12 }}
       href="#"
-      className="grid h-20 w-20 place-content-center rounded-br-xl rounded-tl-xl bg-white transition-colors hover:bg-violet-50"
+      className="flex h-40 w-40 items-center justify-center rounded-br-xl rounded-tl-xl bg-white transition-colors hover:bg-violet-50"
     >
-      <img
-        src="/myride_logo.jpg"
-        alt="MyRide"
-        className="h-full w-full rounded-br-md object-fill"
-      />
+      <img src="/LOGO-BLACK.png" className="w-[240px]" height={200} />
     </motion.a>
   );
 };
@@ -151,7 +147,7 @@ const HamburgerButton = ({
         animate={active ? "open" : "closed"}
         variants={UNDERLAY_VARIANTS}
         style={{ top: 16, right: 16 }}
-        className="fixed rounded-xl bg-[#2f3ccf]/90 shadow-lg shadow-violet-800/20"
+        className="fixed rounded-xl bg-[#df0000]/100 shadow-lg shadow-violet-800/20"
       />
 
       <motion.button
