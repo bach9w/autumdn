@@ -1,6 +1,6 @@
 import { SiInstagram, SiLinkedin, SiTwitter, SiYoutube } from "react-icons/si";
 import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, calcLength, motion } from "framer-motion";
 import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
@@ -20,7 +20,7 @@ const Nav = () => {
 
 const LinksOverlay = () => {
   return (
-    <nav className="fixed right-4 top-4 z-40 h-[calc(100vh_-_32px)] w-[calc(100%_-_32px)] overflow-hidden">
+    <nav className="fixed right-4 top-4 z-40 h-[calc(100vh_-_40px)] w-[calc(100%_-_32px)] overflow-hidden">
       <Logo />
       <LinksContainer />
       <FooterCTAs />
@@ -125,14 +125,14 @@ const Logo = () => {
 
         y: 0,
         height: 200,
-        width: 200,
+        width: 250,
         transition: { delay: 0, duration: 1.5, ease: "easeInOut" },
       }}
       exit={{ opacity: 0, y: -12 }}
       href="#"
-      className="flex h-full w-full items-center justify-center rounded-br-xl rounded-tl-xl bg-white transition-colors hover:bg-violet-50"
+      className="m-2 flex h-full w-full items-center justify-center rounded-br-xl rounded-tl-xl bg-white transition-colors hover:bg-violet-50"
     >
-      <img src="/LOGO-BLACK.png" />
+      <img src="/LOGO-BLACK.png" className="" />
     </motion.a>
   );
 };
@@ -161,23 +161,32 @@ const HamburgerButton = ({
         initial={false}
         animate={active ? "open" : "closed"}
         onClick={() => setActive((pv) => !pv)}
-        className={`group fixed right-4 top-4 z-50 h-10 w-20 bg-white/0 transition-all hover:bg-white/20 ${
-          active ? "rounded-bl-xl rounded-tr-xl" : "rounded-xl"
+        className={`group fixed right-4 top-2 z-50 h-10 w-10 transition-all hover:bg-white/20 ${
+          active ? "rounded-bl-xl rounded-tr-xl bg-white" : "rounded-xl"
         }`}
       >
         <motion.span
           variants={HAMBURGER_VARIANTS.top}
-          className="absolute block h-1 w-10 bg-white"
+          className={cn(
+            "absolute block h-1 w-10",
+            active ? "bg-black" : "bg-white",
+          )}
           style={{ y: "-50%", left: "50%", x: "-50%" }}
         />
         <motion.span
           variants={HAMBURGER_VARIANTS.middle}
-          className="absolute block h-1 w-10 bg-white"
+          className={cn(
+            "absolute block h-1 w-10",
+            active ? "bg-black" : "bg-white",
+          )}
           style={{ left: "50%", x: "-50%", top: "50%", y: "-50%" }}
         />
         <motion.span
           variants={HAMBURGER_VARIANTS.bottom}
-          className="absolute block h-1 w-5 bg-white"
+          className={cn(
+            "absolute block h-1 w-5",
+            active ? "bg-black" : "bg-white",
+          )}
           style={{ x: "-50%", y: "50%" }}
         />
       </motion.button>

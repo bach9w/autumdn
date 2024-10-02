@@ -114,7 +114,7 @@ function NewCard({ card }: { card: any }) {
               layoutId={`card-${active.title}-${id}`}
               ref={ref}
               className="fixed inset-0 flex flex-col justify-center overflow-hidden bg-white dark:bg-neutral-900"
-              style={{ padding: "2vw", boxSizing: "border-box" }}
+              style={{ padding: "1vw", boxSizing: "border-box" }}
             >
               {/* Carousel */}
               <motion.div layoutId={`image-${active.title}-${id}`}>
@@ -123,7 +123,7 @@ function NewCard({ card }: { card: any }) {
                   <Carousel className="max-h-md h-full w-full" key={active.id}>
                     {/* Badge */}
 
-                    <CarouselContent className="w-full">
+                    <CarouselContent className="w-full max-w-2xl">
                       {active.lots[active.lots.length - 1].images.normal
                         ?.length > 0 ? (
                         active.lots[active.lots.length - 1].images.big.map(
@@ -251,10 +251,10 @@ function NewCard({ card }: { card: any }) {
                   {typeof active.lots[active.lots.length - 1]?.status?.name ===
                   "string" ? (
                     <Link
-                      className="mt-2 w-full rounded-t-none"
+                      className="relative top-5 w-full rounded-t-none"
                       href={`/auction/${active.vin}`}
                     >
-                      <Button className="w-full rounded-t-none bg-[#2f3ccf]">
+                      <Button className="h-32 w-full rounded-t-none bg-[#2f3ccf] uppercase">
                         Разгледай аукциона
                       </Button>
                     </Link>
