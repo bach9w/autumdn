@@ -1,6 +1,5 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
+
 import {
   ChevronLeft,
   MessageCircleQuestionIcon,
@@ -8,6 +7,10 @@ import {
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+
+import Lightbox from "yet-another-react-lightbox";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import "yet-another-react-lightbox/styles.css";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -31,9 +34,8 @@ import ReactWhatsapp from "react-whatsapp";
 import Video360 from "./Video360";
 import DamageCheck from "../components/DamageCheck";
 import { AnimatePresence, motion } from "framer-motion";
-import { cn } from "@lib/utils";
+
 import { useEffect, useRef, useState } from "react";
-import Testove from "@components/full-screen/Full-ScreenM";
 
 function splitDateAndTime(date: string) {
   if (!date) {
@@ -61,8 +63,8 @@ function priceBGN(price: number): any {
 }
 
 export function CarInfo({ data }: { data: any }) {
-  const [open, setOpen] = useState(false);
-  const [url, setUrl] = useState("");
+  const [open, setOpen] = useState(true);
+
   const [activeImage, setActiveImage] = useState<string | null>(null);
   const [startIndex, setStartIndex] = useState<number>(0);
 
@@ -90,7 +92,6 @@ export function CarInfo({ data }: { data: any }) {
 
   return (
     <main className="items-start gap-4 p-0 sm:px-3 sm:py-0 md:gap-8">
-      {open && <Testove testove={open} setTestove={setOpen} id={url} />}
       <AnimatePresence>
         <motion.div
           initial={{ opacity: 0 }}
@@ -189,24 +190,29 @@ export function CarInfo({ data }: { data: any }) {
                 <CardContent>
                   <Carousel>
                     {/* Главна снимка с функционалност за fullscreen */}
-                    <CarouselContent>
-                      {mainImage && (
-                        <CarouselItem>
-                          <img
-                            ref={imageRef}
-                            src={mainImage}
-                            alt="Main car image"
-                            height={500}
-                            className="aspect-square w-full cursor-pointer rounded-md object-fill"
-                            width="500"
-                            onClick={() => {
-                              setUrl(images);
-                              setOpen(true);
-                            }}
-                          />
-                        </CarouselItem>
-                      )}
-                    </CarouselContent>
+
+                    <img
+                      ref={imageRef}
+                      src={mainImage}
+                      alt="Main car image"
+                      height={500}
+                      className="aspect-square w-full cursor-pointer rounded-md object-fill"
+                      width="500"
+                      onClick={() => {
+                        setOpen(true);
+                      }}
+                    />
+
+                    <Lightbox
+                      open={open}
+                      close={() => setOpen(false)}
+                      render={{
+                        buttonNext: () => null,
+                        buttonPrev: () => null,
+                      }}
+                      plugins={[Zoom]}
+                      slides={[{ src: mainImage }]}
+                    />
 
                     {/* Секция за thumbnails */}
                     <div className="thumbnails-container mt-4 flex items-center justify-center gap-2">
