@@ -63,7 +63,7 @@ function priceBGN(price: number): any {
 }
 
 export function CarInfo({ data }: { data: any }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const [activeImage, setActiveImage] = useState<string | null>(null);
   const [startIndex, setStartIndex] = useState<number>(0);
