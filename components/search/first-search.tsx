@@ -50,14 +50,10 @@ export default function SearchComponentFirst() {
   );
 
   return (
-    <div className="bg-[#F5F5F5] p-4 text-[#333333] md:p-10 lg:p-12">
+    <div className="rounded bg-[#802531] p-4 text-white md:p-10 lg:p-12">
       <div className="flex items-center justify-between space-x-4 md:space-x-6 lg:space-x-8">
-        <div className="flex items-center space-x-2 md:space-x-3 lg:space-x-4">
-          <div className="flex w-full items-center justify-between space-x-2 font-semibold text-[#0A1F44]">
-            <span>Автомобили</span>
-          </div>
-        </div>
-        <CarIcon className="h-6 w-6 text-[#0A1F44]" />
+        <div className="flex items-center space-x-2 md:space-x-3 lg:space-x-4"></div>
+        <img src="/myride_logo.png" className="w-[200px]" />
       </div>
       <div className="space-y-4 md:space-y-6 lg:space-y-8">
         <div className="space-y-2">
@@ -76,13 +72,15 @@ export default function SearchComponentFirst() {
                 <SelectItem value="all">Всички марки</SelectItem>
                 {manufacturers?.map((manufacturer) => (
                   <SelectItem value={manufacturer.id} key={manufacturer._id}>
-                    {manufacturer.name}
-                    <Image
-                      src={manufacturer?.image || ""}
-                      alt={manufacturer.name}
-                      width={20}
-                      height={20}
-                    />
+                    <div className="flex text-[15px]">
+                      {manufacturer.name}
+                      <img
+                        src={manufacturer?.image || ""}
+                        alt={manufacturer.name}
+                        width={20}
+                        height={20}
+                      />
+                    </div>
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -185,7 +183,7 @@ export default function SearchComponentFirst() {
 }
 
 function CarIcon(props: any) {
-  return <Image src="/myride_logo.jpg" width={50} height={50} alt="Logo" />;
+  return <img src="/myride_logo.png" width={50} height={50} alt="Logo" />;
 }
 
 function SearchIcon(props: React.SVGProps<SVGSVGElement>) {

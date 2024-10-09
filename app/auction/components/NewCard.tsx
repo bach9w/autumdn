@@ -255,7 +255,7 @@ function NewCard({ card }: { card: any }) {
                       href={`/auction/${active.vin}`}
                     >
                       <Button className="h-32 w-full rounded-t-none bg-[#2f3ccf] uppercase">
-                        Разгледай аукциона
+                        повече информация
                       </Button>
                     </Link>
                   ) : (

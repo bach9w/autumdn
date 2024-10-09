@@ -5,7 +5,7 @@ import { CornerBlur } from "@components/components/utils/CornerBlur";
 
 export const Stats = () => {
   return (
-    <div className="relative overflow-hidden border-y border-zinc-700 bg-zinc-900/30">
+    <div className="hidden overflow-hidden border-y border-zinc-700 bg-zinc-900/30 md:relative md:block">
       <div className="relative z-20 mx-auto max-w-3xl px-4 py-12">
         <h2 className="mx-auto mb-9 block w-fit bg-gradient-to-br from-zinc-200 to-zinc-500 bg-clip-text text-center text-lg text-transparent">
           Срещаш трудности при избор на автомобил?
