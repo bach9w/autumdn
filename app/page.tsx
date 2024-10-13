@@ -39,16 +39,15 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <main className="">
       <LenisProvider>
-        <div className="overflow-hidden bg-blue-500/60">
+        <div className="overflow-hidden bg-red-500/60">
           <Hero />
           <Logos />
         </div>
 
         <div className="h-full">
-          <div className="p-2 xl:mt-2">
-            <SearchComponentFirst />
-
+          <div className="gap-y-2 space-y-2 p-2 xl:mt-2">
             <Stats />
+            <SearchComponentFirst />
           </div>
         </div>
 
