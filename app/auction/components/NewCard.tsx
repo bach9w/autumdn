@@ -102,7 +102,7 @@ function NewCard({ card }: { card: any }) {
                 opacity: 0,
                 transition: { duration: 0.05 },
               }}
-              className="absolute top-2 z-[100] flex h-12 w-1/2 items-center justify-center rounded-full bg-[#2f3ccf] uppercase text-white"
+              className="absolute top-2 z-[100] flex h-12 w-1/2 items-center justify-center rounded-full bg-red-600 uppercase text-white"
               onClick={() => setActive(null)}
             >
               Затвори
@@ -113,7 +113,7 @@ function NewCard({ card }: { card: any }) {
             <motion.div
               layoutId={`card-${active.title}-${id}`}
               ref={ref}
-              className="fixed inset-0 flex flex-col justify-center overflow-hidden bg-white dark:bg-neutral-900"
+              className="fixed inset-0 flex flex-col justify-center overflow-hidden bg-black/80 dark:bg-neutral-900"
               style={{ padding: "1vw", boxSizing: "border-box" }}
             >
               {/* Carousel */}
@@ -169,14 +169,14 @@ function NewCard({ card }: { card: any }) {
               <div className="p-4">
                 <motion.h3
                   layoutId={`title-${active.title}-${id}`}
-                  className="text-base font-medium text-neutral-700 dark:text-neutral-200"
+                  className="text-base font-medium text-white dark:text-neutral-200"
                 >
                   {active.manufacturer?.name} / {active.model?.name}
                 </motion.h3>
 
                 <motion.p
                   layoutId={`description-${active.id}-${id}`}
-                  className="text-base text-neutral-600 dark:text-neutral-400"
+                  className="text-base text-white dark:text-neutral-400"
                 >
                   {active.year} / {active.drive_wheel?.name} /{" "}
                   {active.transmission?.name} / {active.body_type?.name}
