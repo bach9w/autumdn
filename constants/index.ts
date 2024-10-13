@@ -88,7 +88,7 @@ export const footerLinks = [
     title: "Компания",
     links: [
       { title: "Новини", url: "/" },
-      { title: "Контакти", url: "/" },
+      { title: "Контакти", url: "/uslugi" },
     ],
   },
   {

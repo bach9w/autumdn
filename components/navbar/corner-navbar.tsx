@@ -1,11 +1,19 @@
+"use client";
 import { SiInstagram, SiLinkedin, SiTwitter, SiYoutube } from "react-icons/si";
-import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
+import React, {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { AnimatePresence, calcLength, motion } from "framer-motion";
 import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { Button } from "@components/ui/button";
 import { cn } from "@lib/utils";
+import { useScrollBlock } from "@hooks/useScrollBlocks";
 
 const Nav = () => {
   const [active, setActive] = useState(false);
@@ -20,7 +28,7 @@ const Nav = () => {
 
 const LinksOverlay = () => {
   return (
-    <nav className="fixed right-4 top-4 z-40 h-[calc(100vh_-_40px)] w-[calc(100%_-_32px)] overflow-hidden">
+    <nav className="fixed right-4 top-4 z-40 h-[calc(100vh_-_40px)] w-[calc(100%_-_32px)]">
       <Logo />
       <LinksContainer />
       <FooterCTAs />
@@ -108,7 +116,7 @@ const NavLink = ({
       }}
       exit={{ opacity: 0, y: -8 }}
       href={href}
-      className="block text-5xl font-semibold text-white transition-colors md:text-7xl"
+      className="block text-3xl font-semibold text-white transition-colors md:text-7xl"
     >
       {children}
     </motion.a>
@@ -151,10 +159,7 @@ const HamburgerButton = ({
         animate={active ? "open" : "closed"}
         variants={UNDERLAY_VARIANTS}
         style={{ top: 16, right: 16 }}
-        className={cn(
-          "fixed rounded-xl",
-          active ? "overflow-y-hidden overscroll-y-none bg-[#df0000]/100" : "",
-        )}
+        className={cn("fixed rounded-xl", active ? "bg-red-600/90" : "")}
       />
 
       <motion.button

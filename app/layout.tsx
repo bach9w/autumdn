@@ -25,8 +25,8 @@ export const metadata = {
 
     images: [
       {
-        url: "https://myride.bg/myride_logo.jpg",
-        secureUrl: "https://myride.bg/myride_logo.jpg",
+        url: "https://myride.bg/myride_logo.png",
+        secureUrl: "https://myride.bg/myride_logo.png",
         width: 1200,
         height: 630,
         alt: "MYRIDE.BG",

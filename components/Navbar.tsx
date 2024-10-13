@@ -63,15 +63,47 @@ const NavBar = () => {
                 className="cursor-pointer rounded-xl"
               />
             </div>
-            <div className="hidden w-[300px] p-2 md:relative md:flex">
-              <Input
-                placeholder="Tърсене на автомобил"
-                className="rounded-r-none"
-              />
 
-              <Button className="rounded-l-none bg-red-500">Търси</Button>
+            <div className="hidden w-full justify-center gap-4 font-bold uppercase text-white md:flex">
+              <Link
+                href="/"
+                className="p-2 font-medium shadow-md shadow-red-500/100 drop-shadow-lg hover:shadow-white"
+              >
+                Начало
+              </Link>
+              <Link
+                href="/about"
+                className="p-2 font-medium shadow-md shadow-red-500/100 drop-shadow-lg hover:shadow-white"
+              >
+                ЗА НАС
+              </Link>
+              <Link
+                href="/uslugi"
+                className="p-2 font-medium shadow-md shadow-red-500/100 drop-shadow-lg hover:shadow-white"
+              >
+                УСЛУГИ
+              </Link>
+              <Link
+                href="/auction"
+                className="p-2 font-medium shadow-md shadow-red-500/100 drop-shadow-lg hover:shadow-white"
+              >
+                АУКЦИОНИ
+              </Link>
+              <Link
+                href="/parts"
+                className="p-2 font-medium shadow-md shadow-red-500/100 drop-shadow-lg hover:shadow-white"
+              >
+                ЧАСТИ
+              </Link>
+              <Link
+                href="/manufacturers"
+                className="p-2 font-medium shadow-md shadow-red-500/100 drop-shadow-lg hover:shadow-white"
+              >
+                МАРКИ
+              </Link>
             </div>
-            <div className="h-full">
+
+            <div className="h-full md:hidden">
               <Nav />
             </div>
           </div>

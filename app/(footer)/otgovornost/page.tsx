@@ -122,7 +122,7 @@ const About = () => {
 
       <Image
         className="mb-4 mt-4 shadow-xl shadow-orange-500"
-        src="/myride_logo.jpg"
+        src="/myride_logo.png"
         alt=""
         width={300}
         height={300}

@@ -52,7 +52,7 @@ export default function SearchComponentFirst() {
   );
 
   return (
-    <div className="mx-auto flex max-w-5xl flex-col items-center justify-between rounded-md bg-red-500/60 p-2 text-[17px] sm:flex-row md:rounded-full">
+    <div className="mx-auto flex max-w-5xl flex-col items-center justify-between rounded-md bg-red-500/60 p-2 text-[17px] sm:flex-row md:rounded-full xl:max-w-7xl">
       <div className="mb-2 flex w-full flex-col items-center gap-2 space-x-2 bg-black p-2 sm:mb-0 sm:w-auto sm:flex-row sm:rounded-full">
         <SearchIcon className="ml-2 text-white" />
         <p className="text-white">Търсачка</p>
@@ -124,6 +124,22 @@ export default function SearchComponentFirst() {
                   />
                 )}
               </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Select
+          disabled={chosedManufacturer !== "all" ? false : true}
+          value={chosedModel}
+          onValueChange={setChosedModel}
+        >
+          <SelectTrigger className="flex w-full items-center border-none bg-transparent text-white">
+            <SelectValue placeholder="Всички модели" />
+          </SelectTrigger>
+          <SelectContent className="rounded-md border border-[#C0C0C0] bg-white text-[#333333]">
+            <SelectItem value="all">Всички модели</SelectItem>
+            {modelsData?.data?.map((model: any) => (
+              <SelectItem value={model?.id}>{model?.name}</SelectItem>
             ))}
           </SelectContent>
         </Select>

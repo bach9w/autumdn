@@ -40,7 +40,7 @@ export default async function Image({
           {cars?.vin} ЛВ.
         </div>
         <img
-          src="https://myride.bg/_next/image?url=%2Fmyride_logo.jpg&w=384&q=75"
+          src="https://myride.bg/_next/image?url=%2Fmyride_logo.png&w=384&q=75"
           width={200}
           height={200}
           tw="absolute left-0 top-0"

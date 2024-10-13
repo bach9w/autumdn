@@ -96,7 +96,7 @@ const Block = ({ className, ...rest }: BlockProps) => {
 const HeaderBlock = () => (
   <Block className="col-span-12 row-span-2 md:col-span-6">
     <img
-      src="/myride_logo.jpg"
+      src="/myride_logo.png"
       alt="avatar"
       className="size-14 mb-4 rounded-full"
     />
@@ -109,7 +109,9 @@ const HeaderBlock = () => (
       className="flex items-center gap-1 text-red-300 hover:underline"
     >
       Свържете се с нас <FiArrowRight />
+      <br />
     </a>
+    Ул. Лазар Михайлов 65, гр. София
   </Block>
 );
 
@@ -166,7 +168,11 @@ const AboutBlock = () => (
 const LocationBlock = () => (
   <Block className="col-span-12 flex flex-col items-center gap-4 md:col-span-3">
     <FiMapPin className="text-3xl" />
-    <p className="text-center text-lg text-zinc-400">Myride.bg</p>
+    <p className="text-center text-lg text-zinc-400">
+      {" "}
+      Ул. Лазар Михайлов 65
+      <br /> гр. София
+    </p>
   </Block>
 );
 
