@@ -1,4 +1,4 @@
-"use client";
+ok"use client";
 import { SiInstagram, SiLinkedin, SiTwitter, SiYoutube } from "react-icons/si";
 import React, {
   Dispatch,
@@ -33,7 +33,7 @@ const LinksOverlay = () => {
       <Logo />
       <LinksContainer />
       <FooterCTAs />
-      <FloatingAuction />
+      
     </nav>
   );
 };
