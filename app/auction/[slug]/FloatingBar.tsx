@@ -163,7 +163,7 @@ const FloatingAuction = () => {
             y: -20,
             transition: { duration: 0 },
           }}
-          className="fixed bottom-[45px] z-50 flex h-40 w-full justify-center bg-red-600/95"
+          className="fixed bottom-[45px] z-50 flex h-[8%] w-full justify-center bg-red-600/95"
         >
           <div className="flex h-full w-full justify-center">
             <GhostButton className="h-full w-full bg-white/20 uppercase text-black">
