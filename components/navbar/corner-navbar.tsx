@@ -14,6 +14,7 @@ import Link from "next/link";
 import { Button } from "@components/ui/button";
 import { cn } from "@lib/utils";
 import { useScrollBlock } from "@hooks/useScrollBlocks";
+import FloatingAuction from "@app/auction/[slug]/FloatingBar";
 
 const Nav = () => {
   const [active, setActive] = useState(false);
@@ -32,6 +33,7 @@ const LinksOverlay = () => {
       <Logo />
       <LinksContainer />
       <FooterCTAs />
+      <FloatingAuction />
     </nav>
   );
 };
