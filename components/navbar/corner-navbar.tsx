@@ -1,4 +1,4 @@
-ok"use client";
+"use client";
 import { SiInstagram, SiLinkedin, SiTwitter, SiYoutube } from "react-icons/si";
 import React, {
   Dispatch,
