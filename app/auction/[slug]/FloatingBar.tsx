@@ -168,7 +168,7 @@ const FloatingAuction = () => {
           <div className="flex h-full w-full justify-center">
             <GhostButton className="h-full w-full bg-white/20 uppercase text-black">
               <div className="flex items-center justify-center bg-white p-2 text-2xl">
-                <button className="group relative h-20 w-full rounded bg-black py-2.5 font-semibold text-white transition-colors hover:bg-red-600/60 md:rounded-r-full">
+                <button className="group relative h-full w-full rounded bg-black py-2.5 font-semibold text-white transition-colors hover:bg-red-600/60 md:rounded-r-full">
                   <span className="font-bold"> Позвъни сега</span>
                   <span className="flex w-full items-center justify-center text-xl">
                     {" "}
@@ -187,7 +187,7 @@ const FloatingAuction = () => {
           <div className="flex h-full w-full justify-center">
             <GhostButton className="w-full bg-white/20 uppercase text-black">
               <div className="flex items-center justify-center bg-white p-2 text-2xl">
-                <button className="group relative h-20 w-full rounded bg-black py-2.5 font-semibold text-white transition-colors hover:bg-red-600/60 md:rounded-r-full">
+                <button className="group relative h-full w-full rounded bg-black py-2.5 font-semibold text-white transition-colors hover:bg-red-600/60 md:rounded-r-full">
                   <span className="font-bold"> Изпрати запитване</span>
                   <span className="flex w-full items-center justify-center text-xl">
                     {" "}
