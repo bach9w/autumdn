@@ -26,7 +26,7 @@ const Manufacture = ({ params }: { params: { slug: string } }) => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <FloatingAuction />
+      <FloatingAuction vin={params.slug} />
       <div
         id="myDIV"
         className="myDIV h-full min-h-screen w-full bg-black/40 py-5"

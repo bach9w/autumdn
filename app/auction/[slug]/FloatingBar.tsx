@@ -5,9 +5,14 @@ import Button from "@components/CustomButton";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { SiAnswer } from "react-icons/si";
-import { MessageCircleIcon, PhoneCall } from "lucide-react";
+import {
+  MessageCircleIcon,
+  MessageCircleQuestionIcon,
+  PhoneCall,
+} from "lucide-react";
+import ReactWhatsapp from "react-whatsapp";
 
 interface DripProps {
   left: string;
@@ -111,7 +116,7 @@ const Drip = ({ left, height, delay }: DripProps) => {
   );
 };
 
-const FloatingAuction = () => {
+const FloatingAuction = ({ vin }: { vin: string }) => {
   const router = useRouter();
   const user = useUser();
   const [showNav, setShowNav] = useState(true);
@@ -145,79 +150,51 @@ const FloatingAuction = () => {
   }, [lastScrollY]);
   return (
     <>
-      {showNav ? (
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: -20,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.5,
-          }}
-          exit={{
-            opacity: 0,
-            y: -20,
-            transition: { duration: 0 },
-          }}
-          className="fixed bottom-[45px] z-50 flex h-40 w-full justify-center bg-red-600/95"
-        >
-          <div className="flex h-full w-full justify-center">
-            <GhostButton className="h-full w-full bg-white/20 uppercase text-black">
-              <div className="flex items-center justify-center bg-white p-2 text-2xl">
-                <button className="group relative h-20 w-full rounded bg-black py-2.5 font-semibold text-white transition-colors hover:bg-red-600/60 md:rounded-r-full">
-                  <span className="font-bold"> Позвъни сега</span>
-                  <span className="flex w-full items-center justify-center text-xl">
-                    {" "}
-                    <PhoneCall />
-                  </span>
-                  <Drip left="10%" height={24} delay={0.5} />
-                  <Drip left="30%" height={20} delay={3} />
-                  <Drip left="57%" height={10} delay={4.25} />
-                  <div className="md:hidden">
-                    <Drip left="85%" height={16} delay={1.5} />
-                  </div>
-                </button>{" "}
-              </div>
-            </GhostButton>
-          </div>
-          <div className="flex h-full w-full justify-center">
-            <GhostButton className="w-full bg-white/20 uppercase text-black">
-              <div className="flex items-center justify-center bg-white p-2 text-2xl">
-                <button className="group relative h-20 w-full rounded bg-black py-2.5 font-semibold text-white transition-colors hover:bg-red-600/60 md:rounded-r-full">
-                  <span className="font-bold"> Изпрати запитване</span>
-                  <span className="flex w-full items-center justify-center text-xl">
-                    {" "}
-                    <MessageCircleIcon />
-                  </span>
-                  <Drip left="10%" height={24} delay={0.5} />
-                  <Drip left="30%" height={20} delay={3} />
-                  <Drip left="57%" height={10} delay={4.25} />
-                  <div className="md:hidden">
-                    <Drip left="85%" height={16} delay={1.5} />
-                  </div>
-                </button>{" "}
-              </div>
-            </GhostButton>
-          </div>
-        </motion.div>
-      ) : (
-        <div className="bottom-[45px] z-50 flex h-40 w-full justify-center bg-red-600/95">
-          <div className="flex w-full justify-center">
-            <GhostButton className="w-full bg-white/20 text-black">
-              <div className="bg-white text-2xl">Запитване</div>
-            </GhostButton>
-          </div>
-          <div className="flex w-full justify-center">
-            <GhostButton className="w-full bg-white/20 text-black">
-              Позвъни сега
-            </GhostButton>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {showNav ? (
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: -20,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.2,
+            }}
+            exit={{
+              opacity: 0,
+              y: -20,
+              transition: { duration: 0 },
+            }}
+            className="fixed bottom-[0%] z-50 flex h-20 w-full justify-center"
+          >
+            <button className="group relative flex w-full items-center justify-center gap-2 bg-black p-2 font-semibold text-white transition-colors hover:bg-blue-600 md:rounded-r-full">
+              <a
+                className="flex animate-pulse items-center justify-center gap-1"
+                href="tel:+359876995555"
+              >
+                Получи информация <PhoneCall className="h-4 w-4" />
+              </a>
+            </button>{" "}
+            <button className="group relative flex w-full items-center justify-center bg-black p-2 font-semibold text-white transition-colors hover:bg-blue-600 md:rounded-r-full">
+              <ReactWhatsapp
+                className="flex animate-pulse items-center justify-center gap-1"
+                element="webview"
+                number="+359876995555"
+                message={`Здравейте, интересувам се от автомил с VIN: ${vin} , https://myride.bg/auction/${vin}`}
+              >
+                Изпрати запитване{" "}
+                <MessageCircleQuestionIcon className="h-4 w-4" />
+              </ReactWhatsapp>
+            </button>{" "}
+          </motion.div>
+        ) : (
+          <div className=""></div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
