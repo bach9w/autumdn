@@ -33,7 +33,7 @@ const LinksOverlay = () => {
       <Logo />
       <LinksContainer />
       <FooterCTAs />
-      <FloatingAuction />
+      
     </nav>
   );
 };
