@@ -8,6 +8,7 @@ import { CarInfo } from "./CarInfo";
 import Video360 from "./Video360";
 import useSWR from "swr";
 import FloatingAuction from "./FloatingBar";
+import Similiar from "./Similiar";
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
