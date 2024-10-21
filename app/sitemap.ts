@@ -3,13 +3,13 @@ import { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://myride.bg/home",
+      url: "https://myride.bg/",
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 1,
     },
     {
-      url: "https://myride.bg/home",
+      url: "https://myride.bg/uslugi",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
@@ -40,6 +40,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: "https://myride.bg/nalichni",
+      lastModified: new Date(),
+      changeFrequency: "hourly",
+      priority: 0.5,
+    },
+    {
+      url: "https://myride.bg/mission",
+      lastModified: new Date(),
+      changeFrequency: "hourly",
+      priority: 0.5,
+    },
+    {
+      url: "https://myride.bg/pravila",
+      lastModified: new Date(),
+      changeFrequency: "hourly",
+      priority: 0.5,
+    },
+    {
+      url: "https://myride.bg/politika",
       lastModified: new Date(),
       changeFrequency: "hourly",
       priority: 0.5,
