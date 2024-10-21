@@ -291,21 +291,24 @@ function NewCard({ card }: { card: any }) {
                   {priceBGN(card.lots?.[card.lots.length - 1]?.buy_now)}
                 </div>
               </motion.div>
-              <img
-                width={300}
-                height={300}
-                src={
-                  (card.lots[card.lots.length - 1].images &&
-                    card.lots[card.lots.length - 1].images.normal &&
-                    card.lots[card.lots.length - 1].images.normal[0]) ||
-                  (card.lots[card.lots.length - 1].images &&
-                    card.lots[card.lots.length - 1].images.big &&
-                    card.lots[card.lots.length - 1].images.big[0]) ||
-                  "/no-image.jpeg"
-                }
-                alt={card.title}
-                className="h-100 w-full rounded-lg object-cover md:h-[300px]"
-              />
+              <picture>
+                <source
+                  srcSet={card.lots[card.lots.length - 1].images.downloaded[0]}
+                  type="image/webp"
+                />
+                <img
+                  width={300}
+                  height={300}
+                  src={
+                    (card.lots[card.lots.length - 1].images &&
+                      card.lots[card.lots.length - 1].images.normal &&
+                      card.lots[card.lots.length - 1].images.normal[0]) ||
+                    "/no-image.jpeg"
+                  }
+                  alt={card.title}
+                  className="h-100 w-full rounded-lg object-cover md:h-[300px]"
+                />
+              </picture>
 
               <motion.div
                 className="relative bottom-2 rounded-md bg-[#1b2e5c]/75 px-2 py-1 uppercase text-white shadow-lg backdrop-blur-sm"
