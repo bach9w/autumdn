@@ -17,7 +17,7 @@ import { Check, ChevronsUpDown, XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { ComboBoxResponsive } from "./search/responsive-combobox";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const fuels = [
   {
@@ -46,11 +46,40 @@ export default function SearchForm({
   setIsOpen: (value: boolean) => void;
 }) {
   const [man, setMan] = useState<any>();
+  const [manName, setManName] = useState<any>();
   const [fuel, setFuel] = useState<any>();
   const [modelName, setModelName] = useState<any>();
   const [manufacturers, setManufacturers] = useState<any>();
   const [models, setModels] = useState<any>();
   const [year, setYear] = useState<any>();
+
+  const searchParams = useSearchParams();
+
+  const manFilter = searchParams.get("manufacturer");
+
+  useEffect(() => {
+    async function fetchName() {
+      try {
+        const response = await fetch(
+          `/api/searchNumber?manufacturer=${manFilter}`,
+          {
+            next: { revalidate: 3600 },
+          },
+        );
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error);
+        }
+        setManName(result.data?.manufacturer.name);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchName();
+
+    setMan(manFilter);
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -184,7 +213,7 @@ export default function SearchForm({
                       setSelected={(e) => {
                         setMan(e);
                       }}
-                      model="Марки"
+                      model={manName || "Марки"}
                       data={manufacturers}
                     />
                   </div>
@@ -237,9 +266,7 @@ export default function SearchForm({
                 </div>
 
                 <div className="mb-4"></div>
-                <div className="mb-4 rounded-md bg-orange-600 p-4 font-bold text-white">
-                  Избери сред 113 927 резултата
-                </div>
+
                 <button
                   onClick={handleSearch}
                   className="w-full rounded-md bg-gray-700 px-4 py-2 text-white"

@@ -293,7 +293,12 @@ function NewCard({ card }: { card: any }) {
               </motion.div>
               <picture>
                 <source
-                  srcSet={card.lots[card.lots.length - 1].images.downloaded[0]}
+                  srcSet={
+                    (card.lots[card.lots.length - 1].images &&
+                      card.lots[card.lots.length - 1].images.downloaded &&
+                      card?.lots[card.lots.length - 1].images.downloaded[0]) ||
+                    ""
+                  }
                   type="image/webp"
                 />
                 <img
