@@ -12,11 +12,13 @@ import Cookie from "@components/bottom/cookie/Cookie";
 import CarbonBackgroundComponent from "@components/layout/carbon";
 import LenisProvider from "@providers/lenis-client";
 import { Hero } from "@components/components/hero/Hero";
+import robots from "./robots";
 
 export const metadata = {
   title: "MYRIDE",
   description: "MYRIDE IMPORT",
   metadataBase: new URL("https://myride.bg"),
+  category: "Cars",
   openGraph: {
     title: "MYRIDE.BG",
     description: "Внос на автомобили от Америка и Канада",
@@ -32,6 +34,34 @@ export const metadata = {
         alt: "MYRIDE.BG",
       },
     ],
+  },
+  generator: "ZASH",
+  applicationName: "ZASH",
+  referrer: "origin-when-cross-origin",
+  keywords: ["Myride", "Import", "Внос", "автомобили", "Сащ", "Канада"],
+  authors: [{ name: "ZASH" }, { name: "ZASH", url: "https://ZASH.ltd" }],
+  creator: "ZASH",
+  publisher: "ZASH",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: "0897962266",
+  },
+  facebook: {
+    appId: "157594147428347",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -49,7 +79,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta property="fb:app_id" content="157594147428347" />
+        <meta property="fb:app_id" content="" />
       </head>
       <body className="relative">
         <CarbonBackgroundComponent>
