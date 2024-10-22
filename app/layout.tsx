@@ -27,8 +27,8 @@ export const metadata = {
 
     images: [
       {
-        url: "https://myride.bg/myride_logo.png",
-        secureUrl: "https://myride.bg/myride_logo.png",
+        url: "https://myride.bg/logoOG.png",
+        secureUrl: "https://myride.bg/logoOG.png",
         width: 1200,
         height: 630,
         alt: "MYRIDE.BG",
@@ -78,9 +78,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <meta property="fb:app_id" content="" />
-      </head>
+      <head></head>
       <body className="relative">
         <CarbonBackgroundComponent>
           <main
