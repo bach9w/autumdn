@@ -18,6 +18,9 @@ export const metadata = {
   title: "MYRIDE",
   description: "MYRIDE IMPORT",
   metadataBase: new URL("https://myride.bg"),
+  alternates: {
+    canonical: "./",
+  },
   category: "Cars",
   openGraph: {
     title: "MYRIDE.BG",
