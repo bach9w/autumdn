@@ -53,7 +53,9 @@ export default function SearchForm({
   const [models, setModels] = useState<any>();
   const [year, setYear] = useState<any>();
 
-  const searchParams = useSearchParams();
+  const searchParams = new URLSearchParams(
+    typeof window !== "undefined" ? window.location.search : "",
+  );
 
   const manFilter = searchParams.get("manufacturer");
 

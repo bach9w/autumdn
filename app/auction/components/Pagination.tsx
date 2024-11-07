@@ -1,13 +1,15 @@
 "use client";
 import { Button } from "@components/ui/button";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
 const Pagination = ({ page }: { page: any }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const searchParams = new URLSearchParams(
+    typeof window !== "undefined" ? window.location.search : "",
+  );
 
   const createQueryString = useCallback(
     (name: string, value: string) => {

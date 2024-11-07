@@ -28,7 +28,9 @@ const Manufacture = ({ params }: { params: { slug: any } }) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const searchParams = new URLSearchParams(
+    typeof window !== "undefined" ? window.location.search : "",
+  );
   const [fromYear, setFromYear] = useState<any>(null);
   const [toYear, setToYear] = useState<any>(null);
 
