@@ -12,7 +12,7 @@ export async function GET(request: Request) {
   const condition = "0";
   const buy_now = "1";
 
-  const per_page = searchParams.get("per_page") || "12";
+  const per_page = searchParams.get("per_page") || "16";
 
   const sale_date = searchParams.get("sale_date_in_days") || "";
   const sale_date_from = searchParams.get("sale_date_from") || "";

@@ -277,41 +277,40 @@ function NewCard({ card }: { card: any }) {
         >
           <div className="flex w-full flex-col gap-4">
             <motion.div layoutId={`image-${card.title}-${id}`}>
-              <motion.div
-                className={cn(
-                  card.lots?.[card.lots.length - 1]?.buy_now !== null
-                    ? `relative top-2 rounded-md bg-red-600/90 px-2 py-1 uppercase text-white shadow-lg backdrop-blur-sm`
-                    : `hidden`,
-                )}
-                initial={{ y: -10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-              >
-                <div className="flex justify-between text-2xl font-bold">
-                  {priceBGN(card.lots?.[card.lots.length - 1]?.buy_now)}
-                </div>
-              </motion.div>
+              {card.lots?.[card.lots.length - 1]?.buy_now !== null && (
+                <motion.div
+                  className="relative top-2 rounded-md bg-red-600/90 px-2 py-1 uppercase text-white shadow-lg backdrop-blur-sm"
+                  initial={{ y: -10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                >
+                  <div className="flex justify-between text-2xl font-bold">
+                    {priceBGN(card.lots[card.lots.length - 1].buy_now)}
+                  </div>
+                </motion.div>
+              )}
+
               <picture>
                 <source
                   srcSet={
-                    (card.lots[card.lots.length - 1].images &&
-                      card.lots[card.lots.length - 1].images.downloaded &&
-                      card?.lots[card.lots.length - 1].images.downloaded[0]) ||
+                    card.lots[card.lots.length - 1]?.images?.downloaded?.[0] ||
                     ""
                   }
                   type="image/webp"
                 />
-                <img
+                <motion.img
                   width={300}
                   height={300}
+                  loading="lazy"
                   src={
-                    (card.lots[card.lots.length - 1].images &&
-                      card.lots[card.lots.length - 1].images.normal &&
-                      card.lots[card.lots.length - 1].images.normal[0]) ||
+                    card.lots[card.lots.length - 1]?.images?.normal?.[0] ||
                     "/no-image.jpeg"
                   }
                   alt={card.title}
-                  className="h-100 w-full rounded-lg object-cover md:h-[300px]"
+                  title={card.title}
+                  className="h-100 w-full rounded-lg object-cover opacity-0 transition-opacity duration-500 ease-in-out"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                 />
               </picture>
 
@@ -323,20 +322,18 @@ function NewCard({ card }: { card: any }) {
               >
                 <div className="text-center text-xl font-bold">
                   {card.lots?.[card.lots.length - 1]?.sale_date !== null ? (
-                    <div>
-                      {splitDateAndTime(
-                        card.lots[card.lots.length - 1]?.sale_date,
-                      ) < 0 ? (
-                        <div className="">Търгува се</div>
-                      ) : (
-                        <div>
-                          {splitDateAndTime(
-                            card.lots[card.lots.length - 1]?.sale_date,
-                          )}{" "}
-                          дни до търг
-                        </div>
-                      )}
-                    </div>
+                    splitDateAndTime(
+                      card.lots[card.lots.length - 1]?.sale_date,
+                    ) < 0 ? (
+                      <div>Търгува се</div>
+                    ) : (
+                      <div>
+                        {splitDateAndTime(
+                          card.lots[card.lots.length - 1]?.sale_date,
+                        )}{" "}
+                        дни до търг
+                      </div>
+                    )
                   ) : (
                     "Наскоро добавена"
                   )}
@@ -349,17 +346,15 @@ function NewCard({ card }: { card: any }) {
                 layoutId={`title-${card.title}-${id}`}
                 className="text-center text-base font-medium text-white group-hover:text-black dark:text-neutral-200 md:text-left"
               >
-                {card.manufacturer && card.manufacturer.name} /{" "}
-                {card.model && card.model.name}
+                {card.manufacturer?.name} / {card.model?.name}
               </motion.h3>
 
               <motion.p
                 layoutId={`description-${card.id}-${id}`}
                 className="text-center text-base text-neutral-600 dark:text-neutral-400 md:text-left"
               >
-                {card.year} / {card.cylinders} цилиндров /{" "}
-                {card.fuel && card.fuel.name} /{" "}
-                {card.transmission && card.transmission.name}
+                {card.year} / {card.cylinders} цилиндров / {card.fuel?.name} /{" "}
+                {card.transmission?.name}
               </motion.p>
             </div>
           </div>
