@@ -22,10 +22,8 @@ export default async function Home({ searchParams }: HomeProps) {
   };
   return (
     <>
-      <div className="flex h-full w-full items-center justify-center">
-        <section id="auctions" className="w-[100%]">
-          <StickySearchForm />
-        </section>
+      <div className="sticky top-0 z-30 flex h-[50px] w-full items-end justify-start rounded bg-white">
+        <StickySearchForm />
       </div>
       <div className="mt-2 overflow-x-hidden">
         <Cars filters={filters} />
