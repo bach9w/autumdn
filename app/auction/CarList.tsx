@@ -37,6 +37,11 @@ function Cars({ filters }: { filters: any }) {
 
   return (
     <>
+      <div className="block p-2 text-xl uppercase text-white">
+        {filters.page && filters.page !== 1 ? filters.page * 16 - 16 : 0} - {""}
+        {filters.page ? (filters.page ? filters.page * 16 : 1) : 16} от общо{" "}
+        {data?.meta?.total} возила
+      </div>
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
