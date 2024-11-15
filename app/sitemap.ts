@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 
+export const baseUrl = "https://myride.bg";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
