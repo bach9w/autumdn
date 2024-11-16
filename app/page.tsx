@@ -21,6 +21,7 @@ import SmoothScrollHero from "@components/hero/hero-main";
 import LenisProvider from "@providers/lenis-client";
 import { Logos } from "@components/components/logos/Logos";
 import { Stats } from "@components/components/features/stats/Stats";
+import BasicFAQ from "@components/faq/faq-basic";
 
 export default async function Home({ searchParams }: HomeProps) {
   const filters = {
@@ -62,6 +63,9 @@ export default async function Home({ searchParams }: HomeProps) {
               Разгледай всички аукциони
             </Button>
           </Link>
+        </div>
+        <div className="mt-2">
+          <BasicFAQ />
         </div>
       </LenisProvider>
     </main>
