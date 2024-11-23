@@ -326,7 +326,7 @@ export default function VehicleSearch() {
       {/* Bottom section */}
       <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
         <div className="flex items-center gap-8">
-          <div className="text-white">Search in</div>
+          <div className="text-white">Търсене в</div>
           <RadioGroup defaultValue="copart" className="flex gap-4">
             <div className="flex items-center space-x-2">
               <RadioGroupItem
