@@ -19,40 +19,18 @@ import { error } from "console";
 import Loading from "@components/loading";
 import { years } from "@constants/import";
 import { useRouter } from "next/navigation";
+import VehicleSearch from "./home-search";
 
 export default function SearchComponentFirst() {
-  const [chosedManufacturer, setChosedManufacturer] = useState<any>("all");
-  const [chosedManName, setChosedManName] = useState<any>();
-  const [chosedModel, setChosedModel] = useState<any>();
-  const [chosedGeneration, setChosedGeneration] = useState<any>();
-  const [yearFrom, setYearFrom] = useState<any>();
-  const [yearTo, setYearTo] = useState<any>();
-  const [vin, setVin] = useState<string>();
-  const router = useRouter();
-
-  const manufacturers = useQuery(api.manufacturer.getManufacturers);
-
-  const fetcher = (url: any) => fetch(url).then((res) => res.json());
-
-  const { data: modelsData } = useSWR(
-    chosedManufacturer !== undefined
-      ? `/api/models/${chosedManufacturer}`
-      : null,
-    fetcher,
-  );
-
-  const { data: generationsData } = useSWR(
-    chosedModel !== undefined ? `/api/generations/${chosedModel}` : null,
-    fetcher,
-  );
-
-  const { data: availableCars, isLoading: availabeLoading } = useSWR(
-    `/api/searchNumber?manufacturer=${chosedManufacturer}&model=${chosedModel}&generation=${chosedGeneration}$&from_year=${yearFrom}&to_year=${yearTo}&status=3`,
-    fetcher,
-  );
-
   return (
-    <div className="mx-auto flex max-w-5xl flex-col items-center justify-between rounded-md bg-red-500/60 p-2 text-[17px] sm:flex-row md:rounded-full xl:max-w-7xl">
+    <>
+      <VehicleSearch />
+    </>
+  );
+}
+
+/*
+ <div className="mx-auto flex max-w-5xl flex-col items-center justify-between rounded-md bg-red-500/60 p-2 text-[17px] sm:flex-row md:rounded-full xl:max-w-7xl">
       <div className="mb-2 flex w-full flex-col items-center gap-2 space-x-2 bg-black p-2 sm:mb-0 sm:w-auto sm:flex-row sm:rounded-full">
         <SearchIcon className="ml-2 text-white" />
         <p className="text-white">Търсачка</p>
@@ -62,113 +40,9 @@ export default function SearchComponentFirst() {
           className="hidden flex-1 border-none bg-transparent text-white placeholder-white focus:outline-none md:block"
         />
 
-        <Select
-          value={chosedManufacturer}
-          onValueChange={setChosedManufacturer}
-        >
-          <SelectTrigger className="flex w-full justify-between border-none bg-transparent text-white">
-            {chosedManufacturer !== "all" ? (
-              <div className="flex w-full items-center justify-center gap-4">
-                {
-                  manufacturers
-                    ?.filter(
-                      (manufacturer) => manufacturer.id === chosedManufacturer,
-                    )
-                    ?.find(
-                      (manufacturers) =>
-                        manufacturers.id === chosedManufacturer,
-                    )?.name
-                }{" "}
-                <img
-                  src={
-                    manufacturers
-                      ?.filter(
-                        (manufacturer) =>
-                          manufacturer.id === chosedManufacturer,
-                      )
-                      ?.find(
-                        (manufacturers) =>
-                          manufacturers.id === chosedManufacturer,
-                      )?.image
-                  }
-                  className="rounded bg-white/100"
-                  width={30}
-                  height={30}
-                />
-              </div>
-            ) : (
-              <div>Марки</div>
-            )}
-          </SelectTrigger>
-          <SelectContent className="max-h-[300px] overflow-y-auto">
-            <SelectItem
-              value="all"
-              className="flex items-center justify-between"
-            >
-              <span>Марки</span>
-            </SelectItem>
-            {manufacturers?.map((manufacturer) => (
-              <SelectItem
-                key={manufacturer._id}
-                value={manufacturer.id}
-                className="flex items-center justify-between py-2"
-              >
-                <span>{manufacturer.name}</span>
-                {manufacturer.image && (
-                  <img
-                    src={manufacturer.image}
-                    alt={manufacturer.name}
-                    width={20}
-                    height={20}
-                    className="ml-2 inline-block bg-white"
-                  />
-                )}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+       
 
-        <Select
-          disabled={chosedManufacturer !== "all" ? false : true}
-          value={chosedModel}
-          onValueChange={setChosedModel}
-        >
-          <SelectTrigger className="flex w-full items-center border-none bg-transparent text-white">
-            <SelectValue placeholder="Всички модели" />
-          </SelectTrigger>
-          <SelectContent className="rounded-md border border-[#C0C0C0] bg-white text-[#333333]">
-            <SelectItem value="all">Всички модели</SelectItem>
-            {modelsData?.data?.map((model: any) => (
-              <SelectItem value={model?.id}>{model?.name}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        <Select value={yearFrom} onValueChange={setYearFrom}>
-          <SelectTrigger className="flex w-full items-center border-none bg-transparent text-white">
-            <SelectValue placeholder="Година от" />
-          </SelectTrigger>
-          <SelectContent className="max-h-[300px] overflow-y-auto">
-            {years.map((year) => (
-              <SelectItem key={year.name} value={year.name}>
-                {year.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        <Select value={yearTo} onValueChange={setYearTo}>
-          <SelectTrigger className="flex w-full items-center border-none bg-transparent text-white">
-            <SelectValue placeholder="Година до" />
-          </SelectTrigger>
-          <SelectContent className="max-h-[300px] overflow-y-auto">
-            {years.map((year) => (
-              <SelectItem key={year.name} value={year.name}>
-                {year.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+       
       </div>
 
       <div className="ml-2 flex items-center space-x-6">
@@ -205,111 +79,7 @@ export default function SearchComponentFirst() {
           </div>
         </button>
       </div>
-    </div>
-  );
-}
-
-interface DripProps {
-  left: string;
-  height: number;
-  delay: number;
-}
-
-const Drip = ({ left, height, delay }: DripProps) => {
-  return (
-    <motion.div
-      className="absolute top-[99%] origin-top"
-      style={{
-        left,
-      }}
-      initial={{ scaleY: 0.75 }}
-      animate={{ scaleY: [0.75, 1, 0.75] }}
-      transition={{
-        duration: 2,
-        times: [0, 0.25, 1],
-        delay,
-        ease: "easeIn",
-        repeat: Infinity,
-        repeatDelay: 2,
-      }}
-    >
-      <div
-        style={{ height }}
-        className="w-2 rounded-b-full bg-black transition-colors group-hover:bg-black"
-      />
-      <svg
-        width="6"
-        height="6"
-        viewBox="0 0 6 6"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="absolute left-full top-0"
-      >
-        <g clipPath="url(#clip0_1077_28)">
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
-            className="fill-black transition-colors group-hover:fill-black"
-          />
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
-            className="fill-black transition-colors group-hover:fill-black"
-          />
-        </g>
-        <defs>
-          <clipPath id="clip0_1077_28">
-            <rect width="6" height="6" fill="white" />
-          </clipPath>
-        </defs>
-      </svg>
-      <svg
-        width="6"
-        height="6"
-        viewBox="0 0 6 6"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="absolute right-full top-0 rotate-90"
-      >
-        <g clipPath="url(#clip0_1077_28)">
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
-            className="fill-black transition-colors group-hover:fill-black"
-          />
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
-            className="fill-black transition-colors group-hover:fill-black"
-          />
-        </g>
-        <defs>
-          <clipPath id="clip0_1077_28">
-            <rect width="6" height="6" fill="white" />
-          </clipPath>
-        </defs>
-      </svg>
-
-      <motion.div
-        initial={{ y: -8, opacity: 1 }}
-        animate={{ y: [-8, 50], opacity: [1, 0] }}
-        transition={{
-          duration: 2,
-          times: [0, 1],
-          delay,
-          ease: "easeIn",
-          repeat: Infinity,
-          repeatDelay: 2,
-        }}
-        className="absolute top-full h-2 w-2 rounded-full bg-black transition-colors group-hover:bg-black"
-      />
-    </motion.div>
-  );
-};
+    </div> */
 
 /*
  <div className="rounded bg-red-500/60 p-4 text-white md:p-10 lg:p-12">
