@@ -1,6 +1,4 @@
-import { fetchAuctionFilter } from "@/app/api/cars";
-import { HomeProps } from "@types";
-import { fuels, yearsOfProduction } from "@constants";
+"use client";
 import { Hero } from "@components/components/hero/Hero";
 import CarCard from "@components/CarCard";
 import SearchBar from "@components/Searchbar";
@@ -13,7 +11,7 @@ import Cars from "./auction/CarList";
 import { Button } from "@components/ui/button";
 import Link from "next/link";
 import Loading from "@components/loading";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Cookie from "@components/bottom/cookie/Cookie";
 import SearchComponentFirst from "@components/search/first-search";
 import NalichniPage from "./nalichni/page";
@@ -23,20 +21,28 @@ import { Logos } from "@components/components/logos/Logos";
 import { Stats } from "@components/components/features/stats/Stats";
 import BasicFAQ from "@components/faq/faq-basic";
 
-export default async function Home({ searchParams }: HomeProps) {
+export default function Home() {
+  const [searchParams, setSearchParams] = useState<URLSearchParams | null>(
+    null,
+  );
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setSearchParams(params);
+  }, []);
+
   const filters = {
-    year: searchParams.year || "",
-    fuel: searchParams.fuel_type || "",
-    manufacturer: searchParams.manufacturer || "",
-    model: searchParams.model || "",
-    page: searchParams.page || "",
+    year: searchParams?.get("year") || "",
+    fuel: searchParams?.get("fuel_type") || "",
+    manufacturer: searchParams?.get("manufacturer") || "",
+    model: searchParams?.get("model") || "",
+    page: searchParams?.get("page") || "",
     status: "3",
     buy_now: "1",
-    generation: searchParams.genaration || "",
-    from_year: searchParams.from_year || "2022",
-    to_year: searchParams.to_year || "2024",
+    generation: searchParams?.get("generation") || "",
+    from_year: searchParams?.get("from_year") || "2022",
+    to_year: searchParams?.get("to_year") || "2024",
   };
-
   return (
     <main className="">
       <LenisProvider>
