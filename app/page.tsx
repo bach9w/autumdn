@@ -45,35 +45,36 @@ export default function Home() {
   };
   return (
     <main className="">
-      <LenisProvider>
-        <div className="overflow-hidden bg-red-500/60">
-          <Hero />
-          <Logos />
-        </div>
-
-        <div className="h-full">
-          <div className="gap-y-2 space-y-2 p-2 xl:mt-2">
-            <Stats />
-            <SearchComponentFirst />
+      <Suspense fallback={<Loading />}>
+        <LenisProvider>
+          <div className="overflow-hidden bg-red-500/60">
+            <Hero />
+            <Logos />
           </div>
-        </div>
 
-        <Suspense fallback={<Loading />}>
+          <div className="h-full">
+            <div className="gap-y-2 space-y-2 p-2 xl:mt-2">
+              <Stats />
+              <SearchComponentFirst />
+            </div>
+          </div>
+
           <div className="">
             <Cars filters={filters} />
           </div>
-        </Suspense>
-        <div className="mt-6 flex w-full items-start justify-center">
-          <Link href="/auction">
-            <Button className="text-md bg-[#2f3ccf]/80 font-bold uppercase hover:bg-[#2f3ccf]">
-              Разгледай всички аукциони
-            </Button>
-          </Link>
-        </div>
-        <div className="mt-2">
-          <BasicFAQ />
-        </div>
-      </LenisProvider>
+
+          <div className="mt-6 flex w-full items-start justify-center">
+            <Link href="/auction">
+              <Button className="text-md bg-[#2f3ccf]/80 font-bold uppercase hover:bg-[#2f3ccf]">
+                Разгледай всички аукциони
+              </Button>
+            </Link>
+          </div>
+          <div className="mt-2">
+            <BasicFAQ />
+          </div>
+        </LenisProvider>
+      </Suspense>
     </main>
   );
 }
