@@ -21,7 +21,7 @@ export const metadata = {
   description: "MYRIDE IMPORT - Внос на автомобили от Америка и Канада",
 
   alternates: {
-    canonical: "./",
+    canonical: "/",
   },
   category: "Cars",
   openGraph: {
